@@ -14,12 +14,6 @@ This repository provides a reusable human-AI research workflow for:
 - referee-guided revision
 - automatic version-control checkpoints
 
-## 中文简介
-
-这是一个面向经济学论文，尤其是以 Econometrica 级别为目标的本地 Codex 工作系统。它不是简单的 prompt 集合，而是一套分阶段的人机协作流程：从找题目、生成模型、推导主结论、数学验证，到模拟审稿、根据审稿意见修改、版本控制和最终投稿前检查。
-
-核心目标不是假设 AI 反复修改就一定能让论文收敛到 Econometrica，而是尽早暴露不收敛的原因：贡献不够、idea 不新、假设过于定制、证明有 gap、文献定位不足，或者文章只是变得更流畅但经济洞见没有变强。
-
 ## Files
 
 - `AGENTS.md`: project-level instructions automatically read by Codex.
@@ -149,4 +143,3 @@ For a future paper project, you can either:
 3. Turn this repository into a Codex skill or plugin later if you want a more formal reusable interface.
 
 The simplest and most robust method is copying the files into each paper root so Codex sees `AGENTS.md` directly.
-
