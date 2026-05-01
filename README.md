@@ -2,7 +2,7 @@
 
 A local Codex workflow system for economics papers targeting Econometrica-level research quality.
 
-The system is designed for human-AI collaboration across the full research lifecycle:
+This repository provides a reusable human-AI research workflow for:
 
 - topic discovery
 - tractable model generation
@@ -13,6 +13,12 @@ The system is designed for human-AI collaboration across the full research lifec
 - simulated Econometrica review
 - referee-guided revision
 - automatic version-control checkpoints
+
+## 中文简介
+
+这是一个面向经济学论文，尤其是以 Econometrica 级别为目标的本地 Codex 工作系统。它不是简单的 prompt 集合，而是一套分阶段的人机协作流程：从找题目、生成模型、推导主结论、数学验证，到模拟审稿、根据审稿意见修改、版本控制和最终投稿前检查。
+
+核心目标不是假设 AI 反复修改就一定能让论文收敛到 Econometrica，而是尽早暴露不收敛的原因：贡献不够、idea 不新、假设过于定制、证明有 gap、文献定位不足，或者文章只是变得更流畅但经济洞见没有变强。
 
 ## Files
 
@@ -42,7 +48,11 @@ verify_toolchain.ps1
 verification_templates/
 ```
 
-Then open the paper folder in Codex Desktop and use short natural-language commands:
+Then open the paper folder in Codex Desktop. `AGENTS.md` should be read automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the router.
+
+## 中文用法
+
+在 Codex Desktop 里打开论文根目录后，你不需要记住每个 workflow 或 stage。直接用自然语言即可，建议以 `按系统处理：` 开头：
 
 ```text
 按系统处理：我想讨论一个新的课题，领域大概是平台搜索和广告。
@@ -70,6 +80,38 @@ Then open the paper folder in Codex Desktop and use short natural-language comma
 
 ```text
 按系统继续。
+```
+
+## English Usage
+
+After opening the paper root folder in Codex Desktop, you do not need to remember workflow names or stage numbers. Use natural language. For best routing stability, start with `Use the system:`.
+
+```text
+Use the system: I want to explore a new research topic in platform search and advertising.
+```
+
+```text
+Use the system: evaluate whether this idea has Econometrica-level potential.
+```
+
+```text
+Use the system: generate tractable model variants and attempt first-pass derivations.
+```
+
+```text
+Use the system: rigorously verify Proposition 1, using Python, Mathematica, and Lean if useful.
+```
+
+```text
+Use the system: run one simulated Econometrica review round.
+```
+
+```text
+Use the system: revise the paper according to the latest referee report.
+```
+
+```text
+Use the system: continue from the current state.
 ```
 
 ## Design Philosophy

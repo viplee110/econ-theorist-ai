@@ -1,0 +1,5 @@
+*.md text working-tree-encoding=UTF-8
+*.ps1 text working-tree-encoding=UTF-8
+*.py text working-tree-encoding=UTF-8
+*.lean text working-tree-encoding=UTF-8
+
