@@ -1,0 +1,57 @@
+# Local toolchains and caches
+.venv/
+.tools/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Paper-specific generated artifacts
+project_state.md
+discovery_state.md
+idea_dossier.md
+contribution_lock.md
+manuscript_map.md
+model_candidates.md
+derivation_notes.md
+math_claims.md
+assumption_ledger.md
+verification_log.md
+counterexamples.md
+formalization_notes.md
+literature_probe.md
+topic_longlist.md
+topic_shortlist.md
+idea_kill_tests.md
+human_decisions.md
+proof_and_model_audit.md
+risk_register.md
+revision_log.md
+version_log.md
+final_report.md
+referee_reports/
+verification/
+formal/
+lean/
+
+# LaTeX generated files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local scratch
+mathematica_smoke_test.wls
+
