@@ -110,6 +110,80 @@ Use the system: revise the paper according to the latest referee report.
 Use the system: continue from the current state.
 ```
 
+## IDE and Agent Recommendations
+
+### Codex Desktop
+
+Codex Desktop is the most natural environment for this system. Copy the workflow files into the paper root folder, then open that folder as a local Codex project. Codex should automatically read `AGENTS.md`, which points it to `ECONOMETRICA_ORCHESTRATOR.md`.
+
+Recommended command:
+
+```text
+Use the system: continue from the current state.
+```
+
+Chinese equivalent:
+
+```text
+按系统继续。
+```
+
+### Cursor
+
+Cursor can use the same workflow files, but it may not automatically treat `AGENTS.md` as project instructions. For a new Cursor agent/chat session, explicitly tell it to read the entry files first.
+
+Recommended command:
+
+```text
+Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow the workflow system and route the task automatically. My task is: [describe the task].
+```
+
+For high-stakes review or modeling work, also ask Cursor to read the relevant module:
+
+```text
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_PANEL_PROTOCOL.md. Use the independent panel protocol where appropriate. My task is: [describe the task].
+```
+
+### Claude Code, Windsurf, VS Code Agents, and Other Local IDE Agents
+
+Any local IDE agent that can read project files can use this repository. Place the workflow files in the project root and start each major session by naming the entry files.
+
+Recommended command:
+
+```text
+Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md first. Then decide which workflow module to use. My task is: [describe the task].
+```
+
+If the task involves proof, equilibrium, symbolic algebra, numerical counterexample search, or formal verification, add:
+
+```text
+Also read ECONOMETRICA_VERIFICATION_WORKFLOW.md and use the available local tools only when their output can be recorded.
+```
+
+### Web Chat Models
+
+Plain web chat models usually cannot automatically read local project files. Use one of these approaches:
+
+1. Upload the workflow files and the relevant paper files.
+2. Provide the GitHub repository URL and ask the model to read the workflow files.
+3. Paste the relevant section of `ECONOMETRICA_ORCHESTRATOR.md` or the module you want to use.
+
+Recommended command:
+
+```text
+Use the workflow from https://github.com/viplee110/econometrica-ai-research-system. Start from AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md, then route this task: [describe the task].
+```
+
+This is less reliable than local use, because the model may not have persistent access to your paper folder, git history, local tools, or generated state files.
+
+### Most Robust Cross-Tool Prompt
+
+Use this when you are unsure whether the IDE automatically reads project instructions:
+
+```text
+Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow this workflow system. If the task involves high-stakes idea, model, theorem, review, or revision decisions, also read ECONOMETRICA_PANEL_PROTOCOL.md. Route the task automatically and stop at human gates. My task is: [describe the task].
+```
+
 ## Design Philosophy
 
 The system does not assume that repeated AI revision converges to Econometrica acceptance. It is designed to expose non-convergence early:
