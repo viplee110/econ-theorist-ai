@@ -12,6 +12,8 @@ For mathematical derivations, theorem checks, comparative statics, equilibrium c
 
 For version control, checkpoints, git diffs, branches, worktrees, commits, tags, rollback, and protection of human edits, first read `ECONOMETRICA_VERSION_CONTROL.md` when it exists in this project.
 
+For high-stakes idea, model, theorem, manuscript, review, or revision decisions, first read `ECONOMETRICA_PANEL_PROTOCOL.md` when it exists. Use independent specialist reports, AE synthesis, Co-Editor decision, and parent-agent summary to avoid single-agent self-confirmation.
+
 ## Local Verification Toolchain
 
 - Use `.venv\Scripts\python.exe` for Python-based symbolic algebra, numerical checks, counterexample searches, plots, and SMT checks.
@@ -35,6 +37,7 @@ For version control, checkpoints, git diffs, branches, worktrees, commits, tags,
 - Do not continue polishing if the main objection is contribution, identification, or economic relevance. Return to idea testing or contribution locking.
 - Use `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` to decide which stage should be run next.
 - Use `ECONOMETRICA_ORCHESTRATOR.md` as the default router for broad or ambiguous research instructions.
+- Use `ECONOMETRICA_PANEL_PROTOCOL.md` for high-stakes decision panels in idea discovery, model selection, mathematical verification, simulated review, and revision triage.
 - Use `ECONOMETRICA_DISCOVERY_WORKFLOW.md` before a full manuscript exists or when the task is to discover topics, generate tractable models, test derivations, or run early-stage kill tests.
 - Use `ECONOMETRICA_VERIFICATION_WORKFLOW.md` whenever a mathematical claim needs derivation, symbolic checking, numerical testing, counterexample search, proof audit, or formal verification.
 - Use `ECONOMETRICA_VERSION_CONTROL.md` before and after meaningful edits, long-running review sessions, and rollback requests.

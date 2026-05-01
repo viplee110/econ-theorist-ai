@@ -12,6 +12,8 @@ This workflow supports three starting modes:
 - `Idea mode`: the human has a rough idea or mechanism.
 - `Open mode`: the human wants AI to explore candidate topics from scratch.
 
+For high-stakes screening, model selection, and investment decisions, also read `ECONOMETRICA_PANEL_PROTOCOL.md`. Use independent panels rather than a single-agent judgment when deciding whether to invest in an idea or model.
+
 ## Core Principle
 
 AI can expand the search frontier, but it cannot certify that a topic is unstudied, important, or Econometrica-level. Treat all generated topics as hypotheses. A candidate survives only if it passes novelty, tractability, economic importance, and execution tests.
@@ -172,6 +174,12 @@ Human gate:
 
 The human selects 1-3 candidates for model sketching.
 
+Panel option:
+
+- If the user asks whether a topic is worth pursuing, run an Idea Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` after D2.
+- Use Blind Mode when judging the idea itself.
+- Use Literature Mode when the main uncertainty is whether the idea is already known.
+
 ## Stage D3 - Literature Probe
 
 Autonomy: Checkpoint
@@ -247,6 +255,11 @@ Tractability constraints:
 - Avoid assumptions that exist only to force the desired result.
 - Make every assumption economically interpretable.
 
+Panel option:
+
+- If multiple model variants survive, run a Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md`.
+- Require the math-rigor panelist to check fixed point, IFT, contraction, boundary behavior, equilibrium selection, and assumption packaging risks before a model is selected for full paper development.
+
 ## Stage D5 - First-Pass Derivation
 
 Autonomy: Auto, but must be rigorous
@@ -302,6 +315,7 @@ Decide whether the candidate deserves further investment.
 AI tasks:
 
 - Create `idea_kill_tests.md`.
+- If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
 - For each promising model, simulate:
   - hostile closest-literature referee
   - theory referee
@@ -416,4 +430,3 @@ Use this discovery workflow before writing a full paper. Once a candidate receiv
 ```text
 Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1 or Stage 2 using the idea_dossier.md and contribution_lock.md created during discovery.
 ```
-

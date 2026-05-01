@@ -18,6 +18,7 @@ This repository provides a reusable human-AI research workflow for:
 
 - `AGENTS.md`: project-level instructions automatically read by Codex.
 - `ECONOMETRICA_ORCHESTRATOR.md`: single entry point that routes natural-language requests to the right workflow.
+- `ECONOMETRICA_PANEL_PROTOCOL.md`: independent specialist panels, AE synthesis, Co-Editor decisions, and consensus/disagreement summaries.
 - `ECONOMETRICA_DISCOVERY_WORKFLOW.md`: topic search, model generation, derivation, early kill tests.
 - `ECONOMETRICA_VERIFICATION_WORKFLOW.md`: symbolic checks, numerical counterexample search, proof audit, Lean/Python/Mathematica usage.
 - `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`: manuscript development, contribution lock, simulated review, revision loop, final readiness.
@@ -33,6 +34,7 @@ Copy these files into the root directory of a paper project:
 ```text
 AGENTS.md
 ECONOMETRICA_ORCHESTRATOR.md
+ECONOMETRICA_PANEL_PROTOCOL.md
 ECONOMETRICA_DISCOVERY_WORKFLOW.md
 ECONOMETRICA_VERIFICATION_WORKFLOW.md
 ECONOMETRICA_AI_HUMAN_WORKFLOW.md

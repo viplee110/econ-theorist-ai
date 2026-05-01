@@ -4,8 +4,9 @@ Version: 2026-05-01
 
 This is the single entry point for the Econometrica research system. When the user gives a broad instruction, do not require them to remember workflow file names or stage numbers. Read this file, infer the task type, inspect available state files, choose the next appropriate module, and proceed until a human gate is reached.
 
-The system is made of four modules:
+The system is made of the following workflow modules:
 
+- `ECONOMETRICA_PANEL_PROTOCOL.md`: independent specialist panels, AE synthesis, Co-Editor decisions, consensus/disagreement/omission summaries.
 - `ECONOMETRICA_DISCOVERY_WORKFLOW.md`: topic discovery, model generation, first-pass derivation, early kill tests.
 - `ECONOMETRICA_VERIFICATION_WORKFLOW.md`: symbolic checks, numerical counterexample search, proof audit, Lean/Mathematica/Python verification.
 - `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`: manuscript development, contribution lock, simulated review, referee-guided revision, submission readiness.
@@ -21,11 +22,12 @@ When the user asks for research help, follow this sequence:
 1. Inspect the local folder and current state files.
 2. Infer whether the task is discovery, verification, manuscript revision, simulated review, or toolchain work.
 3. For meaningful edits or long-running sessions, read `ECONOMETRICA_VERSION_CONTROL.md` and run automatic version-control setup in the background.
-4. State the selected module and stage in one short sentence.
-5. Execute the stage directly if it is safe.
-6. Stop at human gates.
-7. Update the relevant state/log files before stopping.
-8. For meaningful edits, summarize the git diff or version-control state before finishing.
+4. For high-stakes judgments, read `ECONOMETRICA_PANEL_PROTOCOL.md` and choose the appropriate panel type and information mode.
+5. State the selected module, stage, and panel mode in one short sentence.
+6. Execute the stage directly if it is safe.
+7. Stop at human gates.
+8. Update the relevant state/log files before stopping.
+9. For meaningful edits, summarize the git diff or version-control state before finishing.
 
 Do not ask the user to choose a stage unless the routing is genuinely ambiguous or the next step changes the core contribution, theorem, model, assumptions, novelty claim, or target journal.
 
@@ -82,6 +84,7 @@ Before routing, inspect whichever of these files exist:
 - latest `referee_reports/round_N.md`
 - `final_report.md`
 - `version_log.md`
+- latest `panel_reports/*.md`
 
 If no state file exists, begin with intake:
 
@@ -106,6 +109,7 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md` if the user asks for evaluation, screening, or whether the topic is worth pursuing.
 - Run D0 and D1.
 - If the user gave a broad field, use Field mode.
 - If the user gave no field, use Open mode.
@@ -125,7 +129,9 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run D0 through D2 in Idea mode.
+- If the user asks whether the idea is worth pursuing, run an Idea Panel in Blind or Literature Mode after D2.
 - Create or update `discovery_state.md`, `topic_longlist.md`, and `topic_shortlist.md`.
 - Stop for human choice among candidates.
 
@@ -141,8 +147,10 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md` if multiple model candidates need selection.
 - Run D4.
 - Create or update `model_candidates.md`.
+- If selecting among candidates, run a Model Panel.
 - If candidate models already exist, ask only if the user wants new variants or derivation.
 
 ### First-Pass Derivation
@@ -158,7 +166,9 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md` and `ECONOMETRICA_VERIFICATION_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md` for theorem/model claims with high stakes.
 - Run Discovery D5 plus Verification V1-V4 as needed.
+- Use a Verification Panel for the main proposition, equilibrium existence, identification result, or any theorem that carries the contribution.
 - Create or update `derivation_notes.md`, `math_claims.md`, `assumption_ledger.md`, `verification_log.md`, and `counterexamples.md`.
 - Use Python first for quick symbolic/numerical checks; use Mathematica if symbolic assumptions or inequalities benefit from it; use Lean only for compact lemmas.
 
@@ -177,9 +187,11 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_VERIFICATION_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md` for main results or disputed claims.
 - Run V0 if tool availability is unknown.
 - Run V1 if claims are not extracted.
 - For a named theorem/proposition, run V2-V5 for that claim.
+- For central claims, run a Verification Panel and then V2-V5.
 - Use V6-V7 only if a compact lemma is suitable for formalization.
 - Stop before changing theorem assumptions or economic interpretation.
 
@@ -211,7 +223,9 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 1.
+- Use an Idea Panel when the user asks for a serious Econometrica-level go/no-go judgment.
 - Do not edit the manuscript.
 - Create or update `idea_dossier.md`.
 - Stop at the human gate.
@@ -264,7 +278,9 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 7.
+- Use a Review Panel in Blind Mode unless the user explicitly asks for context-aware revision review.
 - Do not edit the manuscript in this pass unless explicitly asked.
 - Write `referee_reports/round_N.md`.
 - Update `risk_register.md`.
@@ -282,7 +298,9 @@ Triggers:
 Route:
 
 - Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 8 using the latest referee report.
+- Use a Revision Panel when objections conflict or when major edits could dilute the contribution.
 - Create a revision plan tied to objections.
 - Edit only where safe.
 - Stop before conceptual changes that require human approval.

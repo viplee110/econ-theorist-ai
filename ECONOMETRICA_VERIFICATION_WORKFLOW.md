@@ -4,6 +4,8 @@ Version: 2026-05-01
 
 Use this file whenever Codex derives, checks, repairs, or criticizes mathematical claims in an economics paper. This workflow is designed to reduce language-model hallucination by forcing derivations to interact with external tools, explicit assumptions, symbolic algebra, numerical checks, counterexample search, and, where feasible, formal proof assistants such as Lean 4.
 
+For central theorems, disputed claims, or model-selection decisions, also read `ECONOMETRICA_PANEL_PROTOCOL.md` and run a Verification Panel. The panel should produce independent re-derivation, symbolic/numerical counterexample search, proof audit, and formalization triage before AE and Co-Editor synthesis.
+
 This file complements:
 
 - `ECONOMETRICA_DISCOVERY_WORKFLOW.md` for early topic and model discovery.
@@ -255,6 +257,12 @@ Human gate:
 
 The human must approve any new assumption that affects economics, novelty, or interpretation.
 
+Panel option:
+
+- For a central theorem, run a Verification Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` before approving proof repairs.
+- The AE should classify each claim as Verified, Partially Verified, Needs Assumption, Counterexample Found, or Fatal Gap.
+- The Co-Editor should decide whether the theorem can remain, must be narrowed, requires new assumptions, or should be withdrawn.
+
 ## Stage V6 - Formalization Triage
 
 Autonomy: Checkpoint
@@ -372,4 +380,3 @@ Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Run Stage V6 for the current theorem
 ```text
 Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. If Lean 4 and Lake are installed, run Stage V7 on the selected compact lemmas. Create minimal Lean files, run the checker, and record accepted lemmas and blockers in formalization_notes.md. If Lean is not installed, record the setup blocker and do not simulate proof-assistant output.
 ```
-

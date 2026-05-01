@@ -11,6 +11,8 @@ The goal is not to assume that repeated AI revision will converge to Econometric
 3. The manuscript is locally improvable but unlikely to reach the target journal without a new insight.
 4. The project should be redirected to a different journal or split into a different paper.
 
+For high-stakes idea, model, theorem, review, or revision decisions, also read `ECONOMETRICA_PANEL_PROTOCOL.md`. Use independent specialist reports, AE synthesis, Co-Editor decision, and parent-agent summaries to avoid single-agent self-confirmation.
+
 ## Operating Principles
 
 - Human judgment is the final authority on contribution, economic importance, identification, taste, and submission decisions.
@@ -92,6 +94,7 @@ Test whether the idea is worth writing to the target journal before heavy manusc
 AI tasks:
 
 - Write `idea_dossier.md`.
+- If the go/no-go decision is high-stakes, run an Idea Panel from `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - State the one-sentence contribution.
 - Identify the closest existing papers and the strongest substitute argument.
 - State what belief a specialist should change after reading the paper.
@@ -286,17 +289,37 @@ Generate structured, adversarial, and diverse feedback without overtrusting the 
 
 AI roles:
 
-- Referee A: theory, identification, assumptions, theorem correctness, proof gaps.
-- Referee B: economic contribution, novelty, literature positioning, general interest.
-- Referee C: exposition, notation, structure, reader burden, examples.
-- Referee D: hostile closest-literature reviewer who argues the contribution is incremental.
-- Editor: fit, contribution threshold, desk-reject risk, revise-and-resubmit prospects.
+- Referee 1: field/theory specialist.
+- Referee 2: adjacent-literature or method specialist.
+- Referee 3: IO/applied micro/economic relevance specialist when appropriate.
+- Referee 4: mathematical/probabilistic rigor specialist.
+- Associate Editor: independent read first, then synthesis of referee reports.
+- Co-Editor: independent read first, then final decision letter and internal notes.
 
 Required outputs:
 
-- `referee_reports/round_N.md`
+- `referee_reports/round_N/referee_1.md`
+- `referee_reports/round_N/referee_2.md`
+- `referee_reports/round_N/referee_3.md`
+- `referee_reports/round_N/referee_4_math_rigor.md`
+- `referee_reports/round_N/associate_editor_report.md`
+- `referee_reports/round_N/co_editor_decision.md`
+- `referee_reports/round_N/00_summary.md`
 - Updated `risk_register.md`
 - A ranked list of objections by fatality, not by ease of fixing.
+
+Information isolation:
+
+- Default to Blind Mode from `ECONOMETRICA_PANEL_PROTOCOL.md`.
+- Referees should read only the current manuscript and explicitly allowed appendices.
+- Referees should not read old reports, revision logs, risk registers, workflow files, or each other's reports.
+- AE may read referee reports only after producing an independent judgment.
+- Co-Editor may read AE/referee reports only after producing an independent judgment.
+
+Location and confidence requirements:
+
+- Every major concern must cite a line, section, theorem, proposition, lemma, equation, assumption, figure, table, or closest-literature comparison.
+- Every referee, AE, and Co-Editor report must include Recommendation and Confidence.
 
 Scoring:
 
@@ -546,4 +569,3 @@ This protocol is informed by current agentic research-writing and AI-review syst
 - ReviewerToo reports that AI reviewers can help with consistency and coverage but remain weaker on methodological novelty and theoretical contribution, where human expertise remains essential: https://huggingface.co/papers/2510.08867
 - Large-scale feedback studies find LLM feedback can overlap substantially with human reviewer comments and be helpful, but should augment rather than replace expert review: https://par.nsf.gov/biblio/10617069
 - Research on LLM ideation finds AI ideas can look novel at the idea stage but lose more value after execution, which motivates early feasibility and execution gates: https://huggingface.co/papers/2506.20803
-

@@ -7,6 +7,7 @@ Copy these files and folders into the root of your paper project:
 ```text
 AGENTS.md
 ECONOMETRICA_ORCHESTRATOR.md
+ECONOMETRICA_PANEL_PROTOCOL.md
 ECONOMETRICA_DISCOVERY_WORKFLOW.md
 ECONOMETRICA_VERIFICATION_WORKFLOW.md
 ECONOMETRICA_AI_HUMAN_WORKFLOW.md
@@ -51,4 +52,3 @@ Run this after copying if you have configured the local toolchain:
 ```
 
 If Python, Lean, or Mathematica are unavailable, the workflows still work as prompts and checklists, but mathematical verification will be weaker.
-
