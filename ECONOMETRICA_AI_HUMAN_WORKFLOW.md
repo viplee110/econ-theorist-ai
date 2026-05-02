@@ -33,7 +33,7 @@ The agent should maintain these files whenever possible:
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
 - `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
-- `referee_reports/round_N.md`: simulated referee and editor reports by round.
+- `referee_reports/round_N/`: simulated referee, AE, Co-Editor, summary, and panel-configuration reports by round.
 - `revision_log.md`: every nontrivial edit with file, location, reason, and expected benefit.
 - `risk_register.md`: unresolved risks, author-only TODOs, pivot warnings, and rejection reasons.
 - `final_report.md`: final summary after any long work session.
@@ -287,21 +287,31 @@ Purpose:
 
 Generate structured, adversarial, and diverse feedback without overtrusting the simulation.
 
+Before assigning referee roles:
+
+- Create `referee_reports/round_N/panel_config.md`.
+- Infer the manuscript's narrowest defensible field, closest literature themes, main method, contribution type, and main technical risk.
+- Select referees dynamically from those features rather than using a fixed field template.
+- Do not default to IO, search, networks, theory, econometrics, or any named field unless the current manuscript actually belongs there.
+- Treat older paper-specific methodology files as historical records rather than referee-role templates.
+- Write the final role list into `panel_config.md` before creating any individual referee prompt.
+
 AI roles:
 
-- Referee 1: field/theory specialist.
-- Referee 2: adjacent-literature or method specialist.
-- Referee 3: IO/applied micro/economic relevance specialist when appropriate.
-- Referee 4: mathematical/probabilistic rigor specialist.
+- Referee 1: primary-field specialist selected from the manuscript's narrowest defensible field.
+- Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
+- Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
+- Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then final decision letter and internal notes.
 
 Required outputs:
 
+- `referee_reports/round_N/panel_config.md`
 - `referee_reports/round_N/referee_1.md`
 - `referee_reports/round_N/referee_2.md`
 - `referee_reports/round_N/referee_3.md`
-- `referee_reports/round_N/referee_4_math_rigor.md`
+- `referee_reports/round_N/referee_4_rigor.md`
 - `referee_reports/round_N/associate_editor_report.md`
 - `referee_reports/round_N/co_editor_decision.md`
 - `referee_reports/round_N/00_summary.md`
@@ -311,6 +321,9 @@ Required outputs:
 Information isolation:
 
 - Default to Blind Mode from `ECONOMETRICA_PANEL_PROTOCOL.md`.
+- If the runtime supports real agent delegation, run referee reports as parallel isolated workers by default.
+- If the runtime does not support real agents, simulate independence serially by running each referee in a separate prompt block without exposing earlier referee reports.
+- Each referee prompt must quote or summarize only that referee's role from `panel_config.md`, not the full role list plus prior reports.
 - Referees should read only the current manuscript and explicitly allowed appendices.
 - Referees should not read old reports, revision logs, risk registers, workflow files, or each other's reports.
 - AE may read referee reports only after producing an independent judgment.
@@ -496,7 +509,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution
 ### Simulated Econometrica Review
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Simulate the Econometrica review board with Referee A, B, C, D, and Editor. Write referee_reports/round_N.md and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. First create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, closest literature themes, main method, contribution type, and main risk. Then simulate the Econometrica review board with dynamically assigned Referees A-D, Associate Editor, and Co-Editor. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
 ```
 
 ### Referee-Guided Revision

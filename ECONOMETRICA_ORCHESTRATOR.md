@@ -81,7 +81,7 @@ Before routing, inspect whichever of these files exist:
 - `counterexamples.md`
 - `risk_register.md`
 - `revision_log.md`
-- latest `referee_reports/round_N.md`
+- latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
 - `version_log.md`
 - latest `panel_reports/*.md`
@@ -280,9 +280,13 @@ Route:
 - Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 7.
+- First create `referee_reports/round_N/panel_config.md` by detecting the manuscript's narrowest field, closest literature themes, main method, contribution type, and main technical risk.
+- Assign referees dynamically from `panel_config.md`; do not use a fixed field template unless the manuscript warrants it.
+- Do not reuse earlier paper-specific methodology files as referee-role templates unless the current `panel_config.md` re-justifies the same assignments.
+- Prefer parallel isolated referee agents when the runtime supports agent delegation; otherwise run serial isolated referee prompts.
 - Use a Review Panel in Blind Mode unless the user explicitly asks for context-aware revision review.
 - Do not edit the manuscript in this pass unless explicitly asked.
-- Write `referee_reports/round_N.md`.
+- Write `referee_reports/round_N/` reports.
 - Update `risk_register.md`.
 - Stop for human decision.
 

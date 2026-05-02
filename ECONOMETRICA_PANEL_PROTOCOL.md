@@ -16,6 +16,80 @@ independent specialist judgments
 
 The purpose is not to make the AI "vote." The purpose is to reduce self-confirmation, preserve real disagreement, and force decisions to be tied to specific claims, assumptions, equations, theorems, manuscript locations, or literature comparisons.
 
+## Dynamic Panel Configuration
+
+Before assigning any referee roles, create or update a panel configuration file:
+
+- `panel_reports/panel_config.md` for idea, model, verification, and revision panels.
+- `referee_reports/round_N/panel_config.md` for simulated manuscript reviews.
+
+The panel configuration must infer the narrowest defensible research field and the closest literature themes from the target material. Do not hard-code IO, search theory, network theory, contract theory, asset pricing, econometrics, behavioral economics, or any other field unless the manuscript, model, or closest-literature comparison actually warrants it.
+
+The parent agent must finish and save `panel_config.md` before writing any individual referee prompt. Each referee prompt must be generated from that saved configuration. Prior rounds, historical review methodology files, or examples may be used only as evidence about earlier work, not as role templates, unless the current `panel_config.md` independently justifies the same assignments.
+
+The configuration must include:
+
+- detected primary field and subfield
+- evidence used for the field and subfield classification
+- confidence in the classification and main classification uncertainty
+- closest literature themes and nearest substitute papers if known
+- main contribution type: theory, econometrics, empirical, experimental, computational, institutional, or mixed
+- central method or model class
+- main technical risk: proof, identification, equilibrium existence, computation, data, measurement, institutional interpretation, or novelty
+- selected referee roles and why each role is necessary
+- allowed materials, prohibited materials, and web/search policy
+- execution mode: parallel independent agents if available; serial isolated simulation otherwise
+
+For Review Panels, the default role logic is:
+
+- Referee 1: primary-field specialist selected from the detected narrow field.
+- Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
+- Referee 3: method, mechanism, application, or institutional specialist selected from the manuscript's actual contribution.
+- Referee 4: rigor specialist selected from the main risk type, such as mathematical proof, econometric identification, computation, empirical design, experimental design, or institutional interpretation.
+
+If the target spans multiple fields, the panel must explain the tradeoff and choose the referee mix that is most likely to reveal fatal objections, not the mix that is easiest for the AI to simulate.
+
+For Idea, Model, Verification, and Revision Panels, the role descriptions below are functional slots rather than fixed field assignments. The `panel_config.md` must specialize each slot to the detected field, literature, method, and risk before execution. For example, "closest-literature specialist" is not enough; the configuration should state which closest literature family the specialist represents and why.
+
+Minimum `panel_config.md` schema:
+
+```text
+Target:
+Panel type and information mode:
+Detected primary field and subfield:
+Evidence for classification:
+Classification confidence and uncertainty:
+Closest literature themes / nearest substitutes:
+Contribution type:
+Central method or model class:
+Main technical risk:
+Allowed materials:
+Prohibited materials:
+Web/search policy:
+Execution mode:
+Referee assignments:
+AE and Co-Editor instructions:
+Risks of this assignment:
+```
+
+## Execution Mode
+
+Prefer real parallel independence when the runtime supports agent delegation. On models or IDEs with native agents, such as future GPT-5.5-class or Claude/Opus-class agentic runtimes when available, the referee reports should be run as parallel, isolated workers by default:
+
+- Each referee receives the same allowed materials and its assigned role from `panel_config.md`.
+- Referees must not read other referee outputs.
+- The Associate Editor starts from an independent judgment before reading referee reports.
+- The Co-Editor starts from an independent judgment before reading the AE and referee reports.
+
+When the runtime does not provide true agents, simulate independence serially:
+
+- Run each referee in a separate prompt block.
+- Do not show earlier referee outputs to later referees.
+- Save each report before starting the next one.
+- Only the AE and Co-Editor may read the full report set at their synthesis stages.
+
+Never claim true parallel independence unless the environment actually ran separate agents or isolated workers.
+
 ## When To Use
 
 Use this protocol for:
@@ -97,6 +171,7 @@ Roles:
 
 Outputs:
 
+- `panel_reports/panel_config.md`
 - `panel_reports/idea_referee_1.md`
 - `panel_reports/idea_referee_2.md`
 - `panel_reports/idea_referee_3.md`
@@ -110,19 +185,20 @@ Use after candidate models exist.
 
 Roles:
 
-- Referee 1: minimalist tractability and baseline clarity.
-- Referee 2: economic mechanism and comparative statics.
-- Referee 3: novelty relative to canonical models.
-- Referee 4: mathematical existence, uniqueness, fixed point, IFT, contraction, boundary, and assumption packaging.
+- Referee 1: minimalist tractability and baseline clarity, specialized to the model class in `panel_config.md`.
+- Referee 2: economic mechanism and comparative statics, specialized to the detected field.
+- Referee 3: novelty relative to the closest canonical or substitute models.
+- Referee 4: rigor specialist selected from the candidate model's main risk, such as existence, uniqueness, fixed point, IFT, contraction, boundary behavior, computation, or assumption packaging.
 - Associate Editor: selects Invest, Refine, Pivot, Park, or Kill for each model.
 - Co-Editor: decides which model, if any, should enter full paper development.
 
 Outputs:
 
+- `panel_reports/panel_config.md`
 - `panel_reports/model_referee_1.md`
 - `panel_reports/model_referee_2.md`
 - `panel_reports/model_referee_3.md`
-- `panel_reports/model_referee_4_math_rigor.md`
+- `panel_reports/model_referee_4_rigor.md`
 - `panel_reports/model_ae_report.md`
 - `panel_reports/model_co_editor_decision.md`
 
@@ -135,12 +211,13 @@ Roles:
 - Referee 1: re-derivation from primitives.
 - Referee 2: symbolic and numerical counterexample search.
 - Referee 3: proof structure and hidden assumptions.
-- Referee 4: formalization triage, Lean suitability, and mathematical rigor.
+- Referee 4: formalization triage, Lean suitability, and rigor focus selected from the claim's main risk in `panel_config.md`.
 - Associate Editor: classifies each claim as Verified, Partially Verified, Needs Assumption, Counterexample Found, or Fatal Gap.
 - Co-Editor: approves theorem restatement, proof repair path, or claim withdrawal.
 
 Outputs:
 
+- `panel_reports/panel_config.md`
 - `panel_reports/verification_referee_1.md`
 - `panel_reports/verification_referee_2.md`
 - `panel_reports/verification_referee_3.md`
@@ -152,12 +229,14 @@ Outputs:
 
 Use for simulated Econometrica review.
 
+Before assigning roles, create `referee_reports/round_N/panel_config.md` using the Dynamic Panel Configuration rules above.
+
 Roles:
 
-- Referee 1: field/theory specialist.
-- Referee 2: adjacent literature specialist.
-- Referee 3: IO/applied micro/economic relevance specialist when appropriate.
-- Referee 4: mathematical/probabilistic rigor specialist.
+- Referee 1: primary-field specialist selected from the manuscript's narrowest defensible field.
+- Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
+- Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
+- Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then decision letter and internal notes.
 
@@ -166,7 +245,7 @@ Outputs:
 - `referee_reports/round_N/referee_1.md`
 - `referee_reports/round_N/referee_2.md`
 - `referee_reports/round_N/referee_3.md`
-- `referee_reports/round_N/referee_4_math_rigor.md`
+- `referee_reports/round_N/referee_4_rigor.md`
 - `referee_reports/round_N/associate_editor_report.md`
 - `referee_reports/round_N/co_editor_decision.md`
 - `referee_reports/round_N/00_summary.md`
@@ -186,6 +265,7 @@ Roles:
 
 Outputs:
 
+- `panel_reports/panel_config.md`
 - `panel_reports/revision_triage.md`
 - updated `risk_register.md`
 - updated `revision_log.md`
@@ -197,6 +277,7 @@ Outputs:
 Before running a panel, define:
 
 - target object: idea, model, theorem, manuscript, review report, or revision plan
+- dynamic referee configuration and execution mode
 - allowed files
 - prohibited files
 - web/search policy
@@ -368,6 +449,5 @@ The system must stop for human judgment before:
 ## Prompt Template
 
 ```text
-Read ECONOMETRICA_PANEL_PROTOCOL.md. Run a [Idea/Model/Verification/Review/Revision] Panel in [Blind/Context/Literature] Mode for [target object]. Define allowed and prohibited materials, produce independent referee reports, then AE synthesis, then Co-Editor decision, then parent-agent summary. Stop at the human gate.
+Read ECONOMETRICA_PANEL_PROTOCOL.md. Run a [Idea/Model/Verification/Review/Revision] Panel in [Blind/Context/Literature] Mode for [target object]. First create panel_config.md by detecting the narrowest field, closest literature themes, main method, contribution type, and main risk. Assign specialist roles dynamically from panel_config.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Define allowed and prohibited materials, produce independent referee reports, then AE synthesis, then Co-Editor decision, then parent-agent summary. Stop at the human gate.
 ```
-

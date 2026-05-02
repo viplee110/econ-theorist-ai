@@ -11,6 +11,8 @@ This repository provides a reusable human-AI research workflow for:
 - contribution kill tests
 - manuscript development
 - simulated Econometrica review
+- dynamic referee assignment by field, closest literature, method, contribution type, and main risk
+- parallel isolated referee agents when available, with serial isolated simulation as fallback
 - referee-guided revision
 - automatic version-control checkpoints
 
@@ -18,7 +20,7 @@ This repository provides a reusable human-AI research workflow for:
 
 - `AGENTS.md`: project-level instructions automatically read by Codex.
 - `ECONOMETRICA_ORCHESTRATOR.md`: single entry point that routes natural-language requests to the right workflow.
-- `ECONOMETRICA_PANEL_PROTOCOL.md`: independent specialist panels, AE synthesis, Co-Editor decisions, and consensus/disagreement summaries.
+- `ECONOMETRICA_PANEL_PROTOCOL.md`: dynamic panel configuration, independent specialist panels, AE synthesis, Co-Editor decisions, and consensus/disagreement summaries.
 - `ECONOMETRICA_DISCOVERY_WORKFLOW.md`: topic search, model generation, derivation, early kill tests.
 - `ECONOMETRICA_VERIFICATION_WORKFLOW.md`: symbolic checks, numerical counterexample search, proof audit, Lean/Python/Mathematica usage.
 - `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`: manuscript development, contribution lock, simulated review, revision loop, final readiness.
@@ -102,6 +104,8 @@ Use the system: rigorously verify Proposition 1, using Python, Mathematica, and 
 Use the system: run one simulated Econometrica review round.
 ```
 
+For simulated review, the workflow first writes `referee_reports/round_N/panel_config.md`, then assigns referees dynamically from the manuscript's narrowest field, closest literature, method, contribution type, and main risk.
+
 ```text
 Use the system: revise the paper according to the latest referee report.
 ```
@@ -141,7 +145,7 @@ Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow the workflow system and 
 For high-stakes review or modeling work, also ask Cursor to read the relevant module:
 
 ```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_PANEL_PROTOCOL.md. Use the independent panel protocol where appropriate. My task is: [describe the task].
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_PANEL_PROTOCOL.md. Use the independent panel protocol where appropriate. First create panel_config.md for any high-stakes panel, then assign specialist roles dynamically. My task is: [describe the task].
 ```
 
 ### Claude Code, Windsurf, VS Code Agents, and Other Local IDE Agents
@@ -181,7 +185,7 @@ This is less reliable than local use, because the model may not have persistent 
 Use this when you are unsure whether the IDE automatically reads project instructions:
 
 ```text
-Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow this workflow system. If the task involves high-stakes idea, model, theorem, review, or revision decisions, also read ECONOMETRICA_PANEL_PROTOCOL.md. Route the task automatically and stop at human gates. My task is: [describe the task].
+Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow this workflow system. If the task involves high-stakes idea, model, theorem, review, or revision decisions, also read ECONOMETRICA_PANEL_PROTOCOL.md. Create panel_config.md before assigning referees, use parallel isolated agents if available, otherwise use serial isolated prompts, route the task automatically, and stop at human gates. My task is: [describe the task].
 ```
 
 ## Design Philosophy

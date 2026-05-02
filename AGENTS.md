@@ -38,6 +38,9 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Use `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` to decide which stage should be run next.
 - Use `ECONOMETRICA_ORCHESTRATOR.md` as the default router for broad or ambiguous research instructions.
 - Use `ECONOMETRICA_PANEL_PROTOCOL.md` for high-stakes decision panels in idea discovery, model selection, mathematical verification, simulated review, and revision triage.
+- For high-stakes panels, create a dynamic `panel_config.md` first, assign referees from the paper's narrowest field, closest literature themes, main method, contribution type, and main risk, and do not use fixed field templates unless warranted by the paper.
+- Do not treat prior paper-specific methodology records as reusable referee templates.
+- Prefer parallel isolated referee agents when the active runtime supports real agent delegation; otherwise use serial isolated referee prompts that hide earlier reports from later referees.
 - Use `ECONOMETRICA_DISCOVERY_WORKFLOW.md` before a full manuscript exists or when the task is to discover topics, generate tractable models, test derivations, or run early-stage kill tests.
 - Use `ECONOMETRICA_VERIFICATION_WORKFLOW.md` whenever a mathematical claim needs derivation, symbolic checking, numerical testing, counterexample search, proof audit, or formal verification.
 - Use `ECONOMETRICA_VERSION_CONTROL.md` before and after meaningful edits, long-running review sessions, and rollback requests.
