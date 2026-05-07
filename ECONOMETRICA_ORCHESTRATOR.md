@@ -75,6 +75,7 @@ Before routing, inspect whichever of these files exist:
 - `contribution_lock.md`
 - `manuscript_map.md`
 - `model_candidates.md`
+- `primitive_hunter_report.md`
 - `model_tournament.md`
 - `theorem_candidates.md`
 - `absorption_tests.md`
@@ -152,14 +153,21 @@ Triggers:
 - "find the main theorem"
 - "theorem-first"
 - "absorption test"
+- "primitive hunter"
+- "deepest primitive"
+- "theorem generator"
+- "non-neighborhood model"
+- "reduced-form object"
 
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` if multiple model candidates need selection.
 - Run D4.
-- Create or update `model_candidates.md`, `model_tournament.md`, and `absorption_tests.md`.
+- If the primitive is unclear or the valuable object is reduced-form, run a Primitive Hunter / Theorem Generator Panel before ordinary model generation.
+- Create or update `primitive_hunter_report.md`, `model_candidates.md`, `model_tournament.md`, and `absorption_tests.md`.
 - Generate 4-6 model variants before selecting one for full development.
+- Generate three non-neighborhood model directions when local repair is a risk.
 - Do not enter manuscript mode until a candidate theorem survives the main-theorem gate.
 - If selecting among candidates, run a Model Panel.
 - If candidate models already exist, ask only if the user wants new variants or derivation.
@@ -207,7 +215,8 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Stop manuscript polishing.
 - Run Discovery D4-D6: model tournament, first-pass derivation, absorption test, and main-theorem gate.
-- Create or update `model_tournament.md`, `theorem_candidates.md`, `absorption_tests.md`, and `idea_kill_tests.md`.
+- Start with a Primitive Hunter / Theorem Generator Panel if the deepest primitive is unclear or the current theorem is weak.
+- Create or update `primitive_hunter_report.md`, `model_tournament.md`, `theorem_candidates.md`, `absorption_tests.md`, and `idea_kill_tests.md`.
 - If two independent review rounds share the same structural objection, require Pivot, Demote to benchmark, Park, or Kill unless the human explicitly overrides.
 - Do not return to Stage 6 or Stage 8 until a human approves a new theorem sentence.
 
@@ -321,10 +330,13 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 7.
 - First create `referee_reports/round_N/panel_config.md` by detecting the manuscript's narrowest field, closest literature themes, main method, contribution type, and main technical risk.
+- Include calibration anchors in `panel_config.md`; if close Econometrica anchors cannot be named confidently, write anchor TODOs rather than inventing citations.
 - Assign referees dynamically from `panel_config.md`; do not use a fixed field template unless the manuscript warrants it.
 - Do not reuse earlier paper-specific methodology files as referee-role templates unless the current `panel_config.md` re-justifies the same assignments.
 - Prefer parallel isolated referee agents when the runtime supports agent delegation; otherwise run serial isolated referee prompts.
 - Add a Scientific Judge / Idea Critic for Nugget Test, Occam Test, and Defensive Dilution assessment.
+- Add an Advocate / Best-Case Reader to state the strongest defensible acceptance case and counter reject-prior drift.
+- If `contribution_lock.md` exists, create `referee_reports/round_N/dilution_check.md` using only the current manuscript and `contribution_lock.md`; referees must not read it.
 - Use a Review Panel in Blind Mode unless the user explicitly asks for context-aware revision review.
 - Do not edit the manuscript in this pass unless explicitly asked.
 - Write `referee_reports/round_N/` reports.

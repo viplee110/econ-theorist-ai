@@ -7,6 +7,7 @@ This repository provides a reusable human-AI research workflow for:
 - topic discovery
 - tractable model generation
 - model tournaments before manuscript writing
+- Primitive Hunter / Theorem Generator panels for non-neighborhood model search
 - absorption tests against existing theory
 - main-theorem gates
 - Scientific Judge / Nugget Test for taste and anti-complexity
@@ -105,6 +106,10 @@ Use the system: generate tractable model variants and attempt first-pass derivat
 
 ```text
 Use the system: run a model tournament and absorption test before we write a manuscript.
+```
+
+```text
+Use the system: run Primitive Hunter. Identify the deepest primitive, what is reduced-form, and three non-neighborhood model directions.
 ```
 
 ```text
@@ -226,7 +231,7 @@ AI should expand the search space, generate and test models, simulate adversaria
 The preferred path is:
 
 ```text
-topic/idea -> model tournament -> absorption test -> main theorem gate -> 5-8 page model note -> manuscript
+topic/idea -> primitive hunting -> model tournament -> absorption test -> main theorem gate -> 5-8 page model note -> manuscript
 ```
 
 If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," the workflow should stop polishing and return to model discovery.

@@ -34,6 +34,7 @@ Maintain these files during discovery:
 - `topic_longlist.md`: broad list of candidate topics and mechanisms.
 - `topic_shortlist.md`: surviving candidates after screening.
 - `model_candidates.md`: structured model sketches for each surviving candidate.
+- `primitive_hunter_report.md`: deepest primitive, reduced-form object audit, and non-neighborhood model directions.
 - `model_tournament.md`: side-by-side comparison of model variants and why weaker variants were killed or demoted.
 - `theorem_candidates.md`: candidate main theorems, theorem sentences, proof status, and failure modes.
 - `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
@@ -216,25 +217,31 @@ Human gate:
 
 The human should inspect the top substitute papers or ask the AI to help locate them. Do not trust novelty until this gate is passed.
 
-## Stage D4 - Model Candidate Generation
+## Stage D4 - Primitive Hunting and Model Candidate Generation
 
 Autonomy: Auto
 
 Purpose:
 
-Generate a model tournament before any paper draft exists.
+Find the deepest primitive, then generate a model tournament before any paper draft exists.
 
 AI tasks:
 
+- Create or update `primitive_hunter_report.md`.
 - Create `model_candidates.md`.
 - Create or update `model_tournament.md`.
+- Before generating local variants, identify:
+  - the deepest primitive
+  - the object currently treated as reduced-form
+  - the primitive that must be endogenized for the theorem to be non-substitutable
+  - whether to change theorem, change model, or keep the question but change primitive
 - For each selected candidate, generate 4-6 model variants:
   - minimalist baseline
   - richer but still tractable version
   - alternative timing
   - alternative information structure
   - alternative equilibrium concept if relevant
-  - one outside-the-current-slope variant that changes the core primitive rather than locally enriching it
+  - three non-neighborhood model directions when the current model seems trapped in local repair
 
 Model template:
 
@@ -294,6 +301,7 @@ Tractability constraints:
 
 Panel option:
 
+- If the current primitive is unclear or appears reduced-form, run a Primitive Hunter / Theorem Generator Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` before the Model Panel.
 - If multiple model variants survive, run a Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Require the math-rigor panelist to check fixed point, IFT, contraction, boundary behavior, equilibrium selection, and assumption packaging risks before a model is selected for the D7 pre-paper package.
 
@@ -361,6 +369,7 @@ AI tasks:
 - Create or update `absorption_tests.md`.
 - Create or update `model_tournament.md`.
 - If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
+- If the candidate's deepest primitive or theorem direction is still unclear, run a Primitive Hunter / Theorem Generator Panel before recommending `Invest`, `Refine`, or `Pivot`.
 - For each promising model, simulate:
   - absorption referee who tries to reduce the result to known theory
   - hostile closest-literature referee
@@ -491,7 +500,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Gener
 ### Generate Models for Shortlisted Ideas
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. Generate 4-6 tractable model variants for each selected candidate, including at least one variant that changes the core primitive rather than locally enriching the current model. Create model_candidates.md and model_tournament.md. Do not write the paper yet.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Then generate 4-6 tractable model variants for each selected candidate, including three non-neighborhood model directions when local repair is a risk. Create primitive_hunter_report.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
 ```
 
 ### Attempt First-Pass Derivations
