@@ -97,6 +97,9 @@ ai/discovery-YYYYMMDD-HHMM
 ai/verification-YYYYMMDD-HHMM
 ai/review-round-N-YYYYMMDD-HHMM
 ai/revision-round-N-YYYYMMDD-HHMM
+codex/tree-A-defensive-YYYYMMDD-HHMM
+codex/tree-B-simplify-YYYYMMDD-HHMM
+codex/tree-C-pivot-YYYYMMDD-HHMM
 ```
 
 Human gate:
@@ -246,6 +249,26 @@ Rules:
 - If a file changed outside the current AI task, do not overwrite it.
 - If a file has both human changes and AI-needed edits, read it carefully and make minimal changes.
 - If a conflict is real, stop and ask how to proceed.
+
+## Stage G8 - Agentic Tree Search Branch Strategy
+
+Autonomy: Checkpoint
+
+Purpose:
+
+Support Stage 8 revision tree search without contaminating the main manuscript path.
+
+Rules:
+
+- First create `revision_tree.md` with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe.
+- Do not edit the manuscript on all three branches before the human chooses a path unless the user explicitly asks for parallel prototypes.
+- For lightweight comparison, keep branches as written plans in `revision_tree.md`.
+- For substantial manuscript prototypes, create separate git branches or worktrees with disjoint write scopes.
+- Branch A may add minimal clarifications, but must record every new assumption.
+- Branch B should preferentially delete or simplify objects before adding new ones.
+- Branch C may change framing or theorem target, but requires a human gate before manuscript edits.
+- After the human chooses a branch, summarize why the other branches were pruned.
+- Never merge a tree-search branch into `main` until the chosen branch passes the nugget, absorption, and proof-risk checks.
 
 ## Prompt Templates
 

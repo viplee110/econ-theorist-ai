@@ -85,6 +85,7 @@ Before routing, inspect whichever of these files exist:
 - `counterexamples.md`
 - `risk_register.md`
 - `revision_log.md`
+- `revision_tree.md`
 - latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
 - `version_log.md`
@@ -192,6 +193,9 @@ Triggers:
 - "low quality trap"
 - "低质量陷阱"
 - "too much polishing"
+- "defensive dilution"
+- "nugget"
+- "scientific judge"
 - "no central theorem"
 - "main theorem is weak"
 - "absorbed by existing theory"
@@ -320,6 +324,7 @@ Route:
 - Assign referees dynamically from `panel_config.md`; do not use a fixed field template unless the manuscript warrants it.
 - Do not reuse earlier paper-specific methodology files as referee-role templates unless the current `panel_config.md` re-justifies the same assignments.
 - Prefer parallel isolated referee agents when the runtime supports agent delegation; otherwise run serial isolated referee prompts.
+- Add a Scientific Judge / Idea Critic for Nugget Test, Occam Test, and Defensive Dilution assessment.
 - Use a Review Panel in Blind Mode unless the user explicitly asks for context-aware revision review.
 - Do not edit the manuscript in this pass unless explicitly asked.
 - Write `referee_reports/round_N/` reports.
@@ -343,8 +348,10 @@ Route:
 - Run Stage 8 using the latest referee report.
 - Use a Revision Panel when objections conflict or when major edits could dilute the contribution.
 - If the latest report repeats a structural objection from a prior round, such as missing central theorem or old-theory absorption, route to Discovery D4-D6 instead of local revision.
-- Create a revision plan tied to objections.
-- Edit only where safe.
+- Create `revision_tree.md` with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe.
+- Run the Scientific Judge on the branch plans.
+- Stop for human branch choice before direct manuscript edits.
+- Edit only after the human selects a branch and only where safe.
 - Stop before conceptual changes that require human approval.
 
 ### Final Readiness

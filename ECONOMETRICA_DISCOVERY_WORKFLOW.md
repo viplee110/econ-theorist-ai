@@ -394,6 +394,16 @@ The candidate cannot receive `Invest` unless all are true:
 - The model primitive that carries the contribution is economically interpretable or explicitly endogenized.
 - At least one alternative model variant has been killed for a documented reason.
 
+Hostile kill conditions:
+
+Triggering any one condition should lead to `Kill`, `Park`, or `Demote to benchmark` unless the human explicitly overrides with a documented reason.
+
+- `Conclusion-first triviality`: after removing the mathematical shell, the result is just a trivial statement that a specialist would already believe.
+- `Name-swap absorption`: replacing topical nouns such as data, algorithms, platforms, AI, benchmarks, certification, or diagnostics with generic terms such as information, technology, intermediary, signal, or machine makes the result equivalent to an old model.
+- `Assumption manipulation`: removing a minor-looking regularity condition, distributional restriction, or boundary assumption changes the sign or existence of the core result.
+- `Defensive dilution`: the contribution sentence becomes longer, more conditional, or more legalistic after revision.
+- `Complexity shield`: heterogeneity, dynamics, extra states, or special distributions mainly protect the theorem rather than reveal the mechanism.
+
 Decision labels:
 
 - `Invest`: proceed to D7 pre-paper package; begin full manuscript development only after human approval of the model note and theorem sentence.

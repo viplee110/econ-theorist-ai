@@ -46,6 +46,7 @@ For Review Panels, the default role logic is:
 - Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
 - Referee 3: method, mechanism, application, or institutional specialist selected from the manuscript's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type, such as mathematical proof, econometric identification, computation, empirical design, experimental design, or institutional interpretation.
+- Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test and Occam Test.
 
 If the target spans multiple fields, the panel must explain the tradeoff and choose the referee mix that is most likely to reveal fatal objections, not the mix that is easiest for the AI to simulate.
 
@@ -189,7 +190,7 @@ Roles:
 - Referee 2: economic mechanism and comparative statics, specialized to the detected field.
 - Referee 3: novelty and absorption risk relative to the closest canonical or substitute models.
 - Referee 4: rigor specialist selected from the candidate model's main risk, such as existence, uniqueness, fixed point, IFT, contraction, boundary behavior, computation, or assumption packaging.
-- Associate Editor: selects Invest, Refine, Pivot, Park, or Kill for each model.
+- Associate Editor: selects Invest, Refine, Pivot, Demote to Benchmark, Park, or Kill for each model.
 - Co-Editor: decides which model, if any, should enter the pre-paper model-note stage.
 
 Outputs:
@@ -237,6 +238,7 @@ Roles:
 - Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
 - Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
+- Referee 5: Scientific Judge / Idea Critic. This referee does not audit algebra. It judges taste, strategy, simplicity, and whether the paper's nugget survives the revision process.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then decision letter and internal notes.
 
@@ -246,6 +248,7 @@ Outputs:
 - `referee_reports/round_N/referee_2.md`
 - `referee_reports/round_N/referee_3.md`
 - `referee_reports/round_N/referee_4_rigor.md`
+- `referee_reports/round_N/referee_5_scientific_judge.md`
 - `referee_reports/round_N/associate_editor_report.md`
 - `referee_reports/round_N/co_editor_decision.md`
 - `referee_reports/round_N/00_summary.md`
@@ -355,6 +358,18 @@ This paper proves X, and existing theory cannot obtain X because Y.
 Absorption families to test include nonlinear pricing, multidimensional screening, costly disclosure or verification, Bayesian persuasion, information design, dynamic experimentation, inventory or capacity control, moral hazard, certification, reputation, search, matching, and platform steering.
 
 If the panel can reproduce the result by renaming variables inside a known framework, it should recommend `Demote to benchmark`, `Pivot`, `Park`, or `Kill`, not `Invest`. If the issue is that a key primitive is reduced-form, the panel should identify what must be endogenized before manuscript development.
+
+## Nugget and Occam Test
+
+Every Review Panel and high-stakes Revision Panel must include a scientific-taste judgment. The judge should answer:
+
+- What is the paper's nugget in one sentence without mathematical notation?
+- Did the latest revision make the nugget shorter, sharper, and more surprising, or longer and more defensive?
+- Is each additional variable, agent type, state, distributional assumption, or regularity condition necessary for the mechanism?
+- Could the same insight be obtained from a simpler primitive or cleaner model?
+- Does the paper contain a theorem package without one central theorem?
+
+If the contribution sentence requires many clauses such as "under the specific condition that..." or "provided that..." to sound true, label the issue `Defensive Dilution`. If complexity is essential, the judge must say exactly what economic work it performs. If complexity mainly protects a fragile result, the judge should recommend `Pivot`, `Demote to Benchmark`, or `Reject and Resubmit` rather than local repair.
 
 ## Recommendation Scales
 

@@ -40,6 +40,7 @@ The agent should maintain these files whenever possible:
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
 - `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
 - `referee_reports/round_N/`: simulated referee, AE, Co-Editor, summary, and panel-configuration reports by round.
+- `revision_tree.md`: Stage 8 branch plans for Defensive Patch, Mechanism Simplification, and Pivot/Reframe.
 - `revision_log.md`: every nontrivial edit with file, location, reason, and expected benefit.
 - `risk_register.md`: unresolved risks, author-only TODOs, pivot warnings, and rejection reasons.
 - `final_report.md`: final summary after any long work session.
@@ -325,6 +326,7 @@ AI roles:
 - Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
 - Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
+- Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test, Occam Test, and Defensive Dilution check.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then final decision letter and internal notes.
 
@@ -335,6 +337,7 @@ Required outputs:
 - `referee_reports/round_N/referee_2.md`
 - `referee_reports/round_N/referee_3.md`
 - `referee_reports/round_N/referee_4_rigor.md`
+- `referee_reports/round_N/referee_5_scientific_judge.md`
 - `referee_reports/round_N/associate_editor_report.md`
 - `referee_reports/round_N/co_editor_decision.md`
 - `referee_reports/round_N/00_summary.md`
@@ -392,7 +395,7 @@ Autonomy: Mixed
 
 Purpose:
 
-Convert referee objections into targeted improvements.
+Convert referee objections into a controlled search over revision strategies, not a linear sequence of additive patches.
 
 Triage order:
 
@@ -405,13 +408,21 @@ Triage order:
 
 AI tasks:
 
-- Create a revision plan before editing.
-- Tie each edit to a specific objection.
+- Create `revision_tree.md` before editing.
+- If the leading objection is missing central theorem, old-theory absorption, weak contribution, or defensive dilution, do not revise locally. Route back to Discovery D4-D6.
+- For major theoretical or mechanism objections, generate three parallel revision branches as plans before touching the manuscript:
+  - Branch A, `Defensive Patch`: minimal repair that preserves the current model, adding the fewest assumptions or clarifications possible.
+  - Branch B, `Mechanism Simplification`: remove complexity and seek a cleaner primitive, theorem, or benchmark that explains the mechanism with fewer moving parts.
+  - Branch C, `Pivot and Reframe`: abandon or demote the attacked theorem and rebuild around the strongest surviving mechanism.
+- For each branch, write no more than 500 words covering the revised nugget, mathematical cost, assumptions added or removed, likely referee reaction, and kill risk.
+- Run the Scientific Judge on the three branch plans before manuscript edits.
+- Prune any branch whose contribution sentence becomes longer, more conditional, or less economically intuitive.
+- Use Git branches or worktrees for actual manuscript edits only after the human chooses a branch.
+- Tie each eventual edit to a specific objection and chosen branch.
 - Avoid adding defensive clutter.
-- If the leading objection is missing central theorem, old-theory absorption, or weak contribution, do not revise locally. Route back to Discovery D4-D6.
 - Remove or demote claims that cannot be supported.
-- Compile and fix build issues.
-- Update `revision_log.md` and `risk_register.md`.
+- Compile and fix build issues after edits.
+- Update `revision_log.md`, `risk_register.md`, and `revision_tree.md`.
 
 Human gate:
 
@@ -424,6 +435,8 @@ Stop before any edit that changes:
 - claimed novelty
 - empirical interpretation
 - target journal positioning
+
+For major objections, the human must choose `Branch A`, `Branch B`, `Branch C`, `Return to Discovery`, or `Stop` before direct manuscript edits.
 
 Proceed condition:
 
@@ -537,13 +550,13 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution
 ### Simulated Econometrica Review
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. First create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, closest literature themes, main method, contribution type, and main risk. Then simulate the Econometrica review board with dynamically assigned Referees A-D, Associate Editor, and Co-Editor. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. First create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, closest literature themes, main method, contribution type, and main risk. Then simulate the Econometrica review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Associate Editor, and Co-Editor. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
 ```
 
 ### Referee-Guided Revision
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report. If the leading objection is missing central theorem, old-theory absorption, or weak contribution, do not edit locally; route back to Discovery D4-D6. Otherwise create a revision plan tied to specific objections, edit the manuscript directly where safe, compile if possible, and update revision_log.md and risk_register.md. Stop before changing the central question, main theorem, assumptions, claimed novelty, or target-journal positioning.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report in Agentic Tree Search Mode. If the leading objection is missing central theorem, old-theory absorption, weak contribution, or defensive dilution, do not edit locally; route back to Discovery D4-D6. Otherwise create revision_tree.md with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe. Run the Scientific Judge on the branch plans and stop for my branch choice before editing the manuscript.
 ```
 
 ### Final Submission Readiness
@@ -602,6 +615,9 @@ This protocol is informed by current agentic research-writing and AI-review syst
 - PaperOrchestra decomposes paper writing into outline, plotting, literature review, section writing, and content refinement agents, with strict halt rules and verification helpers: https://github.com/Ar9av/PaperOrchestra
 - ResearchClaw emphasizes persistent research state so long-horizon work does not disappear into one-off chat threads: https://github.com/ymx10086/ResearchClaw
 - AI Scientist-v2 uses agentic tree search for open-ended research, while its own README cautions that broader exploration can have lower success rates than template-based workflows: https://github.com/SakanaAI/AI-Scientist-v2
+- Sakana AI reports that the broader AI Scientist line was published in Nature and that AI Scientist-v2 uses agentic tree search for open-ended exploration: https://sakana.ai/ai-scientist-nature/
+- AI Can Learn Scientific Taste proposes reinforcement learning from community feedback as one way to train or scaffold scientific taste; use this as motivation for taste checks, not as proof that AI taste is reliable: https://arxiv.org/abs/2603.14473
+- Nicholas Carlini's research essay emphasizes scientific taste, single-idea focus, early problem selection, and killing projects that are not working: https://nicholas.carlini.com/writing/2026/how-to-win-a-best-paper-award.html
 - Agent Laboratory frames agents as assistants to a human-produced research idea and says the human is the pilot: https://agentlaboratory.github.io/
 - AI co-scientist work emphasizes generate, debate, rank, evolve, and meta-review cycles with scientist-provided objectives and guidance: https://huggingface.co/papers/2502.18864
 - MARG shows that specialized multi-agent review can reduce generic comments and improve useful feedback relative to simpler baselines: https://www.catalyzex.com/paper/marg-multi-agent-review-generation-for

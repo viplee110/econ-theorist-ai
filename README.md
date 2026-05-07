@@ -9,6 +9,8 @@ This repository provides a reusable human-AI research workflow for:
 - model tournaments before manuscript writing
 - absorption tests against existing theory
 - main-theorem gates
+- Scientific Judge / Nugget Test for taste and anti-complexity
+- agentic tree search for major revision paths
 - first-pass derivation
 - mathematical verification
 - contribution kill tests
@@ -101,6 +103,14 @@ Use the system: generate tractable model variants and attempt first-pass derivat
 
 ```text
 Use the system: run a model tournament and absorption test before we write a manuscript.
+```
+
+```text
+Use the system: run the Scientific Judge and Nugget Test on this project.
+```
+
+```text
+Use the system: revise with agentic tree search instead of a single defensive patch.
 ```
 
 ```text
@@ -218,6 +228,12 @@ topic/idea -> model tournament -> absorption test -> main theorem gate -> 5-8 pa
 ```
 
 If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," the workflow should stop polishing and return to model discovery.
+
+For major revision, the system should compare three paths before editing:
+
+```text
+Branch A Defensive Patch -> Branch B Mechanism Simplification -> Branch C Pivot/Reframe -> human branch choice
+```
 
 ## Local Toolchain
 

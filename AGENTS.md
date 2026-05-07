@@ -21,6 +21,14 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Mathematica 13.0 is installed at `C:\Program Files\Wolfram Research\Mathematica\13.0`. Use `wolframscript.exe` for symbolic checks. The default sandbox may not be able to read WolframScript's user configuration directory, so Mathematica commands may require approval to run outside the sandbox. Do not claim Mathematica verification unless the command succeeds and its output is recorded.
 - Run `.\verify_toolchain.ps1` to test the local toolchain.
 
+## Scientific Taste & Anti-Complexity Directive
+
+- Highest priority: protect the paper's nugget, the shortest truthful statement of the paper's cognitive update.
+- Always watch for additive bias: using extra variables, agent types, dynamic states, distributions, assumptions, or appendices to hide a weak mechanism.
+- Top economics papers should convert deep primitives into a sharp, simple insight. Complexity is allowed only when it is doing necessary economic work.
+- When responding to a referee objection or proof gap, first ask whether the problem can be solved by deeper primitives, simplification, or reframing before adding assumptions or sections.
+- If a revision makes the contribution sentence longer, more conditional, or more defensive, stop and report a local-optimum trap. Recommend agentic tree search with simplification and pivot branches before editing.
+
 ## Core Rules
 
 - Preserve mathematical correctness, citation integrity, and author intent.
