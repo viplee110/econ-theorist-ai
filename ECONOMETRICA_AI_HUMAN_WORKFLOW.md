@@ -327,17 +327,20 @@ AI roles:
 - Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
 - Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test, Occam Test, and Defensive Dilution check.
+- Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then final decision letter and internal notes.
 
 Required outputs:
 
 - `referee_reports/round_N/panel_config.md`
+- `referee_reports/round_N/dilution_check.md`
 - `referee_reports/round_N/referee_1.md`
 - `referee_reports/round_N/referee_2.md`
 - `referee_reports/round_N/referee_3.md`
 - `referee_reports/round_N/referee_4_rigor.md`
 - `referee_reports/round_N/referee_5_scientific_judge.md`
+- `referee_reports/round_N/referee_6_advocate.md`
 - `referee_reports/round_N/associate_editor_report.md`
 - `referee_reports/round_N/co_editor_decision.md`
 - `referee_reports/round_N/00_summary.md`
@@ -352,6 +355,7 @@ Information isolation:
 - Each referee prompt must quote or summarize only that referee's role from `panel_config.md`, not the full role list plus prior reports.
 - Referees should read only the current manuscript and explicitly allowed appendices.
 - Referees should not read old reports, revision logs, risk registers, workflow files, or each other's reports.
+- The parent agent must generate `dilution_check.md` using only the current manuscript and `contribution_lock.md`. Referees do not read it.
 - AE may read referee reports only after producing an independent judgment.
 - Co-Editor may read AE/referee reports only after producing an independent judgment.
 

@@ -10,6 +10,7 @@ This repository provides a reusable human-AI research workflow for:
 - absorption tests against existing theory
 - main-theorem gates
 - Scientific Judge / Nugget Test for taste and anti-complexity
+- Advocate / Best-Case Reader to counter reject-prior drift
 - agentic tree search for major revision paths
 - first-pass derivation
 - mathematical verification
@@ -18,6 +19,7 @@ This repository provides a reusable human-AI research workflow for:
 - simulated Econometrica review
 - dynamic referee assignment by field, closest literature, method, contribution type, and main risk
 - parallel isolated referee agents when available, with serial isolated simulation as fallback
+- calibration anchors and optional control-paper calibration for review panels
 - referee-guided revision
 - automatic version-control checkpoints
 

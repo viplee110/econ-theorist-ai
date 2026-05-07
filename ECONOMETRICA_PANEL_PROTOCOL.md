@@ -47,6 +47,7 @@ For Review Panels, the default role logic is:
 - Referee 3: method, mechanism, application, or institutional specialist selected from the manuscript's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type, such as mathematical proof, econometric identification, computation, empirical design, experimental design, or institutional interpretation.
 - Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test and Occam Test.
+- Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
 
 If the target spans multiple fields, the panel must explain the tradeoff and choose the referee mix that is most likely to reveal fatal objections, not the mix that is easiest for the AI to simulate.
 
@@ -64,6 +65,8 @@ Closest literature themes / nearest substitutes:
 Contribution type:
 Central method or model class:
 Main technical risk:
+Calibration anchors (required for Review Panels):
+Control-paper calibration plan (optional but recommended):
 Allowed materials:
 Prohibited materials:
 Web/search policy:
@@ -72,6 +75,29 @@ Referee assignments:
 AE and Co-Editor instructions:
 Risks of this assignment:
 ```
+
+## Calibration Anchors and Control-Paper Checks (Review Panels)
+
+Simulated "Econometrica-level" review has a strong reject prior. Without calibration, a panel can become stricter than the journal it aims to simulate.
+
+### Calibration anchors (required)
+
+For every Review Panel, `referee_reports/round_N/panel_config.md` must include:
+
+- 2-3 **calibration anchors**: short descriptions of published Econometrica papers that are genuinely close to the manuscript's neighborhood (field + method + contribution type).
+- A sentence instructing referees to calibrate their "Fit for Econometrica" judgment **against the anchors**, not an idealized standard.
+
+Rules:
+
+- Do not fabricate citations. If anchors cannot be named with high confidence, list them as TODOs and state what the anchors should be (topic/method).
+- Anchors are for calibration, not for claiming novelty. Novelty remains a separate audit.
+
+### Control-paper calibration (recommended)
+
+Periodically run the same Review Panel protocol on a **published Econometrica paper** (author/title removed if possible) and record the decision distribution.
+
+- If the panel rejects a known-accepted paper, treat the panel as miscalibrated and discount "reject" language in subsequent simulations.
+- Save results in a local `panel_calibration_log.md` in the paper project (not in this workflow repo).
 
 ## Execution Mode
 
@@ -370,6 +396,20 @@ Every Review Panel and high-stakes Revision Panel must include a scientific-tast
 - Does the paper contain a theorem package without one central theorem?
 
 If the contribution sentence requires many clauses such as "under the specific condition that..." or "provided that..." to sound true, label the issue `Defensive Dilution`. If complexity is essential, the judge must say exactly what economic work it performs. If complexity mainly protects a fragile result, the judge should recommend `Pivot`, `Demote to Benchmark`, or `Reject and Resubmit` rather than local repair.
+
+## Contribution-Lock Dilution Check (Hard Ratchet)
+
+When a paper project uses `contribution_lock.md`, every Review Panel must include a **separate dilution check artifact** produced by the parent agent:
+
+- Output file: `referee_reports/round_N/dilution_check.md`
+- Inputs allowed: the current manuscript + `contribution_lock.md` (and nothing else).
+- Output: for each locked statement (Central question / Main theorem sentence / Non-substitutable insight / Reader belief update), score 1-5 how strongly the current manuscript delivers it, and explicitly flag any **weakening relative to the lock** as `Defensive Dilution`.
+
+Rules:
+
+- This is not a rewrite step. It is a diagnostic guardrail.
+- Referees do **not** read `contribution_lock.md` and do **not** read `dilution_check.md`.
+- The Associate Editor and Co-Editor may read `dilution_check.md` during synthesis as a constraint: if the manuscript no longer delivers the locked contribution, the correct action is usually `Reject and Resubmit`, `Pivot`, or `Return to Discovery`, not additive local repair.
 
 ## Recommendation Scales
 
