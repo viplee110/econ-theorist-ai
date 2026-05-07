@@ -18,6 +18,14 @@ For high-stakes screening, model selection, and investment decisions, also read 
 
 AI can expand the search frontier, but it cannot certify that a topic is unstudied, important, or Econometrica-level. Treat all generated topics as hypotheses. A candidate survives only if it passes novelty, tractability, economic importance, and execution tests.
 
+Main-theorem-first rule: do not move into a full manuscript until the project has a candidate main theorem that can be stated in one sharp sentence:
+
+```text
+This paper proves X, and existing theory cannot obtain X because Y.
+```
+
+The default discovery output is a 5-8 page model note, not a polished paper. The note should contain only the question, closest substitutes, one model, one main theorem candidate, proof status, and killer intuition. Manuscript development begins only after the theorem survives absorption and model-competition gates.
+
 ## Required Artifacts
 
 Maintain these files during discovery:
@@ -26,9 +34,13 @@ Maintain these files during discovery:
 - `topic_longlist.md`: broad list of candidate topics and mechanisms.
 - `topic_shortlist.md`: surviving candidates after screening.
 - `model_candidates.md`: structured model sketches for each surviving candidate.
+- `model_tournament.md`: side-by-side comparison of model variants and why weaker variants were killed or demoted.
+- `theorem_candidates.md`: candidate main theorems, theorem sentences, proof status, and failure modes.
+- `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
 - `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
 - `literature_probe.md`: closest literatures, nearest substitutes, novelty risks, and citation TODOs.
 - `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
+- `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
 - `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
 
 If a candidate becomes a real paper project, create or update:
@@ -210,17 +222,19 @@ Autonomy: Auto
 
 Purpose:
 
-Generate tractable model skeletons for each surviving idea.
+Generate a model tournament before any paper draft exists.
 
 AI tasks:
 
 - Create `model_candidates.md`.
-- For each selected candidate, generate 3-5 model variants:
+- Create or update `model_tournament.md`.
+- For each selected candidate, generate 4-6 model variants:
   - minimalist baseline
   - richer but still tractable version
   - alternative timing
   - alternative information structure
   - alternative equilibrium concept if relevant
+  - one outside-the-current-slope variant that changes the core primitive rather than locally enriching it
 
 Model template:
 
@@ -246,6 +260,29 @@ What could go wrong:
 Closest existing model:
 ```
 
+Tournament rule:
+
+- Treat every model variant as competing to produce the main theorem.
+- Do not repair a weak variant by adding features until at least one alternative model space has been tried.
+- If two variants produce the same theorem, keep the simpler one and demote the other.
+- If a variant only creates a theorem package of local sufficient conditions, label it `Local repair trap`.
+- If the result follows from a named existing framework, label it `Absorbed benchmark` rather than a main model.
+
+Absorption pre-test:
+
+For each model variant, ask whether the predicted result is essentially a version of:
+
+- nonlinear pricing
+- multidimensional screening
+- costly disclosure or verification
+- Bayesian persuasion or information design
+- dynamic experimentation or bandits
+- inventory, queueing, or capacity control
+- moral hazard, certification, or reputation
+- search, matching, or platform steering
+
+If yes, the model can still be useful, but it cannot be the main theorem unless the note explains the non-absorbed element.
+
 Tractability constraints:
 
 - Prefer two or three agent types before many-type models.
@@ -258,7 +295,7 @@ Tractability constraints:
 Panel option:
 
 - If multiple model variants survive, run a Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md`.
-- Require the math-rigor panelist to check fixed point, IFT, contraction, boundary behavior, equilibrium selection, and assumption packaging risks before a model is selected for full paper development.
+- Require the math-rigor panelist to check fixed point, IFT, contraction, boundary behavior, equilibrium selection, and assumption packaging risks before a model is selected for the D7 pre-paper package.
 
 ## Stage D5 - First-Pass Derivation
 
@@ -266,11 +303,12 @@ Autonomy: Auto, but must be rigorous
 
 Purpose:
 
-Test whether the model has a real result.
+Test whether any model has a real main theorem.
 
 AI tasks:
 
 - Create or update `derivation_notes.md`.
+- Create or update `theorem_candidates.md`.
 - For each model variant, attempt a first-pass derivation.
 - Write:
   - agent problem
@@ -280,6 +318,7 @@ AI tasks:
   - candidate solution
   - main comparative static
   - proof sketch
+  - candidate main theorem sentence
   - exact algebra where possible
   - conditions required
   - counterexample attempt
@@ -295,28 +334,35 @@ Required derivation discipline:
 - If algebra becomes messy, try a simpler model before adding assumptions.
 - Try to construct at least one counterexample to the predicted proposition.
 - If the proposition fails, record the failure rather than repairing silently.
+- If the result is true but unsurprising under a known framework, demote it to a benchmark.
+- If the model requires a reduced-form primitive to carry the whole contribution, record what primitive must be endogenized before manuscript development.
 
 Output categories:
 
-- `Promising`: clean result, plausible assumptions, nontrivial insight.
+- `Main-theorem candidate`: clean result, plausible assumptions, nontrivial insight, and not absorbed by a known framework.
+- `Promising but needs endogenization`: result is interesting, but a key primitive is still reduced-form.
 - `Technically possible but weak`: solvable but low economic bite.
+- `Absorbed benchmark`: result is useful but naturally reproduced by existing theory.
 - `Too tailored`: result depends on artificial assumptions.
 - `Too messy`: solution exists but not paper-tractable.
 - `Fails`: proposition false or no clear result.
 
-## Stage D6 - Contribution and Kill Test
+## Stage D6 - Absorption, Main Theorem, and Kill Test
 
 Autonomy: Gate
 
 Purpose:
 
-Decide whether the candidate deserves further investment.
+Decide whether the candidate deserves manuscript investment or must return to model search.
 
 AI tasks:
 
 - Create `idea_kill_tests.md`.
+- Create or update `absorption_tests.md`.
+- Create or update `model_tournament.md`.
 - If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
 - For each promising model, simulate:
+  - absorption referee who tries to reduce the result to known theory
   - hostile closest-literature referee
   - theory referee
   - economic relevance referee
@@ -328,13 +374,32 @@ AI tasks:
   - Are assumptions credible?
   - Is the result surprising after reading the closest literature?
   - Would a top-field seminar audience care?
+  - What is the cleanest theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y"?
+  - Which primitive must be endogenized for the theorem to be more than reduced-form relabeling?
   - What is the strongest reason to kill this idea today?
+
+Absorption test:
+
+- If the theorem is equivalent to nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, or platform steering after renaming variables, it fails as a main theorem.
+- If only a narrow part is absorbed, demote that part to a benchmark and search for the non-absorbed theorem.
+- If the model's key object is assumed rather than generated, require an endogenization plan before `Invest`.
+
+Main theorem gate:
+
+The candidate cannot receive `Invest` unless all are true:
+
+- The theorem sentence is sharp enough to be put in the introduction unchanged.
+- The theorem changes a specialist's belief after conditioning on closest substitutes.
+- The result is not merely a package of local sufficient conditions.
+- The model primitive that carries the contribution is economically interpretable or explicitly endogenized.
+- At least one alternative model variant has been killed for a documented reason.
 
 Decision labels:
 
-- `Invest`: begin full paper development.
+- `Invest`: proceed to D7 pre-paper package; begin full manuscript development only after human approval of the model note and theorem sentence.
 - `Refine`: keep the idea but modify the model.
 - `Pivot`: change the mechanism/question.
+- `Demote to benchmark`: keep as background, but do not build the paper around it.
 - `Park`: save for later but do not invest now.
 - `Kill`: abandon for current purposes.
 
@@ -348,19 +413,23 @@ Autonomy: Auto
 
 Purpose:
 
-Convert a surviving candidate into a paper-ready starting package.
+Convert a surviving theorem into a paper-ready model note.
 
 AI tasks:
 
 - Create `idea_dossier.md`.
 - Create `contribution_lock.md`.
 - Create `project_state.md`.
-- Write a 1-2 page concept note:
+- Create `pre_paper_model_note.md`.
+- Write a 5-8 page model note:
   - question
   - mechanism
   - model
-  - main predicted proposition
+  - main theorem candidate
+  - theorem sentence
   - proof status
+  - absorption-test result
+  - killed model variants
   - closest literature
   - contribution claim
   - biggest risks
@@ -368,7 +437,7 @@ AI tasks:
 
 Proceed condition:
 
-- The human approves the concept note.
+- The human approves the model note and theorem sentence.
 - Then continue with `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`, starting at Stage 1 or Stage 2 depending on maturity.
 
 ## Common Failure Modes
@@ -384,6 +453,10 @@ Stop or pivot if:
 - The result only says "more friction leads to worse outcomes" without a sharp twist.
 - The contribution is a parameter extension, not a conceptual insight.
 - The human cannot pitch the idea in one minute with conviction.
+- The project starts accumulating fixes before it has a central theorem.
+- Two independent panels say the same thing: no central theorem, too close to old theory, or absorbed by a known framework.
+- The manuscript becomes more complete while the theorem sentence becomes less sharp.
+- The model's important object remains a reduced-form primitive after several repair attempts.
 
 ## Prompt Templates
 
@@ -408,19 +481,19 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Gener
 ### Generate Models for Shortlisted Ideas
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. Generate 3-5 tractable model variants for each selected candidate. Create model_candidates.md. Do not write the paper yet.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. Generate 4-6 tractable model variants for each selected candidate, including at least one variant that changes the core primitive rather than locally enriching the current model. Create model_candidates.md and model_tournament.md. Do not write the paper yet.
 ```
 
 ### Attempt First-Pass Derivations
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the selected model candidates. Attempt clean first-pass derivations, state assumptions, show algebra where possible, identify failure points, and attempt counterexamples. Create derivation_notes.md. Do not hide failed models.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the selected model candidates. Attempt clean first-pass derivations, state assumptions, show algebra where possible, identify failure points, attempt counterexamples, and write candidate theorem sentences in the form: "This paper proves X, and existing theory cannot obtain X because Y." Create derivation_notes.md and theorem_candidates.md. Do not hide failed models.
 ```
 
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, derivation_notes.md, and literature_probe.md if available. Simulate hostile referees and an editor. Create idea_kill_tests.md and recommend Invest, Refine, Pivot, Park, or Kill for each candidate. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, and literature_probe.md if available. Run absorption tests against nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, and platform steering. Simulate hostile referees and an editor. Create absorption_tests.md and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow
@@ -430,3 +503,5 @@ Use this discovery workflow before writing a full paper. Once a candidate receiv
 ```text
 Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1 or Stage 2 using the idea_dossier.md and contribution_lock.md created during discovery.
 ```
+
+If a later manuscript review says "no central theorem," "too close to existing theory," or "absorbed by known models" in two independent rounds, return here to D4-D6 instead of continuing manuscript polishing.

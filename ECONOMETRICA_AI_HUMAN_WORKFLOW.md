@@ -21,6 +21,9 @@ For high-stakes idea, model, theorem, review, or revision decisions, also read `
 - Never confuse "simulated readiness" with real acceptance.
 - Do not let repeated revision erase the paper's sharp central idea.
 - Stop polishing when the main objection is contribution, identification, or economic relevance.
+- Treat simulated review as local search, not invention. If review reveals no central theorem, old-theory absorption, or weak contribution, return to discovery instead of repairing locally.
+- Do not use a full manuscript as a rescue device for an idea that has not passed the main-theorem gate.
+- The preferred path is theorem note first, manuscript second.
 - Use artifacts, gates, and logs. Do not rely on chat memory alone.
 
 ## Core Artifacts
@@ -30,6 +33,9 @@ The agent should maintain these files whenever possible:
 - `project_state.md`: current stage, last human decision, active thesis, active target, current blocker.
 - `idea_dossier.md`: one-sentence idea, mechanism, closest papers, novelty claims, feasibility risks.
 - `contribution_lock.md`: the locked core question, non-substitutable insight, and reader belief update.
+- `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
+- `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
+- `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
 - `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
@@ -51,6 +57,18 @@ Default rule:
 
 - Stages 0, 3, 6, and mechanical parts of 8 can be `Auto`.
 - Stages 1, 2, 5, 7, 9, and 10 require `Gate` or `Human-only`.
+
+## Manuscript-Mode Firewall
+
+Before substantial manuscript revision, check whether the project has passed the discovery gates in `ECONOMETRICA_DISCOVERY_WORKFLOW.md`:
+
+- a 5-8 page `pre_paper_model_note.md` or equivalent theorem note
+- a sharp theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y"
+- `absorption_tests.md` showing why the result is not just nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, or platform steering under new names
+- `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
+- a human-approved `contribution_lock.md`
+
+If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4-D6 unless the user explicitly asks for mechanical editing only.
 
 ## Stage 0 - Project Intake and State Reconstruction
 
@@ -96,7 +114,9 @@ AI tasks:
 - Write `idea_dossier.md`.
 - If the go/no-go decision is high-stakes, run an Idea Panel from `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - State the one-sentence contribution.
+- State the candidate main theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y."
 - Identify the closest existing papers and the strongest substitute argument.
+- Run or update `absorption_tests.md` if the idea might be a relabeling of a known framework.
 - State what belief a specialist should change after reading the paper.
 - Identify why Econometrica might desk reject the paper.
 - Identify what would have to be true for the paper to deserve Econometrica.
@@ -107,6 +127,7 @@ Required questions:
 - What is the non-substitutable insight?
 - What is surprising after conditioning on the existing literature?
 - Does the model reveal a mechanism, or only repackage a known mechanism?
+- Can the theorem be absorbed by nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, or platform steering?
 - Are the assumptions doing essential economic work or merely engineering the result?
 - If the main theorem is true, what important belief changes?
 - If the paper disappeared, what would the literature still fail to understand?
@@ -137,6 +158,7 @@ Proceed condition:
 
 - No score below 3.
 - Novelty, importance, and non-substitutability are at least 4.
+- The main theorem sentence is sharp and not absorbed by the nearest substitute theory.
 - The human can defend the one-sentence contribution without relying on wording tricks.
 
 ## Stage 2 - Contribution Lock
@@ -150,8 +172,9 @@ Prevent later rounds from diluting the core idea.
 AI tasks:
 
 - Create `contribution_lock.md`.
-- Draft three locked statements:
+- Draft four locked statements:
   - `Central question`
+  - `Main theorem sentence`
   - `Non-substitutable insight`
   - `Reader belief update`
 - Draft a short "do not dilute" list.
@@ -159,7 +182,7 @@ AI tasks:
 
 Human gate:
 
-The human must approve or rewrite the three locked statements.
+The human must approve or rewrite the four locked statements.
 
 Rule:
 
@@ -167,7 +190,7 @@ No later revision may weaken these statements without explicit human approval.
 
 Proceed condition:
 
-- The introduction, theorem targets, and conclusion can all be organized around the locked contribution.
+- The introduction, theorem targets, and conclusion can all be organized around the locked theorem and contribution.
 
 ## Stage 3 - Model, Assumption, and Proof Architecture Audit
 
@@ -352,7 +375,7 @@ Interpretation:
 
 - Scores are diagnostic only.
 - A score cannot certify acceptance.
-- If the same core objection appears in three consecutive rounds, stop polishing and return to Stage 1 or Stage 2.
+- If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," stop polishing and return to Discovery D4-D6.
 
 Human gate:
 
@@ -385,6 +408,7 @@ AI tasks:
 - Create a revision plan before editing.
 - Tie each edit to a specific objection.
 - Avoid adding defensive clutter.
+- If the leading objection is missing central theorem, old-theory absorption, or weak contribution, do not revise locally. Route back to Discovery D4-D6.
 - Remove or demote claims that cannot be supported.
 - Compile and fix build issues.
 - Update `revision_log.md` and `risk_register.md`.
@@ -469,16 +493,20 @@ Submission readiness threshold:
 
 Stop the current revision loop if any of these patterns appears:
 
+- Two independent reviews identify the same structural objection: no central theorem, old-theory absorption, or weak contribution.
 - The same "incremental contribution" objection survives three rounds.
 - The paper becomes longer but the one-sentence contribution becomes weaker.
 - Assumptions become more tailored after every revision.
 - The model needs increasingly artificial features to generate the result.
+- The work turns into a theorem package of local sufficient conditions rather than one clean result.
+- Referee objections cause the AI to add sections rather than reconsider the model space.
+- A key object remains reduced-form even though it carries the whole contribution.
 - The editor simulation improves mainly because prose improves, not because the core objection changes.
 - AI repeatedly proposes literature claims that the human cannot verify.
 - The paper is technically correct but the "why should we care?" answer stays vague.
 - The introduction has to use elaborate wording to make the contribution sound important.
 
-When this happens, return to Stage 1 or Stage 2. Do not continue cosmetic revision.
+When this happens, return to Discovery D4-D6 for model tournament, absorption testing, and main-theorem search. Do not continue cosmetic revision.
 
 ## Recommended Codex Prompts
 
@@ -515,7 +543,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. First create referee_report
 ### Referee-Guided Revision
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report. Create a revision plan tied to specific objections, edit the manuscript directly where safe, compile if possible, and update revision_log.md and risk_register.md. Stop before changing the central question, main theorem, assumptions, claimed novelty, or target-journal positioning.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report. If the leading objection is missing central theorem, old-theory absorption, or weak contribution, do not edit locally; route back to Discovery D4-D6. Otherwise create a revision plan tied to specific objections, edit the manuscript directly where safe, compile if possible, and update revision_log.md and risk_register.md. Stop before changing the central question, main theorem, assumptions, claimed novelty, or target-journal positioning.
 ```
 
 ### Final Submission Readiness
@@ -528,18 +556,17 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 10. Do not make major conceptu
 
 For a 5-hour Codex Desktop session:
 
-- 20 minutes: Stage 0 intake and build check.
-- 40 minutes: Stage 1 idea kill test.
-- 30 minutes: Stage 2 contribution lock.
-- 60 minutes: Stage 3 model and proof audit.
-- 40 minutes: Stage 5 literature positioning sketch.
-- 90 minutes: Stage 6 controlled manuscript revision.
-- 45 minutes: Stage 7 simulated review.
-- 15 minutes: final state update and next-step plan.
+- 30 minutes: intake and discovery-state reconstruction.
+- 60 minutes: absorption and closest-literature probe.
+- 90 minutes: model tournament across 4-6 variants.
+- 90 minutes: first-pass derivations and theorem-candidate search.
+- 45 minutes: kill test or Model Panel.
+- 30 minutes: pre-paper model note and human gate.
 
 Important:
 
-- Do not spend the full 5 hours on prose if Stage 1 or Stage 2 is weak.
+- Spend roughly 70% of early project time on discovery, model competition, and theorem search before prose.
+- Do not spend the full 5 hours on prose if the main theorem gate is weak.
 - Do not let the AI continue beyond a human gate by pretending uncertainty has been resolved.
 
 ## What the Human Should Do Better Than AI

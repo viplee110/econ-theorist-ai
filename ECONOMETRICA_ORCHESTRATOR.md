@@ -75,7 +75,11 @@ Before routing, inspect whichever of these files exist:
 - `contribution_lock.md`
 - `manuscript_map.md`
 - `model_candidates.md`
+- `model_tournament.md`
+- `theorem_candidates.md`
+- `absorption_tests.md`
 - `derivation_notes.md`
+- `pre_paper_model_note.md`
 - `math_claims.md`
 - `verification_log.md`
 - `counterexamples.md`
@@ -143,13 +147,19 @@ Triggers:
 - "tractable model"
 - "model variants"
 - "turn this idea into a model"
+- "model tournament"
+- "find the main theorem"
+- "theorem-first"
+- "absorption test"
 
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` if multiple model candidates need selection.
 - Run D4.
-- Create or update `model_candidates.md`.
+- Create or update `model_candidates.md`, `model_tournament.md`, and `absorption_tests.md`.
+- Generate 4-6 model variants before selecting one for full development.
+- Do not enter manuscript mode until a candidate theorem survives the main-theorem gate.
 - If selecting among candidates, run a Model Panel.
 - If candidate models already exist, ask only if the user wants new variants or derivation.
 
@@ -169,8 +179,33 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` for theorem/model claims with high stakes.
 - Run Discovery D5 plus Verification V1-V4 as needed.
 - Use a Verification Panel for the main proposition, equilibrium existence, identification result, or any theorem that carries the contribution.
-- Create or update `derivation_notes.md`, `math_claims.md`, `assumption_ledger.md`, `verification_log.md`, and `counterexamples.md`.
+- Create or update `derivation_notes.md`, `theorem_candidates.md`, `math_claims.md`, `assumption_ledger.md`, `verification_log.md`, and `counterexamples.md`.
+- Require a candidate theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y."
 - Use Python first for quick symbolic/numerical checks; use Mathematica if symbolic assumptions or inequalities benefit from it; use Lean only for compact lemmas.
+
+### Local Optimum or Manuscript Trap
+
+Triggers:
+
+- "local optimum"
+- "局部极值"
+- "low quality trap"
+- "低质量陷阱"
+- "too much polishing"
+- "no central theorem"
+- "main theorem is weak"
+- "absorbed by existing theory"
+- "old theory can absorb it"
+
+Route:
+
+- Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
+- Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
+- Stop manuscript polishing.
+- Run Discovery D4-D6: model tournament, first-pass derivation, absorption test, and main-theorem gate.
+- Create or update `model_tournament.md`, `theorem_candidates.md`, `absorption_tests.md`, and `idea_kill_tests.md`.
+- If two independent review rounds share the same structural objection, require Pivot, Demote to benchmark, Park, or Kill unless the human explicitly overrides.
+- Do not return to Stage 6 or Stage 8 until a human approves a new theorem sentence.
 
 ### Mathematical Verification
 
@@ -258,7 +293,8 @@ Triggers:
 
 Route:
 
-- If `contribution_lock.md` does not exist, recommend Stage 1 or 2 first.
+- If `contribution_lock.md` or a sharp main theorem sentence does not exist, return to Discovery D4-D6 first.
+- If the leading risk is "no central theorem," "too close to old theory," or "absorbed by known models," return to Discovery D4-D6 rather than revising prose.
 - If contribution is locked, read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
 - Run Stages 3, 4, and 6 as appropriate.
 - Use `ECONOMETRICA_VERIFICATION_WORKFLOW.md` for mathematical claims.
@@ -289,6 +325,7 @@ Route:
 - Write `referee_reports/round_N/` reports.
 - Update `risk_register.md`.
 - Stop for human decision.
+- If the review's leading objection is missing central theorem or old-theory absorption, recommend Discovery D4-D6 instead of Stage 8.
 
 ### Referee-Guided Revision
 
@@ -305,6 +342,7 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 8 using the latest referee report.
 - Use a Revision Panel when objections conflict or when major edits could dilute the contribution.
+- If the latest report repeats a structural objection from a prior round, such as missing central theorem or old-theory absorption, route to Discovery D4-D6 instead of local revision.
 - Create a revision plan tied to objections.
 - Edit only where safe.
 - Stop before conceptual changes that require human approval.
@@ -357,7 +395,7 @@ The assistant may automatically proceed from:
 - D4 to D5 when the user explicitly asks to solve or derive.
 - V1 to V4 for a named mathematical claim.
 - Stage 3 to Stage 6 after contribution lock is approved.
-- Stage 7 to Stage 8 only if the user explicitly asks to revise according to the report.
+- Stage 7 to Stage 8 only if the user explicitly asks to revise according to the report and the leading objection is not missing central theorem, old-theory absorption, or weak contribution.
 
 The assistant must stop at gates involving:
 

@@ -163,7 +163,7 @@ Use before committing to a paper.
 Roles:
 
 - Referee 1: economic importance and field relevance.
-- Referee 2: closest-literature and novelty risk.
+- Referee 2: closest-literature, novelty risk, and absorption by existing theory.
 - Referee 3: tractability and model feasibility.
 - Referee 4: hostile editor focused on fatal objections.
 - Associate Editor: synthesizes the four reports and recommends Proceed, Pivot, Narrow, Split, Park, Kill, or Retarget.
@@ -187,10 +187,10 @@ Roles:
 
 - Referee 1: minimalist tractability and baseline clarity, specialized to the model class in `panel_config.md`.
 - Referee 2: economic mechanism and comparative statics, specialized to the detected field.
-- Referee 3: novelty relative to the closest canonical or substitute models.
+- Referee 3: novelty and absorption risk relative to the closest canonical or substitute models.
 - Referee 4: rigor specialist selected from the candidate model's main risk, such as existence, uniqueness, fixed point, IFT, contraction, boundary behavior, computation, or assumption packaging.
 - Associate Editor: selects Invest, Refine, Pivot, Park, or Kill for each model.
-- Co-Editor: decides which model, if any, should enter full paper development.
+- Co-Editor: decides which model, if any, should enter the pre-paper model-note stage.
 
 Outputs:
 
@@ -259,7 +259,7 @@ Roles:
 - Referee 1: which objections are fatal.
 - Referee 2: which objections are fixable without changing the contribution.
 - Referee 3: which edits would dilute the core idea.
-- Referee 4: which fixes require new assumptions, proofs, computations, or citations.
+- Referee 4: which fixes require new assumptions, proofs, computations, citations, or a return to model discovery.
 - Associate Editor: creates a ranked revision plan.
 - Co-Editor: approves Revise, Pivot, Retarget, External Feedback, or Stop.
 
@@ -344,12 +344,24 @@ All high-stakes panels should evaluate three dimensions:
 
 For each dimension, panelists should score 1-5 and explain the score.
 
+## Absorption and Main-Theorem Test
+
+Idea and Model Panels must explicitly ask whether the candidate theorem is absorbed by existing frameworks. The required theorem sentence is:
+
+```text
+This paper proves X, and existing theory cannot obtain X because Y.
+```
+
+Absorption families to test include nonlinear pricing, multidimensional screening, costly disclosure or verification, Bayesian persuasion, information design, dynamic experimentation, inventory or capacity control, moral hazard, certification, reputation, search, matching, and platform steering.
+
+If the panel can reproduce the result by renaming variables inside a known framework, it should recommend `Demote to benchmark`, `Pivot`, `Park`, or `Kill`, not `Invest`. If the issue is that a key primitive is reduced-form, the panel should identify what must be endogenized before manuscript development.
+
 ## Recommendation Scales
 
 ### Idea and Model Decisions
 
 ```text
-Kill < Park < Retarget < Pivot < Refine < Invest
+Kill < Park < Retarget < Demote to Benchmark < Pivot < Refine < Invest
 ```
 
 ### Verification Decisions

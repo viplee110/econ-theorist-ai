@@ -6,6 +6,9 @@ This repository provides a reusable human-AI research workflow for:
 
 - topic discovery
 - tractable model generation
+- model tournaments before manuscript writing
+- absorption tests against existing theory
+- main-theorem gates
 - first-pass derivation
 - mathematical verification
 - contribution kill tests
@@ -94,6 +97,10 @@ Use the system: evaluate whether this idea has Econometrica-level potential.
 
 ```text
 Use the system: generate tractable model variants and attempt first-pass derivations.
+```
+
+```text
+Use the system: run a model tournament and absorption test before we write a manuscript.
 ```
 
 ```text
@@ -199,8 +206,18 @@ The system does not assume that repeated AI revision converges to Econometrica a
 - hidden proof gap
 - poor literature positioning
 - manuscript polish without real economic bite
+- local repair traps where each review round adds sections but no stronger main theorem
+- old-theory absorption where a result is just nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, or platform steering under new names
 
 AI should expand the search space, generate and test models, simulate adversarial feedback, maintain logs, and automate mechanical checks. The human should own taste, contribution, assumptions, novelty, target journal, and final go/no-go decisions.
+
+The preferred path is:
+
+```text
+topic/idea -> model tournament -> absorption test -> main theorem gate -> 5-8 page model note -> manuscript
+```
+
+If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," the workflow should stop polishing and return to model discovery.
 
 ## Local Toolchain
 

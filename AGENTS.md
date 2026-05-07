@@ -26,6 +26,8 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Preserve mathematical correctness, citation integrity, and author intent.
 - Do not invent citations, proofs, data results, robustness checks, theorem statements, numerical results, or claims.
 - If a citation, proof, result, robustness check, or interpretation requires author verification, write it as a precise TODO in `risk_register.md` instead of fabricating it.
+- Before full manuscript development, require a candidate main theorem sentence, an absorption test against known theoretical families, and a model tournament unless the user explicitly requests mechanical editing only.
+- If repeated reviews identify no central theorem, old-theory absorption, or weak contribution, stop polishing and return to discovery/model search.
 - Prefer direct edits to LaTeX source files when the source can be improved safely.
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.
