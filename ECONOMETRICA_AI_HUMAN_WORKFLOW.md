@@ -31,6 +31,7 @@ For high-stakes idea, model, theorem, review, or revision decisions, also read `
 The agent should maintain these files whenever possible:
 
 - `project_state.md`: current stage, last human decision, active thesis, active target, current blocker.
+- `human_decisions.md`: append-only record of human gate decisions, reversals, overrides, and reasons.
 - `idea_dossier.md`: one-sentence idea, mechanism, closest papers, novelty claims, feasibility risks.
 - `contribution_lock.md`: the locked core question, non-substitutable insight, and reader belief update.
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
@@ -59,6 +60,28 @@ Default rule:
 
 - Stages 0, 3, 6, and mechanical parts of 8 can be `Auto`.
 - Stages 1, 2, 5, 7, 9, and 10 require `Gate` or `Human-only`.
+
+## Human Decision Persistence
+
+Human gate outcomes must be written to persistent artifacts before the workflow treats them as durable state. Do not rely on chat history alone.
+
+For every gate:
+
+- Create `human_decisions.md` if it is missing, then append the decision, date, stage, reason, and affected files.
+- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
+- If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
+
+Human decisions are append-only by default. A later reversal supersedes the previous decision for current work but does not erase it. Record reversals in this form when useful:
+
+```text
+Decision reversal / Override
+Date:
+Previous decision:
+New decision:
+Reason:
+Affected artifacts:
+Required updates or rechecks:
+```
 
 ## Manuscript-Mode Firewall
 

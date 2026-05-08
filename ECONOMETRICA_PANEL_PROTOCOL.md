@@ -584,6 +584,20 @@ The system must stop for human judgment before:
 - deciding to submit, pivot, retarget, split, or kill
 - accepting a simulated editorial decision as action-guiding
 
+Every panel-facing human gate must be recorded before the next panel or revision step relies on it. Create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
+
+If the user reverses a prior panel decision, preserve the earlier decision and add a reversal entry:
+
+```text
+Decision reversal / Override
+Date:
+Previous decision:
+New decision:
+Reason:
+Affected panel artifacts:
+Required reruns or rechecks:
+```
+
 ## Prompt Template
 
 ```text

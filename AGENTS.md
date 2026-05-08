@@ -47,6 +47,8 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 
 - Stop for human approval before changing the central question, main theorem, model primitives, assumption set, claimed novelty, empirical interpretation, or target-journal positioning.
 - Stop for human confirmation when creating the project-level `field_profile.md` for the first time or when new evidence materially changes the primary field, adjacent fields, closest-literature themes, or field-sensitive referee roles.
+- Every human gate decision must be written to the relevant persistent artifact before the system treats it as durable state. Create `human_decisions.md` if it is missing, use it for append-only decision history, and update the active state file such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md` as appropriate.
+- Human decisions are append-only by default. If the user reverses or overrides an earlier decision, record the reversal with the previous decision, new decision, reason, affected artifacts, and required rechecks. The later decision governs current work, but the earlier decision must not be erased.
 - Do not continue polishing if the main objection is contribution, identification, or economic relevance. Return to idea testing or contribution locking.
 - Use `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` to decide which stage should be run next.
 - Use `ECONOMETRICA_ORCHESTRATOR.md` as the default router for broad or ambiguous research instructions.

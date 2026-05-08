@@ -26,8 +26,9 @@ When the user asks for research help, follow this sequence:
 5. State the selected module, stage, and panel mode in one short sentence.
 6. Execute the stage directly if it is safe.
 7. Stop at human gates.
-8. Update the relevant state/log files before stopping.
-9. For meaningful edits, summarize the git diff or version-control state before finishing.
+8. Write human gate decisions to persistent artifacts before treating them as durable state.
+9. Update the relevant state/log files before stopping.
+10. For meaningful edits, summarize the git diff or version-control state before finishing.
 
 Do not ask the user to choose a stage unless the routing is genuinely ambiguous or the next step changes the core contribution, theorem, model, assumptions, novelty claim, or target journal.
 
@@ -454,6 +455,12 @@ The assistant must stop at gates involving:
 - novelty claim
 - economic interpretation
 - decision to submit, pivot, retarget, split, or abandon
+
+## Human Decision Persistence
+
+When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
+
+If the user reverses an earlier decision, record the reversal as a new entry rather than deleting the old one. The new decision supersedes the old decision for current routing. The reversal entry should identify the previous decision, new decision, reason, affected artifacts, and any stages, panels, proofs, or literature checks that must be rerun.
 
 ## Current-State Continuation
 

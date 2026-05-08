@@ -76,6 +76,35 @@ The human should own:
 - final novelty interpretation after real literature checks
 - confirmation of the project-level field profile before high-stakes panels rely on it
 
+## Human Gate Persistence
+
+Human gate outcomes are persistent project state, not chat memory. Before proceeding past a gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`.
+
+Use this entry format in `human_decisions.md` when useful:
+
+```text
+Decision record
+Date:
+Stage or gate:
+Decision:
+Reason:
+Affected artifacts:
+Supersedes:
+Next checks:
+```
+
+Human decisions are append-only by default. If the user reverses or overrides a prior choice, do not delete the old decision. Add a reversal entry and update the current-state files so later workflow stages know which decision controls.
+
+```text
+Decision reversal / Override
+Date:
+Previous decision:
+New decision:
+Reason:
+Affected artifacts:
+Required updates or rechecks:
+```
+
 ## Stage D0 - Intake and Mode Selection
 
 Autonomy: Gate

@@ -251,6 +251,8 @@ The system does not assume that repeated AI revision converges to Econometrica a
 
 AI should expand the search space, generate and test models, search the literature, propose the field profile, simulate adversarial feedback, maintain logs, and automate mechanical checks. The human should own taste, contribution, assumptions, field-profile confirmation, novelty, target journal, and final go/no-go decisions.
 
+Human gate decisions must be saved in project artifacts, not only remembered in chat. The default record is `human_decisions.md`, with the active state also updated in files such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`. If the human reverses a prior decision, the workflow records the reversal as a new append-only entry; the later decision governs current work, but the earlier decision remains part of the project history.
+
 The preferred path is:
 
 ```text
