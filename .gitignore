@@ -1,6 +1,8 @@
 # Local toolchains and caches
 .venv/
 .tools/
+.lake/
+lean_packages/
 __pycache__/
 *.pyc
 .pytest_cache/

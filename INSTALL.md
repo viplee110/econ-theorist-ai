@@ -51,4 +51,23 @@ Run this after copying if you have configured the local toolchain:
 .\verify_toolchain.ps1
 ```
 
+By default the script looks for shared verification tools under:
+
+```text
+C:\Tools\CodexVerification
+```
+
+To use another location:
+
+```powershell
+$env:CODEX_VERIFICATION_HOME = "D:\Tools\CodexVerification"
+.\verify_toolchain.ps1
+```
+
+or:
+
+```powershell
+.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification"
+```
+
 If Python, Lean, or Mathematica are unavailable, the workflows still work as prompts and checklists, but mathematical verification will be weaker.

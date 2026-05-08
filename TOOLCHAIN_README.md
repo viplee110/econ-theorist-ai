@@ -1,11 +1,18 @@
 # Local Verification Toolchain
 
-This project now contains a local verification toolchain for economics theory work.
+This workflow expects verification tools to live outside paper project folders.
+The default shared tool root on Windows is:
 
-## Installed Locally
+```text
+C:\Tools\CodexVerification
+```
 
-- Python 3.12.10: `.tools/Python312/python.exe`
-- Python virtual environment: `.venv/`
+You can override this location by setting `CODEX_VERIFICATION_HOME` or by
+passing `-ToolRoot` to `verify_toolchain.ps1`.
+
+## Shared Tool Layout
+
+- Python 3.12.10: `C:\Tools\CodexVerification\Python312\python.exe`
 - Python packages:
   - `sympy` for symbolic algebra
   - `numpy` and `scipy` for numerical computation and counterexample search
@@ -13,8 +20,36 @@ This project now contains a local verification toolchain for economics theory wo
   - `pandas` for tables/logs
   - `z3-solver` for SMT-style checks
 - Lean 4 via elan:
-  - `lean`: `.tools/elan/bin/lean.exe`
-  - `lake`: `.tools/elan/bin/lake.exe`
+  - `lean`: `C:\Tools\CodexVerification\elan\bin\lean.exe`
+  - `lake`: `C:\Tools\CodexVerification\elan\bin\lake.exe`
+- Optional shared Lake packages:
+  - `C:\Tools\CodexVerification\lean_packages\lean-vX.Y.Z\`
+
+Paper folders should not contain real `.venv/`, `.tools/`, or `.lake/packages`
+installations when those directories are large. If a project needs legacy local
+paths, create junctions from the project folder to the shared tool root.
+
+Example junction layout:
+
+```powershell
+New-Item -ItemType Directory -Force .venv
+New-Item -ItemType Junction -Path .venv\Scripts -Target C:\Tools\CodexVerification\Python312
+New-Item -ItemType Directory -Force .tools
+New-Item -ItemType Junction -Path .tools\elan -Target C:\Tools\CodexVerification\elan
+```
+
+For Lean projects with Mathlib, keep the project files in the paper folder:
+
+```text
+lakefile.toml
+lake-manifest.json
+lean-toolchain
+YourLeanLibrary/
+```
+
+Move large package directories such as `.lake/packages/mathlib` to the shared
+tool root and leave junctions behind. This keeps Lake paths stable while moving
+the actual dependency storage out of Dropbox or paper folders.
 
 ## Mathematica
 
@@ -47,6 +82,19 @@ Run:
 .\verify_toolchain.ps1
 ```
 
+Use a non-default tool root:
+
+```powershell
+$env:CODEX_VERIFICATION_HOME = "D:\Tools\CodexVerification"
+.\verify_toolchain.ps1
+```
+
+or:
+
+```powershell
+.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification"
+```
+
 Direct Mathematica test:
 
 ```powershell
@@ -59,13 +107,13 @@ Direct Mathematica test:
 Use:
 
 ```powershell
-.\.venv\Scripts\python.exe
+& "C:\Tools\CodexVerification\Python312\python.exe"
 ```
 
 Example:
 
 ```powershell
-.\.venv\Scripts\python.exe -c "import sympy as sp; x=sp.symbols('x'); print(sp.diff(x**3, x))"
+& "C:\Tools\CodexVerification\Python312\python.exe" -c "import sympy as sp; x=sp.symbols('x'); print(sp.diff(x**3, x))"
 ```
 
 ## Lean Command
@@ -73,9 +121,11 @@ Example:
 Use:
 
 ```powershell
-$env:ELAN_HOME = "$PWD\.tools\elan"
-.\.tools\elan\bin\lean.exe --version
-.\.tools\elan\bin\lake.exe --version
+$env:ELAN_HOME = "C:\Tools\CodexVerification\elan"
+& "C:\Tools\CodexVerification\elan\bin\lean.exe" --version
+& "C:\Tools\CodexVerification\elan\bin\lake.exe" --version
 ```
 
-Lean is installed, but Mathlib has not been downloaded yet. Install Mathlib only when needed, because it can be a large dependency.
+Mathlib should be installed only when needed, because it is a large dependency.
+Prefer shared package storage under `C:\Tools\CodexVerification\lean_packages`
+plus project-local junctions.

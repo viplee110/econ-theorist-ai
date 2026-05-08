@@ -56,6 +56,22 @@ verification_templates/
 
 Then open the paper folder in Codex Desktop. `AGENTS.md` should be read automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the router.
 
+## Toolchain Location
+
+Keep Python, Lean/elan, Mathlib, and large Lake package caches outside paper
+folders. On Windows the recommended shared tool root is:
+
+```text
+C:\Tools\CodexVerification
+```
+
+You can choose another location by setting `CODEX_VERIFICATION_HOME` or by
+passing `-ToolRoot` to `verify_toolchain.ps1`.
+
+Project-local `.venv/`, `.tools/`, and `.lake/packages/` paths should be
+junctions to shared tools when needed, not full duplicate installations inside
+Dropbox or a paper folder.
+
 ## 中文用法
 
 在 Codex Desktop 里打开论文根目录后，你不需要记住每个 workflow 或 stage。直接用自然语言即可，建议以 `按系统处理：` 开头：
@@ -252,7 +268,7 @@ The workflow can use:
 - Git
 - LaTeX
 
-Tool installation is intentionally not committed to this repo. Do not commit `.venv/`, `.tools/`, downloaded installers, caches, or paper-specific outputs.
+Tool installation is intentionally not committed to this repo. Do not commit `.venv/`, `.tools/`, `.lake/`, downloaded installers, package caches, or paper-specific outputs.
 
 ## GitHub Installation Pattern
 
