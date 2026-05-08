@@ -484,7 +484,7 @@ Convert a surviving theorem into a paper-ready model note.
 AI tasks:
 
 - Create `idea_dossier.md`.
-- Create `contribution_lock.md`.
+- Create or update a draft `contribution_lock.md`.
 - Create `project_state.md`.
 - Create `pre_paper_model_note.md`.
 - Carry forward the confirmed `field_profile.md` if it exists; otherwise mark field-sensitive panel assignments as provisional.

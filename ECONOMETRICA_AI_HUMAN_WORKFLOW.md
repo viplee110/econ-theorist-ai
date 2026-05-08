@@ -201,7 +201,7 @@ Prevent later rounds from diluting the core idea.
 
 AI tasks:
 
-- Create `contribution_lock.md`.
+- Create or update `contribution_lock.md`.
 - Draft four locked statements:
   - `Central question`
   - `Main theorem sentence`
@@ -574,7 +574,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1, the Idea Kill Test. Do not 
 ### Lock the Contribution
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 2. Draft contribution_lock.md with the central question, non-substitutable insight, reader belief update, do-not-dilute list, and overclaim risks. Stop for my approval before any manuscript revision.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 2. Create or update contribution_lock.md with the central question, non-substitutable insight, reader belief update, do-not-dilute list, and overclaim risks. Stop for my approval before any manuscript revision.
 ```
 
 ### Deep Manuscript Revision
