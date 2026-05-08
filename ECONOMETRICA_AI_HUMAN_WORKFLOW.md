@@ -1,6 +1,6 @@
 # Human-AI Workflow for Econometrica-Level Paper Development
 
-Version: 2026-05-01
+Version: 2026-05-08
 
 This file is a working protocol for developing and revising an economics paper with Codex or another AI research assistant. Put this file in the paper's root directory and ask the agent to read it before making research or manuscript changes.
 
@@ -36,6 +36,7 @@ The agent should maintain these files whenever possible:
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
 - `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
+- `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
 - `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
@@ -65,7 +66,8 @@ Before substantial manuscript revision, check whether the project has passed the
 
 - a 5-8 page `pre_paper_model_note.md` or equivalent theorem note
 - a sharp theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y"
-- `absorption_tests.md` showing why the result is not just nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, or platform steering under new names
+- `absorption_tests.md` showing why the result is not just a known theory family, identified through the closest-literature search, under new names
+- a confirmed or explicitly provisional `field_profile.md` recording the primary field, adjacent fields, absorption-risk families, and field-sensitive referee roles
 - `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
 - a human-approved `contribution_lock.md`
 
@@ -117,6 +119,7 @@ AI tasks:
 - State the one-sentence contribution.
 - State the candidate main theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y."
 - Identify the closest existing papers and the strongest substitute argument.
+- Create or update `field_profile.md` if the project does not already have a confirmed current profile.
 - Run or update `absorption_tests.md` if the idea might be a relabeling of a known framework.
 - State what belief a specialist should change after reading the paper.
 - Identify why Econometrica might desk reject the paper.
@@ -155,11 +158,14 @@ The human must choose one:
 - `Split`: separate multiple ideas into different papers.
 - `Abandon or retarget`: do not aim this version at Econometrica.
 
+If `field_profile.md` was created or materially changed during this stage, the human must also confirm or correct it before `Proceed`; record the confirmation in `field_profile.md` and `project_state.md`.
+
 Proceed condition:
 
 - No score below 3.
 - Novelty, importance, and non-substitutability are at least 4.
 - The main theorem sentence is sharp and not absorbed by the nearest substitute theory.
+- The project-level field profile is confirmed, or explicitly marked provisional because search tools are unavailable.
 - The human can defend the one-sentence contribution without relying on wording tricks.
 
 ## Stage 2 - Contribution Lock
@@ -254,6 +260,7 @@ Stress test novelty against the real literature.
 AI tasks:
 
 - Create or update `literature_positioning.md`.
+- Create or update `field_profile.md` if it is missing, provisional, or contradicted by new literature.
 - Identify nearest substitute papers.
 - For each substitute, write:
   - what it already does
@@ -265,7 +272,7 @@ AI tasks:
 
 Human gate:
 
-The human must verify the key nearest substitute papers and decide whether the novelty claim survives.
+The human must verify the key nearest substitute papers, confirm or correct the project-level field profile if it is new or materially changed, record the confirmation in `field_profile.md` and `project_state.md`, and decide whether the novelty claim survives.
 
 Proceed condition:
 
@@ -313,10 +320,12 @@ Generate structured, adversarial, and diverse feedback without overtrusting the 
 
 Before assigning referee roles:
 
-- Create `referee_reports/round_N/panel_config.md`.
+- Use the confirmed `field_profile.md` when it exists and is still current; otherwise infer a provisional profile from the manuscript and closest-literature evidence.
+- Create `referee_reports/round_N/panel_config.md` from the current field profile and manuscript evidence.
 - Infer the manuscript's narrowest defensible field, closest literature themes, main method, contribution type, and main technical risk.
 - Select referees dynamically from those features rather than using a fixed field template.
 - Do not default to IO, search, networks, theory, econometrics, or any named field unless the current manuscript actually belongs there.
+- Ask for field confirmation before running the review only if the profile is missing, provisional, stale, or contradicted by new evidence.
 - Treat older paper-specific methodology files as historical records rather than referee-role templates.
 - Write the final role list into `panel_config.md` before creating any individual referee prompt.
 
@@ -554,7 +563,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution
 ### Simulated Econometrica Review
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. First create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, closest literature themes, main method, contribution type, main risk, calibration anchors, and control-paper calibration plan if available. Then simulate the Econometrica review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profile.md when current; if it is missing, provisional, or stale, create or update it from the closest-literature evidence and stop for field confirmation before running referee prompts. Then create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, closest literature themes, main method, contribution type, main risk, calibration anchors, and control-paper calibration plan if available. Simulate the Econometrica review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
 ```
 
 ### Referee-Guided Revision

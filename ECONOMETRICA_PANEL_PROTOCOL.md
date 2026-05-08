@@ -1,6 +1,6 @@
 # Independent Panel Protocol for Econometrica-Level Research
 
-Version: 2026-05-02
+Version: 2026-05-08
 
 This protocol generalizes a stronger simulated review methodology into a reusable decision procedure for the entire research lifecycle. Use it whenever the system must make a high-stakes judgment about an idea, model, derivation, manuscript, referee report, or revision plan.
 
@@ -18,19 +18,50 @@ The purpose is not to make the AI "vote." The purpose is to reduce self-confirma
 
 ## Dynamic Panel Configuration
 
-Before assigning any referee roles, create or update a panel configuration file:
+Before writing any individual referee prompt or running a panel, create or update a panel configuration file:
 
 - `panel_reports/panel_config.md` for idea, model, verification, and revision panels.
 - `referee_reports/round_N/panel_config.md` for simulated manuscript reviews.
 
-The panel configuration must infer the narrowest defensible research field and the closest literature themes from the target material. Do not hard-code IO, search theory, network theory, contract theory, asset pricing, econometrics, behavioral economics, or any other field unless the manuscript, model, or closest-literature comparison actually warrants it.
+Use the project-level `field_profile.md` when it exists and is still current. If it does not exist, create a provisional field profile from the target material, closest-literature search, and paper-specific evidence before assigning roles.
+
+The panel configuration must infer the narrowest defensible research field and the closest literature themes from the target material and the current field profile. Do not hard-code IO, search theory, network theory, contract theory, asset pricing, econometrics, behavioral economics, or any other field unless the manuscript, model, or closest-literature comparison actually warrants it.
+
+The human should confirm the field profile once near the start of a project or before the first high-stakes panel. Later panels inherit that confirmed profile. Reopen field confirmation only when new evidence changes the likely field assignment: a closer substitute paper is found, the primitive or theorem direction changes materially, the target journal or target audience changes, the user disputes the classification, or a closest-literature/absorption referee says the current classification makes the absorption test unreliable.
 
 The parent agent must finish and save `panel_config.md` before writing any individual referee prompt. Each referee prompt must be generated from that saved configuration. Prior rounds, historical review methodology files, or examples may be used only as evidence about earlier work, not as role templates, unless the current `panel_config.md` independently justifies the same assignments.
+
+Minimum `field_profile.md` schema:
+
+```text
+Project or candidate:
+Status: Confirmed / Provisional / Stale / Reopen requested
+Human confirmation:
+Primary field and subfield:
+Adjacent fields:
+Closest literature themes:
+Nearest substitute papers and evidence status:
+Absorption-risk theory families:
+Method, mechanism, application, or institutional lens:
+Main technical risk:
+Field-sensitive role mapping:
+  Referee 1 primary-field role:
+  Referee 2 closest-literature or adjacent-field role:
+  Referee 3 method/mechanism/application/institutional role:
+Functional role slots retained:
+  Referee 4 risk/rigor role:
+  Referee 5 Scientific Judge / Idea Critic:
+  Referee 6 Advocate / Best-Case Reader:
+  Associate Editor and Co-Editor:
+Uncertainty and missing evidence:
+Reopen triggers:
+```
 
 The configuration must include:
 
 - detected primary field and subfield
 - evidence used for the field and subfield classification
+- field-profile source: confirmed, provisional, or reopened for confirmation
 - confidence in the classification and main classification uncertainty
 - closest literature themes and nearest substitute papers if known
 - main contribution type: theory, econometrics, empirical, experimental, computational, institutional, or mixed
@@ -58,6 +89,7 @@ Minimum `panel_config.md` schema:
 ```text
 Target:
 Panel type and information mode:
+Field profile source and status:
 Detected primary field and subfield:
 Evidence for classification:
 Classification confidence and uncertainty:
@@ -73,6 +105,7 @@ Web/search policy:
 Execution mode:
 Referee assignments:
 AE and Co-Editor instructions:
+Field confirmation needed before execution?:
 Risks of this assignment:
 ```
 
@@ -298,6 +331,7 @@ Roles:
 - Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
 - Referee 5: Scientific Judge / Idea Critic. This referee does not audit algebra. It judges taste, strategy, simplicity, and whether the paper's nugget survives the revision process.
+- Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then decision letter and internal notes.
 
@@ -341,6 +375,7 @@ Outputs:
 Before running a panel, define:
 
 - target object: idea, model, theorem, manuscript, review report, or revision plan
+- field profile status: confirmed, provisional, stale, or reopened for human confirmation
 - dynamic referee configuration and execution mode
 - allowed files
 - prohibited files
@@ -541,6 +576,7 @@ When a panel reaches a mathematical or numerical claim:
 The system must stop for human judgment before:
 
 - committing to a new project
+- confirming a new or materially changed project-level field profile
 - choosing the model to develop
 - adding economically meaningful assumptions
 - changing the main theorem
@@ -551,5 +587,5 @@ The system must stop for human judgment before:
 ## Prompt Template
 
 ```text
-Read ECONOMETRICA_PANEL_PROTOCOL.md. Run a [Idea/Model/Verification/Review/Revision] Panel in [Blind/Context/Literature] Mode for [target object]. First create panel_config.md by detecting the narrowest field, closest literature themes, main method, contribution type, and main risk. Assign specialist roles dynamically from panel_config.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Define allowed and prohibited materials, produce independent referee reports, then AE synthesis, then Co-Editor decision, then parent-agent summary. Stop at the human gate.
+Read ECONOMETRICA_PANEL_PROTOCOL.md. Run a [Idea/Model/Verification/Review/Revision] Panel in [Blind/Context/Literature] Mode for [target object]. Reuse confirmed field_profile.md when current; if it is missing, provisional, or stale, create or update it from the closest-literature evidence and stop for field confirmation before running field-sensitive roles. Then create panel_config.md by detecting the narrowest field, closest literature themes, main method, contribution type, and main risk. Assign specialist roles dynamically from panel_config.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Define allowed and prohibited materials, produce independent referee reports, then AE synthesis, then Co-Editor decision, then parent-agent summary. Stop at the human gate.
 ```

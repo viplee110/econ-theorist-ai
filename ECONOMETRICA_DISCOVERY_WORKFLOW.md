@@ -1,6 +1,6 @@
 # Human-AI Discovery Workflow for Econometrica-Level Theory Projects
 
-Version: 2026-05-01
+Version: 2026-05-08
 
 This file is a pre-manuscript discovery protocol. Use it before `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` when the project is still at the topic, idea, model, or early theorem stage.
 
@@ -40,6 +40,7 @@ Maintain these files during discovery:
 - `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
 - `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
 - `literature_probe.md`: closest literatures, nearest substitutes, novelty risks, and citation TODOs.
+- `field_profile.md`: project-level field configuration confirmed by the human when possible.
 - `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
 - `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
 - `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
@@ -73,6 +74,7 @@ The human should own:
 - whether a mechanism feels deep or merely clever
 - whether to pivot, abandon, or invest
 - final novelty interpretation after real literature checks
+- confirmation of the project-level field profile before high-stakes panels rely on it
 
 ## Stage D0 - Intake and Mode Selection
 
@@ -204,6 +206,7 @@ Avoid rediscovering known papers.
 AI tasks:
 
 - Create `literature_probe.md`.
+- Create or update `field_profile.md`.
 - For each shortlisted candidate:
   - identify provisional closest literature families from the idea and model primitives
   - list likely nearest substitute papers
@@ -212,12 +215,23 @@ AI tasks:
   - update the closest literature families using the search results rather than relying only on memory
   - describe what would kill the novelty claim
   - describe what would preserve the contribution
+- In `field_profile.md`, state:
+  - primary field and subfield
+  - adjacent fields and closest literature themes
+  - absorption-risk theory families derived from the papers actually found
+  - method, mechanism, application, or institutional lens
+  - main technical risk
+  - proposed Referee 1-3 field-sensitive roles
+  - which role assignments are field-sensitive and which are functional
+  - confidence, uncertainty, and evidence that would reopen the classification
 - Separate verified facts from AI inferences.
 - Mark all unverified references as TODO.
 
 Human gate:
 
-The human should inspect the top substitute papers or ask the AI to help locate them. Do not trust novelty until this gate is passed. If web/search tools are unavailable, label the literature probe and all downstream absorption tests `provisional`.
+The human should inspect the top substitute papers or ask the AI to help locate them. The human should confirm or correct `field_profile.md` once before high-stakes panels rely on it, and the agent should record that confirmation in both `field_profile.md` and `human_decisions.md`. Do not trust novelty until this gate is passed. If web/search tools are unavailable, label the literature probe, field profile, panel role configuration, and all downstream absorption tests `provisional`.
+
+Once confirmed, later Idea, Model, Verification, Review, and Revision Panels should inherit `field_profile.md` rather than asking for field confirmation again. Reopen the field gate only if a closer substitute paper appears, the primitive or theorem direction changes materially, the target audience changes, the user disputes the classification, or a panelist explains why the current field profile makes the absorption test unreliable.
 
 ## Stage D4 - Primitive Hunting and Model Candidate Generation
 
@@ -369,6 +383,7 @@ AI tasks:
 - Create `idea_kill_tests.md`.
 - Create or update `absorption_tests.md`.
 - Create or update `model_tournament.md`.
+- Check whether `field_profile.md` is confirmed, provisional, or stale. If it is stale, update it from the latest `literature_probe.md` and stop for field confirmation before treating absorption as final.
 - If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
 - If the candidate's deepest primitive or theorem direction is still unclear, run a Primitive Hunter / Theorem Generator Panel before recommending `Invest`, `Refine`, or `Pivot`.
 - For each promising model, simulate:
@@ -443,6 +458,7 @@ AI tasks:
 - Create `contribution_lock.md`.
 - Create `project_state.md`.
 - Create `pre_paper_model_note.md`.
+- Carry forward the confirmed `field_profile.md` if it exists; otherwise mark field-sensitive panel assignments as provisional.
 - Write a 5-8 page model note:
   - question
   - mechanism
@@ -500,6 +516,12 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 through D2 in Idea mode. M
 Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Generate a broad but disciplined set of candidate theory topics that could plausibly lead to Econometrica-level contributions. Favor tractable models, sharp mechanisms, and non-obvious comparative statics. Create discovery_state.md and topic_longlist.md, then stop.
 ```
 
+### Run Literature Probe And Field Profile
+
+```text
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candidate. Search for closest substitute papers when web/search tools are available, record verified and inferred literature claims separately, create literature_probe.md, and create or update field_profile.md with the primary field, adjacent fields, absorption-risk theory families, and field-sensitive Referee 1-3 roles. Stop for my confirmation of the field profile before any high-stakes panel relies on it.
+```
+
 ### Generate Models for Shortlisted Ideas
 
 ```text
@@ -515,7 +537,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the selected model can
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, and literature_probe.md if available. Run absorption tests against nonlinear pricing, screening, persuasion, disclosure, experimentation, inventory, moral hazard, search, matching, and platform steering. Simulate hostile referees and an editor. Create absorption_tests.md and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, and field_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if field_profile.md is missing, provisional, or stale, update it and stop for field confirmation before making a final absorption judgment. Simulate hostile referees and an editor. Create absorption_tests.md and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow

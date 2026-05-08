@@ -46,11 +46,12 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 ## Human Gates
 
 - Stop for human approval before changing the central question, main theorem, model primitives, assumption set, claimed novelty, empirical interpretation, or target-journal positioning.
+- Stop for human confirmation when creating the project-level `field_profile.md` for the first time or when new evidence materially changes the primary field, adjacent fields, closest-literature themes, or field-sensitive referee roles.
 - Do not continue polishing if the main objection is contribution, identification, or economic relevance. Return to idea testing or contribution locking.
 - Use `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` to decide which stage should be run next.
 - Use `ECONOMETRICA_ORCHESTRATOR.md` as the default router for broad or ambiguous research instructions.
 - Use `ECONOMETRICA_PANEL_PROTOCOL.md` for high-stakes decision panels in idea discovery, model selection, mathematical verification, simulated review, and revision triage.
-- For high-stakes panels, create a dynamic `panel_config.md` first, assign referees from the paper's narrowest field, closest literature themes, main method, contribution type, and main risk, and do not use fixed field templates unless warranted by the paper.
+- For high-stakes panels, create a dynamic `panel_config.md` first, inherit the confirmed `field_profile.md` when it is current, assign referees from the paper's narrowest field, closest literature themes, main method, contribution type, and main risk, and do not use fixed field templates unless warranted by the paper.
 - Do not treat prior paper-specific methodology records as reusable referee templates.
 - Prefer parallel isolated referee agents when the active runtime supports real agent delegation; otherwise use serial isolated referee prompts that hide earlier reports from later referees.
 - Use `ECONOMETRICA_DISCOVERY_WORKFLOW.md` before a full manuscript exists or when the task is to discover topics, generate tractable models, test derivations, or run early-stage kill tests.

@@ -9,6 +9,7 @@ This repository provides a reusable human-AI research workflow for:
 - model tournaments before manuscript writing
 - Primitive Hunter / Theorem Generator panels for non-neighborhood model search
 - absorption tests against existing theory
+- project-level field-profile confirmation for field-sensitive referee roles
 - main-theorem gates
 - Scientific Judge / Nugget Test for taste and anti-complexity
 - Advocate / Best-Case Reader to counter reject-prior drift
@@ -18,7 +19,7 @@ This repository provides a reusable human-AI research workflow for:
 - contribution kill tests
 - manuscript development
 - simulated Econometrica review
-- dynamic referee assignment by field, closest literature, method, contribution type, and main risk
+- dynamic referee assignment by confirmed field profile, closest literature, method, contribution type, and main risk
 - parallel isolated referee agents when available, with serial isolated simulation as fallback
 - calibration anchors and optional control-paper calibration for review panels
 - referee-guided revision
@@ -150,7 +151,7 @@ Use the system: rigorously verify Proposition 1, using Python, Mathematica, and 
 Use the system: run one simulated Econometrica review round.
 ```
 
-For simulated review, the workflow first writes `referee_reports/round_N/panel_config.md`, then assigns referees dynamically from the manuscript's narrowest field, closest literature, method, contribution type, and main risk.
+For simulated review, the workflow first writes or reuses a project-level `field_profile.md`, asks for human confirmation if that profile is new or materially changed, then writes `referee_reports/round_N/panel_config.md` and assigns referees dynamically from the confirmed field profile, closest literature, method, contribution type, and main risk.
 
 ```text
 Use the system: revise the paper according to the latest referee report.
@@ -191,7 +192,7 @@ Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow the workflow system and 
 For high-stakes review or modeling work, also ask Cursor to read the relevant module:
 
 ```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_PANEL_PROTOCOL.md. Use the independent panel protocol where appropriate. First create panel_config.md for any high-stakes panel, then assign specialist roles dynamically. My task is: [describe the task].
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_PANEL_PROTOCOL.md. Use the independent panel protocol where appropriate. Reuse confirmed field_profile.md when current; if it is missing, provisional, or stale, create or update it and stop for field confirmation before running field-sensitive high-stakes panels. Then create panel_config.md and assign specialist roles dynamically. My task is: [describe the task].
 ```
 
 ### Claude Code, Windsurf, VS Code Agents, and Other Local IDE Agents
@@ -231,7 +232,7 @@ This is less reliable than local use, because the model may not have persistent 
 Use this when you are unsure whether the IDE automatically reads project instructions:
 
 ```text
-Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow this workflow system. If the task involves high-stakes idea, model, theorem, review, or revision decisions, also read ECONOMETRICA_PANEL_PROTOCOL.md. Create panel_config.md before assigning referees, use parallel isolated agents if available, otherwise use serial isolated prompts, route the task automatically, and stop at human gates. My task is: [describe the task].
+Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow this workflow system. If the task involves high-stakes idea, model, theorem, review, or revision decisions, also read ECONOMETRICA_PANEL_PROTOCOL.md. Reuse confirmed field_profile.md when current; if it is missing, provisional, or stale, create or update it and stop for field confirmation before running field-sensitive panels. Create panel_config.md before assigning referees, use parallel isolated agents if available, otherwise use serial isolated prompts, route the task automatically, and stop at human gates. My task is: [describe the task].
 ```
 
 ## Design Philosophy
@@ -248,12 +249,12 @@ The system does not assume that repeated AI revision converges to Econometrica a
 - local repair traps where each review round adds sections but no stronger main theorem
 - old-theory absorption where literature search shows that a result is just a known theory family under new names
 
-AI should expand the search space, generate and test models, simulate adversarial feedback, maintain logs, and automate mechanical checks. The human should own taste, contribution, assumptions, novelty, target journal, and final go/no-go decisions.
+AI should expand the search space, generate and test models, search the literature, propose the field profile, simulate adversarial feedback, maintain logs, and automate mechanical checks. The human should own taste, contribution, assumptions, field-profile confirmation, novelty, target journal, and final go/no-go decisions.
 
 The preferred path is:
 
 ```text
-topic/idea -> primitive hunting -> model tournament -> absorption test -> main theorem gate -> 5-8 page model note -> manuscript
+topic/idea -> literature probe and field profile -> primitive hunting -> model tournament -> absorption test -> main theorem gate -> 5-8 page model note -> manuscript
 ```
 
 If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," the workflow should stop polishing and return to model discovery.
