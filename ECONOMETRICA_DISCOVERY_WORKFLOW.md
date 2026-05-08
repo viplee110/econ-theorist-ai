@@ -277,16 +277,10 @@ Tournament rule:
 
 Absorption pre-test:
 
-For each model variant, ask whether the predicted result is essentially a version of:
-
-- nonlinear pricing
-- multidimensional screening
-- costly disclosure or verification
-- Bayesian persuasion or information design
-- dynamic experimentation or bandits
-- inventory, queueing, or capacity control
-- moral hazard, certification, or reputation
-- search, matching, or platform steering
+For each model variant, infer the closest classical theory families from the
+topic, primitive friction, agents, information structure, market design, timing,
+and predicted theorem. Ask whether the predicted result is essentially a
+renaming or modest extension of one of those nearest theory families.
 
 If yes, the model can still be useful, but it cannot be the main theorem unless the note explains the non-absorbed element.
 
