@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 
 # Paper-specific generated artifacts
+active_context.md
 project_state.md
 discovery_state.md
 idea_dossier.md
@@ -22,6 +23,7 @@ topic_longlist.md
 topic_shortlist.md
 idea_kill_tests.md
 human_decisions.md
+generality_ledger.md
 proof_and_model_audit.md
 risk_register.md
 revision_log.md

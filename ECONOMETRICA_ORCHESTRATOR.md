@@ -49,6 +49,10 @@ Continue from the current state.
 ```
 
 ```text
+按系统继续。
+```
+
+```text
 Check the math carefully.
 ```
 
@@ -70,6 +74,7 @@ The assistant should translate these commands into the correct workflow and stag
 
 Before routing, inspect whichever of these files exist:
 
+- `active_context.md` first, if present, as a compact dashboard only
 - `project_state.md`
 - `discovery_state.md`
 - `human_decisions.md`
@@ -90,6 +95,7 @@ Before routing, inspect whichever of these files exist:
 - `risk_register.md`
 - `revision_log.md`
 - `revision_tree.md`
+- `generality_ledger.md`
 - latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
 - `version_log.md`
@@ -99,6 +105,16 @@ If no state file exists, begin with intake:
 
 - no manuscript or no clear paper files: Discovery D0.
 - manuscript exists: Manuscript Stage 0.
+
+`active_context.md` is never a source of truth. Use it to find the current state quickly, then verify any important claim against the underlying artifacts such as `project_state.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and the latest panel reports.
+
+## Low-Token State Discipline
+
+Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, active theorem, contribution lock status, field profile status, open risks, pending human gate, and next safe action.
+
+Token discipline reduces redundant re-reading, repeated summaries, and boilerplate. It must not reduce research depth. For main theorem discovery, proof verification, closest-literature checks, simulated review, model tournaments, and high-stakes revision, use enough context, tools, and token budget to execute the complete workflow.
+
+When the user explicitly asks for a full review, literature audit, theorem verification, model tournament, or full simulated review, do not substitute a lightweight summary. Run the complete relevant workflow stage and produce the required artifacts.
 
 ## Routing Table
 
@@ -149,6 +165,8 @@ Route:
 Triggers:
 
 - "literature probe"
+- "literature audit"
+- "full literature audit"
 - "closest literature"
 - "nearest substitute"
 - "field profile"
@@ -175,6 +193,7 @@ Triggers:
 - "model variants"
 - "turn this idea into a model"
 - "model tournament"
+- "full model tournament"
 - "find the main theorem"
 - "theorem-first"
 - "absorption test"
@@ -190,10 +209,11 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` if multiple model candidates need selection.
 - Run D4.
 - If the primitive is unclear or the valuable object is reduced-form, run a Primitive Hunter / Theorem Generator Panel before ordinary model generation.
-- Create or update `primitive_hunter_report.md`, `model_candidates.md`, `model_tournament.md`, and `absorption_tests.md`.
+- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_candidates.md`, `model_tournament.md`, and `absorption_tests.md`.
 - Use confirmed `field_profile.md` if available; if absorption or role assignment depends on a missing, provisional, stale, or `Reopen requested` field profile, update it from closest-literature evidence and stop for confirmation before final judgment.
 - Generate 4-6 model variants before selecting one for full development.
 - Generate three non-neighborhood model directions when local repair is a risk.
+- If the user explicitly asks for a model tournament or full model tournament, complete the model-tournament path: D4 model generation, D5 derivation where needed, and D6 absorption/main-theorem gate before recommending a winner. Do not merely summarize candidate variants.
 - Do not enter manuscript mode until a candidate theorem survives the main-theorem gate.
 - If selecting among candidates, run a Model Panel.
 - If candidate models already exist, ask only if the user wants new variants or derivation.
@@ -205,6 +225,8 @@ Triggers:
 - "derive"
 - "solve the model"
 - "main proposition"
+- "theorem verification"
+- "full theorem verification"
 - "comparative static"
 - "equilibrium conditions"
 
@@ -224,8 +246,34 @@ Triggers:
 
 - "local optimum"
 - "局部极值"
+- "局部最优"
+- "local maximum"
+- "local trap"
+- "stuck in local optimum"
 - "low quality trap"
 - "低质量陷阱"
+- "越改越复杂"
+- "越修越差"
+- "离 Econometrica 越来越远"
+- "打补丁"
+- "主定理不清楚"
+- "被旧理论吸收"
+- "假设越来越多"
+- "贡献句越来越长"
+- "一般性下降"
+- "模型越来越特殊"
+- "revision trap"
+- "patching mode"
+- "too many patches"
+- "overfitting to referee comments"
+- "over-polishing"
+- "nugget is getting weaker"
+- "theorem package"
+- "too close to existing theory"
+- "assumption creep"
+- "losing generality"
+- "special-case trap"
+- "moving away from Econometrica"
 - "too much polishing"
 - "defensive dilution"
 - "nugget"
@@ -242,8 +290,10 @@ Route:
 - Stop manuscript polishing.
 - Run Discovery D4-D6: model tournament, first-pass derivation, absorption test, and main-theorem gate.
 - Start with a Primitive Hunter / Theorem Generator Panel if the deepest primitive is unclear or the current theorem is weak.
-- Create or update `primitive_hunter_report.md`, `model_tournament.md`, `theorem_candidates.md`, `absorption_tests.md`, `field_profile.md`, and `idea_kill_tests.md`.
+- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_tournament.md`, `theorem_candidates.md`, `absorption_tests.md`, `field_profile.md`, and `idea_kill_tests.md`.
 - Reuse confirmed `field_profile.md` unless the closest-literature evidence, primitive, theorem direction, or target audience has materially changed.
+- Generate a Multi-Path Dashboard comparing at least Preserve, Simplify, Pivot, and Kill/Demote paths when evidence supports more than one route.
+- Do not directly edit the manuscript until the human selects a path.
 - If two independent review rounds share the same structural objection, require Pivot, Demote to benchmark, Park, or Kill unless the human explicitly overrides.
 - Do not return to Stage 6 or Stage 8 until a human approves a new theorem sentence.
 
@@ -350,12 +400,15 @@ Triggers:
 - "review like Econometrica"
 - "run editorial board"
 - "give referee reports"
+- "full review"
+- "full simulated review"
 
 Route:
 
 - Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 7.
+- If the user asks for a full review or full simulated review, complete the full Stage 7 review workflow and required artifacts rather than issuing a lightweight summary.
 - Reuse confirmed `field_profile.md` when it exists; if it is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature evidence and ask for field confirmation before running the referee prompts.
 - Then create `referee_reports/round_N/panel_config.md` by detecting the manuscript's narrowest field, closest literature themes, main method, contribution type, and main technical risk.
 - Include calibration anchors in `panel_config.md`; if close Econometrica anchors cannot be named confidently, write anchor TODOs rather than inventing citations.
@@ -464,9 +517,11 @@ If the user reverses an earlier decision, record the reversal as a new entry rat
 
 ## Current-State Continuation
 
+Route Chinese continuation commands such as `按系统继续` and `按系统处理` here.
+
 When the user says "continue" or "按系统继续":
 
-1. Inspect the state files.
+1. Inspect `active_context.md` first if it exists, treating it as a dashboard only.
 2. Identify the most recent completed stage.
 3. Identify whether a human gate is awaiting a decision.
 4. If a gate is awaiting a decision, summarize the decision needed and stop.

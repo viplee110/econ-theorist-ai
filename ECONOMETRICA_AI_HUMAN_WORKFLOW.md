@@ -31,12 +31,14 @@ For high-stakes idea, model, theorem, review, or revision decisions, also read `
 The agent should maintain these files whenever possible:
 
 - `project_state.md`: current stage, last human decision, active thesis, active target, current blocker.
+- `active_context.md`: 80-120 line compact dashboard for continuation; not a source of truth.
 - `human_decisions.md`: append-only record of human gate decisions, reversals, overrides, and reasons.
 - `idea_dossier.md`: one-sentence idea, mechanism, closest papers, novelty claims, feasibility risks.
 - `contribution_lock.md`: the locked core question, non-substitutable insight, and reader belief update.
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
 - `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
+- `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
 - `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
@@ -82,6 +84,23 @@ Reason:
 Affected artifacts:
 Required updates or rechecks:
 ```
+
+## Token and Decision Discipline
+
+Token economy must never override research quality. Use `active_context.md` as an 80-120 line compact dashboard to reduce redundant reconstruction during long projects, but verify substantive claims against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
+
+Low-token discipline means shorter boilerplate, fewer repeated summaries, and cleaner state handoffs. It does not mean shallow main-theorem discovery, abbreviated proof verification, skipped closest-literature checks, compressed simulated review, or lightweight handling of high-stakes revision.
+
+Decision Batch Mode:
+
+- Accumulate non-core small decisions into batches of 3-5 before asking the human.
+- Ask immediately when the decision concerns the central question, main theorem, model primitives, assumption set, novelty claim, target journal, or the choice to submit, pivot, split, retarget, or abandon.
+- Write every human gate outcome to `human_decisions.md` and the artifact controlled by that decision before treating it as state.
+
+Generality Ledger Mode:
+
+- Maintain `generality_ledger.md` when revisions add distribution assumptions, special graph structures, extra agents, extra states, regularity conditions, or longer theorem sentences.
+- If generality loss is rising but the nugget is not sharper, stop local polishing and return to Discovery D4-D6 or Stage 8 tree search.
 
 ## Manuscript-Mode Firewall
 
@@ -446,6 +465,7 @@ AI tasks:
 
 - Create `revision_tree.md` before editing.
 - If the leading objection is missing central theorem, old-theory absorption, weak contribution, or defensive dilution, do not revise locally. Route back to Discovery D4-D6.
+- If `generality_ledger.md` shows rising generality loss without a sharper nugget, stop local polishing and return to Discovery D4-D6 or Stage 8 tree search before manuscript edits.
 - For major theoretical or mechanism objections, generate three parallel revision branches as plans before touching the manuscript:
   - Branch A, `Defensive Patch`: minimal repair that preserves the current model, adding the fewest assumptions or clarifications possible.
   - Branch B, `Mechanism Simplification`: remove complexity and seek a cleaner primitive, theorem, or benchmark that explains the mechanism with fewer moving parts.
@@ -592,7 +612,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profi
 ### Referee-Guided Revision
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report in Agentic Tree Search Mode. If the leading objection is missing central theorem, old-theory absorption, weak contribution, or defensive dilution, do not edit locally; route back to Discovery D4-D6. Otherwise create revision_tree.md with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe. Run the Scientific Judge on the branch plans and stop for my branch choice before editing the manuscript.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report in Agentic Tree Search Mode. If the leading objection is missing central theorem, old-theory absorption, weak contribution, defensive dilution, or rising generality loss without a sharper nugget, do not edit locally; route back to Discovery D4-D6. Otherwise create revision_tree.md with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe, checking generality_ledger.md before choosing local repairs. Run the Scientific Judge on the branch plans and stop for my branch choice before editing the manuscript.
 ```
 
 ### Final Submission Readiness

@@ -25,11 +25,21 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 
 ## Scientific Taste & Anti-Complexity Directive
 
+- Scientific taste is a filter, not the sole objective.
+- During discovery, preserve non-mainstream but internally coherent exploration long enough to test deep primitive potential, theorem bite, and absorption risk.
+- During polishing and revision, taste, simplicity, and contribution sharpness become strong constraints against defensive clutter.
 - Highest priority: protect the paper's nugget, the shortest truthful statement of the paper's cognitive update.
 - Always watch for additive bias: using extra variables, agent types, dynamic states, distributions, assumptions, or appendices to hide a weak mechanism.
 - Top economics papers should convert deep primitives into a sharp, simple insight. Complexity is allowed only when it is doing necessary economic work.
 - When responding to a referee objection or proof gap, first ask whether the problem can be solved by deeper primitives, simplification, or reframing before adding assumptions or sections.
+- The Scientific Judge may strongly oppose defensive dilution, fake novelty, and complexity shields, but must not kill a direction only because it is non-mainstream. It must first check deep primitive potential, theorem bite, and absorption risk.
 - If a revision makes the contribution sentence longer, more conditional, or more defensive, stop and report a local-optimum trap. Recommend agentic tree search with simplification and pivot branches before editing.
+
+## Token Quality Priority
+
+- Token economy must never override research quality.
+- For main theorem discovery, proof verification, closest-literature checks, simulated review, and high-stakes revision, use enough context, tools, and tokens to execute the workflow rather than compressing it into a shallow answer.
+- Token discipline should reduce repeated boilerplate and redundant summaries, not reduce mathematical checking, literature search, model comparison, or adversarial review depth.
 
 ## Core Rules
 
@@ -38,6 +48,8 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - If a citation, proof, result, robustness check, or interpretation requires author verification, write it as a precise TODO in `risk_register.md` instead of fabricating it.
 - Before full manuscript development, require a candidate main theorem sentence, an absorption test against known theoretical families, and a model tournament unless the user explicitly requests mechanical editing only.
 - If repeated reviews identify no central theorem, old-theory absorption, or weak contribution, stop polishing and return to discovery/model search.
+- Use `active_context.md` only as a compact dashboard for continuation; it is not a source of truth and must be checked against the underlying artifacts.
+- Use `generality_ledger.md` to track losses of generality from special-case assumptions, distributions, graph structures, extra agents, extra states, or longer theorem sentences.
 - Prefer direct edits to LaTeX source files when the source can be improved safely.
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.

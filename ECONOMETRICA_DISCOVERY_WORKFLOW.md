@@ -35,6 +35,7 @@ Maintain these files during discovery:
 - `topic_shortlist.md`: surviving candidates after screening.
 - `model_candidates.md`: structured model sketches for each surviving candidate.
 - `primitive_hunter_report.md`: deepest primitive, reduced-form object audit, and non-neighborhood model directions.
+- `generality_ledger.md`: running record of generality losses, special-case restrictions, and whether each restriction makes the nugget sharper.
 - `model_tournament.md`: side-by-side comparison of model variants and why weaker variants were killed or demoted.
 - `theorem_candidates.md`: candidate main theorems, theorem sentences, proof status, and failure modes.
 - `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
@@ -44,6 +45,19 @@ Maintain these files during discovery:
 - `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
 - `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
 - `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
+
+## Exploration Quota
+
+D1, D4, and any Primitive Hunter / Theorem Generator Panel must preserve at least 1-2 non-mainstream but internally coherent directions until they have been tested for deep primitive potential, theorem bite, and absorption risk.
+
+For every exploration direction, record:
+
+- deep primitive
+- possible theorem sentence
+- absorption risk
+- why this is not just a local variant of the current model or a nearby paper
+
+Do not kill an exploration-quota variant merely because it does not look like mainstream taste. It can be killed only after the workflow explains why the primitive is shallow, the theorem has low bite, the direction is absorbed by closest literature, or the assumptions become artificial.
 
 If a candidate becomes a real paper project, create or update:
 
@@ -174,11 +188,16 @@ Mechanism:
 Strategic choice:
 Information/timing:
 Potential main result:
+Deep primitive:
+Possible theorem sentence:
+Absorption risk:
+Why not local variant:
 Why it might matter:
 Closest literature families:
 Tractability guess:
 Novelty risk:
 Execution risk:
+Exploration quota status:
 One-sentence pitch:
 ```
 
@@ -188,6 +207,7 @@ Rules:
 - Prefer mechanisms that could change a specialist's belief.
 - Include some high-risk/high-upside candidates.
 - Include some clean and tractable candidates.
+- Include at least 1-2 non-mainstream but internally coherent exploration-quota candidates when the search space permits.
 - Flag candidates that sound clever but not important.
 
 ## Stage D2 - Coarse Screening
@@ -273,6 +293,7 @@ Find the deepest primitive, then generate a model tournament before any paper dr
 AI tasks:
 
 - Create or update `primitive_hunter_report.md`.
+- Create or update `generality_ledger.md`.
 - Create `model_candidates.md`.
 - Create or update `model_tournament.md`.
 - Before generating local variants, identify:
@@ -287,6 +308,8 @@ AI tasks:
   - alternative information structure
   - alternative equilibrium concept if relevant
   - three non-neighborhood model directions when the current model seems trapped in local repair
+- Preserve 1-2 non-mainstream but internally coherent directions from the exploration quota unless D1 or the Primitive Hunter already killed them for documented primitive, theorem, or absorption reasons.
+- For each exploration-quota direction, state the deep primitive, possible theorem sentence, absorption risk, and why it is not a local variant.
 
 Model template:
 
@@ -304,12 +327,15 @@ Equilibrium concept:
 Key assumptions:
 Main endogenous objects:
 Predicted main proposition:
+Possible theorem sentence:
 Comparative statics:
 Welfare or policy object:
 Why tractable:
 Likely proof technique:
 What could go wrong:
 Closest existing model:
+Generality loss:
+Why not local variant:
 ```
 
 Tournament rule:
@@ -319,6 +345,7 @@ Tournament rule:
 - If two variants produce the same theorem, keep the simpler one and demote the other.
 - If a variant only creates a theorem package of local sufficient conditions, label it `Local repair trap`.
 - If the result follows from a named existing framework, label it `Absorbed benchmark` rather than a main model.
+- Update `generality_ledger.md` whenever a variant becomes a special case, adds a distribution assumption, imposes a special graph structure, adds an agent or state, adds a regularity condition, or makes the theorem sentence longer.
 
 Absorption pre-test:
 
@@ -383,6 +410,7 @@ Required derivation discipline:
 - Every proof sketch must state where each assumption enters.
 - If a result follows almost immediately from an assumption, flag it as low contribution.
 - If the result needs an unstated regularity condition, add it explicitly to `derivation_notes.md` and mark it as a risk.
+- If the derivation adds a distribution assumption, special graph structure, extra agent, extra state, regularity condition, or longer theorem sentence, update `generality_ledger.md`.
 - If algebra becomes messy, try a simpler model before adding assumptions.
 - Try to construct at least one counterexample to the predicted proposition.
 - If the proposition fails, record the failure rather than repairing silently.
@@ -412,6 +440,7 @@ AI tasks:
 - Create `idea_kill_tests.md`.
 - Create or update `absorption_tests.md`.
 - Create or update `model_tournament.md`.
+- Create or update `generality_ledger.md`.
 - Check whether `field_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If it is missing, provisional, stale, or reopened, update it from the latest `literature_probe.md` and stop for field confirmation before treating absorption as final.
 - If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
 - If the candidate's deepest primitive or theorem direction is still unclear, run a Primitive Hunter / Theorem Generator Panel before recommending `Invest`, `Refine`, or `Pivot`.
@@ -439,6 +468,7 @@ Absorption test:
 - If web/search tools were unavailable and the closest literature was not checked, label the absorption result `provisional` rather than final.
 - If only a narrow part is absorbed, demote that part to a benchmark and search for the non-absorbed theorem.
 - If the model's key object is assumed rather than generated, require an endogenization plan before `Invest`.
+- Do not kill an exploration-quota variant because it lacks mainstream taste; judge it separately on deep primitive potential, theorem bite, absorption risk, and assumption artificiality.
 
 Main theorem gate:
 
@@ -554,7 +584,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candid
 ### Generate Models for Shortlisted Ideas
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Then generate 4-6 tractable model variants for each selected candidate, including three non-neighborhood model directions when local repair is a risk. Create primitive_hunter_report.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Then generate 4-6 tractable model variants for each selected candidate, including three non-neighborhood model directions when local repair is a risk and 1-2 non-mainstream but internally coherent exploration-quota directions when available. For each such direction, state the deep primitive, possible theorem sentence, absorption risk, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
 ```
 
 ### Attempt First-Pass Derivations
@@ -566,7 +596,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the selected model can
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, and field_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. Simulate hostile referees and an editor. Create absorption_tests.md and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, generality_ledger.md, and field_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota variants merely because they are non-mainstream. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow

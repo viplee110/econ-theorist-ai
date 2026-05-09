@@ -77,7 +77,7 @@ For Review Panels, the default role logic is:
 - Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
 - Referee 3: method, mechanism, application, or institutional specialist selected from the manuscript's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type, such as mathematical proof, econometric identification, computation, empirical design, experimental design, or institutional interpretation.
-- Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test and Occam Test.
+- Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test, Occam Test, defensive dilution check, and deep primitive potential check.
 - Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
 
 If the target spans multiple fields, the panel must explain the tradeoff and choose the referee mix that is most likely to reveal fatal objections, not the mix that is easiest for the AI to simulate.
@@ -283,7 +283,7 @@ Roles:
 - Hunter 2: endogenization designer who asks which reduced-form object must be generated inside the model.
 - Hunter 3: non-neighborhood model generator who proposes three models outside the current local basin.
 - Hunter 4: theorem generator who states candidate theorem sentences for each primitive/model direction.
-- Scientific Judge: runs the Nugget, Occam, and absorption tests on the generated directions.
+- Scientific Judge: runs the Nugget, Occam, absorption, and deep primitive potential tests on the generated directions; it cannot kill a non-mainstream exploration merely for being non-mainstream.
 - Associate Editor: recommends Keep Question / Change Primitive / Change Theorem / Change Model / Park / Kill.
 - Co-Editor: decides which primitive-theorem direction, if any, should enter D4 model tournament.
 
@@ -330,7 +330,7 @@ Roles:
 - Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
 - Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
-- Referee 5: Scientific Judge / Idea Critic. This referee does not audit algebra. It judges taste, strategy, simplicity, and whether the paper's nugget survives the revision process.
+- Referee 5: Scientific Judge / Idea Critic. This referee does not audit algebra. It judges taste, strategy, simplicity, deep primitive potential, and whether the paper's nugget survives the revision process. It may strongly oppose defensive dilution, fake novelty, and complexity shields, but it must not kill a non-mainstream exploration solely for being non-mainstream.
 - Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then decision letter and internal notes.
@@ -347,6 +347,8 @@ Outputs:
 - `referee_reports/round_N/associate_editor_report.md`
 - `referee_reports/round_N/co_editor_decision.md`
 - `referee_reports/round_N/00_summary.md`
+
+The Referee 6 Advocate / Best-Case Reader role must write `referee_reports/round_N/referee_6_advocate.md`; do not rename the role without renaming the output consistently.
 
 ### Revision Panel
 
@@ -464,8 +466,11 @@ Every Review Panel and high-stakes Revision Panel must include a scientific-tast
 - Is each additional variable, agent type, state, distributional assumption, or regularity condition necessary for the mechanism?
 - Could the same insight be obtained from a simpler primitive or cleaner model?
 - Does the paper contain a theorem package without one central theorem?
+- Does a non-mainstream direction have deep primitive potential, theorem bite, or a non-absorbed mechanism that warrants further discovery before rejection?
 
 If the contribution sentence requires many clauses such as "under the specific condition that..." or "provided that..." to sound true, label the issue `Defensive Dilution`. If complexity is essential, the judge must say exactly what economic work it performs. If complexity mainly protects a fragile result, the judge should recommend `Pivot`, `Demote to Benchmark`, or `Reject and Resubmit` rather than local repair.
+
+Scientific taste is a filter, not the sole objective. The judge can reject defensive dilution, fake novelty, or a complexity shield, but must separately evaluate deep primitive potential before recommending Kill/Pivot for a non-mainstream exploration.
 
 ## Contribution-Lock Dilution Check (Hard Ratchet)
 
