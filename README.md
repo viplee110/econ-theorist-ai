@@ -1,44 +1,66 @@
-﻿# Econometrica AI Research System
+# Econometrica AI Research System
 
-A local Codex workflow system for economics papers targeting Econometrica-level research quality.
+A local Codex workflow system for economics research projects that aim for
+Econometrica-level theory, verification, and revision discipline.
 
-This repository provides a reusable human-AI research workflow for:
+The system helps researchers move from rough ideas to primitive hunting, model
+tournaments, theorem candidates, absorption tests, human gates, simulated review,
+and controlled revision paths.
 
-- topic discovery
-- tractable model generation
-- model tournaments before manuscript writing
-- Primitive Hunter / Theorem Generator panels for non-neighborhood model search
-- absorption tests against existing theory
-- project-level field-profile confirmation for field-sensitive referee roles
-- main-theorem gates
-- Scientific Judge / Nugget Test for taste and anti-complexity
-- Advocate / Best-Case Reader to counter reject-prior drift
-- agentic tree search for major revision paths
-- first-pass derivation
-- mathematical verification
-- contribution kill tests
-- manuscript development
-- simulated Econometrica review
-- dynamic referee assignment by confirmed field profile, closest literature, method, contribution type, and main risk
-- parallel isolated referee agents when available, with serial isolated simulation as fallback
-- calibration anchors and optional control-paper calibration for review panels
-- referee-guided revision
-- automatic version-control checkpoints
+If this workflow helps your research, please consider giving the repository a
+star so more researchers can find and improve their own research process.
 
-## Files
+## Workflow Map
 
-- `AGENTS.md`: project-level instructions automatically read by Codex.
-- `ECONOMETRICA_ORCHESTRATOR.md`: single entry point that routes natural-language requests to the right workflow.
-- `ECONOMETRICA_PANEL_PROTOCOL.md`: dynamic panel configuration, independent specialist panels, AE synthesis, Co-Editor decisions, and consensus/disagreement summaries.
-- `ECONOMETRICA_DISCOVERY_WORKFLOW.md`: topic search, model generation, derivation, early kill tests.
-- `ECONOMETRICA_VERIFICATION_WORKFLOW.md`: symbolic checks, numerical counterexample search, proof audit, Lean/Python/Mathematica usage.
-- `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`: manuscript development, contribution lock, simulated review, revision loop, final readiness.
-- `ECONOMETRICA_VERSION_CONTROL.md`: git checkpointing, diffs, branches, commits, rollback safety.
-- `TOOLCHAIN_README.md`: local verification toolchain instructions.
-- `verify_toolchain.ps1`: quick local toolchain self-test.
-- `verification_templates/`: starter templates for counterexample search and Lean lemmas.
+```mermaid
+flowchart LR
+    A["Topic or rough idea"] --> B["Literature probe<br/>field_profile.md"]
+    B --> C["Primitive Hunter<br/>Exploration Quota"]
+    C --> D["Model tournament"]
+    D --> E["First-pass derivation"]
+    E --> F["Absorption test<br/>main theorem gate"]
+    F --> G["5-8 page model note"]
+    G --> H["Manuscript development"]
+    H --> I["Simulated review"]
+    I --> J["Revision tree"]
+    J --> K{"Human decision"}
+    K -->|preserve or revise| H
+    K -->|simplify or pivot| C
+    K -->|submit or retarget| L["Final readiness"]
+```
 
-## Recommended Use
+## Control Layer
+
+```mermaid
+flowchart TD
+    AC["active_context.md<br/>compact dashboard"] --> OR["ECONOMETRICA_ORCHESTRATOR.md<br/>router"]
+    HD["human_decisions.md<br/>append-only gates"] --> OR
+    FP["field_profile.md<br/>confirmed field and referee roles"] --> OR
+    GL["generality_ledger.md<br/>special-case and assumption drift"] --> OR
+    OR --> WG["Workflow modules"]
+    WG --> HP{"Human gate"}
+    HP --> HD
+```
+
+`active_context.md` is only a dashboard, not a source of truth. Important claims
+must still be checked against the underlying workflow artifacts.
+
+## What This System Does
+
+- Searches for research directions without immediately forcing mainstream taste.
+- Preserves 1-2 non-mainstream but internally coherent directions during discovery.
+- Runs Primitive Hunter / Theorem Generator panels when the primitive is unclear.
+- Compares model variants before manuscript writing.
+- Requires absorption tests against closest literature and known theory families.
+- Uses `field_profile.md` to assign field-sensitive simulated referees.
+- Records human gate decisions in `human_decisions.md` instead of relying on chat memory.
+- Tracks assumption and generality drift in `generality_ledger.md`.
+- Uses Scientific Judge / Nugget Test safeguards against defensive complexity.
+- Runs simulated Econometrica review with dynamic referee roles.
+- Routes local-optimum traps back to discovery before manuscript polishing.
+- Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
+
+## Quick Start
 
 Copy these files into the root directory of a paper project:
 
@@ -55,117 +77,8 @@ verify_toolchain.ps1
 verification_templates/
 ```
 
-Then open the paper folder in Codex Desktop. `AGENTS.md` should be read automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the router.
-
-## Toolchain Location
-
-Keep Python, Lean/elan, Mathlib, and large Lake package caches outside paper
-folders. On Windows the recommended shared tool root is:
-
-```text
-C:\Tools\CodexVerification
-```
-
-You can choose another location by setting `CODEX_VERIFICATION_HOME` or by
-passing `-ToolRoot` to `verify_toolchain.ps1`.
-
-Minimum setup check after copying the workflow files into a paper folder:
-
-```powershell
-.\verify_toolchain.ps1
-```
-
-If the script cannot find Python, Lean, or Mathematica, the workflow still works
-as prompts and checklists, but mathematical verification is weaker until the
-tool root is configured. See `TOOLCHAIN_README.md` for detailed setup options.
-
-## 中文用法
-
-在 Codex Desktop 里打开论文根目录后，你不需要记住每个 workflow 或 stage。直接使用自然语言即可；为了路由更稳定，建议以 `按系统处理：` 开头。
-
-```text
-按系统处理：我想讨论一个新的课题，领域大概是平台搜索和广告。
-```
-
-```text
-按系统处理：这个 idea 是否有 Econometrica 潜力？
-```
-
-```text
-按系统处理：帮我生成 tractable model，并尝试推导主结论。
-```
-
-```text
-按系统处理：严格验证 Proposition 1，必要时用 Python、Mathematica 和 Lean。
-```
-
-```text
-按系统处理：运行一轮 Econometrica 模拟审稿。
-```
-
-```text
-按系统处理：根据最新审稿意见修改论文。
-```
-
-```text
-按系统继续。
-```
-
-## English Usage
-
-After opening the paper root folder in Codex Desktop, you do not need to remember workflow names or stage numbers. Use natural language. For best routing stability, start with `Use the system:`.
-
-```text
-Use the system: I want to explore a new research topic in platform search and advertising.
-```
-
-```text
-Use the system: evaluate whether this idea has Econometrica-level potential.
-```
-
-```text
-Use the system: generate tractable model variants and attempt first-pass derivations.
-```
-
-```text
-Use the system: run a model tournament and absorption test before we write a manuscript.
-```
-
-```text
-Use the system: run Primitive Hunter. Identify the deepest primitive, what is reduced-form, and three non-neighborhood model directions.
-```
-
-```text
-Use the system: run the Scientific Judge and Nugget Test on this project.
-```
-
-```text
-Use the system: revise with agentic tree search instead of a single defensive patch.
-```
-
-```text
-Use the system: rigorously verify Proposition 1, using Python, Mathematica, and Lean if useful.
-```
-
-```text
-Use the system: run one simulated Econometrica review round.
-```
-
-For simulated review, the workflow first writes or reuses a project-level `field_profile.md`, asks for human confirmation if that profile is new or materially changed, then writes `referee_reports/round_N/panel_config.md` and assigns referees dynamically from the confirmed field profile, closest literature, method, contribution type, and main risk.
-
-```text
-Use the system: revise the paper according to the latest referee report.
-```
-
-```text
-Use the system: continue from the current state.
-```
-
-## IDE and Agent Recommendations
-
-### Codex Desktop
-
-Codex Desktop is the most natural environment for this system. Copy the workflow files into the paper root folder, then open that folder as a local Codex project. Codex should automatically read `AGENTS.md`, which points it to `ECONOMETRICA_ORCHESTRATOR.md`.
+Then open the paper folder in Codex Desktop. `AGENTS.md` should be read
+automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the router.
 
 Recommended command:
 
@@ -179,112 +92,118 @@ Chinese equivalent:
 按系统继续。
 ```
 
-### Cursor
-
-Cursor can use the same workflow files, but it may not automatically treat `AGENTS.md` as project instructions. For a new Cursor agent/chat session, explicitly tell it to read the entry files first.
-
-Recommended command:
+## Common Commands
 
 ```text
-Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow the workflow system and route the task automatically. My task is: [describe the task].
+Use the system: I want to explore a new research topic.
 ```
-
-For high-stakes review or modeling work, also ask Cursor to read the relevant module:
 
 ```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_PANEL_PROTOCOL.md. Use the independent panel protocol where appropriate. Reuse confirmed field_profile.md when current; if it is missing, provisional, stale, or marked `Reopen requested`, create or update it and stop for field confirmation before running field-sensitive high-stakes panels. Then create panel_config.md and assign specialist roles dynamically. My task is: [describe the task].
+Use the system: run a model tournament and absorption test before writing.
 ```
-
-### Claude Code, Windsurf, VS Code Agents, and Other Local IDE Agents
-
-Any local IDE agent that can read project files can use this repository. Place the workflow files in the project root and start each major session by naming the entry files.
-
-Recommended command:
 
 ```text
-Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md first. Then decide which workflow module to use. My task is: [describe the task].
+Use the system: run Primitive Hunter and identify the deepest primitive.
 ```
-
-If the task involves proof, equilibrium, symbolic algebra, numerical counterexample search, or formal verification, add:
 
 ```text
-Also read ECONOMETRICA_VERIFICATION_WORKFLOW.md and use the available local tools only when their output can be recorded.
+Use the system: rigorously verify Proposition 1 with Python, Mathematica, or Lean if useful.
 ```
-
-### Web Chat Models
-
-Plain web chat models usually cannot automatically read local project files. Use one of these approaches:
-
-1. Upload the workflow files and the relevant paper files.
-2. Provide the GitHub repository URL and ask the model to read the workflow files.
-3. Paste the relevant section of `ECONOMETRICA_ORCHESTRATOR.md` or the module you want to use.
-
-Recommended command:
 
 ```text
-Use the workflow from https://github.com/viplee110/econometrica-ai-research-system. Start from AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md, then route this task: [describe the task].
+Use the system: run a full simulated Econometrica review.
 ```
-
-This is less reliable than local use, because the model may not have persistent access to your paper folder, git history, local tools, or generated state files.
-
-### Most Robust Cross-Tool Prompt
-
-Use this when you are unsure whether the IDE automatically reads project instructions:
 
 ```text
-Read AGENTS.md and ECONOMETRICA_ORCHESTRATOR.md. Follow this workflow system. If the task involves high-stakes idea, model, theorem, review, or revision decisions, also read ECONOMETRICA_PANEL_PROTOCOL.md. Reuse confirmed field_profile.md when current; if it is missing, provisional, stale, or marked `Reopen requested`, create or update it and stop for field confirmation before running field-sensitive panels. Create panel_config.md before assigning referees, use parallel isolated agents if available, otherwise use serial isolated prompts, route the task automatically, and stop at human gates. My task is: [describe the task].
+Use the system: revise with agentic tree search instead of a defensive patch.
 ```
-
-## Design Philosophy
-
-The system does not assume that repeated AI revision converges to Econometrica acceptance. It is designed to expose non-convergence early:
-
-- weak contribution
-- non-novel idea
-- overly tailored assumptions
-- unverified theorem
-- hidden proof gap
-- poor literature positioning
-- manuscript polish without real economic bite
-- local repair traps where each review round adds sections but no stronger main theorem
-- old-theory absorption where literature search shows that a result is just a known theory family under new names
-
-AI should expand the search space, generate and test models, search the literature, propose the field profile, simulate adversarial feedback, maintain logs, and automate mechanical checks. The human should own taste, contribution, assumptions, field-profile confirmation, novelty, target journal, and final go/no-go decisions.
-
-Human gate decisions must be saved in project artifacts, not only remembered in chat. The default record is `human_decisions.md`, with the active state also updated in files such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`. If the human reverses a prior decision, the workflow records the reversal as a new append-only entry; the later decision governs current work, but the earlier decision remains part of the project history.
-
-The preferred path is:
 
 ```text
-topic/idea -> literature probe and field profile -> primitive hunting -> model tournament -> absorption test -> main theorem gate -> 5-8 page model note -> manuscript
+按系统处理：这个项目是不是陷入局部最优或越改越复杂？
 ```
 
-If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," the workflow should stop polishing and return to model discovery.
+## Files
 
-For major revision, the system should compare three paths before editing:
+| File | Purpose |
+| --- | --- |
+| `AGENTS.md` | Project-level instructions for Codex and compatible agents. |
+| `ECONOMETRICA_ORCHESTRATOR.md` | Natural-language router for workflow modules and stages. |
+| `ECONOMETRICA_DISCOVERY_WORKFLOW.md` | Topic discovery, primitive hunting, model tournaments, and theorem gates. |
+| `ECONOMETRICA_PANEL_PROTOCOL.md` | Independent panels, dynamic referee assignment, AE synthesis, and Co-Editor decisions. |
+| `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` | Manuscript development, simulated review, revision trees, and human gates. |
+| `ECONOMETRICA_VERIFICATION_WORKFLOW.md` | Mathematical derivation, counterexample search, symbolic checks, and formal verification. |
+| `ECONOMETRICA_VERSION_CONTROL.md` | Git checkpoints, branches, diffs, rollback safety, and version logs. |
+| `TOOLCHAIN_README.md` | Local Python, Lean, Mathematica, and verification setup. |
+| `verify_toolchain.ps1` | Quick local toolchain self-test. |
+| `verification_templates/` | Starter templates for counterexample search and Lean lemmas. |
+
+## Runtime Artifacts
+
+These files are created inside paper projects, not maintained as fixed files in
+this workflow repository:
+
+| Artifact | Purpose |
+| --- | --- |
+| `active_context.md` | 80-120 line continuation dashboard. |
+| `human_decisions.md` | Append-only human gate decisions, reversals, and reasons. |
+| `field_profile.md` | Confirmed or provisional field profile for literature and referee routing. |
+| `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
+| `model_tournament.md` | Comparison of model variants and documented winners/losers. |
+| `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
+| `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
+
+## Toolchain
+
+Keep Python, Lean/elan, Mathlib, and large package caches outside paper folders.
+On Windows the recommended shared tool root is:
 
 ```text
-Branch A Defensive Patch -> Branch B Mechanism Simplification -> Branch C Pivot/Reframe -> human branch choice
+C:\Tools\CodexVerification
 ```
 
-## Local Toolchain
+You can choose another location by setting `CODEX_VERIFICATION_HOME` or by
+passing `-ToolRoot` to `verify_toolchain.ps1`.
 
-The workflow can use:
+Minimum setup check:
 
-- Python with `sympy`, `numpy`, `scipy`, `pandas`, `matplotlib`, `z3-solver`
-- Mathematica via `wolframscript`
-- Lean 4 / Lake
-- Git
-- LaTeX
+```powershell
+.\verify_toolchain.ps1
+```
 
-Tool installation is intentionally not committed to this repo. Do not commit downloaded installers, package caches, or paper-specific outputs.
+If the script cannot find Python, Lean, or Mathematica, the workflow still works
+as prompts and checklists, but mathematical verification is weaker until the tool
+root is configured. See `TOOLCHAIN_README.md` for details.
 
-## GitHub Installation Pattern
+## Design Principles
 
-For a future paper project, you can either:
+- Scientific taste is a filter, not the sole objective.
+- Token economy must never override research quality.
+- Main theorem discovery, proof verification, closest-literature checks, and simulated review require enough context and tools.
+- Human gate decisions must be written to persistent artifacts.
+- Simulated acceptance is a diagnostic benchmark, not a publication guarantee.
+- If the paper is stuck in local polishing, return to primitive hunting and model discovery.
+- The preferred path is theorem note first, manuscript second.
 
-1. Copy this repository's workflow files into the paper root.
-2. Add this repository as a git submodule and copy/symlink the workflow files.
-3. Turn this repository into a Codex skill or plugin later if you want a more formal reusable interface.
+## Feedback and Issues
 
-The simplest and most robust method is copying the files into each paper root so Codex sees `AGENTS.md` directly.
+This project currently uses an issue-only feedback model.
+
+Please open a GitHub Issue if you find:
+
+- unclear workflow routing
+- internal contradictions
+- missing safeguards
+- confusing documentation
+- toolchain setup problems
+- examples where the system behaves poorly
+- suggestions that may help researchers use the system better
+
+Pull requests are not the preferred contribution path at this stage. The
+maintainer reviews issues, decides which suggestions to adopt, and integrates
+accepted changes directly to preserve consistency across the workflow system.
+
+See `CONTRIBUTING.md` for the current contribution policy.
+
+## License
+
+See `LICENSE`.
