@@ -540,7 +540,7 @@ The assistant must stop at gates involving:
 
 ## Human Decision Persistence
 
-When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
+When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `style_calibration.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
 
 If the user reverses an earlier decision, record the reversal as a new entry rather than deleting the old one. The new decision supersedes the old decision for current routing. The reversal entry should identify the previous decision, new decision, reason, affected artifacts, and any stages, panels, proofs, or literature checks that must be rerun.
 
