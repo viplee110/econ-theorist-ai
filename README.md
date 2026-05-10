@@ -26,7 +26,9 @@ flowchart LR
     E --> F["Absorption test<br/>main theorem gate"]
     F --> G["5-8 page model note"]
     G --> H["Manuscript development"]
-    H --> I["Simulated review"]
+    H --> S["Style calibration<br/>style_calibration.md"]
+    S --> I["Simulated review"]
+    S -->|structural weakness| C
     I --> J["Revision tree"]
     J --> K{"Human decision"}
     K -->|preserve or revise| H
