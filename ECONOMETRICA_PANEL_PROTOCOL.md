@@ -370,6 +370,27 @@ Outputs:
 - updated `risk_register.md`
 - updated `revision_log.md`
 
+### Exposition Editor / Elegant Reader
+
+Use during Stage 6.5 style calibration or when the manuscript reads like a mechanical solution note even though the theorem and contribution may be sound. This is a light functional role, not a referee vote.
+
+The Exposition Editor / Elegant Reader evaluates whether:
+
+- the paper has a humane reader path
+- the theorem appears as the answer to a real economic question
+- assumptions are interpreted before being used
+- proof roadmaps explain why the proof moves as it does
+- prose avoids AI-list style and decorative rhetoric
+- elegance is improving clarity rather than hiding weakness
+
+Rules:
+
+- This role cannot approve conceptual changes.
+- It must not change theorem statements, assumptions, novelty claims, target-journal positioning, or unverified literature claims.
+- It may use published papers as style anchors only to extract exposition moves, not sentences, paragraph structures, or framing.
+- If it finds a structural issue, it routes to the Scientific Judge, Discovery D4-D6, or Stage 8 tree search rather than polishing.
+- Its findings should be written into `style_calibration.md` or, if run inside a panel, summarized in the panel output.
+
 ## Generic Panel Phases
 
 ### P0 - Scope and Allowed Materials

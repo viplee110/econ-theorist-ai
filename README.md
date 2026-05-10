@@ -63,6 +63,7 @@ must still be checked against the underlying workflow artifacts.
 - Uses Scientific Judge / Nugget Test safeguards against defensive complexity.
 - Runs simulated Econometrica review with dynamic referee roles.
 - Routes local-optimum traps back to discovery before manuscript polishing.
+- Calibrates exposition style with elegance without rhetoric after the contribution is locked.
 - Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
 
 ## Quick Start
@@ -153,6 +154,7 @@ this workflow repository:
 | `human_decisions.md` | Append-only human gate decisions, reversals, and reasons. |
 | `field_profile.md` | Confirmed or provisional field profile for literature and referee routing. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
+| `style_calibration.md` | Confirmed or provisional guide for elegant, field-calibrated exposition without rhetoric. |
 | `model_tournament.md` | Comparison of model variants and documented winners/losers. |
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |

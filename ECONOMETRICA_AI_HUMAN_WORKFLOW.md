@@ -39,6 +39,7 @@ The agent should maintain these files whenever possible:
 - `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
 - `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
+- `style_calibration.md`: confirmed or provisional style calibration for elegant, field-sensitive exposition without rhetoric.
 - `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
@@ -60,8 +61,8 @@ Use different autonomy levels at different stages.
 
 Default rule:
 
-- Stages 0, 3, 6, and mechanical parts of 8 can be `Auto`.
-- Stages 1, 2, 5, 7, 9, and 10 require `Gate` or `Human-only`.
+- Stages 0, 3, 6, a confirmed Stage 6.5 style pass, and mechanical parts of 8 can be `Auto`.
+- Stages 1, 2, 5, the first Stage 6.5 style calibration, 7, 9, and 10 require `Gate` or `Human-only`.
 
 ## Human Decision Persistence
 
@@ -70,7 +71,7 @@ Human gate outcomes must be written to persistent artifacts before the workflow 
 For every gate:
 
 - Create `human_decisions.md` if it is missing, then append the decision, date, stage, reason, and affected files.
-- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
+- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
 - If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
 
 Human decisions are append-only by default. A later reversal supersedes the previous decision for current work but does not erase it. Record reversals in this form when useful:
@@ -352,6 +353,72 @@ Proceed condition:
 
 - The manuscript expresses the locked contribution clearly and does not contain obvious correctness or exposition blockers.
 
+## Stage 6.5 - Style Calibration and Exposition Elegance
+
+Autonomy: Checkpoint for calibration, Auto after human confirmation
+
+Purpose:
+
+Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and Econometrica-level standards.
+
+Guiding principles:
+
+```text
+Elegance without rhetoric.
+Use published papers as calibration anchors, not prose templates.
+Extract exposition moves, not sentences.
+```
+
+Prerequisites:
+
+- The project has passed the contribution lock and main-theorem gate, or the user explicitly asks for exposition diagnosis only.
+- A confirmed current `field_profile.md` is reused when available. Do not reopen field confirmation for style calibration alone.
+- If `field_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but field-sensitive style anchors cannot be treated as final.
+
+AI tasks:
+
+- Inspect the current manuscript and core artifacts: `field_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `risk_register.md`, and latest referee reports if available.
+- Search for 3-5 field-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, and target audience.
+- If web/search tools are unavailable, use the house style below and mark the style anchors and calibration as `provisional`.
+- Create or update `style_calibration.md` with:
+  - field profile source and status
+  - target reader
+  - target voice
+  - style anchor list with citations or links
+  - extracted exposition moves, not copied prose
+  - current mechanical prose diagnosis
+  - forbidden rhetoric and overclaiming rules
+  - invariants that must not change
+  - 2-3 sample rewrites for human approval
+  - sections needing calibration
+- Stop for human confirmation before any full style pass. The user may confirm, edit, or reject the style direction.
+- Record the confirmed or revised style decision in `human_decisions.md` and keep the active constraints in `style_calibration.md`.
+- After confirmation, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, section openings, and paragraph flow.
+- Log nontrivial edits in `revision_log.md` and compile after meaningful manuscript edits when possible.
+
+House style:
+
+- Mechanism before notation.
+- Reader path before theorem.
+- Precision before flourish.
+- Understatement before promotion.
+- Economic intuition before technical detail, but never instead of technical detail.
+- Avoid AI-list prose, decorative motivation, slogan-like contribution claims, and legalistic overqualification.
+
+Guardrails:
+
+- Do not change the central question, main theorem, model primitives, assumption set, novelty claim, target journal positioning, or unverified citations/literature claims.
+- Do not copy sentences, paragraph structures, or framing from style anchors.
+- Summarize anchor-paper exposition strategies only; do not quote long passages.
+- If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, or defensive dilution, stop and route back to Discovery D4-D6 or Stage 8 tree search instead of polishing.
+- If confirmed `style_calibration.md` exists and the field profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
+
+Proceed condition:
+
+- `style_calibration.md` is confirmed or explicitly provisional.
+- The manuscript is more readable and more human without weakening the locked contribution.
+- Any conceptual, theorem, assumption, or novelty issue found during style work is recorded as a risk rather than hidden by elegant prose.
+
 ## Stage 7 - Simulated Econometrica Review Board
 
 Autonomy: Gate
@@ -601,6 +668,12 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 2. Create or update contributi
 
 ```text
 Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution gates. Run Stages 3, 4, and 6. Audit the model, assumptions, proof architecture, and evidence. Then revise the manuscript section by section. Compile after meaningful edits. Log every nontrivial edit in revision_log.md. Stop if you find a foundational problem that threatens the contribution lock.
+```
+
+### Style Calibration
+
+```text
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5. Reuse confirmed field_profile.md when current; do not reopen field confirmation for style calibration alone. Search for 3-5 field-matched style anchors when web/search tools are available; otherwise mark the calibration provisional. Create or update style_calibration.md with target reader, target voice, anchor-derived exposition moves, mechanical prose diagnosis, forbidden rhetoric, invariants, and 2-3 sample rewrites. Stop for my confirmation before any full style pass.
 ```
 
 ### Simulated Econometrica Review

@@ -95,6 +95,7 @@ Before routing, inspect whichever of these files exist:
 - `risk_register.md`
 - `revision_log.md`
 - `revision_tree.md`
+- `style_calibration.md`
 - `generality_ledger.md`
 - latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
@@ -391,6 +392,34 @@ Route:
 - Compile when possible.
 - Update `revision_log.md` and `risk_register.md`.
 - Stop if a foundational issue appears.
+
+### Style Calibration and Exposition Elegance
+
+Triggers:
+
+- "style calibration"
+- "elegance without rhetoric"
+- "文章太机械"
+- "读起来像做数学题"
+- "提升可读性"
+- "make it less mechanical"
+- "improve exposition without lowering rigor"
+- "improve readability"
+- "humanize the prose"
+- "make the paper read less mechanically"
+
+Route:
+
+- Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+- Run Stage 6.5.
+- Reuse confirmed `field_profile.md` when current; do not reopen field confirmation for style calibration alone.
+- If `style_calibration.md` is missing, provisional, stale, or inconsistent with the current theorem, contribution lock, field profile, or target audience, create or update it and stop for human confirmation before a full style pass.
+- Search for 3-5 field-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using `field_profile.md`, closest-literature themes, method, contribution type, and target audience.
+- If web/search tools are unavailable, use the house style from Stage 6.5 and mark the style anchors and calibration as provisional.
+- Treat style anchors as calibration evidence, not prose templates: extract exposition moves, not sentences.
+- Do not change the central question, main theorem, model primitives, assumptions, novelty claim, target journal positioning, or unverified literature claims.
+- If the manuscript is mechanical because the theorem is weak, the contribution is unclear, assumptions are patchy, or defensive dilution is present, route to Discovery D4-D6 or Stage 8 tree search instead of polishing.
+- After human confirmation of `style_calibration.md`, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, and paragraph flow; then update `revision_log.md` and compile when possible.
 
 ### Simulated Review
 

@@ -50,6 +50,7 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - If repeated reviews identify no central theorem, old-theory absorption, or weak contribution, stop polishing and return to discovery/model search.
 - Use `active_context.md` only as a compact dashboard for continuation; it is not a source of truth and must be checked against the underlying artifacts.
 - Use `generality_ledger.md` to track losses of generality from special-case assumptions, distributions, graph structures, extra agents, extra states, or longer theorem sentences.
+- Use `style_calibration.md` only as a confirmed or provisional paper-specific guide for elegance without rhetoric; it must not change theorem statements, assumptions, novelty claims, or target-journal positioning.
 - Prefer direct edits to LaTeX source files when the source can be improved safely.
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.
