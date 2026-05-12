@@ -10,6 +10,9 @@ C:\Tools\CodexVerification
 You can override this location by setting `CODEX_VERIFICATION_HOME` or by
 passing `-ToolRoot` to `verify_toolchain.ps1`.
 
+The toolchain check is diagnostic. It does not install large tools, modify PATH,
+or change system environment variables.
+
 ## Shared Tool Layout
 
 - Python 3.12.10: `C:\Tools\CodexVerification\Python312\python.exe`
@@ -65,20 +68,43 @@ When using Mathematica from Codex, approve the `wolframscript` command if prompt
 Run:
 
 ```powershell
-.\verify_toolchain.ps1
+.\verify_toolchain.ps1 -WriteStatus
+```
+
+This writes a reusable computer-level status file to:
+
+```text
+C:\Users\<user>\.econ-theorist-ai\toolchain_status.md
 ```
 
 Use a non-default tool root:
 
 ```powershell
 $env:CODEX_VERIFICATION_HOME = "D:\Tools\CodexVerification"
-.\verify_toolchain.ps1
+.\verify_toolchain.ps1 -WriteStatus
 ```
 
 or:
 
 ```powershell
-.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification"
+.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification" -WriteStatus
+```
+
+Use a persistent local config:
+
+```powershell
+.\verify_toolchain.ps1 -ConfigPath "$HOME\.econ-theorist-ai\config.json" -WriteStatus
+```
+
+Example `config.json`:
+
+```json
+{
+  "toolRoot": "D:\\Tools\\CodexVerification",
+  "pythonPath": "D:\\Tools\\CodexVerification\\Python312\\python.exe",
+  "elanHome": "D:\\Tools\\CodexVerification\\elan",
+  "wolframScriptPath": "C:\\Program Files\\Wolfram Research\\Mathematica\\13.0\\wolframscript.exe"
+}
 ```
 
 Direct Mathematica test:

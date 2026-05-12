@@ -6,6 +6,23 @@ This is the single entry point for the economic theory research system, original
 
 Target journal changes calibration, not quality. A different target changes reader path, referee mix, exposition style, and fit standard; it must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
 
+## Language and First-Run Policy
+
+This is an English research system with multilingual command understanding.
+
+- In chat, respond in the user's language when convenient.
+- Keep research-facing outputs English by default: workflow artifacts, field profiles, target journal profiles, human decision logs, style calibration files, referee reports, theorem/proof/literature notes, revision logs, and manuscripts.
+- Chinese is allowed only in chat interaction and a small routing trigger list.
+- Do not write Chinese into research artifacts or manuscripts unless the user explicitly asks for a separate Chinese explanatory note outside the manuscript workflow.
+
+First-run check is a soft gate, not a hard gate.
+
+- Suggest first-run setup only for execution-type requests when the computer-level `toolchain_status.md` is missing, stale, or unknown.
+- Do not interrupt conceptual questions, early idea discussion, or ordinary Q&A with toolchain setup.
+- If a global `toolchain_status.md` already exists, do not repeat the full computer-level check for a second paper unless the user asks or the status is stale.
+- A new paper project may still need lightweight project initialization through `project_state.md` and `active_context.md`.
+- The setup check must not silently install large tools, modify PATH, or change system environment variables.
+
 The system is made of the following workflow modules:
 
 - `ECONOMETRICA_PANEL_PROTOCOL.md`: independent specialist panels, AE synthesis, Co-Editor decisions, consensus/disagreement/omission summaries.
@@ -60,6 +77,14 @@ Check the math carefully.
 
 ```text
 Run a target-calibrated simulated review.
+```
+
+```text
+Use the system: first-run setup check.
+```
+
+```text
+Use the system: initialize this paper project.
 ```
 
 ```text
@@ -187,6 +212,31 @@ Route:
 - Create or update `literature_probe.md` and `field_profile.md`.
 - Mark literature and field classifications as provisional if search tools are unavailable.
 - Stop for human confirmation if `field_profile.md` is new, provisional, stale, marked `Reopen requested`, or materially changed.
+
+### First-Run Setup and Project Initialization
+
+Triggers:
+
+- "first-run setup"
+- "first run setup"
+- "setup check"
+- "toolchain check"
+- "initialize this paper project"
+- "first use"
+- "computer setup"
+- "初始化检测"
+- "检查工具链"
+
+Route:
+
+- Read `FIRST_RUN.md` and `TOOLCHAIN_README.md` if they exist.
+- Treat first-run setup as a soft gate. Recommend it only when the user is trying to execute the workflow and computer-level toolchain status is missing, stale, or unknown.
+- If the user is asking a conceptual question or only discussing an idea, answer normally and do not interrupt with setup.
+- If the user chooses setup check, run `.\verify_toolchain.ps1 -WriteStatus` when safe. It should detect Git, LaTeX, Python packages, Lean/Lake, and Mathematica without installing large tools or modifying system environment variables.
+- If the user specifies a custom tool location, use `CODEX_VERIFICATION_HOME` or `verify_toolchain.ps1 -ConfigPath` / `-ToolRoot`.
+- Interpret missing tools as capability limits, not workflow blockers. Core idea discovery, field profile, target journal profile, simulated review, style calibration, and revision planning remain available.
+- If `project_state.md` is missing and the user wants to work on the paper, run Manuscript Stage 0 or Discovery D0 as appropriate after the setup prompt is resolved or skipped.
+- Keep generated setup and project artifacts in English even when the chat response is in Chinese.
 
 ### Target Journal Profile
 

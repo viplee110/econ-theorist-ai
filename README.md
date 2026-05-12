@@ -3,6 +3,11 @@
 An AI system for economic theorists, from idea discovery to theory paper
 development.
 
+This is an English-first research workflow system with multilingual command
+understanding. You can talk to the assistant in Chinese or English, but research
+artifacts, referee reports, theorem notes, and manuscripts are English by
+default.
+
 Originally developed with Econometrica-level theory standards in mind, this
 unofficial local workflow system helps researchers move from rough ideas to
 primitive hunting, model tournaments, theorem candidates, absorption tests, target
@@ -76,9 +81,10 @@ must still be checked against the underlying workflow artifacts.
 - Calibrates exposition style with elegance without rhetoric after the contribution is locked.
 - Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
 
-## Quick Start
+## Start In 5 Minutes
 
-Copy these files into the root directory of a paper project:
+1. Download the repository as a ZIP file or clone it.
+2. Copy these files into the root directory of your paper project:
 
 ```text
 AGENTS.md
@@ -88,27 +94,43 @@ ECONOMETRICA_DISCOVERY_WORKFLOW.md
 ECONOMETRICA_VERIFICATION_WORKFLOW.md
 ECONOMETRICA_AI_HUMAN_WORKFLOW.md
 ECONOMETRICA_VERSION_CONTROL.md
+FIRST_RUN.md
 TOOLCHAIN_README.md
 verify_toolchain.ps1
 verification_templates/
 ```
 
-Then open the paper folder in Codex Desktop. `AGENTS.md` should be read
-automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the router.
+3. Open the paper folder in Codex Desktop or another agent IDE. `AGENTS.md`
+should be read automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the
+router.
 
-Recommended command:
+4. Run a first-run setup check:
 
 ```text
-Use the system: continue from the current state.
+Use the system: first-run setup check
 ```
 
-Chinese equivalent:
+Small Chinese command example:
 
 ```text
-按系统继续。
+按系统处理：初始化检测
+```
+
+5. Initialize the paper project:
+
+```text
+Use the system: initialize this paper project
 ```
 
 ## Common Commands
+
+```text
+Use the system: first-run setup check.
+```
+
+```text
+Use the system: initialize this paper project.
+```
 
 ```text
 Use the system: I want to explore a new research topic.
@@ -139,7 +161,11 @@ Use the system: revise with agentic tree search instead of a defensive patch.
 ```
 
 ```text
-按系统处理：这个项目是不是陷入局部最优或越改越复杂？
+按系统继续。
+```
+
+```text
+按系统处理：这个项目是不是陷入局部最优？
 ```
 
 ## Files
@@ -152,9 +178,10 @@ Use the system: revise with agentic tree search instead of a defensive patch.
 | `ECONOMETRICA_PANEL_PROTOCOL.md` | Independent panels, dynamic referee assignment, AE synthesis, and Co-Editor decisions. |
 | `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` | Manuscript development, simulated review, revision trees, and human gates. |
 | `ECONOMETRICA_VERIFICATION_WORKFLOW.md` | Mathematical derivation, counterexample search, symbolic checks, and formal verification. |
+| `FIRST_RUN.md` | First-run setup guide for non-technical users. |
 | `ECONOMETRICA_VERSION_CONTROL.md` | Git checkpoints, branches, diffs, rollback safety, and version logs. |
 | `TOOLCHAIN_README.md` | Local Python, Lean, Mathematica, and verification setup. |
-| `verify_toolchain.ps1` | Quick local toolchain self-test. |
+| `verify_toolchain.ps1` | Quick local toolchain self-test and status writer. |
 | `verification_templates/` | Starter templates for counterexample search and Lean lemmas. |
 
 ## Runtime Artifacts
@@ -170,6 +197,7 @@ this workflow repository:
 | `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
 | `style_calibration.md` | Confirmed or provisional guide for elegant, field-calibrated exposition without rhetoric. |
+| `toolchain_status.md` | Computer-level diagnostic status, usually stored globally outside the paper project. |
 | `model_tournament.md` | Comparison of model variants and documented winners/losers. |
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
@@ -189,12 +217,28 @@ passing `-ToolRoot` to `verify_toolchain.ps1`.
 Minimum setup check:
 
 ```powershell
-.\verify_toolchain.ps1
+.\verify_toolchain.ps1 -WriteStatus
 ```
 
 If the script cannot find Python, Lean, or Mathematica, the workflow still works
 as prompts and checklists, but mathematical verification is weaker until the tool
 root is configured. See `TOOLCHAIN_README.md` for details.
+
+## If You Do Not Have Python, Lean, Or Mathematica
+
+You can still use the research workflow. Missing tools only weaken mathematical
+verification, local compilation, or formal proof support. They do not block idea
+discovery, field profiling, target journal profiling, model tournaments,
+simulated review, style calibration, or revision planning.
+
+## Language Policy
+
+The workflow files, project artifacts, referee reports, theorem notes, revision
+logs, and manuscripts are English by default.
+
+Chinese commands are supported for convenience, but generated research files
+remain English unless the user explicitly requests a separate Chinese
+explanatory note outside the manuscript workflow.
 
 ## Design Principles
 

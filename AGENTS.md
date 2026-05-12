@@ -4,6 +4,13 @@ This folder contains an economic theory paper or research workflow targeting fro
 
 The system is target-calibrated rather than Econometrica-only. Econometrica-level means a high standard for theoretical clarity, novelty, rigor, and contribution discipline; it is not the only possible submission target. A confirmed `target_journal_profile.md` may calibrate the reader path, referee mix, exposition style, and fit standard for RAND, JET, Theoretical Economics, GEB, ReStud, AER, or another venue without lowering the quality floor.
 
+## Language and Artifact Policy
+
+- This is an English research system with multilingual command understanding.
+- In chat, respond in the user's language when convenient.
+- Keep research-facing outputs English by default: workflow artifacts, field profiles, target journal profiles, human decision logs, style calibration files, referee reports, theorem/proof/literature notes, revision logs, and manuscripts.
+- Chinese is allowed only in chat interaction and a small routing trigger list. Do not write Chinese into research artifacts or manuscripts unless the user explicitly asks for a separate Chinese explanatory note outside the manuscript workflow.
+
 Default entry point: first read `ECONOMETRICA_ORCHESTRATOR.md` when it exists. Use it to route broad user requests to the correct workflow module and stage, so the user does not need to remember stage numbers or file names.
 
 For pre-manuscript topic discovery, model generation, early derivation, and idea kill tests, first read `ECONOMETRICA_DISCOVERY_WORKFLOW.md` when it exists in this project.
@@ -23,7 +30,7 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Use `C:\Tools\CodexVerification\elan\bin\lean.exe` and `C:\Tools\CodexVerification\elan\bin\lake.exe` for Lean 4 verification unless `CODEX_VERIFICATION_HOME` points elsewhere. Set `ELAN_HOME` to the shared `elan` directory before invoking them.
 - Keep large verification tools and package caches in the shared tool root, not inside paper folders.
 - Mathematica 13.0 is installed at `C:\Program Files\Wolfram Research\Mathematica\13.0`. Use `wolframscript.exe` for symbolic checks. The default sandbox may not be able to read WolframScript's user configuration directory, so Mathematica commands may require approval to run outside the sandbox. Do not claim Mathematica verification unless the command succeeds and its output is recorded.
-- Run `.\verify_toolchain.ps1` to test the local toolchain.
+- Run `.\verify_toolchain.ps1 -WriteStatus` to test the local toolchain and write a reusable computer-level `toolchain_status.md`.
 
 ## Scientific Taste & Anti-Complexity Directive
 

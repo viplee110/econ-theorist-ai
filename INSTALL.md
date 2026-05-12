@@ -12,15 +12,28 @@ ECONOMETRICA_DISCOVERY_WORKFLOW.md
 ECONOMETRICA_VERIFICATION_WORKFLOW.md
 ECONOMETRICA_AI_HUMAN_WORKFLOW.md
 ECONOMETRICA_VERSION_CONTROL.md
+FIRST_RUN.md
 TOOLCHAIN_README.md
 verify_toolchain.ps1
 verification_templates/
 ```
 
-Open the paper folder in Codex Desktop. Use:
+Open the paper folder in Codex Desktop. Start with:
 
 ```text
-按系统处理：[your task]
+Use the system: first-run setup check
+```
+
+Small Chinese command example:
+
+```text
+按系统处理：初始化检测
+```
+
+Then initialize the current paper project:
+
+```text
+Use the system: initialize this paper project
 ```
 
 ## Option B - Git Clone and Copy
@@ -45,10 +58,10 @@ Then copy or symlink `AGENTS.md` into the paper root. Codex reads `AGENTS.md` mo
 
 ## Toolchain
 
-Run this after copying if you have configured the local toolchain:
+Run this after copying if you want a computer-level toolchain status report:
 
 ```powershell
-.\verify_toolchain.ps1
+.\verify_toolchain.ps1 -WriteStatus
 ```
 
 By default the script looks for shared verification tools under:
@@ -61,13 +74,13 @@ To use another location:
 
 ```powershell
 $env:CODEX_VERIFICATION_HOME = "D:\Tools\CodexVerification"
-.\verify_toolchain.ps1
+.\verify_toolchain.ps1 -WriteStatus
 ```
 
 or:
 
 ```powershell
-.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification"
+.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification" -WriteStatus
 ```
 
 If Python, Lean, or Mathematica are unavailable, the workflows still work as prompts and checklists, but mathematical verification will be weaker.
