@@ -1,8 +1,10 @@
-# Independent Panel Protocol for Econometrica-Level Research
+# Independent Panel Protocol for Target-Calibrated Frontier Research
 
 Version: 2026-05-08
 
 This protocol generalizes a stronger simulated review methodology into a reusable decision procedure for the entire research lifecycle. Use it whenever the system must make a high-stakes judgment about an idea, model, derivation, manuscript, referee report, or revision plan.
+
+Target journal changes calibration, not quality. Panels may calibrate reader path, referee mix, exposition style, and fit standard to Econometrica, RAND, JET, Theoretical Economics, GEB, ReStud, AER, or another confirmed target, but they must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
 
 The core pattern is:
 
@@ -23,11 +25,11 @@ Before writing any individual referee prompt or running a panel, create or updat
 - `panel_reports/panel_config.md` for idea, model, verification, and revision panels.
 - `referee_reports/round_N/panel_config.md` for simulated manuscript reviews.
 
-Use the project-level `field_profile.md` when it exists and is still current. If it does not exist, create a provisional field profile from the target material, closest-literature search, and paper-specific evidence before assigning roles.
+Use the project-level `field_profile.md` and `target_journal_profile.md` when they exist and are still current. If they do not exist, create provisional profiles from the target material, closest-literature search, theorem package, target audience, and paper-specific evidence before assigning roles.
 
-The panel configuration must infer the narrowest defensible research field and the closest literature themes from the target material and the current field profile. Do not hard-code IO, search theory, network theory, contract theory, asset pricing, econometrics, behavioral economics, or any other field unless the manuscript, model, or closest-literature comparison actually warrants it.
+The panel configuration must infer the narrowest defensible research field, confirmed target, target audience, and closest literature themes from the target material and the current profiles. Do not hard-code IO, search theory, network theory, contract theory, asset pricing, econometrics, behavioral economics, RAND, JET, GEB, or any other field or journal unless the manuscript, model, target profile, or closest-literature comparison actually warrants it.
 
-The human should confirm the field profile once near the start of a project or before the first high-stakes panel. Later panels inherit that confirmed profile. Reopen field confirmation only when new evidence changes the likely field assignment: a closer substitute paper is found, the primitive or theorem direction changes materially, the target journal or target audience changes, the user disputes the classification, or a closest-literature/absorption referee says the current classification makes the absorption test unreliable.
+The human should confirm the field profile and target journal profile once near the start of a project or before the first high-stakes panel. Later panels inherit those confirmed profiles. Reopen field or target confirmation only when new evidence changes the likely assignment: a closer substitute paper is found, the primitive or theorem direction changes materially, the target journal or target audience changes, the user disputes the classification, or a closest-literature/absorption/fit referee says the current profile makes the absorption or target-fit test unreliable.
 
 The parent agent must finish and save `panel_config.md` before writing any individual referee prompt. Each referee prompt must be generated from that saved configuration. Prior rounds, historical review methodology files, or examples may be used only as evidence about earlier work, not as role templates, unless the current `panel_config.md` independently justifies the same assignments.
 
@@ -57,17 +59,42 @@ Uncertainty and missing evidence:
 Reopen triggers:
 ```
 
+Minimum `target_journal_profile.md` schema:
+
+```text
+Project or candidate:
+Status: Confirmed / Provisional / Stale / Reopen requested
+Human confirmation:
+Primary target:
+Stretch target:
+Fallback target:
+Target audience:
+Fit standard:
+Quality floor:
+Theorem rigor expectation:
+Reader path:
+Referee mix implications:
+Style calibration implications:
+What must improve to move upward:
+What would trigger retargeting:
+Evidence used:
+Missing evidence:
+Reopen triggers:
+```
+
 The configuration must include:
 
 - detected primary field and subfield
 - evidence used for the field and subfield classification
 - field-profile source: confirmed, provisional, or reopened for confirmation
+- target-journal-profile source: confirmed, provisional, or reopened for confirmation
 - confidence in the classification and main classification uncertainty
 - closest literature themes and nearest substitute papers if known
 - main contribution type: theory, econometrics, empirical, experimental, computational, institutional, or mixed
 - central method or model class
 - main technical risk: proof, identification, equilibrium existence, computation, data, measurement, institutional interpretation, or novelty
 - selected referee roles and why each role is necessary
+- target-calibrated referee mix and fit standard
 - allowed materials, prohibited materials, and web/search policy
 - execution mode: parallel independent agents if available; serial isolated simulation otherwise
 
@@ -90,6 +117,10 @@ Minimum `panel_config.md` schema:
 Target:
 Panel type and information mode:
 Field profile source and status:
+Target journal profile source and status:
+Confirmed primary target:
+Stretch and fallback targets:
+Target audience and quality floor:
 Detected primary field and subfield:
 Evidence for classification:
 Classification confidence and uncertainty:
@@ -97,7 +128,7 @@ Closest literature themes / nearest substitutes:
 Contribution type:
 Central method or model class:
 Main technical risk:
-Calibration anchors (required for Review Panels):
+Target-calibrated calibration anchors (required for Review Panels):
 Control-paper calibration plan (optional but recommended):
 Allowed materials:
 Prohibited materials:
@@ -106,28 +137,31 @@ Execution mode:
 Referee assignments:
 AE and Co-Editor instructions:
 Field confirmation needed before execution?:
+Target confirmation needed before execution?:
 Risks of this assignment:
 ```
 
 ## Calibration Anchors and Control-Paper Checks (Review Panels)
 
-Simulated "Econometrica-level" review has a strong reject prior. Without calibration, a panel can become stricter than the journal it aims to simulate.
+Simulated review has a strong reject prior. Without target calibration, a panel can become stricter than the journal it aims to simulate or misread the paper through the wrong audience.
 
 ### Calibration anchors (required)
 
 For every Review Panel, `referee_reports/round_N/panel_config.md` must include:
 
-- 2-3 **calibration anchors**: short descriptions of published Econometrica papers that are genuinely close to the manuscript's neighborhood (field + method + contribution type).
-- A sentence instructing referees to calibrate their "Fit for Econometrica" judgment **against the anchors**, not an idealized standard.
+- 2-3 **target-calibrated calibration anchors**: short descriptions of published papers that match the confirmed target, field, method, and contribution type.
+- A sentence instructing referees to calibrate their "fit for the confirmed target" judgment **against the anchors**, not an idealized standard.
+- If the confirmed primary target is RAND, anchors should prioritize RAND or nearby IO/applied-theory papers when they match the paper's field and method; use Econometrica or TE anchors only as stretch-target calibration.
 
 Rules:
 
 - Do not fabricate citations. If anchors cannot be named with high confidence, list them as TODOs and state what the anchors should be (topic/method).
 - Anchors are for calibration, not for claiming novelty. Novelty remains a separate audit.
+- A non-Econometrica target does not relax the quality floor: weak theorem bite, fake novelty, defensive complexity, or unverified claims remain fatal or near-fatal concerns.
 
 ### Control-paper calibration (recommended)
 
-Periodically run the same Review Panel protocol on a **published Econometrica paper** (author/title removed if possible) and record the decision distribution.
+Periodically run the same Review Panel protocol on a **published paper from the confirmed target or stretch target** (author/title removed if possible) and record the decision distribution.
 
 - If the panel rejects a known-accepted paper, treat the panel as miscalibrated and discount "reject" language in subsequent simulations.
 - Save results in a local `panel_calibration_log.md` in the paper project (not in this workflow repo).
@@ -160,7 +194,7 @@ Use this protocol for:
 - tractable model selection
 - first-pass theorem or equilibrium assessment
 - mathematical proof audits
-- simulated Econometrica reviews
+- target-calibrated simulated reviews
 - referee-guided revision triage
 - final readiness decisions
 
@@ -320,7 +354,7 @@ Outputs:
 
 ### Review Panel
 
-Use for simulated Econometrica review.
+Use for target-calibrated simulated review.
 
 Before assigning roles, create `referee_reports/round_N/panel_config.md` using the Dynamic Panel Configuration rules above.
 
@@ -330,7 +364,7 @@ Roles:
 - Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
 - Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
 - Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
-- Referee 5: Scientific Judge / Idea Critic. This referee does not audit algebra. It judges taste, strategy, simplicity, deep primitive potential, and whether the paper's nugget survives the revision process. It may strongly oppose defensive dilution, fake novelty, and complexity shields, but it must not kill a non-mainstream exploration solely for being non-mainstream.
+- Referee 5: Scientific Judge / Idea Critic. This referee does not audit algebra. It judges taste, strategy, simplicity, deep primitive potential, whether the paper's nugget survives the revision process, and whether the target profile is being used to calibrate fit rather than lower quality. It may strongly oppose defensive dilution, fake novelty, weak theorem bite, and complexity shields, but it must not kill a non-mainstream exploration solely for being non-mainstream.
 - Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
 - Associate Editor: independent read first, then synthesis of referee reports.
 - Co-Editor: independent read first, then decision letter and internal notes.
@@ -399,6 +433,7 @@ Before running a panel, define:
 
 - target object: idea, model, theorem, manuscript, review report, or revision plan
 - field profile status: confirmed, provisional, stale, or reopened for human confirmation
+- target journal profile status: confirmed, provisional, stale, or reopened for human confirmation
 - dynamic referee configuration and execution mode
 - allowed files
 - prohibited files
@@ -456,9 +491,9 @@ The parent agent must create a summary with:
 - next actions
 - issues requiring human judgment
 
-## Econometrica Bar
+## Frontier-Level Quality Bar
 
-All high-stakes panels should evaluate three dimensions:
+All high-stakes panels should evaluate three dimensions. The confirmed target journal may change how these are explained to readers, but not whether they matter.
 
 1. Conceptual novelty: the paper offers a research object, mechanism, or framing not naturally reproduced by existing theory.
 2. Deep result: at least one nontrivial theorem, identification result, equilibrium insight, or proof strategy carries real bite.
@@ -492,6 +527,8 @@ Every Review Panel and high-stakes Revision Panel must include a scientific-tast
 If the contribution sentence requires many clauses such as "under the specific condition that..." or "provided that..." to sound true, label the issue `Defensive Dilution`. If complexity is essential, the judge must say exactly what economic work it performs. If complexity mainly protects a fragile result, the judge should recommend `Pivot`, `Demote to Benchmark`, or `Reject and Resubmit` rather than local repair.
 
 Scientific taste is a filter, not the sole objective. The judge can reject defensive dilution, fake novelty, or a complexity shield, but must separately evaluate deep primitive potential before recommending Kill/Pivot for a non-mainstream exploration.
+
+Target-journal calibration is not a quality discount. If the primary target is RAND, GEB, a field journal, or another non-Econometrica outlet, the Scientific Judge must still flag weak theorem bite, old-theory absorption, fake novelty, unverified claims, and defensive complexity. The appropriate recommendation may be `Retarget`, but only after explaining whether the issue is fit, reader path, or genuine quality.
 
 ## Contribution-Lock Dilution Check (Hard Ratchet)
 
@@ -610,7 +647,7 @@ The system must stop for human judgment before:
 - deciding to submit, pivot, retarget, split, or kill
 - accepting a simulated editorial decision as action-guiding
 
-Every panel-facing human gate must be recorded before the next panel or revision step relies on it. Create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
+Every panel-facing human gate must be recorded before the next panel or revision step relies on it. Create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
 
 If the user reverses a prior panel decision, preserve the earlier decision and add a reversal entry:
 
@@ -627,5 +664,5 @@ Required reruns or rechecks:
 ## Prompt Template
 
 ```text
-Read ECONOMETRICA_PANEL_PROTOCOL.md. Run a [Idea/Model/Verification/Review/Revision] Panel in [Blind/Context/Literature] Mode for [target object]. Reuse confirmed field_profile.md when current; if it is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature evidence and stop for field confirmation before running field-sensitive roles. Then create panel_config.md by detecting the narrowest field, closest literature themes, main method, contribution type, and main risk. Assign specialist roles dynamically from panel_config.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Define allowed and prohibited materials, produce independent referee reports, then AE synthesis, then Co-Editor decision, then parent-agent summary. Stop at the human gate.
+Read ECONOMETRICA_PANEL_PROTOCOL.md. Run a [Idea/Model/Verification/Review/Revision] Panel in [Blind/Context/Literature] Mode for [target object]. Reuse confirmed field_profile.md and target_journal_profile.md when current; if either is missing, provisional, stale, or marked `Reopen requested`, create or update it from closest-literature, theorem, target-audience, and manuscript evidence and stop for confirmation before running field- or target-sensitive roles. Then create panel_config.md by detecting the narrowest field, confirmed target, target audience, closest literature themes, main method, contribution type, and main risk. Assign specialist roles dynamically from panel_config.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Define allowed and prohibited materials, produce independent referee reports, then AE synthesis, then Co-Editor decision, then parent-agent summary. Stop at the human gate.
 ```

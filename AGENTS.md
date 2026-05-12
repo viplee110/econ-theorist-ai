@@ -2,6 +2,8 @@
 
 This folder contains an economic theory paper or research workflow targeting frontier-level development, originally calibrated against Econometrica-level standards.
 
+The system is target-calibrated rather than Econometrica-only. Econometrica-level means a high standard for theoretical clarity, novelty, rigor, and contribution discipline; it is not the only possible submission target. A confirmed `target_journal_profile.md` may calibrate the reader path, referee mix, exposition style, and fit standard for RAND, JET, Theoretical Economics, GEB, ReStud, AER, or another venue without lowering the quality floor.
+
 Default entry point: first read `ECONOMETRICA_ORCHESTRATOR.md` when it exists. Use it to route broad user requests to the correct workflow module and stage, so the user does not need to remember stage numbers or file names.
 
 For pre-manuscript topic discovery, model generation, early derivation, and idea kill tests, first read `ECONOMETRICA_DISCOVERY_WORKFLOW.md` when it exists in this project.
@@ -26,6 +28,9 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 ## Scientific Taste & Anti-Complexity Directive
 
 - Scientific taste is a filter, not the sole objective.
+- Target journal changes calibration, not quality.
+- Different targets change reader path, referee mix, exposition style, and fit standard; they must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
+- RAND, JET, Theoretical Economics, GEB, ReStud, AER, and field-journal targets should be treated as different calibration profiles, not as permission to accept weak theorems, fake novelty, defensive complexity, or unverified claims.
 - During discovery, preserve non-mainstream but internally coherent exploration long enough to test deep primitive potential, theorem bite, and absorption risk.
 - During polishing and revision, taste, simplicity, and contribution sharpness become strong constraints against defensive clutter.
 - Highest priority: protect the paper's nugget, the shortest truthful statement of the paper's cognitive update.
@@ -51,6 +56,7 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Use `active_context.md` only as a compact dashboard for continuation; it is not a source of truth and must be checked against the underlying artifacts.
 - Use `generality_ledger.md` to track losses of generality from special-case assumptions, distributions, graph structures, extra agents, extra states, or longer theorem sentences.
 - Use `style_calibration.md` only as a confirmed or provisional paper-specific guide for elegance without rhetoric; it must not change theorem statements, assumptions, novelty claims, or target-journal positioning.
+- Use `target_journal_profile.md` as the confirmed or provisional target-calibration artifact. It should guide journal fit, reader path, referee mix, style anchors, and review calibration, but it must not replace field evidence, theorem verification, or absorption tests.
 - Prefer direct edits to LaTeX source files when the source can be improved safely.
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.
@@ -60,13 +66,14 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 
 - Stop for human approval before changing the central question, main theorem, model primitives, assumption set, claimed novelty, empirical interpretation, or target-journal positioning.
 - Stop for human confirmation when creating the project-level `field_profile.md` for the first time or when new evidence materially changes the primary field, adjacent fields, closest-literature themes, or field-sensitive referee roles.
-- Every human gate decision must be written to the relevant persistent artifact before the system treats it as durable state. Create `human_decisions.md` if it is missing, use it for append-only decision history, and update the active state file such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md` as appropriate.
+- Stop for human confirmation when creating `target_journal_profile.md` for the first time or when evidence materially changes the primary target, stretch target, fallback target, target audience, or target-journal positioning.
+- Every human gate decision must be written to the relevant persistent artifact before the system treats it as durable state. Create `human_decisions.md` if it is missing, use it for append-only decision history, and update the active state file such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md` as appropriate.
 - Human decisions are append-only by default. If the user reverses or overrides an earlier decision, record the reversal with the previous decision, new decision, reason, affected artifacts, and required rechecks. The later decision governs current work, but the earlier decision must not be erased.
 - Do not continue polishing if the main objection is contribution, identification, or economic relevance. Return to idea testing or contribution locking.
 - Use `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` to decide which stage should be run next.
 - Use `ECONOMETRICA_ORCHESTRATOR.md` as the default router for broad or ambiguous research instructions.
 - Use `ECONOMETRICA_PANEL_PROTOCOL.md` for high-stakes decision panels in idea discovery, model selection, mathematical verification, simulated review, and revision triage.
-- For high-stakes panels, create a dynamic `panel_config.md` first, inherit the confirmed `field_profile.md` when it is current, assign referees from the paper's narrowest field, closest literature themes, main method, contribution type, and main risk, and do not use fixed field templates unless warranted by the paper.
+- For high-stakes panels, create a dynamic `panel_config.md` first, inherit the confirmed `field_profile.md` and `target_journal_profile.md` when they are current, assign referees from the paper's narrowest field, closest literature themes, target audience, main method, contribution type, and main risk, and do not use fixed field or journal templates unless warranted by the paper.
 - Do not treat prior paper-specific methodology records as reusable referee templates.
 - Prefer parallel isolated referee agents when the active runtime supports real agent delegation; otherwise use serial isolated referee prompts that hide earlier reports from later referees.
 - Use `ECONOMETRICA_DISCOVERY_WORKFLOW.md` before a full manuscript exists or when the task is to discover topics, generate tractable models, test derivations, or run early-stage kill tests.

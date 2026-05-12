@@ -1,8 +1,10 @@
-# Human-AI Workflow for Econometrica-Level Paper Development
+# Human-AI Workflow for Target-Calibrated Theory Paper Development
 
 Version: 2026-05-08
 
 This file is a working protocol for developing and revising an economics paper with Codex or another AI research assistant. Put this file in the paper's root directory and ask the agent to read it before making research or manuscript changes.
+
+The default ambition remains frontier-level economic theory, originally calibrated against Econometrica-level standards. A project may target RAND, JET, Theoretical Economics, GEB, ReStud, AER, or another venue through `target_journal_profile.md`. Target journal changes calibration, not quality: it changes reader path, referee mix, exposition style, and fit standard, but must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
 
 The goal is not to assume that repeated AI revision will converge to Econometrica acceptance. The goal is to create a disciplined human-AI process that quickly distinguishes four cases:
 
@@ -41,6 +43,7 @@ The agent should maintain these files whenever possible:
 - `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
 - `style_calibration.md`: confirmed or provisional style calibration for elegant, field-sensitive exposition without rhetoric.
 - `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
+- `target_journal_profile.md`: confirmed or provisional target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
 - `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
@@ -62,7 +65,7 @@ Use different autonomy levels at different stages.
 Default rule:
 
 - Stages 0, 3, 6, a confirmed Stage 6.5 style pass, and mechanical parts of 8 can be `Auto`.
-- Stages 1, 2, 5, the first Stage 6.5 style calibration, 7, 9, and 10 require `Gate` or `Human-only`.
+- Stages 1, 1.5, 2, 5, the first Stage 6.5 style calibration, 7, 9, and 10 require `Gate` or `Human-only`.
 
 ## Human Decision Persistence
 
@@ -71,7 +74,7 @@ Human gate outcomes must be written to persistent artifacts before the workflow 
 For every gate:
 
 - Create `human_decisions.md` if it is missing, then append the decision, date, stage, reason, and affected files.
-- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
+- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
 - If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
 
 Human decisions are append-only by default. A later reversal supersedes the previous decision for current work but does not erase it. Record reversals in this form when useful:
@@ -88,7 +91,7 @@ Required updates or rechecks:
 
 ## Token and Decision Discipline
 
-Token economy must never override research quality. Use `active_context.md` as an 80-120 line compact dashboard to reduce redundant reconstruction during long projects, but verify substantive claims against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
+Token economy must never override research quality. Use `active_context.md` as an 80-120 line compact dashboard to reduce redundant reconstruction during long projects, but verify substantive claims against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
 
 Low-token discipline means shorter boilerplate, fewer repeated summaries, and cleaner state handoffs. It does not mean shallow main-theorem discovery, abbreviated proof verification, skipped closest-literature checks, compressed simulated review, or lightweight handling of high-stakes revision.
 
@@ -111,6 +114,7 @@ Before substantial manuscript revision, check whether the project has passed the
 - a sharp theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y"
 - `absorption_tests.md` showing why the result is not just a known theory family, identified through the closest-literature search, under new names
 - a confirmed or explicitly provisional `field_profile.md` recording the primary field, adjacent fields, absorption-risk families, and field-sensitive referee roles
+- a confirmed or explicitly provisional `target_journal_profile.md` recording primary target, stretch target, fallback target, target audience, fit standard, and quality floor
 - `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
 - a human-approved `contribution_lock.md`
 
@@ -153,7 +157,7 @@ Autonomy: Gate
 
 Purpose:
 
-Test whether the idea is worth writing to the target journal before heavy manuscript polishing.
+Test whether the idea is worth writing to a frontier-level target before heavy manuscript polishing.
 
 AI tasks:
 
@@ -165,8 +169,8 @@ AI tasks:
 - Create or update `field_profile.md` if the project does not already have a confirmed current profile.
 - Run or update `absorption_tests.md` if the idea might be a relabeling of a known framework.
 - State what belief a specialist should change after reading the paper.
-- Identify why Econometrica might desk reject the paper.
-- Identify what would have to be true for the paper to deserve Econometrica.
+- Identify why the current or likely target journal might desk reject the paper.
+- Identify what would have to be true for the paper to deserve a frontier-level theory outlet.
 
 Required questions:
 
@@ -199,7 +203,7 @@ The human must choose one:
 - `Pivot`: change the core question, mechanism, setting, or theorem target.
 - `Narrow`: reduce ambition and aim for a more precise contribution.
 - `Split`: separate multiple ideas into different papers.
-- `Abandon or retarget`: do not aim this version at Econometrica.
+- `Abandon or retarget`: do not aim this version at the current target.
 
 If `field_profile.md` was created or materially changed during this stage, the human must also confirm or correct it before `Proceed`; record the confirmation in `field_profile.md` and `project_state.md`.
 
@@ -210,6 +214,75 @@ Proceed condition:
 - The main theorem sentence is sharp and not absorbed by the nearest substitute theory.
 - The project-level field profile is confirmed, or explicitly marked provisional because search tools are unavailable.
 - The human can defend the one-sentence contribution without relying on wording tricks.
+
+## Stage 1.5 - Target Journal Profile Gate
+
+Autonomy: Gate
+
+Purpose:
+
+Recommend and confirm the target-journal calibration without lowering the paper's quality floor.
+
+Guiding principle:
+
+```text
+Target journal changes calibration, not quality.
+A different target changes reader path, referee mix, exposition style, and fit standard;
+it must not lower rigor, theorem discipline, novelty scrutiny, or absorption testing.
+```
+
+AI tasks:
+
+- Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
+- Create or update `target_journal_profile.md`.
+- Recommend a target ladder:
+  - Primary target
+  - Stretch target
+  - Fallback target
+- Explain whether the recommendation reflects fit, reader path, field audience, theorem strength, absorption risk, exposition needs, or a genuine quality limitation.
+- Preserve upward ambition. If primary target is RAND, still check whether Econometrica, TE, or JET stretch potential exists.
+- If retargeting from Econometrica to RAND or another outlet, state whether this is a fit change, reader change, or quality limitation. Do not hide quality concerns by calling them mere fit.
+
+Minimum `target_journal_profile.md` schema:
+
+```text
+Project or candidate:
+Status: Confirmed / Provisional / Stale / Reopen requested
+Human confirmation:
+Primary target:
+Stretch target:
+Fallback target:
+Target audience:
+Fit standard:
+Quality floor:
+Theorem rigor expectation:
+Reader path:
+Referee mix implications:
+Style calibration implications:
+What must improve to move upward:
+What would trigger retargeting:
+Evidence used:
+Missing evidence:
+Reopen triggers:
+```
+
+Default recommendation logic:
+
+- Econometrica, Theoretical Economics, or JET: deep primitive, general theorem, high theorem bite, low absorption risk, and broad theoretical interest.
+- RAND: strong economic mechanism with IO, platform, market design, regulatory, institutional, or applied-theory relevance; clear comparative statics; strong reader path for applied theory.
+- GEB: strategic interaction or game-theoretic mechanism is central.
+- ReStud, AER, or QJE theory-style paper: large economic question, broad reader interest, clean mechanism, strong narrative, and theorem package that travels beyond a narrow field.
+- Field journal or working-paper route: idea is valuable but theorem bite, novelty, or generality is not yet top-field-ready.
+
+Human gate:
+
+The human must confirm, edit, or reject the target ladder. Record the decision in `human_decisions.md` and update `project_state.md`. If the profile remains provisional because evidence is missing, mark exactly which evidence is missing.
+
+Proceed condition:
+
+- `target_journal_profile.md` is confirmed or explicitly provisional.
+- The target profile states a quality floor and does not weaken theorem, novelty, absorption, or verification requirements.
+- The profile can be reused by Stage 6.5 style calibration, Stage 7 target-calibrated review, and Stage 8 revision triage.
 
 ## Stage 2 - Contribution Lock
 
@@ -359,7 +432,7 @@ Autonomy: Checkpoint for calibration, Auto after human confirmation
 
 Purpose:
 
-Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and Econometrica-level standards.
+Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and the confirmed target's quality floor.
 
 Guiding principles:
 
@@ -374,14 +447,17 @@ Prerequisites:
 - The project has passed the contribution lock and main-theorem gate, or the user explicitly asks for exposition diagnosis only.
 - A confirmed current `field_profile.md` is reused when available. Do not reopen field confirmation for style calibration alone.
 - If `field_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but field-sensitive style anchors cannot be treated as final.
+- A confirmed current `target_journal_profile.md` is reused when available. Do not reopen target confirmation for style calibration alone.
+- If `target_journal_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but target-sensitive style anchors cannot be treated as final.
 
 AI tasks:
 
-- Inspect the current manuscript and core artifacts: `field_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `risk_register.md`, and latest referee reports if available.
-- Search for 3-5 field-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, and target audience.
+- Inspect the current manuscript and core artifacts: `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `risk_register.md`, and latest referee reports if available.
+- Search for 3-5 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, target journal, and target audience.
 - If web/search tools are unavailable, use the house style below and mark the style anchors and calibration as `provisional`.
 - Create or update `style_calibration.md` with:
   - field profile source and status
+  - target journal profile source and status
   - target reader
   - target voice
   - style anchor list with citations or links
@@ -411,7 +487,7 @@ Guardrails:
 - Do not copy sentences, paragraph structures, or framing from style anchors.
 - Summarize anchor-paper exposition strategies only; do not quote long passages.
 - If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, or defensive dilution, stop and route back to Discovery D4-D6 or Stage 8 tree search instead of polishing.
-- If confirmed `style_calibration.md` exists and the field profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
+- If confirmed `style_calibration.md` exists and the field profile, target journal profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
 
 Proceed condition:
 
@@ -419,22 +495,24 @@ Proceed condition:
 - The manuscript is more readable and more human without weakening the locked contribution.
 - Any conceptual, theorem, assumption, or novelty issue found during style work is recorded as a risk rather than hidden by elegant prose.
 
-## Stage 7 - Simulated Econometrica Review Board
+## Stage 7 - Target-Calibrated Simulated Review Board
 
 Autonomy: Gate
 
 Purpose:
 
-Generate structured, adversarial, and diverse feedback without overtrusting the simulation.
+Generate structured, adversarial, and diverse feedback calibrated to the confirmed target journal without overtrusting the simulation.
 
 Before assigning referee roles:
 
 - Use the confirmed `field_profile.md` when it exists and is still current; otherwise infer a provisional profile from the manuscript and closest-literature evidence.
-- Create `referee_reports/round_N/panel_config.md` from the current field profile and manuscript evidence.
-- Infer the manuscript's narrowest defensible field, closest literature themes, main method, contribution type, and main technical risk.
+- Use the confirmed `target_journal_profile.md` when it exists and is still current; otherwise create a provisional target profile from the manuscript, field profile, theorem package, closest-literature evidence, and explicit user preferences.
+- Create `referee_reports/round_N/panel_config.md` from the current field profile, target journal profile, and manuscript evidence.
+- Infer the manuscript's narrowest defensible field, closest literature themes, target audience, main method, contribution type, and main technical risk.
 - Select referees dynamically from those features rather than using a fixed field template.
 - Do not default to IO, search, networks, theory, econometrics, or any named field unless the current manuscript actually belongs there.
 - Ask for field confirmation before running the review only if the profile is missing, provisional, stale, marked `Reopen requested`, or contradicted by new evidence.
+- Ask for target confirmation before running the review if `target_journal_profile.md` is missing, provisional, stale, marked `Reopen requested`, contradicted by new evidence, or materially changed by the theorem package or target audience.
 - Treat older paper-specific methodology files as historical records rather than referee-role templates.
 - Write the final role list into `panel_config.md` before creating any individual referee prompt.
 
@@ -494,7 +572,8 @@ Use 1 to 5:
 - Literature positioning
 - Exposition
 - Robustness to likely objections
-- Fit for Econometrica
+- Fit for confirmed target journal
+- Frontier-level quality floor
 
 Interpretation:
 
@@ -509,7 +588,7 @@ The human must choose:
 - `Revise`: objections are fixable inside the current paper.
 - `Pivot`: contribution or model needs redesign.
 - `External feedback`: ask a human expert before further AI revision.
-- `Retarget`: the paper may be good but not for Econometrica.
+- `Retarget`: the paper may be good but not for the confirmed primary target.
 
 ## Stage 8 - Revision Loop
 
@@ -608,7 +687,7 @@ AI tasks:
 
 Human decision:
 
-- Submit to Econometrica.
+- Submit to the confirmed primary target.
 - Do one more targeted revision.
 - Send for external feedback.
 - Retarget journal.
@@ -658,6 +737,12 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md and follow it as the project protocol. Be
 Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1, the Idea Kill Test. Do not edit the manuscript. Create idea_dossier.md, identify the closest substitute arguments, score the idea, and stop at the human gate with a recommendation: proceed, pivot, narrow, split, abandon, or retarget.
 ```
 
+### Confirm Target Journal Profile
+
+```text
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1.5. Use idea_dossier.md, field_profile.md, literature_probe.md, primitive_hunter_report.md, theorem_candidates.md, absorption_tests.md, generality_ledger.md, risk_register.md, and manuscript_map.md when available. Create or update target_journal_profile.md with primary target, stretch target, fallback target, target audience, fit standard, quality floor, theorem rigor expectation, reader path, referee mix, style implications, upward-improvement requirements, and retargeting triggers. Recommend a target ladder without lowering the quality floor. Stop for my confirmation.
+```
+
 ### Lock the Contribution
 
 ```text
@@ -673,13 +758,13 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution
 ### Style Calibration
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5. Reuse confirmed field_profile.md when current; do not reopen field confirmation for style calibration alone. Search for 3-5 field-matched style anchors when web/search tools are available; otherwise mark the calibration provisional. Create or update style_calibration.md with target reader, target voice, anchor-derived exposition moves, mechanical prose diagnosis, forbidden rhetoric, invariants, and 2-3 sample rewrites. Stop for my confirmation before any full style pass.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5. Reuse confirmed field_profile.md and target_journal_profile.md when current; do not reopen field or target confirmation for style calibration alone. Search for 3-5 field-matched and target-matched style anchors when web/search tools are available; otherwise mark the calibration provisional. Create or update style_calibration.md with field source, target source, target reader, target voice, anchor-derived exposition moves, mechanical prose diagnosis, forbidden rhetoric, invariants, and 2-3 sample rewrites. Stop for my confirmation before any full style pass.
 ```
 
-### Simulated Econometrica Review
+### Target-Calibrated Simulated Review
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profile.md when current; if it is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature evidence and stop for field confirmation before running referee prompts. Then create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, closest literature themes, main method, contribution type, main risk, calibration anchors, and control-paper calibration plan if available. Simulate the Econometrica review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profile.md and target_journal_profile.md when current; if either is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature, theorem, target-audience, and manuscript evidence and stop for confirmation before running referee prompts. Then create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, confirmed target, target audience, closest literature themes, main method, contribution type, main risk, target-calibrated anchors, and control-paper calibration plan if available. Simulate the target-calibrated review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
 ```
 
 ### Referee-Guided Revision

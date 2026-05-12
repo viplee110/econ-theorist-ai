@@ -42,6 +42,7 @@ Maintain these files during discovery:
 - `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
 - `literature_probe.md`: closest literatures, nearest substitutes, novelty risks, and citation TODOs.
 - `field_profile.md`: project-level field configuration confirmed by the human when possible.
+- `target_journal_profile.md`: target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
 - `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
 - `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
 - `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
@@ -92,7 +93,7 @@ The human should own:
 
 ## Human Gate Persistence
 
-Human gate outcomes are persistent project state, not chat memory. Before proceeding past a gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`.
+Human gate outcomes are persistent project state, not chat memory. Before proceeding past a gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `target_journal_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`.
 
 Use this entry format in `human_decisions.md` when useful:
 
@@ -256,6 +257,7 @@ AI tasks:
 
 - Create `literature_probe.md`.
 - Create or update `field_profile.md`.
+- Create or update `target_journal_profile.md` when enough evidence exists to recommend a target ladder.
 - For each shortlisted candidate:
   - identify provisional closest literature families from the idea and model primitives
   - list likely nearest substitute papers
@@ -275,12 +277,19 @@ AI tasks:
   - confidence, uncertainty, and evidence that would reopen the classification
 - Separate verified facts from AI inferences.
 - Mark all unverified references as TODO.
+- Recommend a provisional target ladder using the idea, field profile, closest-literature themes, contribution type, theorem evidence if available, and absorption risk:
+  - Econometrica, Theoretical Economics, or JET when the primitive is deep, the theorem is general, theorem bite is high, and absorption risk is low.
+  - RAND when the economic mechanism has IO, platform, market design, regulatory, institutional, or applied-theory relevance with clear comparative statics and an applied-theory reader path.
+  - GEB when strategic interaction or a game-theoretic mechanism is central.
+  - ReStud, AER, or QJE theory-style when the question is broad, the mechanism is clean, and the result travels beyond a narrow field.
+  - Field journal or working-paper route when the idea is valuable but theorem bite, novelty, or generality is not yet top-field-ready.
+- State explicitly that target journal changes calibration, not quality; no target may bypass model tournament, absorption testing, generality ledger, main-theorem gate, or proof verification.
 
 Human gate:
 
-The human should inspect the top substitute papers or ask the AI to help locate them. The human should confirm or correct `field_profile.md` once before high-stakes panels rely on it, and the agent should record that confirmation in both `field_profile.md` and `human_decisions.md`. Do not trust novelty until this gate is passed. If web/search tools are unavailable, label the literature probe, field profile, panel role configuration, and all downstream absorption tests `provisional`.
+The human should inspect the top substitute papers or ask the AI to help locate them. The human should confirm or correct `field_profile.md` once before high-stakes panels rely on it, and the agent should record that confirmation in both `field_profile.md` and `human_decisions.md`. If `target_journal_profile.md` is created or materially changed, the human should also confirm or correct the target ladder, and the agent should record that confirmation in both `target_journal_profile.md` and `human_decisions.md`. Do not trust novelty until this gate is passed. If web/search tools are unavailable, label the literature probe, field profile, target profile, panel role configuration, and all downstream absorption tests `provisional`.
 
-Once confirmed, later Idea, Model, Verification, Review, and Revision Panels should inherit `field_profile.md` rather than asking for field confirmation again. Reopen the field gate only if a closer substitute paper appears, the primitive or theorem direction changes materially, the target audience changes, the user disputes the classification, or a panelist explains why the current field profile makes the absorption test unreliable.
+Once confirmed, later Idea, Model, Verification, Review, Style Calibration, and Revision Panels should inherit `field_profile.md` and `target_journal_profile.md` rather than asking for confirmation again. Reopen the field or target gate only if a closer substitute paper appears, the primitive or theorem direction changes materially, the target audience changes, the user disputes the classification, or a panelist explains why the current profile makes the absorption or fit test unreliable.
 
 ## Stage D4 - Primitive Hunting and Model Candidate Generation
 
@@ -442,6 +451,8 @@ AI tasks:
 - Create or update `model_tournament.md`.
 - Create or update `generality_ledger.md`.
 - Check whether `field_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If it is missing, provisional, stale, or reopened, update it from the latest `literature_probe.md` and stop for field confirmation before treating absorption as final.
+- Check whether `target_journal_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If theorem quality, absorption risk, target audience, or field evidence materially changes the target ladder, update it and stop for target confirmation before treating journal fit as final.
+- Do not skip absorption tests, model tournament, generality ledger, or main theorem gate because the target is RAND, GEB, a field journal, or any non-Econometrica outlet.
 - If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
 - If the candidate's deepest primitive or theorem direction is still unclear, run a Primitive Hunter / Theorem Generator Panel before recommending `Invest`, `Refine`, or `Pivot`.
 - For each promising model, simulate:
@@ -518,6 +529,7 @@ AI tasks:
 - Create `project_state.md`.
 - Create `pre_paper_model_note.md`.
 - Carry forward the confirmed `field_profile.md` if it exists; otherwise mark field-sensitive panel assignments as provisional.
+- Carry forward the confirmed `target_journal_profile.md` if it exists; otherwise mark target-sensitive review and style calibration as provisional.
 - Write a 5-8 page model note:
   - question
   - mechanism
@@ -578,7 +590,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Gener
 ### Run Literature Probe And Field Profile
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candidate. Search for closest substitute papers when web/search tools are available, record verified and inferred literature claims separately, create literature_probe.md, and create or update field_profile.md with the primary field, adjacent fields, absorption-risk theory families, and field-sensitive Referee 1-3 roles. Stop for my confirmation of the field profile before any high-stakes panel relies on it.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candidate. Search for closest substitute papers when web/search tools are available, record verified and inferred literature claims separately, create literature_probe.md, and create or update field_profile.md with the primary field, adjacent fields, absorption-risk theory families, and field-sensitive Referee 1-3 roles. If evidence is sufficient, create or update target_journal_profile.md with a primary/stretch/fallback target ladder and quality floor. Stop for my confirmation of the field profile and target profile before any high-stakes panel relies on them.
 ```
 
 ### Generate Models for Shortlisted Ideas
@@ -596,7 +608,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the selected model can
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, generality_ledger.md, and field_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota variants merely because they are non-mainstream. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota variants merely because they are non-mainstream, and do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow

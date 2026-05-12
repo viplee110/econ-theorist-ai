@@ -5,12 +5,17 @@ development.
 
 Originally developed with Econometrica-level theory standards in mind, this
 unofficial local workflow system helps researchers move from rough ideas to
-primitive hunting, model tournaments, theorem candidates, absorption tests, human
-gates, simulated review, and controlled revision paths.
+primitive hunting, model tournaments, theorem candidates, absorption tests, target
+journal calibration, human gates, simulated review, and controlled revision paths.
 
 This project is not affiliated with Econometrica. The phrase
 `Econometrica-level` is used only as shorthand for high standards of theoretical
 clarity, novelty, and rigor.
+
+The workflow is target-calibrated rather than Econometrica-only. A confirmed
+`target_journal_profile.md` can calibrate the reader path, referee mix,
+exposition style, and fit standard for RAND, JET, Theoretical Economics, GEB,
+ReStud, AER, or another venue. Target journal changes calibration, not quality.
 
 If this workflow helps your research, please consider giving the repository a
 star so more researchers can find and improve their own research process.
@@ -20,14 +25,15 @@ star so more researchers can find and improve their own research process.
 ```mermaid
 flowchart LR
     A["Topic or rough idea"] --> B["Literature probe<br/>field_profile.md"]
-    B --> C["Primitive Hunter<br/>Exploration Quota"]
+    B --> T["Target profile<br/>target_journal_profile.md"]
+    T --> C["Primitive Hunter<br/>Exploration Quota"]
     C --> D["Model tournament"]
     D --> E["First-pass derivation"]
     E --> F["Absorption test<br/>main theorem gate"]
     F --> G["5-8 page model note"]
     G --> H["Manuscript development"]
     H --> S["Style calibration<br/>style_calibration.md"]
-    S --> I["Simulated review"]
+    S --> I["Target-calibrated<br/>simulated review"]
     S -->|structural weakness| C
     I --> J["Revision tree"]
     J --> K{"Human decision"}
@@ -43,6 +49,7 @@ flowchart TD
     AC["active_context.md<br/>compact dashboard"] --> OR["ECONOMETRICA_ORCHESTRATOR.md<br/>router"]
     HD["human_decisions.md<br/>append-only gates"] --> OR
     FP["field_profile.md<br/>confirmed field and referee roles"] --> OR
+    TJ["target_journal_profile.md<br/>target ladder and quality floor"] --> OR
     GL["generality_ledger.md<br/>special-case and assumption drift"] --> OR
     OR --> WG["Workflow modules"]
     WG --> HP{"Human gate"}
@@ -60,10 +67,11 @@ must still be checked against the underlying workflow artifacts.
 - Compares model variants before manuscript writing.
 - Requires absorption tests against closest literature and known theory families.
 - Uses `field_profile.md` to assign field-sensitive simulated referees.
+- Uses `target_journal_profile.md` to recommend and confirm a primary, stretch, and fallback target without lowering the quality floor.
 - Records human gate decisions in `human_decisions.md` instead of relying on chat memory.
 - Tracks assumption and generality drift in `generality_ledger.md`.
 - Uses Scientific Judge / Nugget Test safeguards against defensive complexity.
-- Runs simulated Econometrica review with dynamic referee roles.
+- Runs target-calibrated simulated review with dynamic referee roles.
 - Routes local-optimum traps back to discovery before manuscript polishing.
 - Calibrates exposition style with elegance without rhetoric after the contribution is locked.
 - Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
@@ -119,7 +127,11 @@ Use the system: rigorously verify Proposition 1 with Python, Mathematica, or Lea
 ```
 
 ```text
-Use the system: run a full simulated Econometrica review.
+Use the system: recommend a target journal ladder for this project.
+```
+
+```text
+Use the system: run a full target-calibrated simulated review.
 ```
 
 ```text
@@ -155,6 +167,7 @@ this workflow repository:
 | `active_context.md` | 80-120 line continuation dashboard. |
 | `human_decisions.md` | Append-only human gate decisions, reversals, and reasons. |
 | `field_profile.md` | Confirmed or provisional field profile for literature and referee routing. |
+| `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
 | `style_calibration.md` | Confirmed or provisional guide for elegant, field-calibrated exposition without rhetoric. |
 | `model_tournament.md` | Comparison of model variants and documented winners/losers. |
@@ -186,6 +199,7 @@ root is configured. See `TOOLCHAIN_README.md` for details.
 ## Design Principles
 
 - Scientific taste is a filter, not the sole objective.
+- Target journal changes calibration, not quality.
 - Token economy must never override research quality.
 - Main theorem discovery, proof verification, closest-literature checks, and simulated review require enough context and tools.
 - Human gate decisions must be written to persistent artifacts.
