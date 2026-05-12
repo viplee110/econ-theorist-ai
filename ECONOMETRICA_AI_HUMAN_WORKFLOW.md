@@ -44,6 +44,7 @@ The agent should maintain these files whenever possible:
 - `style_calibration.md`: confirmed or provisional style calibration for elegant, field-sensitive exposition without rhetoric.
 - `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
 - `target_journal_profile.md`: confirmed or provisional target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
+- `literature_evidence_ledger.md`: verified source records for closest papers, anchor papers, absorption threats, and style anchors.
 - `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
 - `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
 - `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
@@ -77,6 +78,22 @@ For every gate:
 - Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
 - If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
 
+Major gates must use this explicit structure. Simple user commands do not simplify the gate:
+
+```text
+Gate name:
+Why the system is stopping:
+Evidence summary:
+Decision needed:
+Recommended option:
+Alternatives:
+Consequences:
+Files to update:
+Next stage after decision:
+```
+
+Do not ask vague questions such as "continue?" or "what do you think?" at major gates. The user should not need to know the internal stage names, but the gate prompt must teach what decision is needed and what happens next.
+
 Human decisions are append-only by default. A later reversal supersedes the previous decision for current work but does not erase it. Record reversals in this form when useful:
 
 ```text
@@ -91,7 +108,21 @@ Required updates or rechecks:
 
 ## Token and Decision Discipline
 
-Token economy must never override research quality. Use `active_context.md` as an 80-120 line compact dashboard to reduce redundant reconstruction during long projects, but verify substantive claims against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
+Token economy must never override research quality. Use `active_context.md` as an 80-120 line compact dashboard to reduce redundant reconstruction during long projects, but verify substantive claims against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `target_journal_profile.md`, `literature_evidence_ledger.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
+
+The dashboard should include:
+
+```text
+Current stage:
+Current blocker:
+Confirmed source-of-truth artifacts:
+Open human gates:
+2-4 step horizon:
+Execute next:
+Why this next action has highest information value:
+Safety barriers active:
+If only 2 hours are available:
+```
 
 Low-token discipline means shorter boilerplate, fewer repeated summaries, and cleaner state handoffs. It does not mean shallow main-theorem discovery, abbreviated proof verification, skipped closest-literature checks, compressed simulated review, or lightweight handling of high-stakes revision.
 
@@ -105,6 +136,27 @@ Generality Ledger Mode:
 
 - Maintain `generality_ledger.md` when revisions add distribution assumptions, special graph structures, extra agents, extra states, regularity conditions, or longer theorem sentences.
 - If generality loss is rising but the nugget is not sharper, stop local polishing and return to Discovery D4-D6 or Stage 8 tree search.
+
+Closed-loop safety barriers:
+
+- No strong novelty claim without literature evidence.
+- No full manuscript before theorem sentence and absorption test.
+- No established theorem if proof status is sketch only.
+- No local polishing if complexity debt is rising.
+- No kill of a possible frontier spike before spike-specific tests.
+- No target-journal downgrade as a substitute for theorem quality.
+
+Fault alarms:
+
+- contribution sentence lengthening
+- assumption count rising
+- proof confidence stagnant
+- absorption risk unresolved
+- same panel criticism recurring
+- model note not compressing to 5-8 pages
+- `risk_register.md` growing without resolution
+
+When a fault alarm fires, stop local polishing and return to Discovery D4-D6, Stage 8 tree search, or an explicit human gate.
 
 ## Manuscript-Mode Firewall
 
@@ -166,6 +218,7 @@ AI tasks:
 - State the one-sentence contribution.
 - State the candidate main theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y."
 - Identify the closest existing papers and the strongest substitute argument.
+- Create or update `literature_evidence_ledger.md` for any closest-paper or absorption-threat claim used in the score.
 - Create or update `field_profile.md` if the project does not already have a confirmed current profile.
 - Run or update `absorption_tests.md` if the idea might be a relabeling of a known framework.
 - State what belief a specialist should change after reading the paper.
@@ -212,6 +265,7 @@ Proceed condition:
 - No score below 3.
 - Novelty, importance, and non-substitutability are at least 4.
 - The main theorem sentence is sharp and not absorbed by the nearest substitute theory.
+- Closest-paper and absorption-threat claims are backed by `literature_evidence_ledger.md`, or the novelty and absorption conclusions are explicitly provisional.
 - The project-level field profile is confirmed, or explicitly marked provisional because search tools are unavailable.
 - The human can defend the one-sentence contribution without relying on wording tricks.
 
@@ -233,7 +287,7 @@ it must not lower rigor, theorem discipline, novelty scrutiny, or absorption tes
 
 AI tasks:
 
-- Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
+- Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `literature_evidence_ledger.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
 - Create or update `target_journal_profile.md`.
 - Recommend a target ladder:
   - Primary target
@@ -242,6 +296,7 @@ AI tasks:
 - Explain whether the recommendation reflects fit, reader path, field audience, theorem strength, absorption risk, exposition needs, or a genuine quality limitation.
 - Preserve upward ambition. If primary target is RAND, still check whether Econometrica, TE, or JET stretch potential exists.
 - If retargeting from Econometrica to RAND or another outlet, state whether this is a fit change, reader change, or quality limitation. Do not hide quality concerns by calling them mere fit.
+- If the target recommendation depends on closest literature or journal/style anchors that are not recorded in `literature_evidence_ledger.md`, mark the affected target-profile claims provisional.
 
 Minimum `target_journal_profile.md` schema:
 
@@ -262,6 +317,7 @@ Style calibration implications:
 What must improve to move upward:
 What would trigger retargeting:
 Evidence used:
+Literature evidence ledger status:
 Missing evidence:
 Reopen triggers:
 ```
@@ -378,6 +434,7 @@ AI tasks:
 - Create or update `literature_positioning.md`.
 - Create or update `field_profile.md` if it is missing, provisional, or contradicted by new literature.
 - Identify nearest substitute papers.
+- Create or update `literature_evidence_ledger.md` for every nearest substitute, absorption threat, method anchor, and style anchor used in the audit.
 - For each substitute, write:
   - what it already does
   - what this paper adds
@@ -385,6 +442,7 @@ AI tasks:
   - what citation or framing change is needed
 - Flag missing citations rather than inventing them.
 - Separate "known to be true from documents" from "AI inference."
+- If a nearest substitute is not recorded in `literature_evidence_ledger.md`, mark the corresponding novelty or absorption conclusion provisional.
 
 Human gate:
 
@@ -392,7 +450,7 @@ The human must verify the key nearest substitute papers, confirm or correct the 
 
 Proceed condition:
 
-- The project has a defensible contribution after accounting for the closest substitutes.
+- The project has a defensible contribution after accounting for the closest substitutes, with key closest-literature evidence recorded in `literature_evidence_ledger.md` or explicitly marked provisional.
 
 ## Stage 6 - Controlled Manuscript Development
 
@@ -454,6 +512,7 @@ AI tasks:
 
 - Inspect the current manuscript and core artifacts: `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `risk_register.md`, and latest referee reports if available.
 - Search for 3-5 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, target journal, and target audience.
+- Record named style anchors in `literature_evidence_ledger.md`. If an anchor is not recorded there, keep the corresponding style claim provisional.
 - If web/search tools are unavailable, use the house style below and mark the style anchors and calibration as `provisional`.
 - Create or update `style_calibration.md` with:
   - field profile source and status
@@ -461,6 +520,7 @@ AI tasks:
   - target reader
   - target voice
   - style anchor list with citations or links
+  - literature evidence ledger status for anchors
   - extracted exposition moves, not copied prose
   - current mechanical prose diagnosis
   - forbidden rhetoric and overclaiming rules
@@ -507,6 +567,7 @@ Before assigning referee roles:
 
 - Use the confirmed `field_profile.md` when it exists and is still current; otherwise infer a provisional profile from the manuscript and closest-literature evidence.
 - Use the confirmed `target_journal_profile.md` when it exists and is still current; otherwise create a provisional target profile from the manuscript, field profile, theorem package, closest-literature evidence, and explicit user preferences.
+- Use `literature_evidence_ledger.md` for nearest substitute papers, target-calibrated anchors, style anchors, and absorption threats. If a named paper is not in the ledger, mark that part of the panel configuration provisional.
 - Create `referee_reports/round_N/panel_config.md` from the current field profile, target journal profile, and manuscript evidence.
 - Infer the manuscript's narrowest defensible field, closest literature themes, target audience, main method, contribution type, and main technical risk.
 - Select referees dynamically from those features rather than using a fixed field template.
@@ -515,6 +576,7 @@ Before assigning referee roles:
 - Ask for target confirmation before running the review if `target_journal_profile.md` is missing, provisional, stale, marked `Reopen requested`, contradicted by new evidence, or materially changed by the theorem package or target audience.
 - Treat older paper-specific methodology files as historical records rather than referee-role templates.
 - Write the final role list into `panel_config.md` before creating any individual referee prompt.
+- Include candidate geometry when reviewing a pre-manuscript idea, model, or possible frontier spike.
 
 AI roles:
 
@@ -558,6 +620,7 @@ Information isolation:
 Location and confidence requirements:
 
 - Every major concern must cite a line, section, theorem, proposition, lemma, equation, assumption, figure, table, or closest-literature comparison.
+- Any concern based on a named closest paper, anchor paper, or absorption threat must cite the corresponding `literature_evidence_ledger.md` entry or be labeled provisional.
 - Every referee, AE, and Co-Editor report must include Recommendation and Confidence.
 
 Scoring:
@@ -740,7 +803,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1, the Idea Kill Test. Do not 
 ### Confirm Target Journal Profile
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1.5. Use idea_dossier.md, field_profile.md, literature_probe.md, primitive_hunter_report.md, theorem_candidates.md, absorption_tests.md, generality_ledger.md, risk_register.md, and manuscript_map.md when available. Create or update target_journal_profile.md with primary target, stretch target, fallback target, target audience, fit standard, quality floor, theorem rigor expectation, reader path, referee mix, style implications, upward-improvement requirements, and retargeting triggers. Recommend a target ladder without lowering the quality floor. Stop for my confirmation.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1.5. Use idea_dossier.md, field_profile.md, literature_probe.md, literature_evidence_ledger.md, primitive_hunter_report.md, theorem_candidates.md, absorption_tests.md, generality_ledger.md, risk_register.md, and manuscript_map.md when available. Create or update target_journal_profile.md with primary target, stretch target, fallback target, target audience, fit standard, quality floor, theorem rigor expectation, reader path, referee mix, style implications, upward-improvement requirements, retargeting triggers, and literature evidence ledger status. Recommend a target ladder without lowering the quality floor. Stop for my confirmation.
 ```
 
 ### Lock the Contribution
@@ -758,13 +821,13 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution
 ### Style Calibration
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5. Reuse confirmed field_profile.md and target_journal_profile.md when current; do not reopen field or target confirmation for style calibration alone. Search for 3-5 field-matched and target-matched style anchors when web/search tools are available; otherwise mark the calibration provisional. Create or update style_calibration.md with field source, target source, target reader, target voice, anchor-derived exposition moves, mechanical prose diagnosis, forbidden rhetoric, invariants, and 2-3 sample rewrites. Stop for my confirmation before any full style pass.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5. Reuse confirmed field_profile.md and target_journal_profile.md when current; do not reopen field or target confirmation for style calibration alone. Search for 3-5 field-matched and target-matched style anchors when web/search tools are available; record named anchors in literature_evidence_ledger.md, otherwise mark the calibration provisional. Create or update style_calibration.md with field source, target source, target reader, target voice, anchor-derived exposition moves, literature evidence ledger status, mechanical prose diagnosis, forbidden rhetoric, invariants, and 2-3 sample rewrites. Stop for my confirmation before any full style pass.
 ```
 
 ### Target-Calibrated Simulated Review
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profile.md and target_journal_profile.md when current; if either is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature, theorem, target-audience, and manuscript evidence and stop for confirmation before running referee prompts. Then create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, confirmed target, target audience, closest literature themes, main method, contribution type, main risk, target-calibrated anchors, and control-paper calibration plan if available. Simulate the target-calibrated review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profile.md and target_journal_profile.md when current; if either is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature, theorem, target-audience, and manuscript evidence and stop for confirmation before running referee prompts. Use literature_evidence_ledger.md for closest substitutes, absorption threats, and target-calibrated anchors; if a named paper lacks a ledger entry, mark that part of the review provisional. Then create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, confirmed target, target audience, closest literature themes, main method, contribution type, main risk, target-calibrated anchors, and control-paper calibration plan if available. Simulate the target-calibrated review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
 ```
 
 ### Referee-Guided Revision

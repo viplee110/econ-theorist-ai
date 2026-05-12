@@ -17,6 +17,24 @@ Long AI editing sessions must be reversible. Before meaningful edits, create a c
 
 Never overwrite human work casually. Never use destructive git commands unless the human explicitly asks and approves.
 
+## If The User Uses GitHub
+
+Generated research files are saved locally in each paper project folder. They are
+not automatically uploaded to GitHub. The workflow works locally even if the user
+never uses Git.
+
+If the user uses GitHub as backup, they may choose which generated research files
+to track. Durable research records that are often worth tracking include
+`human_decisions.md`, `project_state.md`, `contribution_lock.md`,
+`field_profile.md`, `target_journal_profile.md`,
+`literature_evidence_ledger.md`, `model_tournament.md`,
+`absorption_tests.md`, `generality_ledger.md`, `risk_register.md`,
+`revision_tree.md`, `revision_log.md`, and `version_log.md`.
+
+Files that usually do not need tracking include `active_context.md`,
+`toolchain_status.md`, `referee_reports/`, `verification/`, `formal/`, `lean/`,
+and large local caches.
+
 ## Default Automation Policy
 
 By default, version control should run automatically in the background so the human can focus on the paper.

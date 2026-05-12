@@ -19,6 +19,8 @@ verification_log.md
 counterexamples.md
 formalization_notes.md
 literature_probe.md
+literature_evidence_ledger.md
+literature_cache/
 topic_longlist.md
 topic_shortlist.md
 idea_kill_tests.md
@@ -26,6 +28,7 @@ human_decisions.md
 generality_ledger.md
 style_calibration.md
 target_journal_profile.md
+spike_dossier.md
 toolchain_status.md
 .econ-theorist-ai/
 proof_and_model_audit.md
@@ -60,5 +63,6 @@ Thumbs.db
 .idea/
 
 # Local scratch
+.plan_notes/
 mathematica_smoke_test.wls
 01_review_methodology.md

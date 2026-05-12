@@ -10,6 +10,8 @@ The system is target-calibrated rather than Econometrica-only. Econometrica-leve
 - In chat, respond in the user's language when convenient.
 - Keep research-facing outputs English by default: workflow artifacts, field profiles, target journal profiles, human decision logs, style calibration files, referee reports, theorem/proof/literature notes, revision logs, and manuscripts.
 - Chinese is allowed only in chat interaction and a small routing trigger list. Do not write Chinese into research artifacts or manuscripts unless the user explicitly asks for a separate Chinese explanatory note outside the manuscript workflow.
+- Ordinary Q&A remains ordinary Q&A: explanatory, translation, GitHub, software, or conceptual questions should not be over-routed into the research workflow.
+- Research execution is serious by default. Casual wording must not downgrade a research idea; explicit quick requests may receive a compact screen, but the quality floor remains.
 
 Default entry point: first read `ECONOMETRICA_ORCHESTRATOR.md` when it exists. Use it to route broad user requests to the correct workflow module and stage, so the user does not need to remember stage numbers or file names.
 
@@ -39,6 +41,7 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Different targets change reader path, referee mix, exposition style, and fit standard; they must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
 - RAND, JET, Theoretical Economics, GEB, ReStud, AER, and field-journal targets should be treated as different calibration profiles, not as permission to accept weak theorems, fake novelty, defensive complexity, or unverified claims.
 - During discovery, preserve non-mainstream but internally coherent exploration long enough to test deep primitive potential, theorem bite, and absorption risk.
+- Treat nonconvex discovery as branch generation inside the existing tree search, not as a separate mode or quality guarantee. Possible frontier spikes must still pass primitive depth, theorem bite, tractability, literature evidence, and absorption gates.
 - During polishing and revision, taste, simplicity, and contribution sharpness become strong constraints against defensive clutter.
 - Highest priority: protect the paper's nugget, the shortest truthful statement of the paper's cognitive update.
 - Always watch for additive bias: using extra variables, agent types, dynamic states, distributions, assumptions, or appendices to hide a weak mechanism.
@@ -58,12 +61,16 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Preserve mathematical correctness, citation integrity, and author intent.
 - Do not invent citations, proofs, data results, robustness checks, theorem statements, numerical results, or claims.
 - If a citation, proof, result, robustness check, or interpretation requires author verification, write it as a precise TODO in `risk_register.md` instead of fabricating it.
+- Record closest-paper, anchor-paper, absorption-threat, and style-anchor claims in `literature_evidence_ledger.md` when the project reaches literature-sensitive or high-stakes stages. If such evidence is missing, downstream field, target, absorption, panel, and style judgments must be marked provisional.
 - Before full manuscript development, require a candidate main theorem sentence, an absorption test against known theoretical families, and a model tournament unless the user explicitly requests mechanical editing only.
 - If repeated reviews identify no central theorem, old-theory absorption, or weak contribution, stop polishing and return to discovery/model search.
 - Use `active_context.md` only as a compact dashboard for continuation; it is not a source of truth and must be checked against the underlying artifacts.
+- The dashboard should identify the current stage, current blocker, confirmed source-of-truth artifacts, open human gates, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 - Use `generality_ledger.md` to track losses of generality from special-case assumptions, distributions, graph structures, extra agents, extra states, or longer theorem sentences.
 - Use `style_calibration.md` only as a confirmed or provisional paper-specific guide for elegance without rhetoric; it must not change theorem statements, assumptions, novelty claims, or target-journal positioning.
 - Use `target_journal_profile.md` as the confirmed or provisional target-calibration artifact. It should guide journal fit, reader path, referee mix, style anchors, and review calibration, but it must not replace field evidence, theorem verification, or absorption tests.
+- Treat optional cross-project researcher memory as a prior, never as paper source of truth. User-level files such as `researcher_profile.md`, `method_library.md`, `negative_knowledge.md`, `proof_technique_memory.md`, `project_postmortems/`, and `field_maps/` may live under `C:\Users\<user>\.econ-theorist-ai\`, but current project artifacts, literature evidence, proof verification, and human gates override them.
+- Guard against information bubbles from researcher memory: include outside-view objections, adjacent-field search, and at least one internally coherent anti-profile direction when discovery breadth matters.
 - Prefer direct edits to LaTeX source files when the source can be improved safely.
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.
@@ -74,6 +81,8 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Stop for human approval before changing the central question, main theorem, model primitives, assumption set, claimed novelty, empirical interpretation, or target-journal positioning.
 - Stop for human confirmation when creating the project-level `field_profile.md` for the first time or when new evidence materially changes the primary field, adjacent fields, closest-literature themes, or field-sensitive referee roles.
 - Stop for human confirmation when creating `target_journal_profile.md` for the first time or when evidence materially changes the primary target, stretch target, fallback target, target audience, or target-journal positioning.
+- Simple user commands must not weaken human gates. At major gates, use an explicit structure: gate name, why the system is stopping, evidence summary, decision needed, recommended option, alternatives, consequences, files to update, and next stage after decision.
+- Do not ask vague major-gate questions such as "continue?" or "what do you think?" The gate prompt should teach the user what decision is needed and what happens next.
 - Every human gate decision must be written to the relevant persistent artifact before the system treats it as durable state. Create `human_decisions.md` if it is missing, use it for append-only decision history, and update the active state file such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md` as appropriate.
 - Human decisions are append-only by default. If the user reverses or overrides an earlier decision, record the reversal with the previous decision, new decision, reason, affected artifacts, and required rechecks. The later decision governs current work, but the earlier decision must not be erased.
 - Do not continue polishing if the main objection is contribution, identification, or economic relevance. Return to idea testing or contribution locking.

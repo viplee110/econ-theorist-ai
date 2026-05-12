@@ -6,7 +6,7 @@ This is the single entry point for the economic theory research system, original
 
 Target journal changes calibration, not quality. A different target changes reader path, referee mix, exposition style, and fit standard; it must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
 
-## Language and First-Run Policy
+## Language, Simplicity, and First-Run Policy
 
 This is an English research system with multilingual command understanding.
 
@@ -14,6 +14,10 @@ This is an English research system with multilingual command understanding.
 - Keep research-facing outputs English by default: workflow artifacts, field profiles, target journal profiles, human decision logs, style calibration files, referee reports, theorem/proof/literature notes, revision logs, and manuscripts.
 - Chinese is allowed only in chat interaction and a small routing trigger list.
 - Do not write Chinese into research artifacts or manuscripts unless the user explicitly asks for a separate Chinese explanatory note outside the manuscript workflow.
+- Ordinary Q&A remains ordinary Q&A: explanatory, translation, GitHub, software, or conceptual questions should not be over-routed into the research workflow.
+- The workflow activates when the user asks the system to act on a research project, paper, idea, theorem, model, literature, review, revision, or project state.
+- Research execution is serious by default. Casual wording must not downgrade a research idea.
+- Explicit quick requests may receive a compact screen, but the quality floor remains. Explicit full requests require the complete relevant workflow.
 
 First-run check is a soft gate, not a hard gate.
 
@@ -22,6 +26,13 @@ First-run check is a soft gate, not a hard gate.
 - If a global `toolchain_status.md` already exists, do not repeat the full computer-level check for a second paper unless the user asks or the status is stale.
 - A new paper project may still need lightweight project initialization through `project_state.md` and `active_context.md`.
 - The setup check must not silently install large tools, modify PATH, or change system environment variables.
+
+Stage-aware effort calibration replaces user-visible Lite / Standard / Full modes:
+
+- Default continuation uses the current project stage, existing artifacts, user request, and risk level.
+- A quick screen is used only when the user explicitly asks for quick, rough, no-file, or short screening. It should still check theorem sentence, closest-literature risk, absorption risk, and go/park/kill logic, and must not claim final novelty.
+- A full audit is mandatory when the user asks for full review, full literature audit, theorem verification, full model tournament, high-stakes submission, or equivalent language.
+- No effort level may lower rigor, theorem discipline, novelty scrutiny, absorption testing, proof verification, or human-gate persistence.
 
 The system is made of the following workflow modules:
 
@@ -50,6 +61,24 @@ When the user asks for research help, follow this sequence:
 10. For meaningful edits, summarize the git diff or version-control state before finishing.
 
 Do not ask the user to choose a stage unless the routing is genuinely ambiguous or the next step changes the core contribution, theorem, model, assumptions, novelty claim, or target journal.
+
+## Human Gate Format
+
+Simple commands must not weaken human gates. At major gates, stop and present a decision-complete prompt using this structure:
+
+```text
+Gate name:
+Why the system is stopping:
+Evidence summary:
+Decision needed:
+Recommended option:
+Alternatives:
+Consequences:
+Files to update:
+Next stage after decision:
+```
+
+Do not ask vague major-gate questions such as "continue?" or "what do you think?" The user should not need to know the workflow, but the gate prompt must teach them what decision is needed and what happens next. After the user chooses, write `human_decisions.md` and update the controlled artifact before proceeding.
 
 ## Universal User Commands
 
@@ -88,6 +117,22 @@ Use the system: initialize this paper project.
 ```
 
 ```text
+Use the system: quickly screen this idea.
+```
+
+```text
+Use the system: run a full literature audit.
+```
+
+```text
+Use the system: what should I do today?
+```
+
+```text
+Use the system: where is this project stuck?
+```
+
+```text
 Revise according to the latest referee report.
 ```
 
@@ -115,6 +160,7 @@ Before routing, inspect whichever of these files exist:
 - `absorption_tests.md`
 - `field_profile.md`
 - `target_journal_profile.md`
+- `literature_evidence_ledger.md`
 - `derivation_notes.md`
 - `pre_paper_model_note.md`
 - `math_claims.md`
@@ -135,15 +181,102 @@ If no state file exists, begin with intake:
 - no manuscript or no clear paper files: Discovery D0.
 - manuscript exists: Manuscript Stage 0.
 
-`active_context.md` is never a source of truth. Use it to find the current state quickly, then verify any important claim against the underlying artifacts such as `project_state.md`, `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and the latest panel reports.
+`active_context.md` is never a source of truth. Use it to find the current state quickly, then verify any important claim against the underlying artifacts such as `project_state.md`, `field_profile.md`, `target_journal_profile.md`, `literature_evidence_ledger.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and the latest panel reports.
 
 ## Low-Token State Discipline
 
-Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, active theorem, contribution lock status, field profile status, target journal profile status, open risks, pending human gate, and next safe action.
+Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 
 Token discipline reduces redundant re-reading, repeated summaries, and boilerplate. It must not reduce research depth. For main theorem discovery, proof verification, closest-literature checks, simulated review, model tournaments, and high-stakes revision, use enough context, tools, and token budget to execute the complete workflow.
 
 When the user explicitly asks for a full review, literature audit, theorem verification, model tournament, or full simulated review, do not substitute a lightweight summary. Run the complete relevant workflow stage and produce the required artifacts.
+
+## Literature Evidence and Safety Barriers
+
+Use `literature_evidence_ledger.md` as the evidence ledger for closest-paper, anchor-paper, absorption-threat, and style-anchor claims.
+
+- Any closest-paper, anchor-paper, absorption-threat, or style-anchor claim must have a ledger entry before it is treated as high-confidence.
+- If the ledger is missing or incomplete, mark downstream `field_profile.md`, `target_journal_profile.md`, `absorption_tests.md`, `panel_config.md`, and `style_calibration.md` judgments as provisional where they rely on that evidence.
+- Default behavior is search/open/verify/record evidence, not bulk-download PDFs.
+- Download papers only when they are open access, user-provided, or explicitly authorized by the user. If downloaded, use `literature_cache/` and record the source and permission status.
+- Extract model, proof, and exposition moves from papers; do not copy copyrighted prose.
+
+Safety barriers:
+
+- No strong novelty claim without literature evidence.
+- No full manuscript before theorem sentence and absorption test.
+- No established theorem if proof status is sketch only.
+- No local polishing if complexity debt is rising.
+- No kill of a possible frontier spike before spike-specific tests.
+- No target-journal downgrade as a substitute for theorem quality.
+
+Fault alarms:
+
+- contribution sentence lengthening
+- assumption count rising
+- proof confidence stagnant
+- absorption risk unresolved
+- same panel criticism recurring
+- model note not compressing to 5-8 pages
+- `risk_register.md` growing without resolution
+
+When a fault alarm fires, stop local polishing and route to Discovery D4-D6, Stage 8 tree search, or a human decision gate.
+
+## Closed-Loop Next-Action Control
+
+Use this lightweight research-control loop. Do not implement fake numerical PID, Kalman, MPC, or bandit scores.
+
+```text
+observe -> estimate -> diagnose -> constrain -> plan -> act -> update
+```
+
+For each serious candidate, the active notes should include a belief-state block when useful:
+
+```text
+Belief state:
+Candidate geometry:
+Evidence status: verified / inferred / speculative
+Main uncertainty:
+Most informative next test:
+Kill condition:
+Spike protection status:
+```
+
+The next action should be chosen by information value as well as progress value: what action most changes the decision-relevant uncertainty at reasonable cost?
+
+## Cross-Project Researcher Memory
+
+Project artifacts are the source of truth. Optional cross-project memory is a prior only, never a controlling artifact.
+
+Default user-level location:
+
+```text
+C:\Users\<user>\.econ-theorist-ai\
+```
+
+Optional files:
+
+```text
+researcher_profile.md
+method_library.md
+negative_knowledge.md
+proof_technique_memory.md
+project_postmortems/
+field_maps/
+```
+
+Rules:
+
+- Do not copy cross-project memory into a paper project unless explicitly requested.
+- Literature evidence, proof verification, and current human gates override `researcher_profile.md`.
+- Use researcher memory to lower search cost, not to narrow the project into the user's usual taste.
+
+Anti-bubble checks:
+
+- Outside-view check: ask how a referee who does not share the user's taste would reject the project.
+- Anti-profile direction: when discovery breadth matters, preserve one internally coherent direction that violates the user's usual taste.
+- Adjacent-field search: field confirmation must inspect adjacent literature, not only familiar fields.
+- Postmortem: record which user priors helped and which misled the project when a project ends.
 
 ## Routing Table
 
@@ -179,12 +312,15 @@ Triggers:
 - "possible mechanism"
 - "can this become a paper"
 - "evaluate this idea"
+- "quickly screen this idea"
+- "quick screen"
 
 Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
-- Run D0 through D2 in Idea mode.
+- Run D0 through D2 in Idea mode. Treat research execution as serious by default even if the wording is casual.
+- If the user explicitly asks for a quick or no-file screen, keep the output compact but still include theorem sentence, closest-literature risk, absorption risk, and go/park/kill logic. Do not claim final novelty.
 - If the user asks whether the idea is worth pursuing, run an Idea Panel in Blind or Literature Mode after D2.
 - Create or update `discovery_state.md`, `topic_longlist.md`, and `topic_shortlist.md`.
 - Stop for human choice among candidates.
@@ -209,7 +345,9 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` if the probe will feed a high-stakes panel.
 - Run D3.
 - Search for closest substitute papers when web/search tools are available.
-- Create or update `literature_probe.md` and `field_profile.md`.
+- Create or update `literature_probe.md`, `literature_evidence_ledger.md`, and `field_profile.md`.
+- If the user asks for a full literature audit, complete the full D3 literature path and do not substitute a lightweight summary.
+- Record verified literature claims and AI inferences separately. Any nearest-substitute, anchor, or absorption-threat claim without a ledger entry remains provisional.
 - Mark literature and field classifications as provisional if search tools are unavailable.
 - Stop for human confirmation if `field_profile.md` is new, provisional, stale, marked `Reopen requested`, or materially changed.
 
@@ -261,7 +399,8 @@ Route:
 
 - Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
 - Run Stage 1.5.
-- Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
+- Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `literature_evidence_ledger.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
+- If target-fit or closest-literature claims depend on papers that are not recorded in `literature_evidence_ledger.md`, mark the target profile provisional for those claims.
 - Create or update `target_journal_profile.md` with primary target, stretch target, fallback target, target audience, fit standard, quality floor, theorem rigor expectation, reader path, referee mix implications, style calibration implications, upward-improvement requirements, and retargeting triggers.
 - Recommend a target ladder from project evidence rather than asking the user to choose blindly. Explain whether the recommendation reflects fit, reader path, field audience, theorem strength, absorption risk, exposition needs, or a genuine quality limitation.
 - Preserve upward ambition: if the primary target is RAND, still check for Econometrica, Theoretical Economics, or JET stretch potential.
@@ -298,6 +437,9 @@ Route:
 - Use confirmed `target_journal_profile.md` if available for target-aware model and theorem calibration, but do not let a non-Econometrica target skip model tournament, absorption testing, generality ledger, or main-theorem gate.
 - Generate 4-6 model variants before selecting one for full development.
 - Generate three non-neighborhood model directions when local repair is a risk.
+- Include candidate geometry for serious candidates: local extension, recombination, possible frontier spike, absorbed benchmark, clever but shallow, or hidden gem.
+- Use mutation operators when search appears trapped in local repair: primitive, endogenization, timing, information, objective, equilibrium-concept, boundary, duality, and field-transfer mutations.
+- Treat nonconvex discovery as branch generation inside the existing tree search. It expands candidate coverage and protects against false kills; it does not certify quality.
 - If the user explicitly asks for a model tournament or full model tournament, complete the model-tournament path: D4 model generation, D5 derivation where needed, and D6 absorption/main-theorem gate before recommending a winner. Do not merely summarize candidate variants.
 - Do not enter manuscript mode until a candidate theorem survives the main-theorem gate.
 - If selecting among candidates, run a Model Panel.
@@ -502,6 +644,7 @@ Route:
 - Reuse confirmed `target_journal_profile.md` when current; do not reopen target confirmation for style calibration alone.
 - If `style_calibration.md` is missing, provisional, stale, or inconsistent with the current theorem, contribution lock, field profile, target journal profile, or target audience, create or update it and stop for human confirmation before a full style pass.
 - Search for 3-5 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using `field_profile.md`, `target_journal_profile.md`, closest-literature themes, method, contribution type, and target audience.
+- Record style anchors in `literature_evidence_ledger.md`; if anchors are not backed by ledger entries, mark the style calibration provisional.
 - If web/search tools are unavailable, use the house style from Stage 6.5 and mark the style anchors and calibration as provisional.
 - Treat style anchors as calibration evidence, not prose templates: extract exposition moves, not sentences.
 - Do not change the central question, main theorem, model primitives, assumptions, novelty claim, target journal positioning, or unverified literature claims.
@@ -534,6 +677,7 @@ Route:
 - Reuse confirmed `target_journal_profile.md` when it exists; if it is missing, provisional, stale, or marked `Reopen requested`, create or update it from the manuscript, theorem, closest-literature, target-audience, and user-preference evidence and ask for target confirmation before running target-sensitive referee prompts.
 - Then create `referee_reports/round_N/panel_config.md` by detecting the manuscript's narrowest field, confirmed target, target audience, closest literature themes, main method, contribution type, and main technical risk.
 - Include target-calibrated calibration anchors in `panel_config.md`; if close anchors for the confirmed target cannot be named confidently, write anchor TODOs rather than inventing citations.
+- Anchor papers and absorption-threat papers used by the panel must appear in `literature_evidence_ledger.md`; otherwise mark the corresponding panel conclusion provisional.
 - Assign referees dynamically from `panel_config.md`; do not use a fixed field template unless the manuscript warrants it.
 - Do not reuse earlier paper-specific methodology files as referee-role templates unless the current `panel_config.md` re-justifies the same assignments.
 - Prefer parallel isolated referee agents when the runtime supports agent delegation; otherwise run serial isolated referee prompts.
@@ -584,6 +728,27 @@ Route:
 - Run Stage 10.
 - Do not make major conceptual edits.
 - Write or update `final_report.md`.
+
+### Research OS Dashboard
+
+Triggers:
+
+- "what should I do today"
+- "where is this project stuck"
+- "if I only have two hours"
+- "highest-value next action"
+- "current blocker"
+- "今天我该做什么"
+- "这个项目卡在哪里"
+- "只花两小时"
+
+Route:
+
+- Inspect `active_context.md` first if it exists, treating it only as a dashboard.
+- Verify the dashboard against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `target_journal_profile.md`, `literature_evidence_ledger.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
+- Report current stage, current blocker, pending human gate if any, safety barriers active, a 2-4 step horizon, the next action to execute, and why that action has the highest information value.
+- If a human gate is pending, present the explicit human gate format and stop.
+- Do not create a new research path solely for the dashboard; use the current source artifacts to choose the next safe action.
 
 ### Version Control and Rollback
 

@@ -29,9 +29,9 @@ star so more researchers can find and improve their own research process.
 
 ```mermaid
 flowchart LR
-    A["Topic or rough idea"] --> B["Literature probe<br/>field_profile.md"]
+    A["Topic or rough idea"] --> B["Literature probe<br/>field_profile.md<br/>literature_evidence_ledger.md"]
     B --> T["Target profile<br/>target_journal_profile.md"]
-    T --> C["Primitive Hunter<br/>Exploration Quota"]
+    T --> C["Primitive Hunter<br/>tree search + nonconvex branches"]
     C --> D["Model tournament"]
     D --> E["First-pass derivation"]
     E --> F["Absorption test<br/>main theorem gate"]
@@ -55,6 +55,7 @@ flowchart TD
     HD["human_decisions.md<br/>append-only gates"] --> OR
     FP["field_profile.md<br/>confirmed field and referee roles"] --> OR
     TJ["target_journal_profile.md<br/>target ladder and quality floor"] --> OR
+    LE["literature_evidence_ledger.md<br/>verified paper evidence"] --> OR
     GL["generality_ledger.md<br/>special-case and assumption drift"] --> OR
     OR --> WG["Workflow modules"]
     WG --> HP{"Human gate"}
@@ -66,10 +67,14 @@ must still be checked against the underlying workflow artifacts.
 
 ## What This System Does
 
+- Treats ordinary explanatory, translation, GitHub, software, or conceptual questions as ordinary Q&A.
+- Runs research execution seriously by default once the user asks the system to act on an idea, model, theorem, literature, manuscript, review, revision, or project state.
+- Uses simple user commands while keeping explicit human gates for major decisions.
 - Searches for research directions without immediately forcing mainstream taste.
 - Preserves 1-2 non-mainstream but internally coherent directions during discovery.
+- Records closest-paper, anchor-paper, absorption-threat, and style-anchor evidence in `literature_evidence_ledger.md`.
 - Runs Primitive Hunter / Theorem Generator panels when the primitive is unclear.
-- Compares model variants before manuscript writing.
+- Compares model variants before manuscript writing and uses nonconvex branch generation inside the existing tree search.
 - Requires absorption tests against closest literature and known theory families.
 - Uses `field_profile.md` to assign field-sensitive simulated referees.
 - Uses `target_journal_profile.md` to recommend and confirm a primary, stretch, and fallback target without lowering the quality floor.
@@ -133,6 +138,18 @@ Use the system: initialize this paper project.
 ```
 
 ```text
+Use the system: continue by the system.
+```
+
+```text
+Use the system: quickly screen this idea.
+```
+
+```text
+Use the system: run a full literature audit.
+```
+
+```text
 Use the system: I want to explore a new research topic.
 ```
 
@@ -157,15 +174,37 @@ Use the system: run a full target-calibrated simulated review.
 ```
 
 ```text
+Use the system: what should I do today?
+```
+
+```text
+Use the system: where is this project stuck?
+```
+
+```text
+Use the system: if I only have two hours, what is the highest-value next action?
+```
+
+```text
 Use the system: revise with agentic tree search instead of a defensive patch.
 ```
 
+Small Chinese command examples:
+
 ```text
-按系统继续。
+按系统继续
 ```
 
 ```text
-按系统处理：这个项目是不是陷入局部最优？
+快速看看这个想法
+```
+
+```text
+完整审查一遍
+```
+
+```text
+今天我该做什么
 ```
 
 ## Files
@@ -195,12 +234,53 @@ this workflow repository:
 | `human_decisions.md` | Append-only human gate decisions, reversals, and reasons. |
 | `field_profile.md` | Confirmed or provisional field profile for literature and referee routing. |
 | `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
+| `literature_evidence_ledger.md` | Verified source records for closest papers, anchors, absorption threats, and style anchors. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
 | `style_calibration.md` | Confirmed or provisional guide for elegant, field-calibrated exposition without rhetoric. |
+| `spike_dossier.md` | Optional focused dossier for a possible frontier spike that survives D6. |
+| `literature_cache/` | Optional local cache for user-authorized or open-access papers; bulk download is not the default. |
 | `toolchain_status.md` | Computer-level diagnostic status, usually stored globally outside the paper project. |
 | `model_tournament.md` | Comparison of model variants and documented winners/losers. |
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
+
+## If You Use Git
+
+Generated research files are saved locally in each paper project folder. They are
+not automatically uploaded to GitHub. The workflow works locally even if you
+never use Git.
+
+If you use GitHub as a backup for a paper project, you may choose which generated
+research files to track. Durable research records that are often worth tracking
+include:
+
+```text
+human_decisions.md
+project_state.md
+contribution_lock.md
+field_profile.md
+target_journal_profile.md
+literature_evidence_ledger.md
+model_tournament.md
+absorption_tests.md
+generality_ledger.md
+risk_register.md
+revision_tree.md
+revision_log.md
+version_log.md
+```
+
+Files that usually do not need to be tracked include:
+
+```text
+active_context.md
+toolchain_status.md
+referee_reports/
+verification/
+formal/
+lean/
+large local caches
+```
 
 ## Toolchain
 
@@ -240,16 +320,41 @@ Chinese commands are supported for convenience, but generated research files
 remain English unless the user explicitly requests a separate Chinese
 explanatory note outside the manuscript workflow.
 
+## Optional Researcher Memory
+
+Project artifacts are the source of truth. Cross-project memory, if used, is only
+an optional prior stored outside paper projects, typically under:
+
+```text
+C:\Users\<user>\.econ-theorist-ai\
+```
+
+Possible files include `researcher_profile.md`, `method_library.md`,
+`negative_knowledge.md`, `proof_technique_memory.md`, `project_postmortems/`,
+and `field_maps/`. Literature evidence, proof verification, and current human
+gate decisions override researcher memory.
+
 ## Design Principles
 
 - Scientific taste is a filter, not the sole objective.
+- Simple commands must not weaken human gates.
+- Research execution is serious by default, while ordinary Q&A remains ordinary Q&A.
+- Nonconvex discovery expands branch generation inside tree search; it does not certify quality.
 - Target journal changes calibration, not quality.
+- Strong novelty, absorption, anchor, and style claims require evidence recorded in `literature_evidence_ledger.md` or must be marked provisional.
 - Token economy must never override research quality.
 - Main theorem discovery, proof verification, closest-literature checks, and simulated review require enough context and tools.
 - Human gate decisions must be written to persistent artifacts.
 - Simulated acceptance is a diagnostic benchmark, not a publication guarantee.
 - If the paper is stuck in local polishing, return to primitive hunting and model discovery.
 - The preferred path is theorem note first, manuscript second.
+
+## Planned Public-Use Improvements
+
+- Toy worked examples.
+- Benchmark cases.
+- Richer verification templates.
+- Optional cross-platform toolchain notes.
 
 ## Feedback and Issues
 

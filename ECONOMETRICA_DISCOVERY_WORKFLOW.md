@@ -18,6 +18,8 @@ For high-stakes screening, model selection, and investment decisions, also read 
 
 AI can expand the search frontier, but it cannot certify that a topic is unstudied, important, or Econometrica-level. Treat all generated topics as hypotheses. A candidate survives only if it passes novelty, tractability, economic importance, and execution tests.
 
+Nonconvex discovery expands candidate generation; it does not certify quality. Tree search remains the search structure. Nonconvex discovery is an internal branch-generation and false-kill prevention discipline inside D1, D4, Primitive Hunter, and D6.
+
 Main-theorem-first rule: do not move into a full manuscript until the project has a candidate main theorem that can be stated in one sharp sentence:
 
 ```text
@@ -41,10 +43,12 @@ Maintain these files during discovery:
 - `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
 - `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
 - `literature_probe.md`: closest literatures, nearest substitutes, novelty risks, and citation TODOs.
+- `literature_evidence_ledger.md`: verified source records for closest papers, anchor papers, absorption threats, and style anchors.
 - `field_profile.md`: project-level field configuration confirmed by the human when possible.
 - `target_journal_profile.md`: target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
 - `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
 - `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
+- `spike_dossier.md`: optional dossier created only when a possible frontier spike survives D6 and needs focused development.
 - `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
 
 ## Exploration Quota
@@ -59,6 +63,43 @@ For every exploration direction, record:
 - why this is not just a local variant of the current model or a nearby paper
 
 Do not kill an exploration-quota variant merely because it does not look like mainstream taste. It can be killed only after the workflow explains why the primitive is shallow, the theorem has low bite, the direction is absorbed by closest literature, or the assumptions become artificial.
+
+## Nonconvex Branch Generation
+
+D1, D4, and Primitive Hunter should classify serious candidates by candidate geometry:
+
+```text
+local extension
+recombination
+possible frontier spike
+absorbed benchmark
+clever but shallow
+hidden gem
+```
+
+Possible frontier spike protection is not acceptance. A possible frontier spike cannot be killed merely for weirdness, non-mainstream taste, or weak initial positioning. It can be killed after tests show shallow primitive, weak theorem bite, absorption by existing theory, artificial assumptions, infeasible proof, or unacceptable legibility cost.
+
+Use these mutation operators when the search is trapped in local repair or when discovery breadth matters:
+
+```text
+primitive mutation
+endogenization mutation
+timing mutation
+information mutation
+objective mutation
+equilibrium-concept mutation
+boundary mutation
+duality mutation
+field-transfer mutation
+```
+
+Reuse existing artifacts:
+
+- Put the frontier map in `literature_probe.md` and `literature_evidence_ledger.md`.
+- Put the mutation queue in `primitive_hunter_report.md`.
+- Create `spike_dossier.md` only if a possible frontier spike survives D6.
+- Put convexification plans in `model_tournament.md` or `contribution_lock.md`.
+- Put negative results in `idea_kill_tests.md`.
 
 If a candidate becomes a real paper project, create or update:
 
@@ -195,6 +236,12 @@ Absorption risk:
 Why not local variant:
 Why it might matter:
 Closest literature families:
+Candidate geometry:
+Evidence status: verified / inferred / speculative
+Main uncertainty:
+Most informative next test:
+Kill condition:
+Spike protection status:
 Tractability guess:
 Novelty risk:
 Execution risk:
@@ -210,6 +257,8 @@ Rules:
 - Include some clean and tractable candidates.
 - Include at least 1-2 non-mainstream but internally coherent exploration-quota candidates when the search space permits.
 - Flag candidates that sound clever but not important.
+- Classify each serious candidate by candidate geometry: local extension, recombination, possible frontier spike, absorbed benchmark, clever but shallow, or hidden gem.
+- Use candidate geometry to diversify branch generation and prevent false kills; it is not evidence that a candidate is high quality.
 
 ## Stage D2 - Coarse Screening
 
@@ -256,6 +305,7 @@ Avoid rediscovering known papers.
 AI tasks:
 
 - Create `literature_probe.md`.
+- Create or update `literature_evidence_ledger.md`.
 - Create or update `field_profile.md`.
 - Create or update `target_journal_profile.md` when enough evidence exists to recommend a target ladder.
 - For each shortlisted candidate:
@@ -277,6 +327,29 @@ AI tasks:
   - confidence, uncertainty, and evidence that would reopen the classification
 - Separate verified facts from AI inferences.
 - Mark all unverified references as TODO.
+- Every closest-paper, anchor-paper, absorption-threat, or style-anchor claim must have a `literature_evidence_ledger.md` entry before downstream artifacts treat it as confirmed.
+- Use this minimum ledger entry:
+
+```text
+Paper title:
+Authors:
+Year:
+Publication / working paper status:
+Source opened:
+DOI / journal / NBER / SSRN / RePEc / publisher link:
+Verified claim from source:
+AI inference:
+Relation to current project:
+  nearest substitute / ancestor / method anchor / style anchor / absorption threat / adjacent literature
+Novelty threat:
+Confidence:
+Unverified TODO:
+```
+
+- If a relevant paper has not been recorded in the ledger, mark the corresponding `field_profile.md`, `target_journal_profile.md`, `absorption_tests.md`, `panel_config.md`, and `style_calibration.md` judgment provisional.
+- Default to search/open/verify/record evidence, not bulk-downloading PDFs.
+- Download only open-access papers, user-provided PDFs, or papers explicitly authorized by the user. If downloaded, store them in `literature_cache/` and record source and permission status in the ledger.
+- Extract model, proof, and exposition moves from papers; do not copy copyrighted prose or treat an anchor as a prose template.
 - Recommend a provisional target ladder using the idea, field profile, closest-literature themes, contribution type, theorem evidence if available, and absorption risk:
   - Econometrica, Theoretical Economics, or JET when the primitive is deep, the theorem is general, theorem bite is high, and absorption risk is low.
   - RAND when the economic mechanism has IO, platform, market design, regulatory, institutional, or applied-theory relevance with clear comparative statics and an applied-theory reader path.
@@ -319,6 +392,8 @@ AI tasks:
   - three non-neighborhood model directions when the current model seems trapped in local repair
 - Preserve 1-2 non-mainstream but internally coherent directions from the exploration quota unless D1 or the Primitive Hunter already killed them for documented primitive, theorem, or absorption reasons.
 - For each exploration-quota direction, state the deep primitive, possible theorem sentence, absorption risk, and why it is not a local variant.
+- When local repair is a risk, use the mutation operators from the Nonconvex Branch Generation section before adding auxiliary features to the current model.
+- For each possible frontier spike, identify the primitive-theorem pair, closest absorption threat, proof bottleneck, and legibility cost before any kill decision.
 
 Model template:
 
@@ -337,6 +412,13 @@ Key assumptions:
 Main endogenous objects:
 Predicted main proposition:
 Possible theorem sentence:
+Candidate geometry:
+Belief state:
+  evidence status: verified / inferred / speculative
+  main uncertainty:
+  most informative next test:
+  kill condition:
+  spike protection status:
 Comparative statics:
 Welfare or policy object:
 Why tractable:
@@ -364,9 +446,10 @@ and predicted theorem. Ask whether the predicted result is essentially a
 renaming or modest extension of one of those nearest theory families.
 
 This inference must be checked against the live literature search in
-`literature_probe.md` when web/search tools are available. If no search was run,
-record the theory-family classification as provisional and do not use it as a
-final kill or invest decision.
+`literature_probe.md` and `literature_evidence_ledger.md` when web/search tools
+are available. If no search was run, or if the closest substitute is not recorded
+in the ledger, record the theory-family classification as provisional and do not
+use it as a final kill or invest decision.
 
 If yes, the model can still be useful, but it cannot be the main theorem unless the note explains the non-absorbed element.
 
@@ -450,6 +533,8 @@ AI tasks:
 - Create or update `absorption_tests.md`.
 - Create or update `model_tournament.md`.
 - Create or update `generality_ledger.md`.
+- Use the latest `literature_evidence_ledger.md` before treating closest-paper, anchor-paper, or absorption-threat claims as confirmed.
+- If a closest substitute or absorption threat is not recorded in `literature_evidence_ledger.md`, mark the corresponding absorption judgment provisional.
 - Check whether `field_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If it is missing, provisional, stale, or reopened, update it from the latest `literature_probe.md` and stop for field confirmation before treating absorption as final.
 - Check whether `target_journal_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If theorem quality, absorption risk, target audience, or field evidence materially changes the target ladder, update it and stop for target confirmation before treating journal fit as final.
 - Do not skip absorption tests, model tournament, generality ledger, or main theorem gate because the target is RAND, GEB, a field journal, or any non-Econometrica outlet.
@@ -475,11 +560,13 @@ AI tasks:
 Absorption test:
 
 - Before judging absorption, confirm the nearest theory families and substitute papers through the latest `literature_probe.md`.
+- Confirm that the nearest substitute papers and absorption threats appear in `literature_evidence_ledger.md`.
 - If the theorem is equivalent to a nearest classical theory family after renaming variables, it fails as a main theorem.
-- If web/search tools were unavailable and the closest literature was not checked, label the absorption result `provisional` rather than final.
+- If web/search tools were unavailable, the closest literature was not checked, or the relevant papers are missing from the ledger, label the absorption result `provisional` rather than final.
 - If only a narrow part is absorbed, demote that part to a benchmark and search for the non-absorbed theorem.
 - If the model's key object is assumed rather than generated, require an endogenization plan before `Invest`.
 - Do not kill an exploration-quota variant because it lacks mainstream taste; judge it separately on deep primitive potential, theorem bite, absorption risk, and assumption artificiality.
+- Do not kill a possible frontier spike merely because it looks weird or initially hard to position. Kill or park it only after spike-specific tests show weak primitive depth, weak theorem bite, absorption escape failure, artificial assumptions, infeasible proof, or unacceptable legibility cost.
 
 Main theorem gate:
 
@@ -490,6 +577,7 @@ The candidate cannot receive `Invest` unless all are true:
 - The result is not merely a package of local sufficient conditions.
 - The model primitive that carries the contribution is economically interpretable or explicitly endogenized.
 - At least one alternative model variant has been killed for a documented reason.
+- Any closest-literature or absorption-threat evidence used for the theorem gate is recorded in `literature_evidence_ledger.md`, or the gate is explicitly provisional.
 
 Hostile kill conditions:
 
@@ -590,13 +678,13 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Gener
 ### Run Literature Probe And Field Profile
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candidate. Search for closest substitute papers when web/search tools are available, record verified and inferred literature claims separately, create literature_probe.md, and create or update field_profile.md with the primary field, adjacent fields, absorption-risk theory families, and field-sensitive Referee 1-3 roles. If evidence is sufficient, create or update target_journal_profile.md with a primary/stretch/fallback target ladder and quality floor. Stop for my confirmation of the field profile and target profile before any high-stakes panel relies on them.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candidate. Search for closest substitute papers when web/search tools are available, record verified and inferred literature claims separately, create literature_probe.md, and create or update literature_evidence_ledger.md with entries for every closest paper, anchor paper, absorption threat, and style anchor used downstream. Create or update field_profile.md with the primary field, adjacent fields, absorption-risk theory families, and field-sensitive Referee 1-3 roles. If evidence is sufficient, create or update target_journal_profile.md with a primary/stretch/fallback target ladder and quality floor. If any closest-literature or absorption claim lacks a ledger entry, mark the affected judgment provisional. Stop for my confirmation of the field profile and target profile before any high-stakes panel relies on them.
 ```
 
 ### Generate Models for Shortlisted Ideas
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Then generate 4-6 tractable model variants for each selected candidate, including three non-neighborhood model directions when local repair is a risk and 1-2 non-mainstream but internally coherent exploration-quota directions when available. For each such direction, state the deep primitive, possible theorem sentence, absorption risk, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Then generate 4-6 tractable model variants for each selected candidate, including local extension, recombination, and possible frontier-spike branches where appropriate; use primitive, endogenization, timing, information, objective, equilibrium-concept, boundary, duality, and field-transfer mutations when local repair is a risk. For each serious direction, record candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
 ```
 
 ### Attempt First-Pass Derivations
@@ -608,7 +696,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the selected model can
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota variants merely because they are non-mainstream, and do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, literature_evidence_ledger.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if a closest substitute or absorption threat lacks a ledger entry, mark the absorption judgment provisional. If field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota or possible frontier-spike variants merely because they are non-mainstream or hard to position; use spike-specific tests for primitive depth, theorem bite, absorption escape, assumptions, proof feasibility, and legibility. Do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow

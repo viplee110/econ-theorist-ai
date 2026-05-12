@@ -36,6 +36,16 @@ Then initialize the current paper project:
 Use the system: initialize this paper project
 ```
 
+Other useful entry commands:
+
+```text
+Use the system: continue by the system.
+Use the system: quickly screen this idea.
+Use the system: run a full literature audit.
+Use the system: run a full simulated review.
+Use the system: what should I do today?
+```
+
 ## Option B - Git Clone and Copy
 
 Clone the workflow repository somewhere stable, then copy the workflow files into each paper project.
@@ -84,3 +94,41 @@ or:
 ```
 
 If Python, Lean, or Mathematica are unavailable, the workflows still work as prompts and checklists, but mathematical verification will be weaker.
+
+## If You Use Git
+
+Generated research files are saved locally in each paper project folder. They are
+not automatically uploaded to GitHub. The workflow works locally even if you
+never use Git.
+
+If you use GitHub as a backup for a paper project, you may choose which generated
+research files to track. Durable research records that are often worth tracking
+include:
+
+```text
+human_decisions.md
+project_state.md
+contribution_lock.md
+field_profile.md
+target_journal_profile.md
+literature_evidence_ledger.md
+model_tournament.md
+absorption_tests.md
+generality_ledger.md
+risk_register.md
+revision_tree.md
+revision_log.md
+version_log.md
+```
+
+Files that usually do not need to be tracked include:
+
+```text
+active_context.md
+toolchain_status.md
+referee_reports/
+verification/
+formal/
+lean/
+large local caches
+```
