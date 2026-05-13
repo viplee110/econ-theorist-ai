@@ -426,7 +426,7 @@ Outputs:
 
 ### Exposition Editor / Elegant Reader
 
-Use during Stage 6.5 style calibration or when the manuscript reads like a mechanical solution note even though the theorem and contribution may be sound. This is a light functional role, not a referee vote.
+Use during Stage 6.5 Deep Style Anchor Pass or when the manuscript reads like a mechanical solution note even though the theorem and contribution may be sound. This is a light functional role, not a referee vote.
 
 The Exposition Editor / Elegant Reader evaluates whether:
 
@@ -441,7 +441,9 @@ Rules:
 
 - This role cannot approve conceptual changes.
 - It must not change theorem statements, assumptions, novelty claims, target-journal positioning, or unverified literature claims.
-- It may use published papers as style anchors only to extract exposition moves, not sentences, paragraph structures, or framing.
+- It reads `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_calibration.md` when they exist.
+- It may use published papers as style anchors only to extract exposition architecture and exposition moves, not sentences, paragraph structures, or framing.
+- It should check whether the anchor evidence is full-text, partial, or provisional, and whether any style claim lacks a `literature_evidence_ledger.md` entry.
 - If it finds a structural issue, it routes to the Scientific Judge, Discovery D4-D6, or Stage 8 tree search rather than polishing.
 - Its findings should be written into `style_calibration.md` or, if run inside a panel, summarized in the panel output.
 

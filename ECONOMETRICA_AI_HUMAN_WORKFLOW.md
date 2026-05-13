@@ -484,17 +484,21 @@ Proceed condition:
 
 - The manuscript expresses the locked contribution clearly and does not contain obvious correctness or exposition blockers.
 
-## Stage 6.5 - Style Calibration and Exposition Elegance
+## Stage 6.5 - Deep Style Anchor Pass and Exposition Elegance
 
 Autonomy: Checkpoint for calibration, Auto after human confirmation
 
 Purpose:
 
-Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and the confirmed target's quality floor.
+Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and the confirmed target's quality floor. This stage performs deep style reading when full-text anchors are legally available or user-provided; it does not imitate prose.
 
 Guiding principles:
 
 ```text
+Deep style reading, not prose imitation.
+Use full-text anchors when legally available or user-provided.
+Extract exposition architecture, not sentences.
+Style calibration improves reader path; it must not hide weak theory.
 Elegance without rhetoric.
 Use published papers as calibration anchors, not prose templates.
 Extract exposition moves, not sentences.
@@ -511,9 +515,13 @@ Prerequisites:
 AI tasks:
 
 - Inspect the current manuscript and core artifacts: `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `risk_register.md`, and latest referee reports if available.
-- Search for 3-5 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, target journal, and target audience.
+- Search for 5-8 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, target journal, and target audience. If fewer high-quality full-text anchors are legally available, use 3-5 and mark the coverage limitation.
+- Prefer user-provided PDFs, open-access papers, working papers, author-posted versions, SSRN, NBER, RePEc, journal open pages, or papers the user explicitly authorizes. Do not default to bulk download.
+- If downloaded, store only legally available or authorized files in `literature_cache/style_anchors/` and record source and permission status.
 - Record named style anchors in `literature_evidence_ledger.md`. If an anchor is not recorded there, keep the corresponding style claim provisional.
-- If web/search tools are unavailable, use the house style below and mark the style anchors and calibration as `provisional`.
+- If only abstracts, web pages, or fragments are available, mark that anchor's style evidence `provisional` and label it as provisional style evidence.
+- Create or update `style_anchor_notes/`, with one note per serious anchor.
+- Create or update `style_anchor_matrix.md`.
 - Create or update `style_calibration.md` with:
   - field profile source and status
   - target journal profile source and status
@@ -521,16 +529,67 @@ AI tasks:
   - target voice
   - style anchor list with citations or links
   - literature evidence ledger status for anchors
-  - extracted exposition moves, not copied prose
+  - full-text / partial / provisional status for each anchor
+  - anchor-derived exposition rules
+  - section-by-section mechanical prose diagnosis
+  - theorem setup rules
+  - assumption interpretation rules
+  - proof roadmap rules
+  - paragraph-level rewrite rules
   - current mechanical prose diagnosis
   - forbidden rhetoric and overclaiming rules
   - invariants that must not change
-  - 2-3 sample rewrites for human approval
+  - 3-5 sample rewrites for human approval
   - sections needing calibration
+- Create or update `style_pass_plan.md` before any full style pass.
 - Stop for human confirmation before any full style pass. The user may confirm, edit, or reject the style direction.
 - Record the confirmed or revised style decision in `human_decisions.md` and keep the active constraints in `style_calibration.md`.
-- After confirmation, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, section openings, and paragraph flow.
+- After confirmation, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, section openings, paragraph pacing, and paragraph flow section by section.
 - Log nontrivial edits in `revision_log.md` and compile after meaningful manuscript edits when possible.
+
+Minimum `style_anchor_notes/[short_id].md` fields:
+
+```text
+Anchor:
+Why chosen:
+Source / access status / ledger link:
+Full-text status: full-text / partial / provisional
+Reader path:
+Introduction opening move:
+Puzzle-to-primitive move:
+Assumption exposition move:
+Theorem setup move:
+Proof roadmap move:
+Literature positioning move:
+Transition and paragraph pacing:
+What not to imitate:
+Applicable sections in our manuscript:
+```
+
+Minimum `style_anchor_matrix.md` fields:
+
+```text
+Anchor set and coverage limitation:
+Common exposition moves:
+Target-specific moves:
+Field-specific moves:
+Theorem-presentation patterns:
+Proof-roadmap patterns:
+Literature-positioning patterns:
+Moves unsuitable for our paper:
+Confidence by anchor: full-text / partial / provisional
+```
+
+Minimum `style_pass_plan.md` fields:
+
+```text
+Sections needing calibration:
+Per-section rewrite objective:
+Risk of changing meaning:
+Style-anchor moves to apply:
+Locked theorem / assumption / novelty text:
+Compile or check requirement after meaningful edits:
+```
 
 House style:
 
@@ -546,12 +605,14 @@ Guardrails:
 - Do not change the central question, main theorem, model primitives, assumption set, novelty claim, target journal positioning, or unverified citations/literature claims.
 - Do not copy sentences, paragraph structures, or framing from style anchors.
 - Summarize anchor-paper exposition strategies only; do not quote long passages.
+- Extract exposition architecture, not sentences. Anchor papers are calibration evidence, not prose templates.
 - If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, or defensive dilution, stop and route back to Discovery D4-D6 or Stage 8 tree search instead of polishing.
 - If confirmed `style_calibration.md` exists and the field profile, target journal profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
 
 Proceed condition:
 
 - `style_calibration.md` is confirmed or explicitly provisional.
+- `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_pass_plan.md` exist or the system has explained why coverage is provisional.
 - The manuscript is more readable and more human without weakening the locked contribution.
 - Any conceptual, theorem, assumption, or novelty issue found during style work is recorded as a risk rather than hidden by elegant prose.
 
@@ -821,7 +882,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution
 ### Style Calibration
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5. Reuse confirmed field_profile.md and target_journal_profile.md when current; do not reopen field or target confirmation for style calibration alone. Search for 3-5 field-matched and target-matched style anchors when web/search tools are available; record named anchors in literature_evidence_ledger.md, otherwise mark the calibration provisional. Create or update style_calibration.md with field source, target source, target reader, target voice, anchor-derived exposition moves, literature evidence ledger status, mechanical prose diagnosis, forbidden rhetoric, invariants, and 2-3 sample rewrites. Stop for my confirmation before any full style pass.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5 Deep Style Anchor Pass. Reuse confirmed field_profile.md and target_journal_profile.md when current; do not reopen field or target confirmation for style calibration alone. Prefer user-provided PDFs or legally available full-text anchors. Search for 5-8 field-matched and target-matched style anchors when web/search tools are available; if fewer high-quality full-text anchors are available, use 3-5 and mark the coverage limitation. Record named anchors in literature_evidence_ledger.md, create style_anchor_notes/, style_anchor_matrix.md, style_calibration.md, and style_pass_plan.md. If anchors are partial or lack ledger entries, mark the relevant style evidence provisional. Create style_calibration.md as a style contract with target reader, target voice, anchor-derived exposition architecture, section-by-section mechanical prose diagnosis, theorem setup rules, assumption interpretation rules, proof roadmap rules, paragraph-level rewrite rules, forbidden rhetoric, invariants, and 3-5 sample rewrites. Stop for my confirmation before any full style pass.
 ```
 
 ### Target-Calibrated Simulated Review

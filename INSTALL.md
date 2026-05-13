@@ -126,6 +126,9 @@ Files that usually do not need to be tracked include:
 ```text
 active_context.md
 toolchain_status.md
+style_anchor_notes/
+style_anchor_matrix.md
+style_pass_plan.md
 referee_reports/
 verification/
 formal/

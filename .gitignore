@@ -21,12 +21,16 @@ formalization_notes.md
 literature_probe.md
 literature_evidence_ledger.md
 literature_cache/
+literature_cache/style_anchors/
 topic_longlist.md
 topic_shortlist.md
 idea_kill_tests.md
 human_decisions.md
 generality_ledger.md
 style_calibration.md
+style_anchor_notes/
+style_anchor_matrix.md
+style_pass_plan.md
 target_journal_profile.md
 spike_dossier.md
 toolchain_status.md

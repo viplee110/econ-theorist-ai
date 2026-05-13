@@ -169,7 +169,9 @@ Before routing, inspect whichever of these files exist:
 - `risk_register.md`
 - `revision_log.md`
 - `revision_tree.md`
+- `style_anchor_matrix.md`
 - `style_calibration.md`
+- `style_pass_plan.md`
 - `generality_ledger.md`
 - latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
@@ -621,11 +623,12 @@ Route:
 - Update `revision_log.md` and `risk_register.md`.
 - Stop if a foundational issue appears.
 
-### Style Calibration and Exposition Elegance
+### Deep Style Anchor Pass and Exposition Elegance
 
 Triggers:
 
 - "style calibration"
+- "Deep Style Anchor Pass"
 - "elegance without rhetoric"
 - "文章太机械"
 - "读起来像做数学题"
@@ -642,14 +645,18 @@ Route:
 - Run Stage 6.5.
 - Reuse confirmed `field_profile.md` when current; do not reopen field confirmation for style calibration alone.
 - Reuse confirmed `target_journal_profile.md` when current; do not reopen target confirmation for style calibration alone.
-- If `style_calibration.md` is missing, provisional, stale, or inconsistent with the current theorem, contribution lock, field profile, target journal profile, or target audience, create or update it and stop for human confirmation before a full style pass.
-- Search for 3-5 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using `field_profile.md`, `target_journal_profile.md`, closest-literature themes, method, contribution type, and target audience.
+- If `style_calibration.md` is missing, provisional, stale, or inconsistent with the current theorem, contribution lock, field profile, target journal profile, or target audience, run a Deep Style Anchor Pass first and stop for human confirmation before a full style pass.
+- Prefer user-provided PDFs or a user-provided local literature folder when available.
+- Search for 5-8 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available. If fewer high-quality full-text anchors are legally available, use 3-5 and mark the coverage limitation.
+- Prefer full-text anchors from user-provided PDFs, open-access papers, working papers, author-posted versions, SSRN, NBER, RePEc, journal open pages, or papers the user explicitly authorizes.
+- Do not do unauthorized bulk downloads. If downloaded, store only legally available or authorized files in `literature_cache/style_anchors/` and record source and permission status.
 - Record style anchors in `literature_evidence_ledger.md`; if anchors are not backed by ledger entries, mark the style calibration provisional.
-- If web/search tools are unavailable, use the house style from Stage 6.5 and mark the style anchors and calibration as provisional.
-- Treat style anchors as calibration evidence, not prose templates: extract exposition moves, not sentences.
+- Create or update `style_anchor_notes/`, `style_anchor_matrix.md`, `style_calibration.md`, and `style_pass_plan.md`.
+- If only abstracts, web pages, or fragments are available, mark that anchor's style evidence as provisional, label it as provisional style evidence, and state that the calibration is based on partial anchors.
+- Treat style anchors as calibration evidence, not prose templates: extract exposition architecture and exposition moves, not sentences.
 - Do not change the central question, main theorem, model primitives, assumptions, novelty claim, target journal positioning, or unverified literature claims.
 - If the manuscript is mechanical because the theorem is weak, the contribution is unclear, assumptions are patchy, or defensive dilution is present, route to Discovery D4-D6 or Stage 8 tree search instead of polishing.
-- After human confirmation of `style_calibration.md`, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, and paragraph flow; then update `revision_log.md` and compile when possible.
+- After human confirmation of the style contract in `style_calibration.md`, perform a paragraph-level manuscript style pass using `style_pass_plan.md`; improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, paragraph pacing, and flow; then update `revision_log.md` and compile when possible.
 
 ### Simulated Review
 

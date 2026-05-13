@@ -37,7 +37,7 @@ flowchart LR
     E --> F["Absorption test<br/>main theorem gate"]
     F --> G["5-8 page model note"]
     G --> H["Manuscript development"]
-    H --> S["Style calibration<br/>style_calibration.md"]
+    H --> S["Deep style anchor pass<br/>style_calibration.md"]
     S --> I["Target-calibrated<br/>simulated review"]
     S -->|structural weakness| C
     I --> J["Revision tree"]
@@ -83,7 +83,8 @@ must still be checked against the underlying workflow artifacts.
 - Uses Scientific Judge / Nugget Test safeguards against defensive complexity.
 - Runs target-calibrated simulated review with dynamic referee roles.
 - Routes local-optimum traps back to discovery before manuscript polishing.
-- Calibrates exposition style with elegance without rhetoric after the contribution is locked.
+- Calibrates exposition style through a Deep Style Anchor Pass after the contribution is locked.
+- Uses full-text style anchors when legally available or user-provided, extracting exposition architecture rather than prose.
 - Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
 
 ## Start In 5 Minutes
@@ -236,9 +237,13 @@ this workflow repository:
 | `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
 | `literature_evidence_ledger.md` | Verified source records for closest papers, anchors, absorption threats, and style anchors. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
-| `style_calibration.md` | Confirmed or provisional guide for elegant, field-calibrated exposition without rhetoric. |
+| `style_anchor_notes/` | Per-anchor notes from deep reading of legally available or user-provided style anchors. |
+| `style_anchor_matrix.md` | Cross-anchor matrix of exposition architecture, reader path, theorem setup, and proof roadmap moves. |
+| `style_calibration.md` | Human-confirmed style contract for elegant, field-calibrated exposition without rhetoric. |
+| `style_pass_plan.md` | Section-by-section plan for paragraph-level style correction after style confirmation. |
 | `spike_dossier.md` | Optional focused dossier for a possible frontier spike that survives D6. |
 | `literature_cache/` | Optional local cache for user-authorized or open-access papers; bulk download is not the default. |
+| `literature_cache/style_anchors/` | Optional cache for legally available or user-authorized style anchor PDFs. |
 | `toolchain_status.md` | Computer-level diagnostic status, usually stored globally outside the paper project. |
 | `model_tournament.md` | Comparison of model variants and documented winners/losers. |
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
@@ -342,6 +347,8 @@ gate decisions override researcher memory.
 - Nonconvex discovery expands branch generation inside tree search; it does not certify quality.
 - Target journal changes calibration, not quality.
 - Strong novelty, absorption, anchor, and style claims require evidence recorded in `literature_evidence_ledger.md` or must be marked provisional.
+- Deep style calibration means deep style reading, not prose imitation.
+- Style anchors are used to extract exposition architecture, not sentences, paragraph structures, or framing.
 - Token economy must never override research quality.
 - Main theorem discovery, proof verification, closest-literature checks, and simulated review require enough context and tools.
 - Human gate decisions must be written to persistent artifacts.
