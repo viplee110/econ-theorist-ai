@@ -383,6 +383,20 @@ accepted changes directly to preserve consistency across the workflow system.
 
 See `CONTRIBUTING.md` for the current contribution policy.
 
+## Citation And Credit
+
+If this system helps your research, please cite the repository and consider
+starring it on GitHub so other researchers can find it.
+
+GitHub should display a "Cite this repository" option from `CITATION.cff`.
+
+Suggested plain-text citation:
+
+```text
+viplee110. econ-theorist-ai: An AI workflow system for economic theory research.
+GitHub repository, 2026. https://github.com/viplee110/econ-theorist-ai
+```
+
 ## License
 
 Licensed under the Apache License 2.0. See `LICENSE`.
