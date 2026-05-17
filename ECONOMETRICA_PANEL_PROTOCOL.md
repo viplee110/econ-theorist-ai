@@ -293,6 +293,7 @@ Roles:
 - Referee 2: economic mechanism and comparative statics, specialized to the detected field.
 - Referee 3: novelty and absorption risk relative to the closest canonical or substitute models.
 - Referee 4: rigor specialist selected from the candidate model's main risk, such as existence, uniqueness, fixed point, IFT, contraction, boundary behavior, computation, or assumption packaging.
+- Model Base Architect / Economic Naturalness Reader: checks whether the model base is built from a smallest economically interpretable example, whether user-supplied model elements are still provisional or confirmed, whether simpler models fail for economic reasons, and whether proof machinery is entering before economic necessity has been explained.
 - Associate Editor: selects Invest, Refine, Pivot, Demote to Benchmark, Park, or Kill for each model.
 - Co-Editor: decides which model, if any, should enter the pre-paper model-note stage.
 
@@ -303,6 +304,7 @@ Outputs:
 - `panel_reports/model_referee_2.md`
 - `panel_reports/model_referee_3.md`
 - `panel_reports/model_referee_4_rigor.md`
+- `panel_reports/model_base_architect.md`
 - `panel_reports/model_ae_report.md`
 - `panel_reports/model_co_editor_decision.md`
 
@@ -536,6 +538,17 @@ Absorption families to test must be derived from the closest-literature search a
 The closest substitute papers and absorption threats used in this test must appear in `literature_evidence_ledger.md`. If they do not, the panel may still explain a provisional risk, but it must not present the absorption conclusion as final.
 
 If the panel can reproduce the result by renaming variables inside a known framework, it should recommend `Demote to benchmark`, `Pivot`, `Park`, or `Kill`, not `Invest`. If the issue is that a key primitive is reduced-form, the panel should identify what must be endogenized before manuscript development.
+
+## Model-Base Naturalness Test
+
+Before a Model Panel recommends a candidate for D5 derivation or D7 pre-paper packaging, it must check:
+
+- Is the candidate grounded in a smallest real-world scene or toy example?
+- Are the agent set, timing, information, choices, state variables, frictions, and equilibrium concept necessary for the economic force?
+- Which user-supplied model elements remain provisional modeling constraints rather than confirmed primitives?
+- Why do simpler models fail?
+- Does the model rely on fixed point, contraction, IFT, or existence machinery before explaining the economic object requiring consistency?
+- If the model is mechanically formal, assumption-heavy, or lacks a clear toy example, route back to D4.5 rather than recommending formal derivation.
 
 ## Nugget and Occam Test
 

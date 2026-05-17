@@ -10,8 +10,9 @@ default.
 
 Originally developed with Econometrica-level theory standards in mind, this
 unofficial local workflow system helps researchers move from rough ideas to
-primitive hunting, model tournaments, theorem candidates, absorption tests, target
-journal calibration, human gates, simulated review, and controlled revision paths.
+primitive hunting, example-to-theory model-base construction, model tournaments,
+theorem candidates, absorption tests, target journal calibration, human gates,
+simulated review, and controlled revision paths.
 
 This project is not affiliated with Econometrica. The phrase
 `Econometrica-level` is used only as shorthand for high standards of theoretical
@@ -33,7 +34,8 @@ flowchart LR
     B --> T["Target profile<br/>target_journal_profile.md"]
     T --> C["Primitive Hunter<br/>tree search + nonconvex branches"]
     C --> D["Model tournament"]
-    D --> E["First-pass derivation"]
+    D --> MB["Example-to-theory<br/>model_base_design.md"]
+    MB --> E["First-pass derivation"]
     E --> F["Absorption test<br/>main theorem gate"]
     F --> G["5-8 page model note"]
     G --> H["Manuscript development"]
@@ -74,6 +76,9 @@ must still be checked against the underlying workflow artifacts.
 - Preserves 1-2 non-mainstream but internally coherent directions during discovery.
 - Records closest-paper, anchor-paper, absorption-threat, and style-anchor evidence in `literature_evidence_ledger.md`.
 - Runs Primitive Hunter / Theorem Generator panels when the primitive is unclear.
+- Treats user-supplied model details as provisional modeling constraints until a model-base gate confirms them.
+- Searches broadly over cheap model skeletons, then derives narrowly from the few model bases that survive.
+- Builds models from small examples and economic tensions before fixed point or existence machinery enters.
 - Compares model variants before manuscript writing and uses nonconvex branch generation inside the existing tree search.
 - Requires absorption tests against closest literature and known theory families.
 - Uses `field_profile.md` to assign field-sensitive simulated referees.
@@ -159,6 +164,10 @@ Use the system: run a model tournament and absorption test before writing.
 ```
 
 ```text
+Use the system: find the minimal model base before formal derivation.
+```
+
+```text
 Use the system: run Primitive Hunter and identify the deepest primitive.
 ```
 
@@ -237,6 +246,8 @@ this workflow repository:
 | `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
 | `literature_evidence_ledger.md` | Verified source records for closest papers, anchors, absorption threats, and style anchors. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
+| `model_base_design.md` | Example-to-theory model base, skeleton funnel, failed simpler alternatives, and human confirmation status. |
+| `heuristic_derivation.md` | Economic derivation path from toy example to formal model before proof machinery begins. |
 | `style_anchor_notes/` | Per-anchor notes from deep reading of legally available or user-provided style anchors. |
 | `style_anchor_matrix.md` | Cross-anchor matrix of exposition architecture, reader path, theorem setup, and proof roadmap moves. |
 | `style_calibration.md` | Human-confirmed style contract for elegant, field-calibrated exposition without rhetoric. |
@@ -267,6 +278,8 @@ field_profile.md
 target_journal_profile.md
 literature_evidence_ledger.md
 model_tournament.md
+model_base_design.md
+heuristic_derivation.md
 absorption_tests.md
 generality_ledger.md
 risk_register.md
@@ -344,6 +357,9 @@ gate decisions override researcher memory.
 - Scientific taste is a filter, not the sole objective.
 - Simple commands must not weaken human gates.
 - Research execution is serious by default, while ordinary Q&A remains ordinary Q&A.
+- Specificity is not stage advancement: formal model language from the user is provisional until artifacts and human gates confirm it.
+- Exhaust broadly at the model-skeleton level; derive narrowly at the formal level.
+- A model is not ready because it is formal; it is ready when its smallest version explains the economic force.
 - Nonconvex discovery expands branch generation inside tree search; it does not certify quality.
 - Target journal changes calibration, not quality.
 - Strong novelty, absorption, anchor, and style claims require evidence recorded in `literature_evidence_ledger.md` or must be marked provisional.

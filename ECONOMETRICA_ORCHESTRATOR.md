@@ -18,6 +18,8 @@ This is an English research system with multilingual command understanding.
 - The workflow activates when the user asks the system to act on a research project, paper, idea, theorem, model, literature, review, revision, or project state.
 - Research execution is serious by default. Casual wording must not downgrade a research idea.
 - Explicit quick requests may receive a compact screen, but the quality floor remains. Explicit full requests require the complete relevant workflow.
+- Specificity is not stage advancement. User-supplied agents, timing, information, payoffs, equilibrium language, or assumptions are provisional modeling constraints until the relevant artifact and human gate confirm them.
+- New research projects start from discovery or model-base discovery unless the user explicitly asks to solve a given model mechanically. If the user provides a complete model for paper development, run a model-base audit before deriving it as the paper's model.
 
 First-run check is a soft gate, not a hard gate.
 
@@ -156,6 +158,8 @@ Before routing, inspect whichever of these files exist:
 - `model_candidates.md`
 - `primitive_hunter_report.md`
 - `model_tournament.md`
+- `model_base_design.md`
+- `heuristic_derivation.md`
 - `theorem_candidates.md`
 - `absorption_tests.md`
 - `field_profile.md`
@@ -187,7 +191,7 @@ If no state file exists, begin with intake:
 
 ## Low-Token State Discipline
 
-Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
+Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, model base status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 
 Token discipline reduces redundant re-reading, repeated summaries, and boilerplate. It must not reduce research depth. For main theorem discovery, proof verification, closest-literature checks, simulated review, model tournaments, and high-stakes revision, use enough context, tools, and token budget to execute the complete workflow.
 
@@ -211,6 +215,8 @@ Safety barriers:
 - No local polishing if complexity debt is rising.
 - No kill of a possible frontier spike before spike-specific tests.
 - No target-journal downgrade as a substitute for theorem quality.
+- No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
+- No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
 
 Fault alarms:
 
@@ -221,8 +227,10 @@ Fault alarms:
 - same panel criticism recurring
 - model note not compressing to 5-8 pages
 - `risk_register.md` growing without resolution
+- model base feels mechanically formal, assumption-heavy, or lacks a small example
+- formal proof machinery appears before economic necessity is established
 
-When a fault alarm fires, stop local polishing and route to Discovery D4-D6, Stage 8 tree search, or a human decision gate.
+When a fault alarm fires, stop local polishing and route to Discovery D4.5, D4-D6, Stage 8 tree search, or a human decision gate.
 
 ## Closed-Loop Next-Action Control
 
@@ -403,6 +411,7 @@ Route:
 - Run Stage 1.5.
 - Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `literature_evidence_ledger.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
 - If target-fit or closest-literature claims depend on papers that are not recorded in `literature_evidence_ledger.md`, mark the target profile provisional for those claims.
+- If `model_base_design.md`, `theorem_candidates.md`, or closest-literature evidence is missing, treat target-level potential as provisional. Do not claim that a project is RAND-, JET-, TE-, or Econometrica-ready from the idea alone.
 - Create or update `target_journal_profile.md` with primary target, stretch target, fallback target, target audience, fit standard, quality floor, theorem rigor expectation, reader path, referee mix implications, style calibration implications, upward-improvement requirements, and retargeting triggers.
 - Recommend a target ladder from project evidence rather than asking the user to choose blindly. Explain whether the recommendation reflects fit, reader path, field audience, theorem strength, absorption risk, exposition needs, or a genuine quality limitation.
 - Preserve upward ambition: if the primary target is RAND, still check for Econometrica, Theoretical Economics, or JET stretch potential.
@@ -419,6 +428,12 @@ Triggers:
 - "turn this idea into a model"
 - "model tournament"
 - "full model tournament"
+- "model base"
+- "minimal model"
+- "toy example"
+- "example-to-theory"
+- "solve this given model"
+- "mechanically solve this model"
 - "find the main theorem"
 - "theorem-first"
 - "absorption test"
@@ -434,15 +449,17 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` if multiple model candidates need selection.
 - Run D4.
 - If the primitive is unclear or the valuable object is reduced-form, run a Primitive Hunter / Theorem Generator Panel before ordinary model generation.
-- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_candidates.md`, `model_tournament.md`, and `absorption_tests.md`.
+- Treat any user-supplied agents, timing, information, payoffs, equilibrium concepts, or assumptions as provisional modeling constraints until the Minimal Model Base Gate confirms them.
+- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_candidates.md`, `model_tournament.md`, `model_base_design.md`, `heuristic_derivation.md`, and `absorption_tests.md`.
 - Use confirmed `field_profile.md` if available; if absorption or role assignment depends on a missing, provisional, stale, or `Reopen requested` field profile, update it from closest-literature evidence and stop for confirmation before final judgment.
 - Use confirmed `target_journal_profile.md` if available for target-aware model and theorem calibration, but do not let a non-Econometrica target skip model tournament, absorption testing, generality ledger, or main-theorem gate.
-- Generate 4-6 model variants before selecting one for full development.
+- Generate broad cheap model skeletons before selecting one for full development: 20-40 total, or 10-20 per selected direction when needed. Screen them to 6-10 semi-formal baselines, then 3-5 example-to-theory candidates, and only 1-3 formal derivation candidates.
+- Run D4.5 Example-to-Theory Model Base Construction before D5 unless the user explicitly asks only to solve a given model mechanically.
 - Generate three non-neighborhood model directions when local repair is a risk.
 - Include candidate geometry for serious candidates: local extension, recombination, possible frontier spike, absorbed benchmark, clever but shallow, or hidden gem.
 - Use mutation operators when search appears trapped in local repair: primitive, endogenization, timing, information, objective, equilibrium-concept, boundary, duality, and field-transfer mutations.
 - Treat nonconvex discovery as branch generation inside the existing tree search. It expands candidate coverage and protects against false kills; it does not certify quality.
-- If the user explicitly asks for a model tournament or full model tournament, complete the model-tournament path: D4 model generation, D5 derivation where needed, and D6 absorption/main-theorem gate before recommending a winner. Do not merely summarize candidate variants.
+- If the user explicitly asks for a model tournament or full model tournament, complete the model-tournament path: D4 model generation, D4.5 model-base gate, D5 derivation where needed, and D6 absorption/main-theorem gate before recommending a winner. Do not merely summarize candidate variants.
 - Do not enter manuscript mode until a candidate theorem survives the main-theorem gate.
 - If selecting among candidates, run a Model Panel.
 - If candidate models already exist, ask only if the user wants new variants or derivation.
@@ -463,6 +480,8 @@ Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md` and `ECONOMETRICA_VERIFICATION_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` for theorem/model claims with high stakes.
+- If the user explicitly asks to solve a given model mechanically, run direct derivation and verification but do not claim research quality or target-journal potential.
+- Otherwise require `model_base_design.md` and `heuristic_derivation.md`, or route to D4.5 before D5.
 - Run Discovery D5 plus Verification V1-V4 as needed.
 - Use a Verification Panel for the main proposition, equilibrium existence, identification result, or any theorem that carries the contribution.
 - Create or update `derivation_notes.md`, `theorem_candidates.md`, `math_claims.md`, `assumption_ledger.md`, `verification_log.md`, and `counterexamples.md`.
@@ -517,9 +536,10 @@ Route:
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Stop manuscript polishing.
-- Run Discovery D4-D6: model tournament, first-pass derivation, absorption test, and main-theorem gate.
+- Run Discovery D4.5 or D4-D6: model-base construction, model tournament, first-pass derivation, absorption test, and main-theorem gate.
 - Start with a Primitive Hunter / Theorem Generator Panel if the deepest primitive is unclear or the current theorem is weak.
-- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_tournament.md`, `theorem_candidates.md`, `absorption_tests.md`, `field_profile.md`, `target_journal_profile.md` if target fit is implicated, and `idea_kill_tests.md`.
+- Include D4.5 Example-to-Theory Model Base Construction when the model feels mechanically formal, assumption-heavy, too special, or lacks a clear smallest example.
+- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_tournament.md`, `model_base_design.md`, `heuristic_derivation.md`, `theorem_candidates.md`, `absorption_tests.md`, `field_profile.md`, `target_journal_profile.md` if target fit is implicated, and `idea_kill_tests.md`.
 - Reuse confirmed `field_profile.md` unless the closest-literature evidence, primitive, theorem direction, or target audience has materially changed.
 - Reuse confirmed `target_journal_profile.md` unless the field, theorem direction, target audience, contribution strength, or absorption risk has materially changed.
 - Generate a Multi-Path Dashboard comparing at least Preserve, Simplify, Pivot, and Kill/Demote paths when evidence supports more than one route.
@@ -614,8 +634,8 @@ Triggers:
 
 Route:
 
-- If `contribution_lock.md` or a sharp main theorem sentence does not exist, return to Discovery D4-D6 first.
-- If the leading risk is "no central theorem," "too close to old theory," or "absorbed by known models," return to Discovery D4-D6 rather than revising prose.
+- If `contribution_lock.md` or a sharp main theorem sentence does not exist, return to Discovery D4.5 or D4-D6 first.
+- If the leading risk is "no central theorem," "too close to old theory," "absorbed by known models," or "unnatural model base," return to Discovery D4.5 or D4-D6 rather than revising prose.
 - If contribution is locked, read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
 - Run Stages 3, 4, and 6 as appropriate.
 - Use `ECONOMETRICA_VERIFICATION_WORKFLOW.md` for mathematical claims.
@@ -655,7 +675,7 @@ Route:
 - If only abstracts, web pages, or fragments are available, mark that anchor's style evidence as provisional, label it as provisional style evidence, and state that the calibration is based on partial anchors.
 - Treat style anchors as calibration evidence, not prose templates: extract exposition architecture and exposition moves, not sentences.
 - Do not change the central question, main theorem, model primitives, assumptions, novelty claim, target journal positioning, or unverified literature claims.
-- If the manuscript is mechanical because the theorem is weak, the contribution is unclear, assumptions are patchy, or defensive dilution is present, route to Discovery D4-D6 or Stage 8 tree search instead of polishing.
+- If the manuscript is mechanical because the theorem is weak, the contribution is unclear, assumptions are patchy, defensive dilution is present, or the model base is unnatural, route to Discovery D4.5, D4-D6, or Stage 8 tree search instead of polishing.
 - After human confirmation of the style contract in `style_calibration.md`, perform a paragraph-level manuscript style pass using `style_pass_plan.md`; improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, paragraph pacing, and flow; then update `revision_log.md` and compile when possible.
 
 ### Simulated Review
@@ -696,7 +716,7 @@ Route:
 - Write `referee_reports/round_N/` reports.
 - Update `risk_register.md`.
 - Stop for human decision.
-- If the review's leading objection is missing central theorem, old-theory absorption, weak contribution, or failure to meet the target profile's quality floor, recommend Discovery D4-D6 instead of Stage 8.
+- If the review's leading objection is missing central theorem, old-theory absorption, weak contribution, unnatural model base, or failure to meet the target profile's quality floor, recommend Discovery D4.5 or D4-D6 instead of Stage 8.
 
 ### Referee-Guided Revision
 
@@ -713,7 +733,7 @@ Route:
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md`.
 - Run Stage 8 using the latest referee report.
 - Use a Revision Panel when objections conflict or when major edits could dilute the contribution.
-- If the latest report repeats a structural objection from a prior round, such as missing central theorem or old-theory absorption, route to Discovery D4-D6 instead of local revision.
+- If the latest report repeats a structural objection from a prior round, such as missing central theorem, unnatural model base, or old-theory absorption, route to Discovery D4.5 or D4-D6 instead of local revision.
 - Create `revision_tree.md` with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe.
 - Run the Scientific Judge on the branch plans.
 - Stop for human branch choice before direct manuscript edits.
@@ -807,7 +827,7 @@ The assistant must stop at gates involving:
 
 ## Human Decision Persistence
 
-When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
+When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `model_base_design.md`, `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
 
 If the user reverses an earlier decision, record the reversal as a new entry rather than deleting the old one. The new decision supersedes the old decision for current routing. The reversal entry should identify the previous decision, new decision, reason, affected artifacts, and any stages, panels, proofs, or literature checks that must be rerun.
 

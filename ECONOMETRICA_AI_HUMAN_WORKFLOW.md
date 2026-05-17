@@ -38,6 +38,8 @@ The agent should maintain these files whenever possible:
 - `idea_dossier.md`: one-sentence idea, mechanism, closest papers, novelty claims, feasibility risks.
 - `contribution_lock.md`: the locked core question, non-substitutable insight, and reader belief update.
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
+- `model_base_design.md`: confirmed or provisional example-to-theory model base, skeleton funnel, failed simpler alternatives, and recommended baseline.
+- `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
 - `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
 - `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
@@ -117,6 +119,9 @@ Current stage:
 Current blocker:
 Confirmed source-of-truth artifacts:
 Open human gates:
+Model base status:
+Provisional modeling constraints:
+Next model-base test:
 2-4 step horizon:
 Execute next:
 Why this next action has highest information value:
@@ -135,7 +140,7 @@ Decision Batch Mode:
 Generality Ledger Mode:
 
 - Maintain `generality_ledger.md` when revisions add distribution assumptions, special graph structures, extra agents, extra states, regularity conditions, or longer theorem sentences.
-- If generality loss is rising but the nugget is not sharper, stop local polishing and return to Discovery D4-D6 or Stage 8 tree search.
+- If generality loss is rising but the nugget is not sharper, stop local polishing and return to Discovery D4.5, D4-D6, or Stage 8 tree search.
 
 Closed-loop safety barriers:
 
@@ -145,6 +150,8 @@ Closed-loop safety barriers:
 - No local polishing if complexity debt is rising.
 - No kill of a possible frontier spike before spike-specific tests.
 - No target-journal downgrade as a substitute for theorem quality.
+- No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
+- No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
 
 Fault alarms:
 
@@ -155,8 +162,10 @@ Fault alarms:
 - same panel criticism recurring
 - model note not compressing to 5-8 pages
 - `risk_register.md` growing without resolution
+- model base feels mechanically formal, assumption-heavy, or lacks a small example
+- formal proof machinery appears before economic necessity is established
 
-When a fault alarm fires, stop local polishing and return to Discovery D4-D6, Stage 8 tree search, or an explicit human gate.
+When a fault alarm fires, stop local polishing and return to Discovery D4.5, D4-D6, Stage 8 tree search, or an explicit human gate.
 
 ## Manuscript-Mode Firewall
 
@@ -168,9 +177,10 @@ Before substantial manuscript revision, check whether the project has passed the
 - a confirmed or explicitly provisional `field_profile.md` recording the primary field, adjacent fields, absorption-risk families, and field-sensitive referee roles
 - a confirmed or explicitly provisional `target_journal_profile.md` recording primary target, stretch target, fallback target, target audience, fit standard, and quality floor
 - `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
+- `model_base_design.md` and `heuristic_derivation.md`, or equivalent evidence that the current model base was built from a smallest economically interpretable example and passed the Minimal Model Base Gate
 - a human-approved `contribution_lock.md`
 
-If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4-D6 unless the user explicitly asks for mechanical editing only.
+If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4.5 or D4-D6 unless the user explicitly asks for mechanical editing only.
 
 ## Stage 0 - Project Intake and State Reconstruction
 
@@ -297,6 +307,7 @@ AI tasks:
 - Preserve upward ambition. If primary target is RAND, still check whether Econometrica, TE, or JET stretch potential exists.
 - If retargeting from Econometrica to RAND or another outlet, state whether this is a fit change, reader change, or quality limitation. Do not hide quality concerns by calling them mere fit.
 - If the target recommendation depends on closest literature or journal/style anchors that are not recorded in `literature_evidence_ledger.md`, mark the affected target-profile claims provisional.
+- If `model_base_design.md`, `theorem_candidates.md`, or closest-literature evidence is missing, mark target-level potential provisional. A target ladder may guide the next search, but target-journal readiness cannot be confirmed from the idea alone.
 
 Minimum `target_journal_profile.md` schema:
 
@@ -490,7 +501,7 @@ Autonomy: Checkpoint for calibration, Auto after human confirmation
 
 Purpose:
 
-Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and the confirmed target's quality floor. This stage performs deep style reading when full-text anchors are legally available or user-provided; it does not imitate prose.
+Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and the confirmed target's quality floor. This stage performs deep style reading when full-text anchors are legally available or user-provided; it does not imitate prose and must not substitute for a missing model-base construction step.
 
 Guiding principles:
 
@@ -606,7 +617,7 @@ Guardrails:
 - Do not copy sentences, paragraph structures, or framing from style anchors.
 - Summarize anchor-paper exposition strategies only; do not quote long passages.
 - Extract exposition architecture, not sentences. Anchor papers are calibration evidence, not prose templates.
-- If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, or defensive dilution, stop and route back to Discovery D4-D6 or Stage 8 tree search instead of polishing.
+- If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, defensive dilution, or an unnatural model base, stop and route back to Discovery D4.5, D4-D6, or Stage 8 tree search instead of polishing.
 - If confirmed `style_calibration.md` exists and the field profile, target journal profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
 
 Proceed condition:
@@ -703,7 +714,7 @@ Interpretation:
 
 - Scores are diagnostic only.
 - A score cannot certify acceptance.
-- If two independent review rounds say "no central theorem," "too close to existing theory," or "absorbed by known models," stop polishing and return to Discovery D4-D6.
+- If two independent review rounds say "no central theorem," "too close to existing theory," "absorbed by known models," or "unnatural model base," stop polishing and return to Discovery D4.5 or D4-D6.
 
 Human gate:
 
@@ -734,8 +745,8 @@ Triage order:
 AI tasks:
 
 - Create `revision_tree.md` before editing.
-- If the leading objection is missing central theorem, old-theory absorption, weak contribution, or defensive dilution, do not revise locally. Route back to Discovery D4-D6.
-- If `generality_ledger.md` shows rising generality loss without a sharper nugget, stop local polishing and return to Discovery D4-D6 or Stage 8 tree search before manuscript edits.
+- If the leading objection is missing central theorem, old-theory absorption, weak contribution, defensive dilution, or unnatural model base, do not revise locally. Route back to Discovery D4.5 or D4-D6.
+- If `generality_ledger.md` shows rising generality loss without a sharper nugget, stop local polishing and return to Discovery D4.5, D4-D6, or Stage 8 tree search before manuscript edits.
 - For major theoretical or mechanism objections, generate three parallel revision branches as plans before touching the manuscript:
   - Branch A, `Defensive Patch`: minimal repair that preserves the current model, adding the fewest assumptions or clarifications possible.
   - Branch B, `Mechanism Simplification`: remove complexity and seek a cleaner primitive, theorem, or benchmark that explains the mechanism with fewer moving parts.
@@ -845,7 +856,7 @@ Stop the current revision loop if any of these patterns appears:
 - The paper is technically correct but the "why should we care?" answer stays vague.
 - The introduction has to use elaborate wording to make the contribution sound important.
 
-When this happens, return to Discovery D4-D6 for model tournament, absorption testing, and main-theorem search. Do not continue cosmetic revision.
+When this happens, return to Discovery D4.5 or D4-D6 for model-base construction, model tournament, absorption testing, and main-theorem search. Do not continue cosmetic revision.
 
 ## Recommended Codex Prompts
 
@@ -876,7 +887,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 2. Create or update contributi
 ### Deep Manuscript Revision
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution gates. Run Stages 3, 4, and 6. Audit the model, assumptions, proof architecture, and evidence. Then revise the manuscript section by section. Compile after meaningful edits. Log every nontrivial edit in revision_log.md. Stop if you find a foundational problem that threatens the contribution lock.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution gates. Run Stages 3, 4, and 6. Audit the model, model_base_design.md, heuristic_derivation.md, assumptions, proof architecture, and evidence. Then revise the manuscript section by section. Compile after meaningful edits. Log every nontrivial edit in revision_log.md. Stop if you find a foundational problem that threatens the contribution lock or model-base confirmation.
 ```
 
 ### Style Calibration
@@ -894,7 +905,7 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profi
 ### Referee-Guided Revision
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report in Agentic Tree Search Mode. If the leading objection is missing central theorem, old-theory absorption, weak contribution, defensive dilution, or rising generality loss without a sharper nugget, do not edit locally; route back to Discovery D4-D6. Otherwise create revision_tree.md with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe, checking generality_ledger.md before choosing local repairs. Run the Scientific Judge on the branch plans and stop for my branch choice before editing the manuscript.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report in Agentic Tree Search Mode. If the leading objection is missing central theorem, old-theory absorption, weak contribution, defensive dilution, unnatural model base, or rising generality loss without a sharper nugget, do not edit locally; route back to Discovery D4.5 or D4-D6. Otherwise create revision_tree.md with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe, checking generality_ledger.md before choosing local repairs. Run the Scientific Judge on the branch plans and stop for my branch choice before editing the manuscript.
 ```
 
 ### Final Submission Readiness
@@ -909,7 +920,8 @@ For a 5-hour Codex Desktop session:
 
 - 30 minutes: intake and discovery-state reconstruction.
 - 60 minutes: absorption and closest-literature probe.
-- 90 minutes: model tournament across 4-6 variants.
+- 90 minutes: broad skeleton search and model-base tournament.
+- 45 minutes: D4.5 example-to-theory model-base gate when the baseline is not already confirmed.
 - 90 minutes: first-pass derivations and theorem-candidate search.
 - 45 minutes: kill test or Model Panel.
 - 30 minutes: pre-paper model note and human gate.
