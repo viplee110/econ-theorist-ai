@@ -806,11 +806,12 @@ The assistant may automatically proceed from:
 
 - D0 to D1 when the user asks for new-topic exploration.
 - D1 to D2 when the user explicitly asks for screening.
-- D4 to D5 when the user explicitly asks to solve or derive.
+- D4 to D4.5 when the task is research model development.
+- D4 or D4.5 to D5 only after the Minimal Model Base Gate, or when the user explicitly asks only to solve a given model mechanically.
 - V1 to V4 for a named mathematical claim.
 - Stage 1 to Stage 1.5 after the human chooses `Proceed`, or when the user explicitly asks for journal fit or target ladder.
 - Stage 3 to Stage 6 after contribution lock is approved.
-- Stage 7 to Stage 8 only if the user explicitly asks to revise according to the report and the leading objection is not missing central theorem, old-theory absorption, or weak contribution.
+- Stage 7 to Stage 8 only if the user explicitly asks to revise according to the report and the leading objection is not missing central theorem, old-theory absorption, weak contribution, unnatural model base, or defensive dilution.
 
 The assistant must stop at gates involving:
 
@@ -819,6 +820,7 @@ The assistant must stop at gates involving:
 - first-time or materially changed target journal profile confirmation
 - central research question
 - main theorem
+- Minimal Model Base Gate
 - model primitives
 - assumption set
 - novelty claim
