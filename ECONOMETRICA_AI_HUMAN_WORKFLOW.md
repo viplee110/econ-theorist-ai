@@ -421,6 +421,8 @@ AI tasks:
 - Identify every claim that requires a proof, computation, calibration, robustness check, data result, or external citation.
 - Mark each claim as verified, partially verified, unverified, or author-only.
 - Run available code or compile tables if safe and possible.
+- When compiling LaTeX or reporting generated PDFs, verify the exact output path with `Test-Path -LiteralPath` or `Resolve-Path -LiteralPath` before reporting it. Display the path only in backticks or a fenced code block so Markdown cannot drop `\` or `/` separators.
+- Build output paths with `Join-Path`, `Resolve-Path -LiteralPath`, `pathlib`, or equivalent path APIs. Do not manually concatenate path fragments in user-facing output.
 - Check whether figures and tables support the claims made in the text.
 - Add unverifiable claims to `risk_register.md`.
 

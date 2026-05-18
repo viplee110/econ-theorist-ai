@@ -13,6 +13,14 @@ The system is target-calibrated rather than Econometrica-only. Econometrica-leve
 - Ordinary Q&A remains ordinary Q&A: explanatory, translation, GitHub, software, or conceptual questions should not be over-routed into the research workflow.
 - Research execution is serious by default. Casual wording must not downgrade a research idea; explicit quick requests may receive a compact screen, but the quality floor remains.
 
+## Path and PDF Output Hygiene
+
+- Never write a local filesystem path as raw prose. Wrap every local path, compiled PDF path, and command path in backticks or a fenced code block so Markdown cannot consume backslashes.
+- Prefer display-safe paths such as `C:/Dropbox/Shufe/Research/Project/.../paper.pdf`, or exact Windows paths inside code spans such as `C:\Dropbox\Shufe\Research\Project\...\paper.pdf`. Do not write `C:\...` outside code.
+- When reporting a generated or compiled PDF, first verify the real file with `Test-Path -LiteralPath` or `Resolve-Path -LiteralPath`, then report a separate `PDF path:` line in code formatting.
+- Construct paths with `Join-Path`, `Resolve-Path -LiteralPath`, `pathlib`, or equivalent path APIs. Do not concatenate directory strings in a way that can drop `\` or `/` separators.
+- If a path contains spaces, brackets, or non-ASCII characters, quote it in shell commands and keep the path in code formatting. Use a Markdown link only after the path has been resolved, and put the link target in angle brackets when needed.
+
 Default entry point: first read `ECONOMETRICA_ORCHESTRATOR.md` when it exists. Use it to route broad user requests to the correct workflow module and stage, so the user does not need to remember stage numbers or file names.
 
 For pre-manuscript topic discovery, model generation, early derivation, and idea kill tests, first read `ECONOMETRICA_DISCOVERY_WORKFLOW.md` when it exists in this project.

@@ -260,6 +260,28 @@ this workflow repository:
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
 
+## Path Display And PDF Outputs
+
+Windows paths can be mangled by Markdown if backslashes are written as raw text.
+The workflow therefore treats path display as an output-safety rule:
+
+- local paths and compiled PDF paths should be shown in backticks or fenced code
+  blocks, not raw prose;
+- generated PDFs should be reported only after the exact path is verified with
+  `Test-Path -LiteralPath` or `Resolve-Path -LiteralPath`;
+- commands should quote paths with spaces, and path construction should use
+  `Join-Path`, `Resolve-Path -LiteralPath`, `pathlib`, or an equivalent path API.
+
+Example:
+
+```text
+PDF path:
+`C:/Dropbox/Shufe/Research/Project/My Paper/output/main.pdf`
+
+Open command:
+`Start-Process -FilePath "C:\Dropbox\Shufe\Research\Project\My Paper\output\main.pdf"`
+```
+
 ## If You Use Git
 
 Generated research files are saved locally in each paper project folder. They are

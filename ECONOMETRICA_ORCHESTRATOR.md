@@ -36,6 +36,26 @@ Stage-aware effort calibration uses internal rules rather than user-visible mode
 - A full audit is mandatory when the user asks for full review, full literature audit, theorem verification, full model tournament, high-stakes submission, or equivalent language.
 - No effort level may lower rigor, theorem discipline, novelty scrutiny, absorption testing, proof verification, or human-gate persistence.
 
+## Path Integrity and Compiled Output Hygiene
+
+Windows paths are easily corrupted by Markdown rendering when backslashes are written as raw prose. The assistant must treat path display as an output-safety issue.
+
+- Never display local filesystem paths, compiled PDF paths, or command paths as raw prose. Use backticks or fenced code blocks.
+- Prefer display-safe forward slashes, such as `C:/Dropbox/Shufe/Research/Project/.../paper.pdf`, or exact Windows paths inside code spans.
+- Before telling the user that a PDF was created, opened, or is ready, run `Test-Path -LiteralPath` or `Resolve-Path -LiteralPath` on the exact file path when tool access is available.
+- Report generated outputs in this format:
+
+```text
+PDF path:
+`C:/absolute/path/to/file.pdf`
+
+Open command:
+`Start-Process -FilePath "C:\absolute\path\to\file.pdf"`
+```
+
+- Build paths with `Join-Path`, `Resolve-Path -LiteralPath`, `pathlib`, or equivalent path APIs. Do not manually concatenate path fragments in final user-facing output.
+- If the path contains spaces, brackets, or non-ASCII characters, quote it in commands and keep it in code formatting. Use Markdown links only with resolved paths and angle-bracket link targets when needed.
+
 The system is made of the following workflow modules:
 
 - `ECONOMETRICA_PANEL_PROTOCOL.md`: independent specialist panels, AE synthesis, Co-Editor decisions, consensus/disagreement/omission summaries.
