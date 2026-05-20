@@ -40,6 +40,8 @@ The agent should maintain these files whenever possible:
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
 - `model_base_design.md`: confirmed or provisional example-to-theory model base, skeleton funnel, failed simpler alternatives, and recommended baseline.
 - `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
+- `agent_runs/`: separated model-search or judge-pass lanes produced by different IDEs, models, or sessions before canonical merge.
+- `cross_agent_model_audit.md`: Judge Pass comparison of multiple lanes before the Minimal Model Base Gate.
 - `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
 - `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
@@ -120,6 +122,8 @@ Current blocker:
 Confirmed source-of-truth artifacts:
 Open human gates:
 Model base status:
+Model lane status:
+Pending Judge Pass:
 Provisional modeling constraints:
 Next model-base test:
 2-4 step horizon:

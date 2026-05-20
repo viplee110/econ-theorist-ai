@@ -45,6 +45,8 @@ Maintain these files during discovery:
 - `model_tournament.md`: side-by-side comparison of model variants and why weaker variants were killed or demoted.
 - `model_base_design.md`: example-to-theory model base design, skeleton funnel, failed simpler alternatives, recommended baseline, and human confirmation status.
 - `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
+- `agent_runs/`: optional separated output lanes for different IDEs, models, or sessions during high-variance model-base search.
+- `cross_agent_model_audit.md`: judge-pass comparison of multiple model lanes before canonical model-base confirmation.
 - `theorem_candidates.md`: candidate main theorems, theorem sentences, proof status, and failure modes.
 - `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
 - `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
@@ -386,6 +388,8 @@ AI tasks:
 - Create or update `generality_ledger.md`.
 - Create `model_candidates.md`.
 - Create or update `model_tournament.md`.
+- If running as an independent model lane, write `agent_manifest.md`, `model_skeleton_ledger.md`, `model_base_recommendation.md`, `self_critique.md`, and `run_log.md` under `agent_runs/[run_id]/` rather than overwriting canonical artifacts.
+- If `agent_runs/` already contains two or more completed model lanes and `cross_agent_model_audit.md` is missing or stale, stop ordinary generation and recommend a Judge Pass before the Minimal Model Base Gate.
 - Before generating local variants, identify:
   - the deepest primitive
   - the object currently treated as reduced-form
@@ -453,6 +457,7 @@ Tournament rule:
 - If the result follows from a named existing framework, label it `Absorbed benchmark` rather than a main model.
 - Update `generality_ledger.md` whenever a variant becomes a special case, adds a distribution assumption, imposes a special graph structure, adds an agent or state, adds a regularity condition, or makes the theorem sentence longer.
 - If the current winner is mechanically formal, assumption-heavy, lacks a clear toy example, has an unsharp theorem sentence, or relies on fixed point machinery before economic necessity is explained, expand the skeleton search rather than entering D5.
+- Do not claim that 20-40 model skeletons were compared unless `model_candidates.md`, `model_tournament.md`, or a lane-level `model_skeleton_ledger.md` records the candidates, filters, and kill reasons.
 
 Absorption pre-test:
 
@@ -485,6 +490,12 @@ Panel option:
 - If multiple model-base candidates survive, run a Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` and include the Model Base Architect / Economic Naturalness Reader function.
 - Require the math-rigor panelist to check fixed point, IFT, contraction, boundary behavior, equilibrium selection, and assumption packaging risks before a model is selected for the D7 pre-paper package.
 
+Multi-agent lane option:
+
+- The user should not need to remember special lane commands. When D4/D4.5 is high variance, when model generalization becomes inelegant, when top candidates are close, when the ledger looks thin, or when different IDE/model outputs disagree, proactively recommend independent lanes or a Judge Pass.
+- If multiple lanes exist, do not require pairwise critique by default. Recommend one user-selected judge model to compare all lanes and write `cross_agent_model_audit.md`.
+- If the user wants to use another IDE/model as judge, create `agent_runs/_judge_prompt.md` with a self-checking prompt that tells the external system to inspect the shared project state, identify completed lanes, run Judge Pass, and avoid overwriting canonical artifacts.
+
 ## Stage D4.5 - Example-to-Theory Model Base Construction
 
 Autonomy: Checkpoint
@@ -499,6 +510,7 @@ Inputs:
 - `primitive_hunter_report.md`
 - `model_candidates.md`
 - `model_tournament.md`
+- `agent_runs/` and `cross_agent_model_audit.md` when multiple model lanes were used
 - `literature_evidence_ledger.md`
 - user-supplied provisional modeling constraints
 
@@ -517,6 +529,7 @@ AI tasks:
   - likely theorem path and likely failure point
   - where formal machinery may enter, if it is economically necessary
 - Recommend one baseline, one backup baseline, and one parked alternative when evidence supports them.
+- If multiple completed lanes exist, use `cross_agent_model_audit.md` before recommending the model base. If the audit is missing, stale, or produced by an unlabeled judge with low provenance confidence, mark the recommendation provisional and ask whether to run or rerun Judge Pass.
 
 Required `model_base_design.md` sections:
 
@@ -784,6 +797,18 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candid
 
 ```text
 Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Treat any user-supplied agents, timing, information, payoffs, or equilibrium language as provisional modeling constraints until the model-base gate confirms them. Generate broad cheap model skeletons before formal derivation: 20-40 total, or 10-20 per selected direction. Screen them to 6-10 semi-formal baselines, then to 3-5 example-to-theory candidates, and choose only 1-3 formal derivation candidates. For each serious direction, record real-world scene, economic tension, candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, smallest example, why simpler models fail, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
+```
+
+### Run an Independent Model Lane
+
+```text
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_DISCOVERY_WORKFLOW.md. You are running an independent model-base lane in the same paper project folder. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, and existing agent_runs/. If you are continuing the same declared IDE/model/session, continue the active lane. If this is a different declared IDE/model or a fresh blind lane, create agent_runs/[run_id]/ and write agent_manifest.md, model_skeleton_ledger.md, model_base_recommendation.md, self_critique.md, and run_log.md there. Do not overwrite model_tournament.md, model_base_design.md, heuristic_derivation.md, or human_decisions.md. Treat canonical model choices as provisional unless human_decisions.md confirms them.
+```
+
+### Run Judge Pass
+
+```text
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md, and ECONOMETRICA_PANEL_PROTOCOL.md. You are running a Judge Pass over completed model lanes in agent_runs/. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, agent_runs/*/agent_manifest.md, agent_runs/*/model_skeleton_ledger.md, and agent_runs/*/model_base_recommendation.md. Do not generate a new model unless all lanes fail; compare the lanes on smallest toy example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption risk, proof tractability, and target-reader legibility. Write agent_runs/[judge_run_id]/agent_manifest.md, judge_report.md, model_base_ranking.md, decisive_objections.md, and create or update cross_agent_model_audit.md. Do not confirm model_base_design.md; stop at the Minimal Model Base Gate.
 ```
 
 ### Construct Minimal Model Base

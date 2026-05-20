@@ -180,6 +180,9 @@ Before routing, inspect whichever of these files exist:
 - `idea_dossier.md`
 - `contribution_lock.md`
 - `manuscript_map.md`
+- `agent_runs/*/agent_manifest.md`
+- `agent_runs/_lane_registry.md`
+- `cross_agent_model_audit.md`
 - `model_candidates.md`
 - `primitive_hunter_report.md`
 - `model_tournament.md`
@@ -216,7 +219,7 @@ If no state file exists, begin with intake:
 
 ## Low-Token State Discipline
 
-Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, model base status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
+Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, model base status, model lane status, pending Judge Pass status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 
 Token discipline reduces redundant re-reading, repeated summaries, and boilerplate. It must not reduce research depth. For main theorem discovery, proof verification, closest-literature checks, simulated review, model tournaments, and high-stakes revision, use enough context, tools, and token budget to execute the complete workflow.
 
@@ -256,6 +259,30 @@ Fault alarms:
 - formal proof machinery appears before economic necessity is established
 
 When a fault alarm fires, stop local polishing and route to Discovery D4.5, D4-D6, Stage 8 tree search, or a human decision gate.
+
+## Lane-Aware Multi-Agent Model Protocol
+
+Use this protocol during D4, D4.5, and D5-D6 when model-base search is high variance, multiple AI systems are being used, or `agent_runs/` already exists.
+
+Core rule:
+
+```text
+shared project folder, separated write lanes, automatic lane discovery, judge pass before canonical merge
+```
+
+- Automatically inspect `agent_runs/*/agent_manifest.md` and `agent_runs/_lane_registry.md` when a request concerns model discovery, model tournament, minimal model base, toy examples, or model critique.
+- Do not assume the current IDE or model can be reliably detected. Ask for a short lane label only when needed, such as `Codex GPT-5.5`, `Cursor Opus`, `Claude Code`, `Gemini`, `DeepSeek`, `Qwen`, or `local model`. If unknown, record `Declared model: Unknown` and `Provenance confidence: low`.
+- If the same declared IDE/model/session is continuing an active lane, continue that lane rather than creating fake independence.
+- If the user declares a different IDE/model, asks for an independent lane, or is running from an external IDE with the same project folder, create a new lane under `agent_runs/[run_id]/`.
+- Lane outputs may include `agent_manifest.md`, `model_skeleton_ledger.md`, `model_base_recommendation.md`, `self_critique.md`, and `run_log.md`.
+- Minimum `agent_manifest.md` fields: lane id, declared IDE, declared model, declared reasoning level if known, declared by user or inferred, provenance confidence, stage, task, status (`active`, `complete`, `judge`, `audited`, `superseded`, or `contaminated`), current working folder, input artifacts read, output artifacts written, blind status, whether other lanes were read, and known limitations.
+- Do not count a lane as independent unless its manifest declares or reasonably infers a different IDE, model, session, or blind-lane run. If uncertain, treat it as a continuation or low-confidence lane.
+- Lanes must not overwrite canonical artifacts such as `model_tournament.md`, `model_base_design.md`, `heuristic_derivation.md`, or `human_decisions.md`.
+- If two or more completed model lanes exist and `cross_agent_model_audit.md` is missing or stale, recommend a Judge Pass rather than continuing ordinary model generation by default.
+- Judge Pass is not pairwise critique by default. It is many generator lanes plus one user-selected judge model, followed by a human gate.
+- When the user chooses the current model as judge, write judge outputs with declared provenance to `agent_runs/[judge_run_id]/` and create or update `cross_agent_model_audit.md`.
+- When the user wants another IDE/model as judge, create `agent_runs/_judge_prompt.md`. The prompt must tell the external system to read `AGENTS.md`, `ECONOMETRICA_ORCHESTRATOR.md`, shared source-of-truth artifacts, and `agent_runs/`; self-check whether a Judge Pass is pending; write outputs to its assigned judge lane and `cross_agent_model_audit.md`; and avoid overwriting canonical artifacts.
+- If `cross_agent_model_audit.md` exists and is current, prepare the Minimal Model Base Gate instead of generating more lanes unless the user explicitly asks for more search.
 
 ## Closed-Loop Next-Action Control
 
@@ -453,6 +480,16 @@ Triggers:
 - "turn this idea into a model"
 - "model tournament"
 - "full model tournament"
+- "model lane"
+- "independent lane"
+- "judge pass"
+- "compare model lanes"
+- "cross-agent audit"
+- "critic model"
+- "PK"
+- "多模型"
+- "模型分支"
+- "评委模型"
 - "model base"
 - "minimal model"
 - "toy example"
@@ -472,7 +509,10 @@ Route:
 
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` if multiple model candidates need selection.
-- Run D4.
+- Inspect `agent_runs/` before writing model artifacts.
+- If two or more completed model lanes exist and `cross_agent_model_audit.md` is missing or stale, stop ordinary generation, recommend a Judge Pass, and ask whether to use the current model as judge or generate `agent_runs/_judge_prompt.md` for another AI/IDE.
+- If no Judge Pass is blocking, and no lane exists or the current request is a normal single-model continuation, run the ordinary D4/D4.5 workflow. If the model-base decision is high variance, proactively suggest one or more independent lanes but do not require them.
+- If creating or continuing a lane, write lane artifacts only under `agent_runs/[run_id]/` until cross-agent audit and human confirmation. Do not overwrite canonical `model_tournament.md`, `model_base_design.md`, or `heuristic_derivation.md` from a lane.
 - If the primitive is unclear or the valuable object is reduced-form, run a Primitive Hunter / Theorem Generator Panel before ordinary model generation.
 - Treat any user-supplied agents, timing, information, payoffs, equilibrium concepts, or assumptions as provisional modeling constraints until the Minimal Model Base Gate confirms them.
 - Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_candidates.md`, `model_tournament.md`, `model_base_design.md`, `heuristic_derivation.md`, and `absorption_tests.md`.

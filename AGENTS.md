@@ -86,6 +86,10 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Use `target_journal_profile.md` as the confirmed or provisional target-calibration artifact. It should guide journal fit, reader path, referee mix, style anchors, and review calibration, but it must not replace field evidence, theorem verification, or absorption tests.
 - Treat optional cross-project researcher memory as a prior, never as paper source of truth. User-level files such as `researcher_profile.md`, `method_library.md`, `negative_knowledge.md`, `proof_technique_memory.md`, `project_postmortems/`, and `field_maps/` may live under `C:\Users\<user>\.econ-theorist-ai\`, but current project artifacts, literature evidence, proof verification, and human gates override them.
 - Guard against information bubbles from researcher memory: include outside-view objections, adjacent-field search, and at least one internally coherent anti-profile direction when discovery breadth matters.
+- For multi-AI model development, use lane-aware routing. Shared project artifacts may be read by all IDEs and models, but independent model work must write to `agent_runs/[lane_id]/` until a judge pass and human gate merge it into canonical artifacts.
+- Do not rely on automatic IDE/model detection. Use declared provenance in `agent_manifest.md`; if the user does not provide a label, use `Unknown` and mark provenance confidence low.
+- If multiple completed model lanes exist, recommend a Judge Pass before the Minimal Model Base Gate. The judge model is user-selected; it may be the current model or another AI/IDE through `agent_runs/_judge_prompt.md`.
+- A Judge Pass compares lanes and writes `cross_agent_model_audit.md`, but it does not confirm `model_base_design.md`. Only the Minimal Model Base Gate can confirm the canonical model base.
 - Prefer direct edits to LaTeX source files when the source can be improved safely.
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.

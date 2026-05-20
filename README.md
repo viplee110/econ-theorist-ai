@@ -167,6 +167,12 @@ Use the system: run a model tournament and absorption test before writing.
 Use the system: find the minimal model base before formal derivation.
 ```
 
+During D4/D4.5 model-base work, the system will automatically detect existing
+`agent_runs/`. If multiple model lanes exist, it should recommend a Judge Pass
+before the Minimal Model Base Gate. You can use the current model as judge, or
+ask the system to create `agent_runs/_judge_prompt.md` for another AI model or
+IDE opened in the same project folder.
+
 ```text
 Use the system: run Primitive Hunter and identify the deepest primitive.
 ```
@@ -257,6 +263,8 @@ this workflow repository:
 | `literature_cache/style_anchors/` | Optional cache for legally available or user-authorized style anchor PDFs. |
 | `toolchain_status.md` | Computer-level diagnostic status, usually stored globally outside the paper project. |
 | `model_tournament.md` | Comparison of model variants and documented winners/losers. |
+| `agent_runs/` | Optional separated lanes for different AI models, IDEs, or sessions during high-variance model-base search. |
+| `cross_agent_model_audit.md` | Judge Pass comparison of multiple model lanes before canonical model-base confirmation. |
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
 

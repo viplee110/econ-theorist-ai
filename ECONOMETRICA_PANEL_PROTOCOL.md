@@ -550,6 +550,22 @@ Before a Model Panel recommends a candidate for D5 derivation or D7 pre-paper pa
 - Does the model rely on fixed point, contraction, IFT, or existence machinery before explaining the economic object requiring consistency?
 - If the model is mechanically formal, assumption-heavy, or lacks a clear toy example, route back to D4.5 rather than recommending formal derivation.
 
+## Multi-Agent Model Judge Pass
+
+Use this when `agent_runs/` contains multiple model lanes or when the user asks to compare model lanes. The default is many generator lanes plus one user-selected judge model, not pairwise critique among every lane.
+
+The judge must:
+
+- read each lane's `agent_manifest.md`, `model_skeleton_ledger.md`, `model_base_recommendation.md`, and `self_critique.md` when available;
+- record declared IDE/model provenance and provenance confidence for each lane;
+- check that a lane is not counted as independent unless a different IDE, model, session, or blind-lane declaration is present;
+- evaluate model bases on smallest toy example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption escape, proof tractability, and target-reader legibility;
+- separate self-critique from cross-lane or judge critique;
+- write `cross_agent_model_audit.md` and a judge-lane report under `agent_runs/[judge_run_id]/`;
+- stop before changing `model_base_design.md`, `model_tournament.md`, `heuristic_derivation.md`, or `human_decisions.md`.
+
+If the judge finds that no lane contains a satisfactory model base, it should recommend returning to D4 skeleton search rather than inventing and confirming a new model inside the judge pass.
+
 ## Nugget and Occam Test
 
 Every Review Panel and high-stakes Revision Panel must include a scientific-taste judgment. The judge should answer:
