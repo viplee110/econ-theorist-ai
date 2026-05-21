@@ -46,6 +46,7 @@ The agent should maintain these files whenever possible:
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
 - `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
 - `style_calibration.md`: confirmed or provisional style calibration for elegant, field-sensitive exposition without rhetoric.
+- `preview_drafts/`: provisional Working Preview Notes and PDFs for human reading during intermediate stages.
 - `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
 - `target_journal_profile.md`: confirmed or provisional target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
 - `literature_evidence_ledger.md`: verified source records for closest papers, anchor papers, absorption threats, and style anchors.
@@ -75,6 +76,8 @@ Default rule:
 ## Human Decision Persistence
 
 Human gate outcomes must be written to persistent artifacts before the workflow treats them as durable state. Do not rely on chat history alone.
+
+Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
 
 For every gate:
 
@@ -185,6 +188,33 @@ Before substantial manuscript revision, check whether the project has passed the
 - a human-approved `contribution_lock.md`
 
 If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4.5 or D4-D6 unless the user explicitly asks for mechanical editing only.
+
+## Working Preview Notes
+
+Working Preview Notes are provisional reading snapshots, not workflow stages and not source-of-truth artifacts.
+
+Use `preview_drafts/preview_note_YYYYMMDD_HHMM.md` when the human asks for a short draft, short PDF, or intermediate manuscript snapshot before the model, theorem, or manuscript is fully confirmed.
+
+Each preview must state:
+
+```text
+Status: Provisional preview
+Not source of truth
+Model base status:
+Theorem status:
+Literature evidence status:
+Pending human gates:
+Next safe workflow step:
+```
+
+Rules:
+
+- A preview may summarize a candidate question, model base, theorem sketch, literature status, and current risks for human reading.
+- A preview must not confirm model primitives, assumptions, equilibrium concepts, theorem status, novelty, target fit, or style direction.
+- If the Minimal Model Base Gate has not passed, say the model base is unconfirmed.
+- If proof status is sketch only, say the theorem is a sketch or candidate, not established.
+- If closest-literature evidence lacks `literature_evidence_ledger.md` entries, mark novelty and absorption statements provisional.
+- If generating a PDF, verify the exact output path and report the file using the filename-only card plus full path in code formatting.
 
 ## Stage 0 - Project Intake and State Reconstruction
 

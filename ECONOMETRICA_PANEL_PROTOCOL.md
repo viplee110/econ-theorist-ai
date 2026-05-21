@@ -704,6 +704,8 @@ The system must stop for human judgment before:
 
 Every panel-facing human gate must be recorded before the next panel or revision step relies on it. Create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
 
+Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
+
 If the user reverses a prior panel decision, preserve the earlier decision and add a reversal entry:
 
 ```text

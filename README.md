@@ -88,11 +88,25 @@ must still be checked against the underlying workflow artifacts.
 - Uses Scientific Judge / Nugget Test safeguards against defensive complexity.
 - Runs target-calibrated simulated review with dynamic referee roles.
 - Routes local-optimum traps back to discovery before manuscript polishing.
+- Creates provisional Working Preview Notes when the human wants a short readable snapshot before gates are final.
 - Calibrates exposition style through a Deep Style Anchor Pass after the contribution is locked.
 - Uses full-text style anchors when legally available or user-provided, extracting exposition architecture rather than prose.
 - Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
 
 ## Start In 5 Minutes
+
+Only remember these commands:
+
+```text
+Use the system: initialize this paper project.
+Use the system: continue by the system.
+Use the system: quickly screen this idea.
+Use the system: run a full literature audit.
+Use the system: what should I do today?
+```
+
+The system will ask explicit human-gate questions when important decisions are
+needed; you do not need to know the internal stage names.
 
 1. Download the repository as a ZIP file or clone it.
 2. Copy these files into the root directory of your paper project:
@@ -205,6 +219,10 @@ Use the system: if I only have two hours, what is the highest-value next action?
 Use the system: revise with agentic tree search instead of a defensive patch.
 ```
 
+```text
+Use the system: export a short working preview draft.
+```
+
 Small Chinese command examples:
 
 ```text
@@ -258,6 +276,7 @@ this workflow repository:
 | `style_anchor_matrix.md` | Cross-anchor matrix of exposition architecture, reader path, theorem setup, and proof roadmap moves. |
 | `style_calibration.md` | Human-confirmed style contract for elegant, field-calibrated exposition without rhetoric. |
 | `style_pass_plan.md` | Section-by-section plan for paragraph-level style correction after style confirmation. |
+| `preview_drafts/` | Optional provisional Working Preview Notes and PDFs for human reading during intermediate stages. |
 | `spike_dossier.md` | Optional focused dossier for a possible frontier spike that survives D6. |
 | `literature_cache/` | Optional local cache for user-authorized or open-access papers; bulk download is not the default. |
 | `literature_cache/style_anchors/` | Optional cache for legally available or user-authorized style anchor PDFs. |
@@ -295,11 +314,37 @@ Open command:
 `Start-Process -FilePath "C:\Dropbox\Shufe\Research\Project\My Paper\output\main.pdf"`
 ```
 
+## Folder Portability
+
+The paper project is folder-portable. Copy or sync the whole paper project
+folder, open it on another computer, run the local toolchain check, and continue
+from the project artifacts.
+
+Use this command after opening the copied folder:
+
+```text
+Use the system: continue by the system.
+```
+
+Folder portability lets you continue elsewhere. Workflow artifacts tell the
+assistant what happened and what is confirmed. Computer-level setup still belongs
+to each computer: agent IDE login, Python, LaTeX, Lean, Mathematica, Git, and
+local tool paths should be checked locally.
+
 ## If You Use Git
 
 Generated research files are saved locally in each paper project folder. They are
 not automatically uploaded to GitHub. The workflow works locally even if you
 never use Git.
+
+Git is optional for running the workflow. For serious projects, Git checkpoints
+are recommended because they let you roll back file versions if an AI edit,
+manual edit, LaTeX rewrite, or model rewrite damages the project. Folder
+portability preserves project state; Git checkpoints preserve recoverable file
+versions.
+
+Git commits are stored in the project folder's hidden `.git/` directory. They
+stay local unless you choose to push them to GitHub or another remote.
 
 If you use GitHub as a backup for a paper project, you may choose which generated
 research files to track. Durable research records that are often worth tracking
@@ -328,12 +373,18 @@ Files that usually do not need to be tracked include:
 ```text
 active_context.md
 toolchain_status.md
+preview_drafts/
 referee_reports/
 verification/
 formal/
 lean/
 large local caches
 ```
+
+These runtime files are ignored in this workflow template so paper-specific
+process files do not accidentally enter the public workflow repository. In your
+own paper project, you may choose to track selected durable records if you want
+GitHub or another remote to back up the research process.
 
 ## Toolchain
 

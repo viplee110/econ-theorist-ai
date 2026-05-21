@@ -23,6 +23,18 @@ Generated research files are saved locally in each paper project folder. They ar
 not automatically uploaded to GitHub. The workflow works locally even if the user
 never uses Git.
 
+The paper project is folder-portable. If the user copies or syncs the whole paper
+project folder to another computer, the workflow can continue from the project
+artifacts in that folder after the local toolchain check is run on the new
+computer. Folder portability preserves project state; Git checkpoints preserve
+recoverable file versions.
+
+Git is optional for running the workflow. For serious projects, recommend Git
+checkpoints even on one computer because they let the user roll back file
+versions if an AI edit, manual edit, LaTeX rewrite, or model rewrite damages the
+project. Git commits are stored in the project folder's hidden `.git/` directory
+and stay local unless the user pushes them to GitHub or another remote.
+
 If the user uses GitHub as backup, they may choose which generated research files
 to track. Durable research records that are often worth tracking include
 `human_decisions.md`, `project_state.md`, `contribution_lock.md`,
@@ -34,6 +46,11 @@ to track. Durable research records that are often worth tracking include
 Files that usually do not need tracking include `active_context.md`,
 `toolchain_status.md`, `referee_reports/`, `verification/`, `formal/`, `lean/`,
 and large local caches.
+
+Runtime files are ignored in the workflow template so paper-specific process
+files do not accidentally enter the public workflow repository. In the user's
+own paper project, they may choose to track selected durable records if they want
+GitHub or another remote to back up the research process.
 
 ## Default Automation Policy
 

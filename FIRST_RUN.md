@@ -78,6 +78,31 @@ When you start a second paper, the computer-level toolchain check usually does
 not need to be repeated. The new paper still needs its own project
 initialization.
 
+## Folder Portability
+
+The paper project is folder-portable. Copy or sync the whole paper project
+folder, open it on another computer, run the local toolchain check there, and
+continue from the project artifacts.
+
+Use this command after opening the copied folder:
+
+```text
+Use the system: continue by the system.
+```
+
+Copy the whole folder, not just the manuscript. Workflow artifacts such as
+`project_state.md`, `human_decisions.md`, `field_profile.md`,
+`target_journal_profile.md`, `model_base_design.md`, and
+`literature_evidence_ledger.md` tell the assistant what happened and what is
+confirmed. Computer-level setup still belongs to each computer: agent IDE login,
+Python, LaTeX, Lean, Mathematica, Git, and local tool paths should be checked
+locally.
+
+Git is optional for running the workflow. For serious projects, Git checkpoints
+are recommended because they let you roll back file versions if something goes
+wrong. Folder portability preserves project state; Git checkpoints preserve
+recoverable file versions.
+
 ## Custom Tool Locations
 
 The default shared verification tool root on Windows is:

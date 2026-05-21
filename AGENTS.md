@@ -12,6 +12,7 @@ The system is target-calibrated rather than Econometrica-only. Econometrica-leve
 - Chinese is allowed only in chat interaction and a small routing trigger list. Do not write Chinese into research artifacts or manuscripts unless the user explicitly asks for a separate Chinese explanatory note outside the manuscript workflow.
 - Ordinary Q&A remains ordinary Q&A: explanatory, translation, GitHub, software, or conceptual questions should not be over-routed into the research workflow.
 - Research execution is serious by default. Casual wording must not downgrade a research idea; explicit quick requests may receive a compact screen, but the quality floor remains.
+- The paper project is folder-portable. If the whole paper project folder is copied or synced to another computer, continue from the artifacts in that folder after running the local toolchain check on the new computer.
 
 ## Path and PDF Output Hygiene
 
@@ -83,6 +84,7 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Use `generality_ledger.md` to track losses of generality from special-case assumptions, distributions, graph structures, extra agents, extra states, or longer theorem sentences.
 - Use `style_calibration.md` only as a confirmed or provisional paper-specific style contract for elegance without rhetoric; it must not change theorem statements, assumptions, novelty claims, or target-journal positioning.
 - For serious style calibration, run deep style reading when full-text anchors are legally available or user-provided. Use `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_pass_plan.md` to extract exposition architecture, not sentences or prose templates.
+- Use `preview_drafts/` only for provisional Working Preview Notes or PDFs. Preview drafts are for human reading and must not confirm model primitives, theorems, novelty, target fit, or style direction.
 - Use `target_journal_profile.md` as the confirmed or provisional target-calibration artifact. It should guide journal fit, reader path, referee mix, style anchors, and review calibration, but it must not replace field evidence, theorem verification, or absorption tests.
 - Treat optional cross-project researcher memory as a prior, never as paper source of truth. User-level files such as `researcher_profile.md`, `method_library.md`, `negative_knowledge.md`, `proof_technique_memory.md`, `project_postmortems/`, and `field_maps/` may live under `C:\Users\<user>\.econ-theorist-ai\`, but current project artifacts, literature evidence, proof verification, and human gates override them.
 - Guard against information bubbles from researcher memory: include outside-view objections, adjacent-field search, and at least one internally coherent anti-profile direction when discovery breadth matters.
@@ -104,6 +106,7 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Do not ask vague major-gate questions such as "continue?" or "what do you think?" The gate prompt should teach the user what decision is needed and what happens next.
 - Every human gate decision must be written to the relevant persistent artifact before the system treats it as durable state. Create `human_decisions.md` if it is missing, use it for append-only decision history, and update the active state file such as `project_state.md`, `discovery_state.md`, `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md` as appropriate.
 - Human decisions are append-only by default. If the user reverses or overrides an earlier decision, record the reversal with the previous decision, new decision, reason, affected artifacts, and required rechecks. The later decision governs current work, but the earlier decision must not be erased.
+- Every local Human gate in a workflow file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
 - Do not continue polishing if the main objection is contribution, identification, or economic relevance. Return to idea testing or contribution locking.
 - Use `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` to decide which stage should be run next.
 - Use `ECONOMETRICA_ORCHESTRATOR.md` as the default router for broad or ambiguous research instructions.
@@ -114,4 +117,5 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Use `ECONOMETRICA_DISCOVERY_WORKFLOW.md` before a full manuscript exists or when the task is to discover topics, generate tractable models, test derivations, or run early-stage kill tests.
 - Use `ECONOMETRICA_VERIFICATION_WORKFLOW.md` whenever a mathematical claim needs derivation, symbolic checking, numerical testing, counterexample search, proof audit, or formal verification.
 - Use `ECONOMETRICA_VERSION_CONTROL.md` before and after meaningful edits, long-running review sessions, and rollback requests.
+- Git is optional for running the workflow, but serious projects should use Git checkpoints as recoverable file-version snapshots. Workflow artifacts explain research state; Git checkpoints make damaged files reversible.
 - Run version control automatically in the background for meaningful edits: status check, safe AI branch when the git tree is clean, checkpoint logging, and post-edit diff summary. Ask only for commits, tags, worktrees, rollback, destructive actions, or dirty pre-existing human changes.

@@ -44,7 +44,11 @@ Use the system: quickly screen this idea.
 Use the system: run a full literature audit.
 Use the system: run a full simulated review.
 Use the system: what should I do today?
+Use the system: export a short working preview draft.
 ```
+
+The system will ask explicit human-gate questions when important decisions are
+needed; you do not need to know the internal stage names.
 
 ## Option B - Git Clone and Copy
 
@@ -95,11 +99,36 @@ or:
 
 If Python, Lean, or Mathematica are unavailable, the workflows still work as prompts and checklists, but mathematical verification will be weaker.
 
+## Folder Portability
+
+The paper project is folder-portable. Copy or sync the whole paper project
+folder, open it on another computer, run the local toolchain check there, and
+continue from the project artifacts.
+
+Use this command after opening the copied folder:
+
+```text
+Use the system: continue by the system.
+```
+
+Copy the whole folder, not just the manuscript. Workflow artifacts tell the
+assistant what happened and what is confirmed. Computer-level setup still belongs
+to each computer: agent IDE login, Python, LaTeX, Lean, Mathematica, Git, and
+local tool paths should be checked locally.
+
 ## If You Use Git
 
 Generated research files are saved locally in each paper project folder. They are
 not automatically uploaded to GitHub. The workflow works locally even if you
 never use Git.
+
+Git is optional for running the workflow. For serious projects, Git checkpoints
+are recommended because they let you roll back file versions if something goes
+wrong. Folder portability preserves project state; Git checkpoints preserve
+recoverable file versions.
+
+Git commits are stored in the project folder's hidden `.git/` directory. They
+stay local unless you choose to push them to GitHub or another remote.
 
 If you use GitHub as a backup for a paper project, you may choose which generated
 research files to track. Durable research records that are often worth tracking
@@ -126,6 +155,7 @@ Files that usually do not need to be tracked include:
 ```text
 active_context.md
 toolchain_status.md
+preview_drafts/
 style_anchor_notes/
 style_anchor_matrix.md
 style_pass_plan.md
@@ -135,3 +165,8 @@ formal/
 lean/
 large local caches
 ```
+
+These runtime files are ignored in this workflow template so paper-specific
+process files do not accidentally enter the public workflow repository. In your
+own paper project, you may choose to track selected durable records if you want
+GitHub or another remote to back up the research process.

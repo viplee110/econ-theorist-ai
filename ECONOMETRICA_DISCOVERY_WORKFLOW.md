@@ -144,6 +144,8 @@ The human should own:
 
 Human gate outcomes are persistent project state, not chat memory. Before proceeding past a gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `target_journal_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`.
 
+Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
+
 Use this entry format in `human_decisions.md` when useful:
 
 ```text
@@ -493,6 +495,7 @@ Panel option:
 Multi-agent lane option:
 
 - The user should not need to remember special lane commands. When D4/D4.5 is high variance, when model generalization becomes inelegant, when top candidates are close, when the ledger looks thin, or when different IDE/model outputs disagree, proactively recommend independent lanes or a Judge Pass.
+- Use a general user-facing prompt: "If you have access to another AI or IDE, I can prepare a copy-paste prompt for an independent lane or judge pass."
 - If multiple lanes exist, do not require pairwise critique by default. Recommend one user-selected judge model to compare all lanes and write `cross_agent_model_audit.md`.
 - If the user wants to use another IDE/model as judge, create `agent_runs/_judge_prompt.md` with a self-checking prompt that tells the external system to inspect the shared project state, identify completed lanes, run Judge Pass, and avoid overwriting canonical artifacts.
 

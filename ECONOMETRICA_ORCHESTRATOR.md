@@ -29,6 +29,12 @@ First-run check is a soft gate, not a hard gate.
 - A new paper project may still need lightweight project initialization through `project_state.md` and `active_context.md`.
 - The setup check must not silently install large tools, modify PATH, or change system environment variables.
 
+The paper project is folder-portable.
+
+- If the whole paper project folder is copied or synced to another computer, continue from the artifacts in that folder after running the local toolchain check on the new computer.
+- Folder portability lets the user continue elsewhere. Workflow artifacts tell the assistant what happened and what is confirmed. Git checkpoints, when used, make file versions recoverable if something goes wrong.
+- Computer-level setup still belongs to each computer: agent IDE login, Python, LaTeX, Lean, Mathematica, Git, and local tool paths should be checked locally.
+
 Stage-aware effort calibration uses internal rules rather than user-visible modes:
 
 - Default continuation uses the current project stage, existing artifacts, user request, and risk level.
@@ -156,6 +162,10 @@ Use the system: what should I do today?
 ```
 
 ```text
+Use the system: export a short working preview draft.
+```
+
+```text
 Use the system: where is this project stuck?
 ```
 
@@ -204,6 +214,7 @@ Before routing, inspect whichever of these files exist:
 - `style_anchor_matrix.md`
 - `style_calibration.md`
 - `style_pass_plan.md`
+- latest `preview_drafts/*.md`
 - `generality_ledger.md`
 - latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
@@ -280,6 +291,7 @@ shared project folder, separated write lanes, automatic lane discovery, judge pa
 - Lanes must not overwrite canonical artifacts such as `model_tournament.md`, `model_base_design.md`, `heuristic_derivation.md`, or `human_decisions.md`.
 - If two or more completed model lanes exist and `cross_agent_model_audit.md` is missing or stale, recommend a Judge Pass rather than continuing ordinary model generation by default.
 - Judge Pass is not pairwise critique by default. It is many generator lanes plus one user-selected judge model, followed by a human gate.
+- When the model-base choice is high variance, use a general user-facing prompt: "If you have access to another AI or IDE, I can prepare a copy-paste prompt for an independent lane or judge pass."
 - When the user chooses the current model as judge, write judge outputs with declared provenance to `agent_runs/[judge_run_id]/` and create or update `cross_agent_model_audit.md`.
 - When the user wants another IDE/model as judge, create `agent_runs/_judge_prompt.md`. The prompt must tell the external system to read `AGENTS.md`, `ECONOMETRICA_ORCHESTRATOR.md`, shared source-of-truth artifacts, and `agent_runs/`; self-check whether a Judge Pass is pending; write outputs to its assigned judge lane and `cross_agent_model_audit.md`; and avoid overwriting canonical artifacts.
 - If `cross_agent_model_audit.md` exists and is current, prepare the Minimal Model Base Gate instead of generating more lanes unless the user explicitly asks for more search.
@@ -512,6 +524,7 @@ Route:
 - Inspect `agent_runs/` before writing model artifacts.
 - If two or more completed model lanes exist and `cross_agent_model_audit.md` is missing or stale, stop ordinary generation, recommend a Judge Pass, and ask whether to use the current model as judge or generate `agent_runs/_judge_prompt.md` for another AI/IDE.
 - If no Judge Pass is blocking, and no lane exists or the current request is a normal single-model continuation, run the ordinary D4/D4.5 workflow. If the model-base decision is high variance, proactively suggest one or more independent lanes but do not require them.
+- Use a general prompt rather than naming a specific product: "If you have access to another AI or IDE, I can prepare a copy-paste prompt for an independent lane or judge pass."
 - If creating or continuing a lane, write lane artifacts only under `agent_runs/[run_id]/` until cross-agent audit and human confirmation. Do not overwrite canonical `model_tournament.md`, `model_base_design.md`, or `heuristic_derivation.md` from a lane.
 - If the primitive is unclear or the valuable object is reduced-form, run a Primitive Hunter / Theorem Generator Panel before ordinary model generation.
 - Treat any user-supplied agents, timing, information, payoffs, equilibrium concepts, or assumptions as provisional modeling constraints until the Minimal Model Base Gate confirms them.
@@ -707,6 +720,31 @@ Route:
 - Compile when possible.
 - Update `revision_log.md` and `risk_register.md`.
 - Stop if a foundational issue appears.
+
+### Working Preview Note
+
+Triggers:
+
+- "working preview"
+- "preview note"
+- "short PDF draft"
+- "export a short draft"
+- "export a short working preview draft"
+- "short manuscript snapshot"
+- "简短版 PDF"
+- "导出草稿"
+- "草稿看看"
+
+Route:
+
+- Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+- Create or update a provisional Working Preview Note under `preview_drafts/`, using a timestamped filename such as `preview_note_YYYYMMDD_HHMM.md`.
+- If the user asks for PDF output and LaTeX or another safe PDF path is available, optionally compile or export `preview_note_YYYYMMDD_HHMM.pdf`.
+- The preview is for human reading only. It is not a source of truth and must not confirm model primitives, assumptions, equilibrium concepts, theorem status, novelty, target fit, or style direction.
+- The preview must state: `Status: Provisional preview`, `Not source of truth`, model base status, theorem status, literature evidence status, pending human gates, and the next safe workflow step.
+- If the Minimal Model Base Gate has not passed, state that the model base is unconfirmed. If proof status is sketch only, state that the theorem is a sketch or candidate, not established.
+- Do not skip any human gate because a preview was created.
+- If generating a PDF, follow Path Integrity and Compiled Output Hygiene: verify the exact path first, use the basename as the visible file-card title, and report the full path separately in code formatting.
 
 ### Deep Style Anchor Pass and Exposition Elegance
 

@@ -261,6 +261,8 @@ Human gate:
 
 The human must approve any new assumption that affects economics, novelty, or interpretation.
 
+Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
+
 Panel option:
 
 - For a central theorem, run a Verification Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` before approving proof repairs.
