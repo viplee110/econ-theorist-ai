@@ -147,6 +147,20 @@ Small Chinese command example:
 Use the system: initialize this paper project
 ```
 
+## Examples
+
+New users should skim the examples before running a real project:
+
+```text
+examples/full_walkthrough_toy_project/
+examples/model_base_mini_example/
+examples/kill_or_pivot_mini_example/
+```
+
+The examples are toy walkthroughs, not publishable papers and not literature
+claims. They show how the workflow moves from a vague idea to artifacts, human
+gates, model-base choice, preview drafts, review, and kill-or-pivot decisions.
+
 ## Common Commands
 
 ```text
