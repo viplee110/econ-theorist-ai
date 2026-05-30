@@ -42,6 +42,53 @@ Stage-aware effort calibration uses internal rules rather than user-visible mode
 - A full audit is mandatory when the user asks for full review, full literature audit, theorem verification, full model tournament, high-stakes submission, or equivalent language.
 - No effort level may lower rigor, theorem discipline, novelty scrutiny, absorption testing, proof verification, or human-gate persistence.
 
+## Micro-Example First and Autonomous-Run Discipline
+
+The workflow must not confuse abstract formalism with economic discovery.
+
+Hard rule:
+
+```text
+No general model before a hand-solved micro-example.
+```
+
+- Before D5 formal derivation, require `micro_example_note.md` unless the user explicitly asks only to solve a given model mechanically.
+- `micro_example_note.md` must contain a real-world vignette, the smallest numerical or symbolic example, a hand-solved special case, the economic force in plain language, the predicted comparative static before derivation, a failure condition, the closest-literature gap for the mechanism, and a statement of why generalization is needed.
+- Do not introduce fixed point, contraction, IFT, existence-theorem, or maximal-general model language until the micro-example shows the economic object that requires consistency.
+- Treat Econometrica-level ambition as sharpness, minimality, and eventual generalizability, not permission to start with a complex general model.
+
+Autonomous or goal-driven runs may generate candidates, micro-examples, audits,
+and recommendations, but they must not proxy the human at these gates:
+
+- Micro-Example Gate
+- Minimal Model Base Gate
+- central question
+- model primitives
+- assumption set
+- main theorem
+- novelty claim
+- contribution lock
+- target journal decision
+- invest, kill, park, pivot, split, retarget, or submit decision
+
+If the user asks for full automation, interpret it as automatic preparation up
+to the next gate, not automatic approval of the gate.
+
+## Artifact Budget
+
+Long automatic runs must keep the project folder readable.
+
+- Keep canonical source-of-truth artifacts in the project root.
+- Put exploratory scratch, failed candidate dumps, panel scratch, and large lane
+  work under `scratch_runs/YYYYMMDD_HHMM/` or `agent_runs/[run_id]/`.
+- Do not create hundreds of top-level files. If a run would exceed roughly 25
+  top-level generated runtime files, stop and consolidate.
+- End every long automatic run by updating `active_context.md` and writing or
+  updating `run_summary.md` with: what was tried, what survived, what failed,
+  open gates, files that matter, and the next highest-value action.
+- If file growth, repeated summaries, or scratch artifacts become the main
+  output, stop the run and compress state before continuing.
+
 ## Path Integrity and Compiled Output Hygiene
 
 Windows paths are easily corrupted by Markdown rendering when backslashes are written as raw prose. The assistant must treat path display as an output-safety issue.
@@ -197,6 +244,7 @@ Before routing, inspect whichever of these files exist:
 - `primitive_hunter_report.md`
 - `model_tournament.md`
 - `model_base_design.md`
+- `micro_example_note.md`
 - `heuristic_derivation.md`
 - `theorem_candidates.md`
 - `absorption_tests.md`
@@ -215,6 +263,7 @@ Before routing, inspect whichever of these files exist:
 - `style_calibration.md`
 - `style_pass_plan.md`
 - latest `preview_drafts/*.md`
+- latest `run_summary.md`
 - `generality_ledger.md`
 - latest `referee_reports/round_N/00_summary.md`
 - `final_report.md`
@@ -230,7 +279,7 @@ If no state file exists, begin with intake:
 
 ## Low-Token State Discipline
 
-Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, model base status, model lane status, pending Judge Pass status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
+Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, micro-example status, model base status, model lane status, pending Judge Pass status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 
 Token discipline reduces redundant re-reading, repeated summaries, and boilerplate. It must not reduce research depth. For main theorem discovery, proof verification, closest-literature checks, simulated review, model tournaments, and high-stakes revision, use enough context, tools, and token budget to execute the complete workflow.
 
@@ -254,6 +303,7 @@ Safety barriers:
 - No local polishing if complexity debt is rising.
 - No kill of a possible frontier spike before spike-specific tests.
 - No target-journal downgrade as a substitute for theorem quality.
+- No general model before a hand-solved micro-example recorded in `micro_example_note.md`.
 - No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
 - No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
 
@@ -267,9 +317,11 @@ Fault alarms:
 - model note not compressing to 5-8 pages
 - `risk_register.md` growing without resolution
 - model base feels mechanically formal, assumption-heavy, or lacks a small example
+- `micro_example_note.md` is missing, only verbal, or not hand-solved
 - formal proof machinery appears before economic necessity is established
+- top-level generated files keep growing without a sharper mechanism or gate decision
 
-When a fault alarm fires, stop local polishing and route to Discovery D4.5, D4-D6, Stage 8 tree search, or a human decision gate.
+When a fault alarm fires, stop local polishing and route to Discovery D4.5, D4-D6, Stage 8 tree search, artifact consolidation, or a human decision gate.
 
 ## Lane-Aware Multi-Agent Model Protocol
 
@@ -528,11 +580,12 @@ Route:
 - If creating or continuing a lane, write lane artifacts only under `agent_runs/[run_id]/` until cross-agent audit and human confirmation. Do not overwrite canonical `model_tournament.md`, `model_base_design.md`, or `heuristic_derivation.md` from a lane.
 - If the primitive is unclear or the valuable object is reduced-form, run a Primitive Hunter / Theorem Generator Panel before ordinary model generation.
 - Treat any user-supplied agents, timing, information, payoffs, equilibrium concepts, or assumptions as provisional modeling constraints until the Minimal Model Base Gate confirms them.
-- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_candidates.md`, `model_tournament.md`, `model_base_design.md`, `heuristic_derivation.md`, and `absorption_tests.md`.
+- Create or update `primitive_hunter_report.md`, `generality_ledger.md`, `model_candidates.md`, `model_tournament.md`, `micro_example_note.md`, `model_base_design.md`, `heuristic_derivation.md`, and `absorption_tests.md`.
 - Use confirmed `field_profile.md` if available; if absorption or role assignment depends on a missing, provisional, stale, or `Reopen requested` field profile, update it from closest-literature evidence and stop for confirmation before final judgment.
 - Use confirmed `target_journal_profile.md` if available for target-aware model and theorem calibration, but do not let a non-Econometrica target skip model tournament, absorption testing, generality ledger, or main-theorem gate.
 - Generate broad cheap model skeletons before selecting one for full development: 20-40 total, or 10-20 per selected direction when needed. Screen them to 6-10 semi-formal baselines, then 3-5 example-to-theory candidates, and only 1-3 formal derivation candidates.
-- Run D4.5 Example-to-Theory Model Base Construction before D5 unless the user explicitly asks only to solve a given model mechanically.
+- Run D4.5 Example-to-Theory Model Base Construction before D5 unless the user explicitly asks only to solve a given model mechanically. D4.5 must create `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md`.
+- Stop at the Micro-Example Gate if the smallest example is not hand-solved, has no economic prediction, lacks a failure condition, or has no provisional literature-gap check.
 - Generate three non-neighborhood model directions when local repair is a risk.
 - Include candidate geometry for serious candidates: local extension, recombination, possible frontier spike, absorbed benchmark, clever but shallow, or hidden gem.
 - Use mutation operators when search appears trapped in local repair: primitive, endogenization, timing, information, objective, equilibrium-concept, boundary, duality, and field-transfer mutations.
@@ -559,7 +612,7 @@ Route:
 - Read `ECONOMETRICA_DISCOVERY_WORKFLOW.md` and `ECONOMETRICA_VERIFICATION_WORKFLOW.md`.
 - Read `ECONOMETRICA_PANEL_PROTOCOL.md` for theorem/model claims with high stakes.
 - If the user explicitly asks to solve a given model mechanically, run direct derivation and verification but do not claim research quality or target-journal potential.
-- Otherwise require `model_base_design.md` and `heuristic_derivation.md`, or route to D4.5 before D5.
+- Otherwise require `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md`, or route to D4.5 before D5.
 - Run Discovery D5 plus Verification V1-V4 as needed.
 - Use a Verification Panel for the main proposition, equilibrium existence, identification result, or any theorem that carries the contribution.
 - Create or update `derivation_notes.md`, `theorem_candidates.md`, `math_claims.md`, `assumption_ledger.md`, `verification_log.md`, and `counterexamples.md`.
@@ -910,7 +963,9 @@ The assistant may automatically proceed from:
 - D0 to D1 when the user asks for new-topic exploration.
 - D1 to D2 when the user explicitly asks for screening.
 - D4 to D4.5 when the task is research model development.
-- D4 or D4.5 to D5 only after the Minimal Model Base Gate, or when the user explicitly asks only to solve a given model mechanically.
+- D4.5 candidate generation to the Micro-Example Gate.
+- D4.5 Micro-Example Gate to the Minimal Model Base Gate only after the human confirms the micro-example.
+- D4 or D4.5 to D5 only after both the Micro-Example Gate and Minimal Model Base Gate, or when the user explicitly asks only to solve a given model mechanically.
 - V1 to V4 for a named mathematical claim.
 - Stage 1 to Stage 1.5 after the human chooses `Proceed`, or when the user explicitly asks for journal fit or target ladder.
 - Stage 3 to Stage 6 after contribution lock is approved.
@@ -923,6 +978,7 @@ The assistant must stop at gates involving:
 - first-time or materially changed target journal profile confirmation
 - central research question
 - main theorem
+- Micro-Example Gate
 - Minimal Model Base Gate
 - model primitives
 - assumption set

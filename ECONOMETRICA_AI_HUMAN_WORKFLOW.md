@@ -39,6 +39,7 @@ The agent should maintain these files whenever possible:
 - `contribution_lock.md`: the locked core question, non-substitutable insight, and reader belief update.
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
 - `model_base_design.md`: confirmed or provisional example-to-theory model base, skeleton funnel, failed simpler alternatives, and recommended baseline.
+- `micro_example_note.md`: hand-solved smallest example, economic intuition, predicted comparative static, failure condition, and literature-gap check before general modeling.
 - `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
 - `agent_runs/`: separated model-search or judge-pass lanes produced by different IDEs, models, or sessions before canonical merge.
 - `cross_agent_model_audit.md`: Judge Pass comparison of multiple lanes before the Minimal Model Base Gate.
@@ -57,6 +58,8 @@ The agent should maintain these files whenever possible:
 - `revision_tree.md`: Stage 8 branch plans for Defensive Patch, Mechanism Simplification, and Pivot/Reframe.
 - `revision_log.md`: every nontrivial edit with file, location, reason, and expected benefit.
 - `risk_register.md`: unresolved risks, author-only TODOs, pivot warnings, and rejection reasons.
+- `run_summary.md`: compact summary after long automatic runs, including what was tried, what survived, open gates, important files, and next action.
+- `scratch_runs/`: archived scratch for exploratory outputs that should not clutter the project root.
 - `final_report.md`: final summary after any long work session.
 
 ## Human Intervention Modes
@@ -124,6 +127,7 @@ Current stage:
 Current blocker:
 Confirmed source-of-truth artifacts:
 Open human gates:
+Micro-example status:
 Model base status:
 Model lane status:
 Pending Judge Pass:
@@ -157,8 +161,10 @@ Closed-loop safety barriers:
 - No local polishing if complexity debt is rising.
 - No kill of a possible frontier spike before spike-specific tests.
 - No target-journal downgrade as a substitute for theorem quality.
+- No general model before a hand-solved `micro_example_note.md`, unless the task is explicitly mechanical model solving.
 - No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
 - No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
+- No autonomous approval of the Micro-Example Gate, Minimal Model Base Gate, main theorem gate, novelty claim, contribution lock, or invest/pivot/kill decision.
 
 Fault alarms:
 
@@ -170,9 +176,21 @@ Fault alarms:
 - model note not compressing to 5-8 pages
 - `risk_register.md` growing without resolution
 - model base feels mechanically formal, assumption-heavy, or lacks a small example
+- missing or merely verbal micro-example before formal derivation
 - formal proof machinery appears before economic necessity is established
+- top-level generated files grow without a sharper mechanism, gate decision, or consolidated state
 
 When a fault alarm fires, stop local polishing and return to Discovery D4.5, D4-D6, Stage 8 tree search, or an explicit human gate.
+
+## Artifact Budget For Long Runs
+
+Long automatic runs must produce research progress, not file sprawl.
+
+- Keep canonical source-of-truth artifacts in the project root.
+- Put exploratory scratch under `scratch_runs/YYYYMMDD_HHMM/` or lane-specific output under `agent_runs/[run_id]/`.
+- If a run would create more than roughly 25 top-level generated runtime files, stop and consolidate before continuing.
+- End every long automatic run with `run_summary.md` and an updated `active_context.md`.
+- `run_summary.md` should list what was tried, what survived, what failed, open gates, files that matter, and the next highest-value action.
 
 ## Manuscript-Mode Firewall
 
@@ -184,7 +202,7 @@ Before substantial manuscript revision, check whether the project has passed the
 - a confirmed or explicitly provisional `field_profile.md` recording the primary field, adjacent fields, absorption-risk families, and field-sensitive referee roles
 - a confirmed or explicitly provisional `target_journal_profile.md` recording primary target, stretch target, fallback target, target audience, fit standard, and quality floor
 - `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
-- `model_base_design.md` and `heuristic_derivation.md`, or equivalent evidence that the current model base was built from a smallest economically interpretable example and passed the Minimal Model Base Gate
+- `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md`, or equivalent evidence that the current model base was built from a hand-solved smallest economically interpretable example and passed the Micro-Example Gate and Minimal Model Base Gate
 - a human-approved `contribution_lock.md`
 
 If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4.5 or D4-D6 unless the user explicitly asks for mechanical editing only.

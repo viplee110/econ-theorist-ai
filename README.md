@@ -78,7 +78,8 @@ must still be checked against the underlying workflow artifacts.
 - Runs Primitive Hunter / Theorem Generator panels when the primitive is unclear.
 - Treats user-supplied model details as provisional modeling constraints until a model-base gate confirms them.
 - Searches broadly over cheap model skeletons, then derives narrowly from the few model bases that survive.
-- Builds models from small examples and economic tensions before fixed point or existence machinery enters.
+- Requires a hand-solved micro-example before any general model, fixed point, or existence machinery enters.
+- Builds models from small examples and economic tensions before formal theorem production.
 - Compares model variants before manuscript writing and uses nonconvex branch generation inside the existing tree search.
 - Requires absorption tests against closest literature and known theory families.
 - Uses `field_profile.md` to assign field-sensitive simulated referees.
@@ -285,6 +286,7 @@ this workflow repository:
 | `literature_evidence_ledger.md` | Verified source records for closest papers, anchors, absorption threats, and style anchors. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
 | `model_base_design.md` | Example-to-theory model base, skeleton funnel, failed simpler alternatives, and human confirmation status. |
+| `micro_example_note.md` | Hand-solved smallest example, intuition, predicted comparative static, failure condition, and literature-gap check. |
 | `heuristic_derivation.md` | Economic derivation path from toy example to formal model before proof machinery begins. |
 | `style_anchor_notes/` | Per-anchor notes from deep reading of legally available or user-provided style anchors. |
 | `style_anchor_matrix.md` | Cross-anchor matrix of exposition architecture, reader path, theorem setup, and proof roadmap moves. |
@@ -300,6 +302,8 @@ this workflow repository:
 | `cross_agent_model_audit.md` | Judge Pass comparison of multiple model lanes before canonical model-base confirmation. |
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
+| `run_summary.md` | Compact summary after long automatic runs. |
+| `scratch_runs/` | Scratch archive for exploratory outputs that should not clutter the project root. |
 
 ## Path Display And PDF Outputs
 
@@ -373,6 +377,7 @@ target_journal_profile.md
 literature_evidence_ledger.md
 model_tournament.md
 model_base_design.md
+micro_example_note.md
 heuristic_derivation.md
 absorption_tests.md
 generality_ledger.md
@@ -388,6 +393,8 @@ Files that usually do not need to be tracked include:
 active_context.md
 toolchain_status.md
 preview_drafts/
+run_summary.md
+scratch_runs/
 referee_reports/
 verification/
 formal/
@@ -459,6 +466,7 @@ gate decisions override researcher memory.
 - Research execution is serious by default, while ordinary Q&A remains ordinary Q&A.
 - Specificity is not stage advancement: formal model language from the user is provisional until artifacts and human gates confirm it.
 - Exhaust broadly at the model-skeleton level; derive narrowly at the formal level.
+- No general model before a hand-solved micro-example.
 - A model is not ready because it is formal; it is ready when its smallest version explains the economic force.
 - Nonconvex discovery expands branch generation inside tree search; it does not certify quality.
 - Target journal changes calibration, not quality.

@@ -293,7 +293,7 @@ Roles:
 - Referee 2: economic mechanism and comparative statics, specialized to the detected field.
 - Referee 3: novelty and absorption risk relative to the closest canonical or substitute models.
 - Referee 4: rigor specialist selected from the candidate model's main risk, such as existence, uniqueness, fixed point, IFT, contraction, boundary behavior, computation, or assumption packaging.
-- Model Base Architect / Economic Naturalness Reader: checks whether the model base is built from a smallest economically interpretable example, whether user-supplied model elements are still provisional or confirmed, whether simpler models fail for economic reasons, and whether proof machinery is entering before economic necessity has been explained.
+- Model Base Architect / Economic Naturalness Reader: checks whether the model base is built from a hand-solved `micro_example_note.md`, whether user-supplied model elements are still provisional or confirmed, whether simpler models fail for economic reasons, and whether proof machinery is entering before economic necessity has been explained.
 - Associate Editor: selects Invest, Refine, Pivot, Demote to Benchmark, Park, or Kill for each model.
 - Co-Editor: decides which model, if any, should enter the pre-paper model-note stage.
 
@@ -544,11 +544,14 @@ If the panel can reproduce the result by renaming variables inside a known frame
 Before a Model Panel recommends a candidate for D5 derivation or D7 pre-paper packaging, it must check:
 
 - Is the candidate grounded in a smallest real-world scene or toy example?
+- Has the project produced a hand-solved `micro_example_note.md` rather than only a verbal intuition?
+- Has the Micro-Example Gate been passed, or is the missing gate explicitly listed as a blocker?
 - Are the agent set, timing, information, choices, state variables, frictions, and equilibrium concept necessary for the economic force?
 - Which user-supplied model elements remain provisional modeling constraints rather than confirmed primitives?
 - Why do simpler models fail?
 - Does the model rely on fixed point, contraction, IFT, or existence machinery before explaining the economic object requiring consistency?
 - If the model is mechanically formal, assumption-heavy, or lacks a clear toy example, route back to D4.5 rather than recommending formal derivation.
+- If `micro_example_note.md` is missing, merely verbal, unsolved, or not connected to the claimed literature gap, do not recommend D5. Route to the Micro-Example Gate first.
 
 ## Multi-Agent Model Judge Pass
 
@@ -559,10 +562,10 @@ The judge must:
 - read each lane's `agent_manifest.md`, `model_skeleton_ledger.md`, `model_base_recommendation.md`, and `self_critique.md` when available;
 - record declared IDE/model provenance and provenance confidence for each lane;
 - check that a lane is not counted as independent unless a different IDE, model, session, or blind-lane declaration is present;
-- evaluate model bases on smallest toy example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption escape, proof tractability, and target-reader legibility;
+- evaluate model bases on the hand-solved micro-example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption escape, proof tractability, and target-reader legibility;
 - separate self-critique from cross-lane or judge critique;
 - write `cross_agent_model_audit.md` and a judge-lane report under `agent_runs/[judge_run_id]/`;
-- stop before changing `model_base_design.md`, `model_tournament.md`, `heuristic_derivation.md`, or `human_decisions.md`.
+- stop before changing `micro_example_note.md`, `model_base_design.md`, `model_tournament.md`, `heuristic_derivation.md`, or `human_decisions.md`.
 
 If the judge finds that no lane contains a satisfactory model base, it should recommend returning to D4 skeleton search rather than inventing and confirming a new model inside the judge pass.
 

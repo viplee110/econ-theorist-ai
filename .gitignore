@@ -15,6 +15,7 @@ primitive_hunter_report.md
 agent_runs/
 cross_agent_model_audit.md
 model_base_design.md
+micro_example_note.md
 heuristic_derivation.md
 derivation_notes.md
 math_claims.md
@@ -42,6 +43,8 @@ toolchain_status.md
 .econ-theorist-ai/
 proof_and_model_audit.md
 risk_register.md
+run_summary.md
+scratch_runs/
 revision_log.md
 revision_tree.md
 panel_calibration_log.md

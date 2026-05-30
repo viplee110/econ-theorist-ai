@@ -26,7 +26,7 @@ The language model may propose a theorem, proof, or derivation, but it does not 
 
 Failure in any layer should be recorded, not hidden.
 
-Verification should not replace model construction. For a research-development task, read `model_base_design.md` and `heuristic_derivation.md` before central D5/V2 derivations when they exist or should exist. Fixed point, contraction, IFT, and existence arguments are mathematical tools; they should enter only after the economic object requiring consistency has been explained. If the user explicitly asks only to solve a given model mechanically, verify the model as given but do not infer research quality, novelty, or target-journal potential from the solution.
+Verification should not replace model construction. For a research-development task, read `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md` before central D5/V2 derivations when they exist or should exist. Fixed point, contraction, IFT, and existence arguments are mathematical tools; they should enter only after the hand-solved micro-example has made the economic object requiring consistency visible. If the user explicitly asks only to solve a given model mechanically, verify the model as given but do not infer research quality, novelty, or target-journal potential from the solution.
 
 ## Verification Artifacts
 
@@ -168,7 +168,7 @@ Rebuild the result from the model primitives.
 AI tasks:
 
 - Restate primitives, timing, information, actions, payoffs, constraints, and equilibrium concept.
-- If the task is not explicitly mechanical model solving, check whether `model_base_design.md` and `heuristic_derivation.md` exist and whether primitives, assumptions, and equilibrium concepts have passed the Minimal Model Base Gate. If not, mark them provisional and route foundational concerns back to Discovery D4.5.
+- If the task is not explicitly mechanical model solving, check whether `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md` exist and whether the Micro-Example Gate and Minimal Model Base Gate have passed. If not, mark primitives and assumptions provisional and route foundational concerns back to Discovery D4.5.
 - Re-derive from the heuristic path first: toy example, agent tradeoff, aggregate consistency or market pressure, equilibrium pressure, and comparative-static intuition.
 - Derive agent problems from primitives.
 - Derive FOCs or best responses.
@@ -366,7 +366,7 @@ Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Run Stage V1. Extract all mathematic
 ### Verify One Proposition
 
 ```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Verify Proposition [X]. Run Stages V2 through V5 for this proposition only. If this is part of research development rather than mechanical model solving, read model_base_design.md and heuristic_derivation.md first and mark unconfirmed primitives or assumptions provisional. Re-derive from primitives and from the heuristic path, check algebra symbolically if possible, run numerical counterexample search if applicable, audit the proof, and update verification_log.md, derivation_notes.md, counterexamples.md, and assumption_ledger.md. Stop before changing theorem assumptions.
+Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Verify Proposition [X]. Run Stages V2 through V5 for this proposition only. If this is part of research development rather than mechanical model solving, read micro_example_note.md, model_base_design.md, and heuristic_derivation.md first and mark unconfirmed primitives or assumptions provisional. Re-derive from the hand-solved micro-example, from primitives, and from the heuristic path; check algebra symbolically if possible, run numerical counterexample search if applicable, audit the proof, and update verification_log.md, derivation_notes.md, counterexamples.md, and assumption_ledger.md. Stop before changing theorem assumptions.
 ```
 
 ### Search for Counterexamples

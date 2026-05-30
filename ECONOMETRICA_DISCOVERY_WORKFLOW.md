@@ -22,7 +22,7 @@ Nonconvex discovery expands candidate generation; it does not certify quality. T
 
 Specificity is not stage advancement. Stage is determined by artifacts and human gates, not by how formal the user's language sounds. User-supplied agents, timing, information, payoffs, equilibrium concepts, or assumptions are provisional modeling constraints until the model base is confirmed.
 
-Model discovery should move from examples to theory. Exhaust broadly at the model-skeleton level; derive narrowly at the formal level. A model is not ready because it is formal; it is ready when its smallest version explains the economic force.
+Model discovery should move from examples to theory. Exhaust broadly at the model-skeleton level; derive narrowly at the formal level. A model is not ready because it is formal; it is ready when its smallest version explains the economic force. No general model may precede a hand-solved micro-example unless the user explicitly asks only to solve a given model mechanically.
 
 Main-theorem-first rule: do not move into a full manuscript until the project has a candidate main theorem that can be stated in one sharp sentence:
 
@@ -44,6 +44,7 @@ Maintain these files during discovery:
 - `generality_ledger.md`: running record of generality losses, special-case restrictions, and whether each restriction makes the nugget sharper.
 - `model_tournament.md`: side-by-side comparison of model variants and why weaker variants were killed or demoted.
 - `model_base_design.md`: example-to-theory model base design, skeleton funnel, failed simpler alternatives, recommended baseline, and human confirmation status.
+- `micro_example_note.md`: hand-solved smallest example, intuition, predicted comparative static, failure condition, and literature-gap check before general modeling.
 - `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
 - `agent_runs/`: optional separated output lanes for different IDEs, models, or sessions during high-variance model-base search.
 - `cross_agent_model_audit.md`: judge-pass comparison of multiple model lanes before canonical model-base confirmation.
@@ -507,6 +508,17 @@ Purpose:
 
 Turn the surviving skeletons into a minimal, economically natural model base before formal derivation. This stage is the bridge between primitive hunting and first-pass derivation.
 
+Hard rule:
+
+```text
+No general model before a hand-solved micro-example.
+```
+
+D4.5 has two gates:
+
+- D4.5a Micro-Example Gate
+- D4.5b Minimal Model Base Gate
+
 Inputs:
 
 - `topic_shortlist.md`
@@ -519,6 +531,7 @@ Inputs:
 
 AI tasks:
 
+- Create or update `micro_example_note.md`.
 - Create or update `model_base_design.md`.
 - Create or update `heuristic_derivation.md`.
 - For each of the 3-5 leading example-to-theory candidates, write:
@@ -533,6 +546,30 @@ AI tasks:
   - where formal machinery may enter, if it is economically necessary
 - Recommend one baseline, one backup baseline, and one parked alternative when evidence supports them.
 - If multiple completed lanes exist, use `cross_agent_model_audit.md` before recommending the model base. If the audit is missing, stale, or produced by an unlabeled judge with low provenance confidence, mark the recommendation provisional and ask whether to run or rerun Judge Pass.
+
+Required `micro_example_note.md` sections:
+
+```text
+Micro-example status: provisional / human-confirmed / stale / rejected
+Real-world vignette:
+Smallest numerical or symbolic example:
+Hand-solved special case:
+Economic force in one paragraph:
+Predicted comparative static before derivation:
+Failure condition:
+Closest-literature gap for this mechanism:
+Why generalization is needed:
+What fixed point/existence machinery would add, if anything:
+Human confirmation:
+```
+
+Micro-example discipline:
+
+- Use concrete numbers, a small symbolic case, a diagram description, or a hand-solved two/three-object example before any general model.
+- Predict the economic conclusion before deriving it.
+- State what observation would make the intuition false.
+- If the micro-example cannot be explained in plain economic language, do not proceed to the Minimal Model Base Gate.
+- If the micro-example only restates a known model family, mark it as an absorbed benchmark and return to D4.
 
 Required `model_base_design.md` sections:
 
@@ -571,7 +608,14 @@ What the heuristic does not prove:
 
 Human gate:
 
-Minimal Model Base Gate.
+First gate: Micro-Example Gate.
+
+The system must present the real-world vignette, hand-solved micro-example,
+predicted mechanism, failure condition, and provisional literature-gap check.
+The human must confirm, edit, or reject the micro-example before the system turns
+it into a canonical model base.
+
+Second gate: Minimal Model Base Gate.
 
 The system must present the minimal real-world scene, economic tension, which user constraints are retained or relaxed, the top 3-5 toy examples, the recommended model base, why simpler models fail, and the next theorem path. The human must confirm, edit, or reject the model base before D5 treats primitives, assumptions, or equilibrium concepts as durable state. Record the decision in `human_decisions.md` and update `model_base_design.md`.
 
@@ -585,7 +629,9 @@ Test whether any model has a real main theorem.
 
 AI tasks:
 
+- Read `micro_example_note.md` first, unless the user explicitly asked only to solve a given model mechanically.
 - Read `model_base_design.md` and `heuristic_derivation.md` first, unless the user explicitly asked only to solve a given model mechanically.
+- Do not begin from the general model. Begin by replaying the confirmed or explicitly provisional micro-example.
 - Do not treat primitives, assumptions, or equilibrium concepts as confirmed unless the Minimal Model Base Gate is passed or the file clearly marks them as provisional.
 - Create or update `derivation_notes.md`.
 - Create or update `theorem_candidates.md`.
@@ -689,6 +735,7 @@ The candidate cannot receive `Invest` unless all are true:
 - The result is not merely a package of local sufficient conditions.
 - The model primitive that carries the contribution is economically interpretable or explicitly endogenized.
 - The model base has passed the Minimal Model Base Gate or is explicitly marked provisional with a clear reason.
+- The micro-example has passed the Micro-Example Gate or is explicitly marked provisional with a clear reason.
 - At least one alternative model variant has been killed for a documented reason.
 - Any closest-literature or absorption-threat evidence used for the theorem gate is recorded in `literature_evidence_ledger.md`, or the gate is explicitly provisional.
 
@@ -811,25 +858,25 @@ Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_DISCOVERY_WORKFLO
 ### Run Judge Pass
 
 ```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md, and ECONOMETRICA_PANEL_PROTOCOL.md. You are running a Judge Pass over completed model lanes in agent_runs/. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, agent_runs/*/agent_manifest.md, agent_runs/*/model_skeleton_ledger.md, and agent_runs/*/model_base_recommendation.md. Do not generate a new model unless all lanes fail; compare the lanes on smallest toy example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption risk, proof tractability, and target-reader legibility. Write agent_runs/[judge_run_id]/agent_manifest.md, judge_report.md, model_base_ranking.md, decisive_objections.md, and create or update cross_agent_model_audit.md. Do not confirm model_base_design.md; stop at the Minimal Model Base Gate.
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md, and ECONOMETRICA_PANEL_PROTOCOL.md. You are running a Judge Pass over completed model lanes in agent_runs/. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, agent_runs/*/agent_manifest.md, agent_runs/*/model_skeleton_ledger.md, and agent_runs/*/model_base_recommendation.md. Do not generate a new model unless all lanes fail; compare the lanes on smallest hand-solved micro-example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption risk, proof tractability, and target-reader legibility. Write agent_runs/[judge_run_id]/agent_manifest.md, judge_report.md, model_base_ranking.md, decisive_objections.md, and create or update cross_agent_model_audit.md. Do not confirm micro_example_note.md or model_base_design.md; stop at the Micro-Example Gate or Minimal Model Base Gate as appropriate.
 ```
 
 ### Construct Minimal Model Base
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create model_base_design.md and heuristic_derivation.md. Start from real-world micro scenes, economic tensions, smallest toy examples, failed simpler alternatives, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop at the Minimal Model Base Gate and ask me to confirm, edit, or reject the recommended model base.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create micro_example_note.md, model_base_design.md, and heuristic_derivation.md. Start from real-world micro scenes, economic tensions, a hand-solved smallest numerical or symbolic example, predicted comparative statics, failure conditions, failed simpler alternatives, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop first at the Micro-Example Gate, then at the Minimal Model Base Gate after the micro-example is confirmed.
 ```
 
 ### Attempt First-Pass Derivations
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the model candidates selected after the Minimal Model Base Gate. Read model_base_design.md and heuristic_derivation.md first. Attempt clean first-pass derivations from the heuristic path, state assumptions, show algebra where possible, identify failure points, attempt counterexamples, and write candidate theorem sentences in the form: "This paper proves X, and existing theory cannot obtain X because Y." Create derivation_notes.md and theorem_candidates.md. Do not hide failed models.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the model candidates selected after the Micro-Example Gate and Minimal Model Base Gate. Read micro_example_note.md, model_base_design.md, and heuristic_derivation.md first. Replay the hand-solved micro-example before writing the general model. Attempt clean first-pass derivations from the heuristic path, state assumptions, show algebra where possible, identify failure points, attempt counterexamples, and write candidate theorem sentences in the form: "This paper proves X, and existing theory cannot obtain X because Y." Create derivation_notes.md and theorem_candidates.md. Do not hide failed models.
 ```
 
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, model_base_design.md, heuristic_derivation.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, literature_evidence_ledger.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if a closest substitute or absorption threat lacks a ledger entry, mark the absorption judgment provisional. If field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota or possible frontier-spike variants merely because they are non-mainstream or hard to position; use spike-specific tests for primitive depth, theorem bite, absorption escape, assumptions, proof feasibility, legibility, and model-base naturalness. Do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, micro_example_note.md, model_base_design.md, heuristic_derivation.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, literature_evidence_ledger.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if a closest substitute or absorption threat lacks a ledger entry, mark the absorption judgment provisional. If field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota or possible frontier-spike variants merely because they are non-mainstream or hard to position; use spike-specific tests for primitive depth, theorem bite, absorption escape, assumptions, proof feasibility, legibility, micro-example force, and model-base naturalness. Do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow
