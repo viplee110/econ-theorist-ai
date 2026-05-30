@@ -59,6 +59,9 @@ The agent should maintain these files whenever possible:
 - `revision_log.md`: every nontrivial edit with file, location, reason, and expected benefit.
 - `risk_register.md`: unresolved risks, author-only TODOs, pivot warnings, and rejection reasons.
 - `run_summary.md`: compact summary after long automatic runs, including what was tried, what survived, open gates, important files, and next action.
+- `goal_run_plan.md`: plan for an explicitly requested guarded full-auto goal-mode run.
+- `auto_decisions.md`: AI-delegated provisional gate choices used only during guarded full-auto goal mode.
+- `final_ratification_report.md`: end-of-run list of provisional choices, evidence, risks, and human ratification questions.
 - `scratch_runs/`: archived scratch for exploratory outputs that should not clutter the project root.
 - `final_report.md`: final summary after any long work session.
 
@@ -78,15 +81,21 @@ Default rule:
 
 ## Human Decision Persistence
 
-Human gate outcomes must be written to persistent artifacts before the workflow treats them as durable state. Do not rely on chat history alone.
+Human gate outcomes must be written to persistent artifacts before the workflow treats them as durable state. Do not rely on chat history alone. In guarded full-auto goal mode, AI-delegated provisional choices go to `auto_decisions.md`; they are durable run state, but not confirmed human decisions.
 
 Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
 
-For every gate:
+For every real human gate:
 
 - Create `human_decisions.md` if it is missing, then append the decision, date, stage, reason, and affected files.
 - Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
 - If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
+
+For every AI-delegated provisional gate in guarded full-auto goal mode:
+
+- Create `auto_decisions.md` if it is missing, then append the gate name, provisional decision, evidence, risks, rejected alternatives, affected files, and ratification question.
+- Keep the controlled artifact status provisional or `AI-delegated provisional`.
+- Add the decision to `final_ratification_report.md` before the run is complete.
 
 Major gates must use this explicit structure. Simple user commands do not simplify the gate:
 
@@ -146,7 +155,7 @@ Decision Batch Mode:
 
 - Accumulate non-core small decisions into batches of 3-5 before asking the human.
 - Ask immediately when the decision concerns the central question, main theorem, model primitives, assumption set, novelty claim, target journal, or the choice to submit, pivot, split, retarget, or abandon.
-- Write every human gate outcome to `human_decisions.md` and the artifact controlled by that decision before treating it as state.
+- Write every real human gate outcome to `human_decisions.md` and the artifact controlled by that decision before treating it as confirmed state. In guarded full-auto goal mode, write AI-delegated provisional choices to `auto_decisions.md` and keep the controlled artifact unconfirmed until later human ratification.
 
 Generality Ledger Mode:
 
@@ -164,7 +173,8 @@ Closed-loop safety barriers:
 - No general model before a hand-solved `micro_example_note.md`, unless the task is explicitly mechanical model solving.
 - No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
 - No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
-- No autonomous approval of the Micro-Example Gate, Minimal Model Base Gate, main theorem gate, novelty claim, contribution lock, or invest/pivot/kill decision.
+- No autonomous approval of the Micro-Example Gate, Minimal Model Base Gate, main theorem gate, novelty claim, contribution lock, or invest/pivot/kill decision in ordinary mode.
+- In explicitly requested guarded full-auto goal mode, these decisions may be crossed only as `AI-delegated provisional` entries in `auto_decisions.md`; they remain unconfirmed until human ratification.
 
 Fault alarms:
 
@@ -181,6 +191,34 @@ Fault alarms:
 - top-level generated files grow without a sharper mechanism, gate decision, or consolidated state
 
 When a fault alarm fires, stop local polishing and return to Discovery D4.5, D4-D6, Stage 8 tree search, or an explicit human gate.
+
+## Guarded Full-Auto Goal Mode
+
+This mode is available only when the user explicitly asks for end-to-end
+automatic development, full-auto goal mode, or equivalent language. It is meant
+to produce a complete polished provisional draft, not to certify that the paper
+is correct, novel, or submission-ready.
+
+Behavior:
+
+- Start by writing `goal_run_plan.md` with objective, target assumptions, phase
+  sequence, artifact budget, stopping conditions, and expected final outputs.
+- At each major human gate, preserve the normal gate evidence but record the
+  choice as `AI-delegated provisional` in `auto_decisions.md`.
+- Continue through discovery, model-base construction, theorem search,
+  manuscript drafting, style calibration, simulated review, and one revision
+  path only while safety barriers remain satisfied.
+- Keep all controlled artifacts provisional unless the user later confirms them
+  in `human_decisions.md`.
+- Stop rather than loop when the same blocker recurs three times, when a proof
+  or literature claim cannot be made honestly, or when the artifact budget is
+  exhausted.
+- End with `final_ratification_report.md`, summarizing every provisional gate,
+  manuscript status, unresolved proof/literature/style risks, and the exact
+  human decisions needed before submission.
+
+Guarded full-auto may polish prose, but it must not convert weak model logic,
+unverified novelty, or sketch-only proofs into confident claims.
 
 ## Artifact Budget For Long Runs
 

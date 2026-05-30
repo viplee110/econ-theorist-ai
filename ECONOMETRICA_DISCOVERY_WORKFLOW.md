@@ -143,7 +143,7 @@ The human should own:
 
 ## Human Gate Persistence
 
-Human gate outcomes are persistent project state, not chat memory. Before proceeding past a gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `target_journal_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`.
+Human gate outcomes are persistent project state, not chat memory. Before proceeding past a real human gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `target_journal_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`. In guarded full-auto goal mode, an AI-delegated provisional choice is recorded in `auto_decisions.md` instead and does not count as human confirmation.
 
 Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
 
@@ -618,6 +618,13 @@ it into a canonical model base.
 Second gate: Minimal Model Base Gate.
 
 The system must present the minimal real-world scene, economic tension, which user constraints are retained or relaxed, the top 3-5 toy examples, the recommended model base, why simpler models fail, and the next theorem path. The human must confirm, edit, or reject the model base before D5 treats primitives, assumptions, or equilibrium concepts as durable state. Record the decision in `human_decisions.md` and update `model_base_design.md`.
+
+In guarded full-auto goal mode, the system may cross the Micro-Example Gate and
+Minimal Model Base Gate only by recording `AI-delegated provisional` choices in
+`auto_decisions.md` and marking `micro_example_note.md` and
+`model_base_design.md` as requiring human ratification. It must still stop if
+the micro-example is not hand-solved, has no predicted comparative static, lacks
+a failure condition, or lacks a provisional literature-gap check.
 
 ## Stage D5 - First-Pass Derivation
 

@@ -2,7 +2,7 @@
 
 Version: 2026-05-08
 
-This is the single entry point for the economic theory research system, originally calibrated against Econometrica-level standards and now target-calibrated through `target_journal_profile.md`. When the user gives a broad instruction, do not require them to remember workflow file names or stage numbers. Read this file, infer the task type, inspect available state files, choose the next appropriate module, and proceed until a human gate is reached.
+This is the single entry point for the economic theory research system, originally calibrated against Econometrica-level standards and now target-calibrated through `target_journal_profile.md`. When the user gives a broad instruction, do not require them to remember workflow file names or stage numbers. Read this file, infer the task type, inspect available state files, choose the next appropriate module, and proceed until a human gate is reached, unless the user has explicitly enabled guarded full-auto goal mode.
 
 Target journal changes calibration, not quality. A different target changes reader path, referee mix, exposition style, and fit standard; it must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
 
@@ -57,7 +57,7 @@ No general model before a hand-solved micro-example.
 - Do not introduce fixed point, contraction, IFT, existence-theorem, or maximal-general model language until the micro-example shows the economic object that requires consistency.
 - Treat Econometrica-level ambition as sharpness, minimality, and eventual generalizability, not permission to start with a complex general model.
 
-Autonomous or goal-driven runs may generate candidates, micro-examples, audits,
+Ordinary autonomous or goal-driven runs may generate candidates, micro-examples, audits,
 and recommendations, but they must not proxy the human at these gates:
 
 - Micro-Example Gate
@@ -71,8 +71,54 @@ and recommendations, but they must not proxy the human at these gates:
 - target journal decision
 - invest, kill, park, pivot, split, retarget, or submit decision
 
-If the user asks for full automation, interpret it as automatic preparation up
-to the next gate, not automatic approval of the gate.
+If the user asks for ordinary full automation without explicitly delegating gates,
+interpret it as automatic preparation up to the next gate, not automatic approval
+of the gate.
+
+## Guarded Full-Auto Goal Mode
+
+Use this mode only when the user explicitly asks for full-auto goal mode, end-to-end
+paper development, or equivalent language such as `全自动论文开发`. This mode lets
+the system run from idea discovery to a polished target-journal draft, but it does
+not convert AI decisions into human confirmation.
+
+Rules:
+
+- Create or update `goal_run_plan.md` before the run: objective, target journal
+  assumptions, allowed duration, artifact budget, stopping conditions, and the
+  phase sequence.
+- Record every gate-crossing choice as `AI-delegated provisional` in
+  `auto_decisions.md` and in the controlled artifact's status field.
+- Do not write AI-delegated choices as human approvals in `human_decisions.md`.
+- Keep the hard micro-example rule, literature-evidence rules, proof-verification
+  rules, and artifact budget active. Full-auto does not permit invented citations,
+  unverified theorems, skipped absorption tests, or file sprawl.
+- Use provisional statuses such as `AI-delegated provisional`, `provisional`, or
+  `requires human ratification` for field, target, model base, theorem,
+  contribution lock, style calibration, review decisions, and revision choices.
+- If a stage cannot produce a hand-solved micro-example, credible theorem
+  sentence, literature evidence, or proof route, stop and write `run_summary.md`;
+  do not loop by creating more files.
+- At the end, create `final_ratification_report.md` listing all AI-delegated
+  decisions, evidence, unresolved risks, generated artifacts, manuscript status,
+  and the exact choices the human must ratify, reopen, or reject.
+- The final product is a `polished provisional draft`, not a confirmed or
+  submission-ready paper, until the human ratifies the critical decisions.
+
+Recommended full-auto phase sequence:
+
+```text
+D0-D3 discovery, literature ledger, field profile, target profile
+D4-D4.5 skeleton search, micro-example, model base, lane/judge pass if useful
+D5-D6 derivation, theorem candidates, absorption tests, invest/pivot choice
+pre-paper model note and contribution lock
+manuscript draft
+Deep Style Anchor Pass and style revision
+target-calibrated simulated review
+revision tree and one selected AI-delegated revision branch
+polished provisional draft
+final_ratification_report.md
+```
 
 ## Artifact Budget
 
@@ -139,6 +185,11 @@ When the user asks for research help, follow this sequence:
 8. Write human gate decisions to persistent artifacts before treating them as durable state.
 9. Update the relevant state/log files before stopping.
 10. For meaningful edits, summarize the git diff or version-control state before finishing.
+
+In guarded full-auto goal mode, replace steps 7-8 with: record the gate outcome
+as `AI-delegated provisional` in `auto_decisions.md`, keep the controlled artifact
+provisional, continue only if safety barriers are satisfied, and collect the
+decision for `final_ratification_report.md`.
 
 Do not ask the user to choose a stage unless the routing is genuinely ambiguous or the next step changes the core contribution, theorem, model, assumptions, novelty claim, or target journal.
 
@@ -407,6 +458,35 @@ Anti-bubble checks:
 ## Routing Table
 
 Use this table to choose the module.
+
+### Guarded Full-Auto Goal Mode
+
+Triggers:
+
+- "guarded full-auto goal mode"
+- "full-auto goal mode"
+- "end-to-end automatic paper development"
+- "run from idea discovery to polished draft"
+- "全自动论文开发"
+- "goal模式全自动"
+
+Route:
+
+- Read this orchestrator, `ECONOMETRICA_DISCOVERY_WORKFLOW.md`,
+  `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`, `ECONOMETRICA_PANEL_PROTOCOL.md`,
+  `ECONOMETRICA_VERIFICATION_WORKFLOW.md`, and
+  `ECONOMETRICA_VERSION_CONTROL.md`.
+- Create or update `goal_run_plan.md`, `active_context.md`,
+  `auto_decisions.md`, and `run_summary.md`.
+- Run the recommended full-auto phase sequence, crossing major gates only as
+  `AI-delegated provisional` decisions.
+- Keep `micro_example_note.md`, `literature_evidence_ledger.md`,
+  `verification_log.md`, `risk_register.md`, and the artifact budget active.
+- Stop if a safety barrier fails, the same blocker recurs three times, or the
+  run would require fabricated literature evidence, theorem validity, or human
+  preference.
+- End with a polished provisional draft and `final_ratification_report.md`, not
+  a confirmed submission-ready paper.
 
 ### New Topic or Unknown Direction
 
@@ -971,6 +1051,13 @@ The assistant may automatically proceed from:
 - Stage 3 to Stage 6 after contribution lock is approved.
 - Stage 7 to Stage 8 only if the user explicitly asks to revise according to the report and the leading objection is not missing central theorem, old-theory absorption, weak contribution, unnatural model base, or defensive dilution.
 
+In guarded full-auto goal mode, the assistant may continue across these gates
+only by marking the decision `AI-delegated provisional` and preserving the
+ordinary gate evidence. It must still stop if a safety barrier fails, if the
+artifact budget is exhausted, if the same stage fails three times, or if the
+system would need to fabricate literature evidence, proof validity, or human
+preference.
+
 The assistant must stop at gates involving:
 
 - first-time or materially changed field profile confirmation
@@ -986,11 +1073,23 @@ The assistant must stop at gates involving:
 - economic interpretation
 - decision to submit, pivot, retarget, split, or abandon
 
+Exception: in guarded full-auto goal mode, gates other than real submission may
+be crossed provisionally through `auto_decisions.md`; real submission, public
+release, external communication, destructive file operations, and claims that a
+paper is confirmed or accepted still require explicit human approval.
+
 ## Human Decision Persistence
 
 When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `model_base_design.md`, `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
 
 If the user reverses an earlier decision, record the reversal as a new entry rather than deleting the old one. The new decision supersedes the old decision for current routing. The reversal entry should identify the previous decision, new decision, reason, affected artifacts, and any stages, panels, proofs, or literature checks that must be rerun.
+
+For guarded full-auto goal mode, use `auto_decisions.md` instead of
+`human_decisions.md` for AI-delegated choices. Each entry must include: gate
+name, provisional decision, evidence summary, rejected alternatives, risks,
+files updated, and ratification question. Later human ratification should append
+to `human_decisions.md` and either confirm, edit, or reject the provisional
+choice.
 
 ## Current-State Continuation
 

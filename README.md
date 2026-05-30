@@ -109,6 +109,17 @@ Use the system: what should I do today?
 The system will ask explicit human-gate questions when important decisions are
 needed; you do not need to know the internal stage names.
 
+For a fully automatic long run, use the guarded form:
+
+```text
+Use the system: run guarded full-auto goal mode from idea discovery to a polished target-journal draft.
+```
+
+In this mode the system can keep working through the pipeline, but major
+decisions are saved as `AI-delegated provisional` rather than human-confirmed.
+The run ends with `final_ratification_report.md`, where you approve, edit, or
+reject the provisional choices before treating the paper as confirmed.
+
 1. Download the repository as a ZIP file or clone it.
 2. Copy these files into the root directory of your paper project:
 
@@ -303,6 +314,9 @@ this workflow repository:
 | `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
 | `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
 | `run_summary.md` | Compact summary after long automatic runs. |
+| `auto_decisions.md` | AI-delegated provisional gate choices during guarded full-auto goal mode. |
+| `goal_run_plan.md` | Run plan for a guarded full-auto goal-mode session. |
+| `final_ratification_report.md` | End-of-run list of provisional choices requiring human approval. |
 | `scratch_runs/` | Scratch archive for exploratory outputs that should not clutter the project root. |
 
 ## Path Display And PDF Outputs
@@ -394,6 +408,9 @@ active_context.md
 toolchain_status.md
 preview_drafts/
 run_summary.md
+auto_decisions.md
+goal_run_plan.md
+final_ratification_report.md
 scratch_runs/
 referee_reports/
 verification/
