@@ -113,8 +113,10 @@ Use these as compact craft priors, not as authority or citation substitutes:
 - Predict the conclusion before formal derivation.
 - Generalize only after the small example survives.
 - A model is good when it clarifies applicability, not when it is maximally general.
+- Treat a model like a stripped-down economic fable: it needs a clear lesson, a scope of applicability, and a reason why the abstraction teaches something.
 - Prefer a sharp simple mechanism to a broad but shapeless framework.
 - Explain what old theory cannot see before claiming novelty.
+- Do not generalize for prestige. Generalization is warranted only when the micro-example shows a force that needs a broader object.
 - The reader should know why the theorem matters before technical proof begins.
 - Writing quality means clearer economic logic, not decorative prose.
 - If prose sounds mechanical, first ask whether the economic logic is mechanical.

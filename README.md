@@ -488,6 +488,7 @@ gate decisions override researcher memory.
 - Exhaust broadly at the model-skeleton level; derive narrowly at the formal level.
 - No general model before a hand-solved micro-example.
 - Show economic progress, not only workflow progress.
+- A model should have a visible economic lesson and scope before it becomes a formal baseline.
 - Early review should develop the strongest simple version before it tries to kill an idea.
 - A model is not ready because it is formal; it is ready when its smallest version explains the economic force.
 - Nonconvex discovery expands branch generation inside tree search; it does not certify quality.

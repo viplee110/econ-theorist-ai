@@ -444,6 +444,8 @@ Candidate topic:
 Core question:
 Real-world scene:
 Economic tension:
+Economic lesson / model moral:
+Applicability scope:
 Provisional modeling constraints:
 Agents:
 Primitives:
@@ -467,6 +469,7 @@ Comparative statics:
 Welfare or policy object:
 Smallest example that makes the force visible:
 Why simpler models fail:
+Why generalization is necessary rather than ornamental:
 Why tractable:
 Likely proof technique:
 What could go wrong:
@@ -478,6 +481,8 @@ Why not local variant:
 Tournament rule:
 
 - Treat every model variant as competing to produce the main theorem.
+- Rank candidates first on economic force visibility, smallest-example clarity, economic lesson, applicability scope, and whether generalization is necessary. Then rank theorem promise, absorption escape, tractability, assumption debt, proof path, and target-reader legibility.
+- Formal completeness is not a tournament win if the model's smallest example has no clear economic lesson.
 - Do not repair a weak variant by adding features until at least one alternative model space has been tried.
 - If two variants produce the same theorem, keep the simpler one and demote the other.
 - If a variant only creates a theorem package of local sufficient conditions, label it `Local repair trap`.
@@ -562,6 +567,8 @@ AI tasks:
 - For each of the 3-5 leading example-to-theory candidates, write:
   - real-world micro scene
   - core economic tension
+  - economic lesson or model moral
+  - applicability boundary
   - minimal agents, timing, information, choice object, state variable, friction, and object of interest
   - which user-supplied constraints are retained, relaxed, or rejected as premature
   - the smallest toy example that makes the mechanism visible
@@ -580,8 +587,10 @@ Real-world vignette:
 Smallest numerical or symbolic example:
 Hand-solved special case:
 Economic force in one paragraph:
+Economic lesson / model moral:
 Predicted comparative static before derivation:
 Failure condition:
+Applicability boundary:
 Closest-literature gap for this mechanism:
 Why generalization is needed:
 What fixed point/existence machinery would add, if anything:
@@ -610,10 +619,13 @@ Backup baseline:
 Parked alternative:
 Real-world scene:
 Economic tension:
+Economic lesson / model moral:
+Applicability boundary:
 Minimal primitives:
 Failed simpler alternatives:
 Top toy examples:
 Why this baseline is elegant:
+Why generalization is necessary rather than ornamental:
 Likely theorem path:
 Likely failure point:
 Human confirmation:
@@ -642,7 +654,7 @@ it into a canonical model base.
 
 Second gate: Minimal Model Base Gate.
 
-The system must present the minimal real-world scene, economic tension, which user constraints are retained or relaxed, the top 3-5 toy examples, the recommended model base, why simpler models fail, and the next theorem path. The human must confirm, edit, or reject the model base before D5 treats primitives, assumptions, or equilibrium concepts as durable state. Record the decision in `human_decisions.md` and update `model_base_design.md`.
+The system must present the minimal real-world scene, economic tension, economic lesson, applicability boundary, which user constraints are retained or relaxed, the top 3-5 toy examples, the recommended model base, why simpler models fail, why generalization is necessary rather than ornamental, and the next theorem path. The human must confirm, edit, or reject the model base before D5 treats primitives, assumptions, or equilibrium concepts as durable state. Record the decision in `human_decisions.md` and update `model_base_design.md`.
 
 In guarded full-auto goal mode, the system may cross the Micro-Example Gate and
 Minimal Model Base Gate only by recording `AI-delegated provisional` choices in
@@ -880,7 +892,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candid
 ### Generate Models for Shortlisted Ideas
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Treat any user-supplied agents, timing, information, payoffs, or equilibrium language as provisional modeling constraints until the model-base gate confirms them. Generate broad cheap model skeletons before formal derivation: 20-40 total, or 10-20 per selected direction. Screen them to 6-10 semi-formal baselines, then to 3-5 example-to-theory candidates, and choose only 1-3 formal derivation candidates. For each serious direction, record real-world scene, economic tension, candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, smallest example, why simpler models fail, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, model_tournament.md, and update economic_logic_map.md with the economic force, sharpness, blocker, and next economic question. Do not write the paper yet.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Treat any user-supplied agents, timing, information, payoffs, or equilibrium language as provisional modeling constraints until the model-base gate confirms them. Generate broad cheap model skeletons before formal derivation: 20-40 total, or 10-20 per selected direction. Screen them to 6-10 semi-formal baselines, then to 3-5 example-to-theory candidates, and choose only 1-3 formal derivation candidates. For each serious direction, record real-world scene, economic tension, economic lesson, applicability scope, candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, smallest example, why simpler models fail, why generalization is necessary rather than ornamental, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, model_tournament.md, and update economic_logic_map.md with the economic force, sharpness, blocker, and next economic question. Do not write the paper yet.
 ```
 
 ### Run an Independent Model Lane
@@ -892,13 +904,13 @@ Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_DISCOVERY_WORKFLO
 ### Run Judge Pass
 
 ```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md, and ECONOMETRICA_PANEL_PROTOCOL.md. You are running a Judge Pass over completed model lanes in agent_runs/. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, agent_runs/*/agent_manifest.md, agent_runs/*/model_skeleton_ledger.md, and agent_runs/*/model_base_recommendation.md. Do not generate a new model unless all lanes fail; compare the lanes on smallest hand-solved micro-example, economic naturalness, generalization elegance, theorem sentence sharpness, assumption debt, absorption risk, proof tractability, and target-reader legibility. Write agent_runs/[judge_run_id]/agent_manifest.md, judge_report.md, model_base_ranking.md, decisive_objections.md, and create or update cross_agent_model_audit.md. Do not confirm micro_example_note.md or model_base_design.md; stop at the Micro-Example Gate or Minimal Model Base Gate as appropriate.
+Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md, and ECONOMETRICA_PANEL_PROTOCOL.md. You are running a Judge Pass over completed model lanes in agent_runs/. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, agent_runs/*/agent_manifest.md, agent_runs/*/model_skeleton_ledger.md, and agent_runs/*/model_base_recommendation.md. Do not generate a new model unless all lanes fail; compare the lanes on smallest hand-solved micro-example, economic lesson, applicability boundary, economic naturalness, necessity of generalization, theorem sentence sharpness, assumption debt, absorption risk, proof tractability, and target-reader legibility. Write agent_runs/[judge_run_id]/agent_manifest.md, judge_report.md, model_base_ranking.md, decisive_objections.md, and create or update cross_agent_model_audit.md. Do not confirm micro_example_note.md or model_base_design.md; stop at the Micro-Example Gate or Minimal Model Base Gate as appropriate.
 ```
 
 ### Construct Minimal Model Base
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create micro_example_note.md, model_base_design.md, heuristic_derivation.md, and update economic_logic_map.md. Start from real-world micro scenes, economic tensions, a hand-solved smallest numerical or symbolic example, predicted comparative statics, failure conditions, failed simpler alternatives, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop first at the Micro-Example Gate, then at the Minimal Model Base Gate after the micro-example is confirmed.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create micro_example_note.md, model_base_design.md, heuristic_derivation.md, and update economic_logic_map.md. Start from real-world micro scenes, economic tensions, a hand-solved smallest numerical or symbolic example, economic lesson, applicability boundary, predicted comparative statics, failure conditions, failed simpler alternatives, why generalization is necessary rather than ornamental, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop first at the Micro-Example Gate, then at the Minimal Model Base Gate after the micro-example is confirmed.
 ```
 
 ### Attempt First-Pass Derivations

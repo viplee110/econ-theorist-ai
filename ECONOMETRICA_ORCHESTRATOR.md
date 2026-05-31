@@ -145,8 +145,10 @@ or substitutes for proof and literature evidence:
 - Predict the conclusion before formal derivation.
 - Generalize only after the small example survives.
 - A model is good when it clarifies applicability, not when it is maximally general.
+- Treat a model like a stripped-down economic fable: it needs a clear lesson, a scope of applicability, and a reason why the abstraction teaches something.
 - Prefer a sharp simple mechanism to a broad but shapeless framework.
 - Explain what old theory cannot see before claiming novelty.
+- Do not generalize for prestige. Generalization is warranted only when the micro-example shows a force that needs a broader object.
 - The reader should know why the theorem matters before technical proof begins.
 - Writing quality means clearer economic logic, not decorative prose.
 - If prose sounds mechanical, first ask whether the economic logic is mechanical.
@@ -416,6 +418,7 @@ Safety barriers:
 - No general model before a hand-solved micro-example recorded in `micro_example_note.md`.
 - No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
 - No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
+- No model-tournament winner without an economic lesson, an applicability boundary, and a reason why the recommended generalization is necessary rather than ornamental.
 
 Fault alarms:
 
@@ -723,6 +726,7 @@ Route:
 - Use confirmed `field_profile.md` if available; if absorption or role assignment depends on a missing, provisional, stale, or `Reopen requested` field profile, update it from closest-literature evidence and stop for confirmation before final judgment.
 - Use confirmed `target_journal_profile.md` if available for target-aware model and theorem calibration, but do not let a non-Econometrica target skip model tournament, absorption testing, generality ledger, or main-theorem gate.
 - Generate broad cheap model skeletons before selecting one for full development: 20-40 total, or 10-20 per selected direction when needed. Screen them to 6-10 semi-formal baselines, then 3-5 example-to-theory candidates, and only 1-3 formal derivation candidates.
+- Rank candidate skeletons first by whether their smallest example reveals an economic lesson, then by elegance, theorem promise, absorption escape, tractability, and target-reader legibility. Do not let formal completeness outrank a missing economic force.
 - Run D4.5 Example-to-Theory Model Base Construction before D5 unless the user explicitly asks only to solve a given model mechanically. D4.5 must create `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md`.
 - Stop at the Micro-Example Gate if the smallest example is not hand-solved, has no economic prediction, lacks a failure condition, or has no provisional literature-gap check.
 - Generate three non-neighborhood model directions when local repair is a risk.
