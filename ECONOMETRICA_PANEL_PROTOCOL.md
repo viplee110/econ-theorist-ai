@@ -749,7 +749,9 @@ The system must stop for human judgment before:
 - deciding to submit, pivot, retarget, split, or kill
 - accepting a simulated editorial decision as action-guiding
 
-Every panel-facing human gate must be recorded before the next panel or revision step relies on it. Create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
+Every panel-facing human gate must be recorded before the next panel or revision step relies on it. For real human choices, create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
+
+In explicitly requested guarded full-auto goal mode, do not write AI-delegated panel choices as human decisions. Record them as `AI-delegated provisional` entries in `auto_decisions.md`, keep the controlled panel artifact provisional, and add the ratification question to `final_ratification_report.md`.
 
 Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
 
