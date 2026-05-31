@@ -80,6 +80,7 @@ must still be checked against the underlying workflow artifacts.
 - Searches broadly over cheap model skeletons, then derives narrowly from the few model bases that survive.
 - Requires a hand-solved micro-example before any general model, fixed point, or existence machinery enters.
 - Builds models from small examples and economic tensions before formal theorem production.
+- Shows economic progress, not only workflow progress, through `economic_logic_map.md` and chat summaries that explain what economic question became clearer.
 - Compares model variants before manuscript writing and uses nonconvex branch generation inside the existing tree search.
 - Requires absorption tests against closest literature and known theory families.
 - Uses `field_profile.md` to assign field-sensitive simulated referees.
@@ -295,6 +296,7 @@ this workflow repository:
 | `field_profile.md` | Confirmed or provisional field profile for literature and referee routing. |
 | `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
 | `literature_evidence_ledger.md` | Verified source records for closest papers, anchors, absorption threats, and style anchors. |
+| `economic_logic_map.md` | User-readable map of the phenomenon, core tension, smallest example, sharpness, absorption threat, blocker, and next economic question. |
 | `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
 | `model_base_design.md` | Example-to-theory model base, skeleton funnel, failed simpler alternatives, and human confirmation status. |
 | `micro_example_note.md` | Hand-solved smallest example, intuition, predicted comparative static, failure condition, and literature-gap check. |
@@ -405,6 +407,7 @@ Files that usually do not need to be tracked include:
 
 ```text
 active_context.md
+economic_logic_map.md
 toolchain_status.md
 preview_drafts/
 run_summary.md
@@ -484,6 +487,8 @@ gate decisions override researcher memory.
 - Specificity is not stage advancement: formal model language from the user is provisional until artifacts and human gates confirm it.
 - Exhaust broadly at the model-skeleton level; derive narrowly at the formal level.
 - No general model before a hand-solved micro-example.
+- Show economic progress, not only workflow progress.
+- Early review should develop the strongest simple version before it tries to kill an idea.
 - A model is not ready because it is formal; it is ready when its smallest version explains the economic force.
 - Nonconvex discovery expands branch generation inside tree search; it does not certify quality.
 - Target journal changes calibration, not quality.

@@ -80,9 +80,11 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - No general model before a hand-solved micro-example. Before D5 formal derivation, create `micro_example_note.md` with a real-world vignette, smallest numerical or symbolic example, hand-solved special case, predicted comparative static, failure condition, and literature-gap check for the mechanism.
 - Before fixed point, contraction, IFT, or existence-theorem language, explain the economic object that requires consistency and why simpler examples cannot carry the mechanism.
 - Econometrica-level ambition means sharp, minimal, and generalizable after the mechanism is visible; it does not mean starting from a maximally general or technically ornate model.
+- Show economic progress, not only workflow progress. Keep `economic_logic_map.md` as a concise user-readable map of the phenomenon, core tension, smallest example, predicted conclusion, sharpness, closest absorption threat, blocker, and next economic question.
+- After substantial discovery, model, theorem, review, or revision work, give an Economic Progress Summary in chat: what economic question was clarified, current intuition, what became sharper, what remains weak or mechanical, the main absorption/proof/model risk, next economic question, and files updated.
 - If repeated reviews identify no central theorem, old-theory absorption, or weak contribution, stop polishing and return to discovery/model search.
 - Use `active_context.md` only as a compact dashboard for continuation; it is not a source of truth and must be checked against the underlying artifacts.
-- The dashboard should identify the current stage, current blocker, micro-example status, model base status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
+- The dashboard should identify the current stage, current blocker, economic logic map status, micro-example status, model base status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 - Use `generality_ledger.md` to track losses of generality from special-case assumptions, distributions, graph structures, extra agents, extra states, or longer theorem sentences.
 - Use `style_calibration.md` only as a confirmed or provisional paper-specific style contract for elegance without rhetoric; it must not change theorem statements, assumptions, novelty claims, or target-journal positioning.
 - For serious style calibration, run deep style reading when full-text anchors are legally available or user-provided. Use `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_pass_plan.md` to extract exposition architecture, not sentences or prose templates.
@@ -101,6 +103,23 @@ For high-stakes idea, model, theorem, manuscript, review, or revision decisions,
 - Keep `revision_log.md` updated throughout the task.
 - Compile the paper after meaningful edits when possible.
 - Treat simulated referee acceptance as a diagnostic benchmark only, never as a real publication guarantee.
+
+## Research Craft Priors
+
+Use these as compact craft priors, not as authority or citation substitutes:
+
+- Start from a real phenomenon, puzzle, or institutional tension.
+- Find the smallest example where the economic force is visible.
+- Predict the conclusion before formal derivation.
+- Generalize only after the small example survives.
+- A model is good when it clarifies applicability, not when it is maximally general.
+- Prefer a sharp simple mechanism to a broad but shapeless framework.
+- Explain what old theory cannot see before claiming novelty.
+- The reader should know why the theorem matters before technical proof begins.
+- Writing quality means clearer economic logic, not decorative prose.
+- If prose sounds mechanical, first ask whether the economic logic is mechanical.
+- Early criticism should reconstruct the strongest simple version before killing an idea.
+- Hostile referee mode belongs after the model, theorem, and literature evidence have enough shape to be attacked fairly.
 
 ## Human Gates
 

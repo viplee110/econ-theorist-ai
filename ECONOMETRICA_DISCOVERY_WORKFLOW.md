@@ -53,12 +53,33 @@ Maintain these files during discovery:
 - `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
 - `literature_probe.md`: closest literatures, nearest substitutes, novelty risks, and citation TODOs.
 - `literature_evidence_ledger.md`: verified source records for closest papers, anchor papers, absorption threats, and style anchors.
+- `economic_logic_map.md`: concise user-readable map of the phenomenon, economic tension, smallest example, predicted conclusion, sharpness, absorption threat, blocker, and next economic question. It is not a source of truth.
 - `field_profile.md`: project-level field configuration confirmed by the human when possible.
 - `target_journal_profile.md`: target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
 - `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
 - `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
 - `spike_dossier.md`: optional dossier created only when a possible frontier spike survives D6 and needs focused development.
 - `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
+
+## Economic Logic Map Discipline
+
+After D1/D2, D4.5, D5/D6, and any major pivot, create or update
+`economic_logic_map.md` with:
+
+```text
+Phenomenon:
+Core economic tension:
+Smallest example:
+Predicted conclusion:
+Why the conclusion is sharp / not sharp yet:
+Closest absorption threat:
+What old theory cannot explain:
+Current economic blocker:
+Next economic question:
+```
+
+Keep it to roughly 1-2 pages. It should help the user see how economic
+understanding changed, not merely summarize files or workflow stages.
 
 ## Exploration Quota
 
@@ -216,6 +237,7 @@ Generate a wide but structured set of possible research directions.
 AI tasks:
 
 - Create `topic_longlist.md`.
+- Create or update `economic_logic_map.md` with the current phenomenon, candidate economic tensions, and the main uncertainty about what the project is trying to explain.
 - Generate 30-80 candidate topic-mechanism combinations, depending on scope.
 - Use multiple axes:
   - field
@@ -282,6 +304,7 @@ Reduce the longlist to a serious shortlist.
 
 AI tasks:
 
+- Update `economic_logic_map.md` to explain which economic question survived screening, what intuition is emerging, and why weaker directions were not sharp enough.
 - Score every candidate 1-5 on:
   - economic importance
   - novelty potential
@@ -391,6 +414,7 @@ AI tasks:
 - Create or update `generality_ledger.md`.
 - Create `model_candidates.md`.
 - Create or update `model_tournament.md`.
+- Update `economic_logic_map.md` with the deepest primitive, visible economic force, why the leading skeletons are sharper or still weak, and the next economic question.
 - If running as an independent model lane, write `agent_manifest.md`, `model_skeleton_ledger.md`, `model_base_recommendation.md`, `self_critique.md`, and `run_log.md` under `agent_runs/[run_id]/` rather than overwriting canonical artifacts.
 - If `agent_runs/` already contains two or more completed model lanes and `cross_agent_model_audit.md` is missing or stale, stop ordinary generation and recommend a Judge Pass before the Minimal Model Base Gate.
 - Before generating local variants, identify:
@@ -534,6 +558,7 @@ AI tasks:
 - Create or update `micro_example_note.md`.
 - Create or update `model_base_design.md`.
 - Create or update `heuristic_derivation.md`.
+- Update `economic_logic_map.md` with the hand-solved micro-example, predicted conclusion, failure condition, and what remains unclear before generalization.
 - For each of the 3-5 leading example-to-theory candidates, write:
   - real-world micro scene
   - core economic tension
@@ -638,6 +663,7 @@ AI tasks:
 
 - Read `micro_example_note.md` first, unless the user explicitly asked only to solve a given model mechanically.
 - Read `model_base_design.md` and `heuristic_derivation.md` first, unless the user explicitly asked only to solve a given model mechanically.
+- Read and update `economic_logic_map.md` so the derivation clarifies the economic intuition, not only the algebra.
 - Do not begin from the general model. Begin by replaying the confirmed or explicitly provisional micro-example.
 - Do not treat primitives, assumptions, or equilibrium concepts as confirmed unless the Minimal Model Base Gate is passed or the file clearly marks them as provisional.
 - Create or update `derivation_notes.md`.
@@ -696,6 +722,7 @@ AI tasks:
 - Create `idea_kill_tests.md`.
 - Create or update `absorption_tests.md`.
 - Create or update `model_tournament.md`.
+- Update `economic_logic_map.md` with the theorem sentence, why it is sharp or not sharp yet, the closest absorption threat, and the next economic blocker.
 - Use `model_base_design.md` and `heuristic_derivation.md` to check whether the model base is economically natural before treating derivations as investable.
 - Create or update `generality_ledger.md`.
 - Use the latest `literature_evidence_ledger.md` before treating closest-paper, anchor-paper, or absorption-threat claims as confirmed.
@@ -829,19 +856,19 @@ Stop or pivot if:
 ### Start Discovery in Field Mode
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Field mode. My broad field is: [FIELD]. Generate a structured longlist of candidate Econometrica-level theory topics. Do not write a manuscript. Create discovery_state.md and topic_longlist.md, then stop.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Field mode. My broad field is: [FIELD]. Generate a structured longlist of candidate frontier-level theory topics. Do not write a manuscript. Create discovery_state.md, topic_longlist.md, and economic_logic_map.md, then stop with an Economic Progress Summary.
 ```
 
 ### Start Discovery in Idea Mode
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 through D2 in Idea mode. My rough idea is: [IDEA]. Expand nearby mechanisms and model variants, then screen them. Create discovery_state.md, topic_longlist.md, and topic_shortlist.md. Stop at the human gate.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 through D2 in Idea mode. My rough idea is: [IDEA]. Expand nearby mechanisms and model variants, then screen them. Create discovery_state.md, topic_longlist.md, topic_shortlist.md, and economic_logic_map.md. Stop at the human gate with an Economic Progress Summary.
 ```
 
 ### Start Discovery in Open Mode
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Generate a broad but disciplined set of candidate theory topics that could plausibly lead to Econometrica-level contributions. Favor tractable models, sharp mechanisms, and non-obvious comparative statics. Create discovery_state.md and topic_longlist.md, then stop.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Generate a broad but disciplined set of candidate theory topics that could plausibly lead to frontier-level contributions. Favor tractable models, sharp mechanisms, and non-obvious comparative statics. Create discovery_state.md, topic_longlist.md, and economic_logic_map.md, then stop with an Economic Progress Summary.
 ```
 
 ### Run Literature Probe And Field Profile
@@ -853,7 +880,7 @@ Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candid
 ### Generate Models for Shortlisted Ideas
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Treat any user-supplied agents, timing, information, payoffs, or equilibrium language as provisional modeling constraints until the model-base gate confirms them. Generate broad cheap model skeletons before formal derivation: 20-40 total, or 10-20 per selected direction. Screen them to 6-10 semi-formal baselines, then to 3-5 example-to-theory candidates, and choose only 1-3 formal derivation candidates. For each serious direction, record real-world scene, economic tension, candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, smallest example, why simpler models fail, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, and model_tournament.md. Do not write the paper yet.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Treat any user-supplied agents, timing, information, payoffs, or equilibrium language as provisional modeling constraints until the model-base gate confirms them. Generate broad cheap model skeletons before formal derivation: 20-40 total, or 10-20 per selected direction. Screen them to 6-10 semi-formal baselines, then to 3-5 example-to-theory candidates, and choose only 1-3 formal derivation candidates. For each serious direction, record real-world scene, economic tension, candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, smallest example, why simpler models fail, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, model_tournament.md, and update economic_logic_map.md with the economic force, sharpness, blocker, and next economic question. Do not write the paper yet.
 ```
 
 ### Run an Independent Model Lane
@@ -871,19 +898,19 @@ Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md
 ### Construct Minimal Model Base
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create micro_example_note.md, model_base_design.md, and heuristic_derivation.md. Start from real-world micro scenes, economic tensions, a hand-solved smallest numerical or symbolic example, predicted comparative statics, failure conditions, failed simpler alternatives, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop first at the Micro-Example Gate, then at the Minimal Model Base Gate after the micro-example is confirmed.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create micro_example_note.md, model_base_design.md, heuristic_derivation.md, and update economic_logic_map.md. Start from real-world micro scenes, economic tensions, a hand-solved smallest numerical or symbolic example, predicted comparative statics, failure conditions, failed simpler alternatives, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop first at the Micro-Example Gate, then at the Minimal Model Base Gate after the micro-example is confirmed.
 ```
 
 ### Attempt First-Pass Derivations
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the model candidates selected after the Micro-Example Gate and Minimal Model Base Gate. Read micro_example_note.md, model_base_design.md, and heuristic_derivation.md first. Replay the hand-solved micro-example before writing the general model. Attempt clean first-pass derivations from the heuristic path, state assumptions, show algebra where possible, identify failure points, attempt counterexamples, and write candidate theorem sentences in the form: "This paper proves X, and existing theory cannot obtain X because Y." Create derivation_notes.md and theorem_candidates.md. Do not hide failed models.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the model candidates selected after the Micro-Example Gate and Minimal Model Base Gate. Read micro_example_note.md, model_base_design.md, heuristic_derivation.md, and economic_logic_map.md first. Replay the hand-solved micro-example before writing the general model. Attempt clean first-pass derivations from the heuristic path, state assumptions, show algebra where possible, identify failure points, attempt counterexamples, and write candidate theorem sentences in the form: "This paper proves X, and existing theory cannot obtain X because Y." Create derivation_notes.md and theorem_candidates.md, and update economic_logic_map.md with what became sharper and what remains weak. Do not hide failed models.
 ```
 
 ### Run Discovery Kill Test
 
 ```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, micro_example_note.md, model_base_design.md, heuristic_derivation.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, literature_evidence_ledger.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if a closest substitute or absorption threat lacks a ledger entry, mark the absorption judgment provisional. If field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota or possible frontier-spike variants merely because they are non-mainstream or hard to position; use spike-specific tests for primitive depth, theorem bite, absorption escape, assumptions, proof feasibility, legibility, micro-example force, and model-base naturalness. Do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
+Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, micro_example_note.md, model_base_design.md, heuristic_derivation.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, literature_evidence_ledger.md, economic_logic_map.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if a closest substitute or absorption threat lacks a ledger entry, mark the absorption judgment provisional. If field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then update economic_logic_map.md with the theorem sentence, absorption threat, sharpness, blocker, and next economic question. Recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota or possible frontier-spike variants merely because they are non-mainstream or hard to position; use spike-specific tests for primitive depth, theorem bite, absorption escape, assumptions, proof feasibility, legibility, micro-example force, and model-base naturalness. Do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
 ```
 
 ## How This Connects to the Main Workflow

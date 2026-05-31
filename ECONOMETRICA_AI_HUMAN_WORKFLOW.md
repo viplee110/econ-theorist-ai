@@ -40,6 +40,7 @@ The agent should maintain these files whenever possible:
 - `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
 - `model_base_design.md`: confirmed or provisional example-to-theory model base, skeleton funnel, failed simpler alternatives, and recommended baseline.
 - `micro_example_note.md`: hand-solved smallest example, economic intuition, predicted comparative static, failure condition, and literature-gap check before general modeling.
+- `economic_logic_map.md`: concise user-readable map of the phenomenon, core tension, smallest example, predicted conclusion, sharpness, absorption threat, blocker, and next economic question; not a source of truth.
 - `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
 - `agent_runs/`: separated model-search or judge-pass lanes produced by different IDEs, models, or sessions before canonical merge.
 - `cross_agent_model_audit.md`: Judge Pass comparison of multiple lanes before the Minimal Model Base Gate.
@@ -134,6 +135,7 @@ The dashboard should include:
 ```text
 Current stage:
 Current blocker:
+Economic logic map status:
 Confirmed source-of-truth artifacts:
 Open human gates:
 Micro-example status:
@@ -452,6 +454,7 @@ Prevent later rounds from diluting the core idea.
 AI tasks:
 
 - Create or update `contribution_lock.md`.
+- Create or update `economic_logic_map.md` so the locked contribution is connected to the phenomenon, core tension, theorem sentence, absorption threat, and next economic question.
 - Draft four locked statements:
   - `Central question`
   - `Main theorem sentence`
@@ -566,6 +569,7 @@ Write and revise without losing the core idea.
 AI tasks:
 
 - Revise section by section.
+- Check `economic_logic_map.md` before rewriting so manuscript edits clarify the economic force rather than only improving prose.
 - For each major section, perform a paragraph-level pass.
 - Improve clarity, notation, transitions, proof roadmaps, motivation, and conclusion.
 - Preserve author voice.
@@ -577,6 +581,7 @@ Section-level checklist:
 
 - Does the section serve the locked contribution?
 - Is the economic mechanism clear before technical detail?
+- Would a reader understand the economic question being clarified, not only the theorem being solved?
 - Are claims supported?
 - Is notation introduced before use?
 - Is the reader told why the result matters?
@@ -709,7 +714,7 @@ Guardrails:
 - Do not copy sentences, paragraph structures, or framing from style anchors.
 - Summarize anchor-paper exposition strategies only; do not quote long passages.
 - Extract exposition architecture, not sentences. Anchor papers are calibration evidence, not prose templates.
-- If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, defensive dilution, or an unnatural model base, stop and route back to Discovery D4.5, D4-D6, or Stage 8 tree search instead of polishing.
+- If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, defensive dilution, or an unnatural model base, update `economic_logic_map.md` with the missing economic force and route back to Discovery D4.5, D4-D6, or Stage 8 tree search instead of polishing.
 - If confirmed `style_calibration.md` exists and the field profile, target journal profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
 
 Proceed condition:
@@ -733,6 +738,7 @@ Before assigning referee roles:
 - Use the confirmed `target_journal_profile.md` when it exists and is still current; otherwise create a provisional target profile from the manuscript, field profile, theorem package, closest-literature evidence, and explicit user preferences.
 - Use `literature_evidence_ledger.md` for nearest substitute papers, target-calibrated anchors, style anchors, and absorption threats. If a named paper is not in the ledger, mark that part of the panel configuration provisional.
 - Create `referee_reports/round_N/panel_config.md` from the current field profile, target journal profile, and manuscript evidence.
+- Read `economic_logic_map.md` if present and test whether the review objections are about the idea, model base, theorem, exposition, or literature positioning.
 - Infer the manuscript's narrowest defensible field, closest literature themes, target audience, main method, contribution type, and main technical risk.
 - Select referees dynamically from those features rather than using a fixed field template.
 - Do not default to IO, search, networks, theory, econometrics, or any named field unless the current manuscript actually belongs there.
@@ -768,6 +774,7 @@ Required outputs:
 - `referee_reports/round_N/00_summary.md`
 - Updated `risk_register.md`
 - A ranked list of objections by fatality, not by ease of fixing.
+- A developmental summary with `Best-case version`, `Developmental repair`, `Fatal risk`, and `What would change the decision`.
 
 Information isolation:
 

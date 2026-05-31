@@ -260,16 +260,39 @@ Rules:
 
 ## Panel Types
 
+### Phase-Sensitive Review Posture
+
+Panels should match the maturity of the research object:
+
+```text
+Discovery / D4 / D4.5:
+  Developmental Model Coach
+  Goal: find the strongest simple version of the idea before killing it.
+
+D5 / D6:
+  Skeptical Theorist
+  Goal: test theorem bite, proof route, absorption risk, and model-base naturalness.
+
+Stage 7 simulated review:
+  Target-Journal Referee
+  Goal: diagnose formal rejection risk under the confirmed target profile.
+```
+
+Early panels should not mechanically kill ideas for being rough. They must first
+ask what the strongest simple version would look like and whether a cleaner
+micro-example or model base could reveal the economic force. Hostile referee
+mode belongs at D6, full simulated review, and submission-readiness stages.
+
 ### Idea Panel
 
 Use before committing to a paper.
 
 Roles:
 
-- Referee 1: economic importance and field relevance.
+- Referee 1: economic importance and field relevance; in early discovery, acts as a Developmental Model Coach who reconstructs the strongest simple version before recommending kill.
 - Referee 2: closest-literature, novelty risk, and absorption by existing theory.
 - Referee 3: tractability and model feasibility.
-- Referee 4: hostile editor focused on fatal objections.
+- Referee 4: hostile editor focused on fatal objections only after the developmental repair has been stated.
 - Associate Editor: synthesizes the four reports and recommends Proceed, Pivot, Narrow, Split, Park, Kill, or Retarget.
 - Co-Editor: independently decides whether to accept the AE recommendation or override it.
 
@@ -289,7 +312,7 @@ Use after candidate models exist.
 
 Roles:
 
-- Referee 1: minimalist tractability and baseline clarity, specialized to the model class in `panel_config.md`.
+- Referee 1: Developmental Model Coach for minimalist tractability and baseline clarity, specialized to the model class in `panel_config.md`.
 - Referee 2: economic mechanism and comparative statics, specialized to the detected field.
 - Referee 3: novelty and absorption risk relative to the closest canonical or substitute models.
 - Referee 4: rigor specialist selected from the candidate model's main risk, such as existence, uniqueness, fixed point, IFT, contraction, boundary behavior, computation, or assumption packaging.
@@ -376,7 +399,7 @@ Outputs:
 
 ### Review Panel
 
-Use for target-calibrated simulated review.
+Use for target-calibrated simulated review. This is the Target-Journal Referee posture: strict formal rejection-risk diagnosis under the confirmed or provisional target profile.
 
 Before assigning roles, create `referee_reports/round_N/panel_config.md` using the Dynamic Panel Configuration rules above.
 
@@ -524,6 +547,27 @@ All high-stakes panels should evaluate three dimensions. The confirmed target jo
 3. Economic interpretation: the result changes how economists understand, measure, predict, or regulate something important.
 
 For each dimension, panelists should score 1-5 and explain the score.
+
+## Developmental Review Guardrails
+
+A panel is too strict if it kills before reconstructing the strongest version of
+the idea. A panel is too mechanical if it lists risks without saying what
+economic force is missing.
+
+For Idea, Model, Review, and high-stakes Revision Panels, the AE or parent-agent
+summary must include:
+
+```text
+Best-case version:
+Developmental repair:
+Fatal risk:
+What would change the decision:
+```
+
+Useful criticism must distinguish whether the weakness is a weak idea, weak
+model base, weak theorem, weak exposition, or weak literature positioning.
+Early-stage panels should route mechanical models back to the micro-example and
+economic logic map rather than recommending additional assumptions.
 
 ## Absorption and Main-Theorem Test
 

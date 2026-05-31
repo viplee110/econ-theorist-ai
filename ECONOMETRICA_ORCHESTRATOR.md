@@ -135,6 +135,64 @@ Long automatic runs must keep the project folder readable.
 - If file growth, repeated summaries, or scratch artifacts become the main
   output, stop the run and compress state before continuing.
 
+## Research Craft Priors
+
+Use these as lightweight research-craft priors, not as citations, rules of taste,
+or substitutes for proof and literature evidence:
+
+- Start from a real phenomenon, puzzle, or institutional tension.
+- Find the smallest example where the economic force is visible.
+- Predict the conclusion before formal derivation.
+- Generalize only after the small example survives.
+- A model is good when it clarifies applicability, not when it is maximally general.
+- Prefer a sharp simple mechanism to a broad but shapeless framework.
+- Explain what old theory cannot see before claiming novelty.
+- The reader should know why the theorem matters before technical proof begins.
+- Writing quality means clearer economic logic, not decorative prose.
+- If prose sounds mechanical, first ask whether the economic logic is mechanical.
+- Early criticism should reconstruct the strongest simple version before killing an idea.
+- Hostile referee mode belongs after the model, theorem, and literature evidence have enough shape to be attacked fairly.
+
+## Economic Logic Map and Progress Summary
+
+Use `economic_logic_map.md` as a concise user-readable thinking map, not as a
+source of truth. Keep it to roughly 1-2 pages by summarizing rather than
+appending endlessly.
+
+Minimum fields:
+
+```text
+Phenomenon:
+Core economic tension:
+Smallest example:
+Predicted conclusion:
+Why the conclusion is sharp / not sharp yet:
+Closest absorption threat:
+What old theory cannot explain:
+Current economic blocker:
+Next economic question:
+```
+
+Update it after meaningful discovery, screening, D4.5 model-base construction,
+D5-D6 theorem/absorption work, contribution lock, simulated review, and major
+pivots.
+
+After any substantial research step, end the chat response with an Economic
+Progress Summary in the user's language when helpful:
+
+```text
+What economic question this round clarified:
+Current intuition:
+What became sharper:
+What is still weak or mechanical:
+Main absorption/proof/model risk:
+Next economic question:
+Files updated:
+```
+
+This summary should explain content progress, not merely list stages, panels, or
+files.
+
 ## Path Integrity and Compiled Output Hygiene
 
 Windows paths are easily corrupted by Markdown rendering when backslashes are written as raw prose. The assistant must treat path display as an output-safety issue.
@@ -296,6 +354,7 @@ Before routing, inspect whichever of these files exist:
 - `model_tournament.md`
 - `model_base_design.md`
 - `micro_example_note.md`
+- `economic_logic_map.md`
 - `heuristic_derivation.md`
 - `theorem_candidates.md`
 - `absorption_tests.md`
@@ -326,11 +385,11 @@ If no state file exists, begin with intake:
 - no manuscript or no clear paper files: Discovery D0.
 - manuscript exists: Manuscript Stage 0.
 
-`active_context.md` is never a source of truth. Use it to find the current state quickly, then verify any important claim against the underlying artifacts such as `project_state.md`, `field_profile.md`, `target_journal_profile.md`, `literature_evidence_ledger.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and the latest panel reports.
+`active_context.md` and `economic_logic_map.md` are never sources of truth. Use them to find the current state quickly, then verify any important claim against the underlying artifacts such as `project_state.md`, `field_profile.md`, `target_journal_profile.md`, `literature_evidence_ledger.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and the latest panel reports.
 
 ## Low-Token State Discipline
 
-Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, micro-example status, model base status, model lane status, pending Judge Pass status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
+Use `active_context.md` as an 80-120 line compact dashboard for continuation when a project becomes long. It should contain current stage, current blocker, economic logic map status, micro-example status, model base status, model lane status, pending Judge Pass status, provisional modeling constraints, next model-base test, confirmed source-of-truth artifacts, open human gates, active theorem, contribution lock status, field profile status, target journal profile status, literature evidence status, open risks, a 2-4 step horizon, the next action to execute, why that action has high information value, active safety barriers, and the best step if the user has only two hours.
 
 Token discipline reduces redundant re-reading, repeated summaries, and boilerplate. It must not reduce research depth. For main theorem discovery, proof verification, closest-literature checks, simulated review, model tournaments, and high-stakes revision, use enough context, tools, and token budget to execute the complete workflow.
 
@@ -1130,7 +1189,22 @@ If this file is referenced by `AGENTS.md`, the user can usually shorten this to:
 At the beginning of a routed task, the assistant should say only:
 
 ```text
-I will route this to [module] [stage] because [short reason].
+I will treat this as [economic task], because [content reason].
 ```
 
 Then execute. Avoid dumping the whole workflow back to the user unless asked.
+Prefer content language over stage language. For example, say "we have a small
+example, but it does not yet show why the general model is necessary" rather
+than "D4.5 completed; D5 blocked."
+
+After substantial research work, close with an Economic Progress Summary:
+
+```text
+What economic question this round clarified:
+Current intuition:
+What became sharper:
+What is still weak or mechanical:
+Main absorption/proof/model risk:
+Next economic question:
+Files updated:
+```
