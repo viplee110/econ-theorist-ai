@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Example-To-Theory Model Craft Funnel</title>
+  <desc id="desc">A precise model craft funnel showing how the system moves from real phenomenon to micro-example, economic lesson, model skeleton tournament, derivation candidates, and theorem absorption gates.</desc>
+  <defs>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#16324f" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1f4e79"/>
+    </marker>
+    <style>
+      .bg { fill: #f7fafc; }
+      .title { font: 700 42px Inter, Segoe UI, Arial, sans-serif; fill: #102a43; }
+      .subtitle { font: 500 20px Inter, Segoe UI, Arial, sans-serif; fill: #486581; }
+      .funnel1 { fill: #e8f3ff; stroke: #5b8def; stroke-width: 2; filter: url(#softShadow); }
+      .funnel2 { fill: #eaf7f2; stroke: #63a38f; stroke-width: 2; filter: url(#softShadow); }
+      .funnel3 { fill: #fff4df; stroke: #d99a22; stroke-width: 2; filter: url(#softShadow); }
+      .funnel4 { fill: #f2efff; stroke: #8f77c7; stroke-width: 2; filter: url(#softShadow); }
+      .guard { fill: #ffffff; stroke: #d99a22; stroke-width: 2.2; filter: url(#softShadow); }
+      .artifact { fill: #ffffff; stroke: #b8c7d9; stroke-width: 2; filter: url(#softShadow); }
+      .label { font: 750 25px Inter, Segoe UI, Arial, sans-serif; fill: #183b56; }
+      .small { font: 500 18px Inter, Segoe UI, Arial, sans-serif; fill: #52606d; }
+      .compact { font: 500 16px Inter, Segoe UI, Arial, sans-serif; fill: #52606d; }
+      .tiny { font: 700 14px Inter, Segoe UI, Arial, sans-serif; fill: #627d98; letter-spacing: 0.7px; }
+      .rule { font: 750 18px Inter, Segoe UI, Arial, sans-serif; fill: #9c6500; }
+      .arrow { stroke: #1f4e79; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .center { text-anchor: middle; }
+      .sideText { font: 600 18px Inter, Segoe UI, Arial, sans-serif; fill: #334e68; }
+      .sideSmall { font: 500 16px Inter, Segoe UI, Arial, sans-serif; fill: #627d98; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="1080"/>
+  <text x="72" y="74" class="title">Example-To-Theory Model Craft Funnel</text>
+  <text x="72" y="110" class="subtitle">The system exhausts broadly at the model-skeleton level, then derives narrowly after the economic force is visible.</text>
+
+  <rect x="90" y="150" width="1420" height="85" rx="18" class="guard"/>
+  <text x="122" y="185" class="rule">Hard rule: No general model before a hand-solved micro-example.</text>
+  <text x="122" y="214" class="small">Formal completeness cannot beat a missing economic force, lesson, or applicability boundary.</text>
+
+  <polygon points="260,280 1340,280 1275,375 325,375" class="funnel1"/>
+  <text x="800" y="311" class="tiny center">START FROM CONTENT</text>
+  <text x="800" y="342" class="label center">Real Phenomenon / Puzzle</text>
+  <text x="800" y="366" class="small center">Economic situation + old-theory gap</text>
+
+  <polygon points="325,415 1275,415 1215,510 385,510" class="funnel2"/>
+  <text x="800" y="446" class="tiny center">MICRO-EXAMPLE GATE</text>
+  <text x="800" y="477" class="label center">Smallest Hand-Solved Example</text>
+  <text x="800" y="501" class="small center">Concrete case, prediction before derivation, failure condition</text>
+
+  <polygon points="385,550 1215,550 1155,645 445,645" class="funnel3"/>
+  <text x="800" y="581" class="tiny center">ECONOMIC INTERPRETATION</text>
+  <text x="800" y="612" class="label center">Lesson + Applicability Boundary</text>
+  <text x="800" y="636" class="small center">What the model teaches, and where it should apply</text>
+
+  <polygon points="445,685 1155,685 1095,780 505,780" class="funnel1"/>
+  <text x="800" y="716" class="tiny center">D4 MODEL TOURNAMENT</text>
+  <text x="800" y="747" class="label center">20-40 Cheap Skeletons</text>
+  <text x="800" y="771" class="small center">Local, recombination, frontier-spike, hidden gem; kill reasons recorded</text>
+
+  <polygon points="505,820 1095,820 1035,915 565,915" class="funnel2"/>
+  <text x="800" y="848" class="tiny center">ECONOMIC FILTER</text>
+  <text x="800" y="879" class="label center">6-10 Baselines</text>
+  <text x="800" y="904" class="small center">Then 3-5 candidates with economic failure tests</text>
+
+  <polygon points="565,970 1035,970 975,1060 625,1060" class="funnel4"/>
+  <text x="800" y="995" class="tiny center">D5-D6</text>
+  <text x="800" y="1024" class="label center">1-3 Derivation Candidates</text>
+  <text x="800" y="1047" class="small center">Theorem sentence, proof route, absorption gate</text>
+
+  <path class="arrow" d="M800 375 V410"/>
+  <path class="arrow" d="M800 510 V545"/>
+  <path class="arrow" d="M800 645 V680"/>
+  <path class="arrow" d="M800 780 V815"/>
+  <path class="arrow" d="M800 915 V965"/>
+
+  <rect x="35" y="390" width="285" height="205" rx="18" class="artifact"/>
+  <text x="68" y="428" class="tiny">ARTIFACT</text>
+  <text x="68" y="464" class="sideText">micro_example_note.md</text>
+  <text x="68" y="503" class="sideSmall">Hand-solved case</text>
+  <text x="68" y="532" class="sideSmall">Economic force</text>
+  <text x="68" y="561" class="sideSmall">Failure condition</text>
+
+  <rect x="1280" y="525" width="285" height="215" rx="18" class="artifact"/>
+  <text x="1313" y="565" class="tiny">ARTIFACT</text>
+  <text x="1313" y="602" class="sideText">model_base_design.md</text>
+  <text x="1313" y="642" class="sideSmall">Baseline choice</text>
+  <text x="1313" y="672" class="sideSmall">Scope and lesson</text>
+  <text x="1313" y="702" class="sideSmall">Human confirmation</text>
+
+  <rect x="35" y="720" width="285" height="205" rx="18" class="artifact"/>
+  <text x="68" y="760" class="tiny">DASHBOARD</text>
+  <text x="68" y="797" class="sideText">economic_logic_map.md</text>
+  <text x="68" y="837" class="sideSmall">What became sharper</text>
+  <text x="68" y="867" class="sideSmall">What is still weak</text>
+  <text x="68" y="897" class="sideSmall">Next economic question</text>
+
+  <rect x="1280" y="790" width="285" height="175" rx="18" class="guard"/>
+  <text x="1313" y="830" class="tiny">HUMAN GATE</text>
+  <text x="1313" y="867" class="sideText">Minimal Model Base</text>
+  <text x="1313" y="908" class="sideSmall">Confirms primitives,</text>
+  <text x="1313" y="938" class="sideSmall">assumptions, and scope</text>
+</svg>

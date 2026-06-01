@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Econ Theorist AI Core Workflow Map</title>
+  <desc id="desc">A precise workflow map for the economic theory research system, showing evidence-backed discovery, model craft gates, theorem and absorption tests, style calibration, review, and revision.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1f4e79"/>
+    </marker>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#16324f" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: #f7fafc; }
+      .title { font: 700 42px Inter, Segoe UI, Arial, sans-serif; fill: #102a43; }
+      .subtitle { font: 500 20px Inter, Segoe UI, Arial, sans-serif; fill: #486581; }
+      .node { fill: #ffffff; stroke: #b8c7d9; stroke-width: 2; filter: url(#softShadow); }
+      .node-soft { fill: #eef7f4; stroke: #80b9aa; stroke-width: 2; filter: url(#softShadow); }
+      .gate { fill: #fff7e6; stroke: #d99a22; stroke-width: 2.4; filter: url(#softShadow); }
+      .artifact { fill: #eef4ff; stroke: #6c8ebf; stroke-width: 2; filter: url(#softShadow); }
+      .review { fill: #f4f0ff; stroke: #8f77c7; stroke-width: 2; filter: url(#softShadow); }
+      .label { font: 700 20px Inter, Segoe UI, Arial, sans-serif; fill: #183b56; }
+      .small { font: 500 15px Inter, Segoe UI, Arial, sans-serif; fill: #52606d; }
+      .tiny { font: 600 13px Inter, Segoe UI, Arial, sans-serif; fill: #627d98; letter-spacing: 0.3px; }
+      .gateText { font: 800 13px Inter, Segoe UI, Arial, sans-serif; fill: #9c6500; letter-spacing: 0.8px; }
+      .arrow { stroke: #1f4e79; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #6c8ebf; stroke-width: 2.2; fill: none; stroke-dasharray: 7 7; marker-end: url(#arrow); opacity: 0.9; }
+      .band { fill: #102a43; opacity: 0.94; }
+      .bandText { font: 650 18px Inter, Segoe UI, Arial, sans-serif; fill: #ffffff; }
+      .bandSmall { font: 500 14px Inter, Segoe UI, Arial, sans-serif; fill: #d9e2ec; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="980"/>
+
+  <text x="70" y="72" class="title">Econ Theorist AI: Core Research Workflow</text>
+  <text x="70" y="108" class="subtitle">Simple commands, explicit human gates, evidence-backed discovery, and model craft before formal machinery.</text>
+
+  <rect x="70" y="142" width="330" height="96" rx="14" class="node-soft"/>
+  <text x="96" y="181" class="label">Ordinary Q&amp;A Stays Ordinary</text>
+  <text x="96" y="211" class="small">Concepts, translation, GitHub, setup</text>
+
+  <rect x="460" y="142" width="330" height="96" rx="14" class="node"/>
+  <text x="486" y="181" class="label">User Asks System To Act</text>
+  <text x="486" y="211" class="small">Idea, model, theorem, review, revision</text>
+
+  <rect x="850" y="142" width="330" height="96" rx="14" class="artifact"/>
+  <text x="876" y="181" class="label">Orchestrator Reads State</text>
+  <text x="876" y="211" class="small">Artifacts decide route, not chat memory</text>
+
+  <rect x="1240" y="142" width="290" height="96" rx="14" class="artifact"/>
+  <text x="1266" y="181" class="label">Source Of Truth</text>
+  <text x="1266" y="211" class="small">Human decisions, profiles, ledgers</text>
+
+  <path class="dash" d="M400 190 H455"/>
+  <path class="arrow" d="M790 190 H845"/>
+  <path class="dash" d="M1180 190 H1235"/>
+
+  <rect x="70" y="302" width="300" height="102" rx="14" class="node"/>
+  <text x="96" y="340" class="tiny">D0-D2</text>
+  <text x="96" y="369" class="label">Idea / Field Discovery</text>
+  <text x="96" y="393" class="small">Open search, rough idea, shortlist</text>
+
+  <rect x="435" y="302" width="300" height="102" rx="14" class="artifact"/>
+  <text x="461" y="340" class="tiny">EVIDENCE</text>
+  <text x="461" y="369" class="label">Literature Ledger</text>
+  <text x="461" y="393" class="small">Closest papers, anchors, threats</text>
+
+  <rect x="800" y="302" width="300" height="102" rx="14" class="gate"/>
+  <text x="826" y="337" class="gateText">HUMAN GATE</text>
+  <text x="826" y="369" class="label">Field + Target Profiles</text>
+  <text x="826" y="393" class="small">Calibration changes fit, not quality</text>
+
+  <rect x="1165" y="302" width="330" height="102" rx="14" class="node"/>
+  <text x="1191" y="340" class="tiny">D4</text>
+  <text x="1191" y="369" class="label">Primitive + Branch Search</text>
+  <text x="1191" y="393" class="small">Nonconvex branches inside tree search</text>
+
+  <path class="arrow" d="M1015 238 V270 C1015 288 995 296 970 296 H230 C205 296 220 302 220 302"/>
+  <path class="arrow" d="M370 353 H430"/>
+  <path class="arrow" d="M735 353 H795"/>
+  <path class="arrow" d="M1100 353 H1160"/>
+
+  <rect x="70" y="482" width="300" height="112" rx="14" class="node"/>
+  <text x="96" y="520" class="tiny">MODEL TOURNAMENT</text>
+  <text x="96" y="548" class="label">20-40 Cheap Skeletons</text>
+  <text x="96" y="574" class="small">Economic force before formalism</text>
+
+  <rect x="435" y="482" width="300" height="112" rx="14" class="gate"/>
+  <text x="461" y="517" class="gateText">HUMAN GATE</text>
+  <text x="461" y="548" class="label">Micro-Example Gate</text>
+  <text x="461" y="574" class="small">Hand-solved smallest example</text>
+
+  <rect x="800" y="482" width="300" height="112" rx="14" class="gate"/>
+  <text x="826" y="517" class="gateText">HUMAN GATE</text>
+  <text x="826" y="548" class="label">Minimal Model Base</text>
+  <text x="826" y="574" class="small">Lesson, scope, natural baseline</text>
+
+  <rect x="1165" y="482" width="330" height="112" rx="14" class="node"/>
+  <text x="1191" y="520" class="tiny">D5</text>
+  <text x="1191" y="548" class="label">First-Pass Derivation</text>
+  <text x="1191" y="574" class="small">Only after model-base gates</text>
+
+  <path class="arrow" d="M1330 404 V442 C1330 470 1285 476 1230 476 H220 C190 476 220 482 220 482"/>
+  <path class="arrow" d="M370 538 H430"/>
+  <path class="arrow" d="M735 538 H795"/>
+  <path class="arrow" d="M1100 538 H1160"/>
+
+  <rect x="70" y="672" width="300" height="112" rx="14" class="gate"/>
+  <text x="96" y="707" class="gateText">HUMAN GATE</text>
+  <text x="96" y="738" class="label">D6 Absorption Test</text>
+  <text x="96" y="764" class="small">Main theorem + old-theory risk</text>
+
+  <rect x="435" y="672" width="300" height="112" rx="14" class="node"/>
+  <text x="461" y="710" class="tiny">D7</text>
+  <text x="461" y="738" class="label">5-8 Page Model Note</text>
+  <text x="461" y="764" class="small">Question, model, theorem, proof status</text>
+
+  <rect x="800" y="672" width="300" height="112" rx="14" class="review"/>
+  <text x="826" y="710" class="tiny">STAGE 6.5</text>
+  <text x="826" y="738" class="label">Deep Style Anchors</text>
+  <text x="826" y="764" class="small">Exposition architecture, not imitation</text>
+
+  <rect x="1165" y="672" width="330" height="112" rx="14" class="review"/>
+  <text x="1191" y="710" class="tiny">STAGE 7-8</text>
+  <text x="1191" y="738" class="label">Target-Calibrated Review</text>
+  <text x="1191" y="764" class="small">Revision tree, readiness, ratification</text>
+
+  <path class="arrow" d="M1330 594 V632 C1330 660 1285 666 1230 666 H220 C190 666 220 672 220 672"/>
+  <path class="arrow" d="M370 728 H430"/>
+  <path class="arrow" d="M735 728 H795"/>
+  <path class="arrow" d="M1100 728 H1160"/>
+
+  <rect x="70" y="860" width="1425" height="70" rx="18" class="band"/>
+  <text x="100" y="893" class="bandText">Safety invariants:</text>
+  <text x="290" y="893" class="bandSmall">no strong novelty claim without evidence</text>
+  <text x="620" y="893" class="bandSmall">no general model before micro-example</text>
+  <text x="970" y="893" class="bandSmall">full-auto choices are provisional</text>
+  <text x="1245" y="893" class="bandSmall">economic progress shown to user</text>
+  <text x="100" y="918" class="bandSmall">Artifacts: literature_evidence_ledger.md, economic_logic_map.md, model_base_design.md, human_decisions.md, target_journal_profile.md</text>
+</svg>

@@ -28,44 +28,22 @@ star so more researchers can find and improve their own research process.
 
 ## Workflow Map
 
-```mermaid
-flowchart LR
-    A["Topic or rough idea"] --> B["Literature probe<br/>field_profile.md<br/>literature_evidence_ledger.md"]
-    B --> T["Target profile<br/>target_journal_profile.md"]
-    T --> C["Primitive Hunter<br/>tree search + nonconvex branches"]
-    C --> D["Model tournament"]
-    D --> MB["Example-to-theory<br/>model_base_design.md"]
-    MB --> E["First-pass derivation"]
-    E --> F["Absorption test<br/>main theorem gate"]
-    F --> G["5-8 page model note"]
-    G --> H["Manuscript development"]
-    H --> S["Deep style anchor pass<br/>style_calibration.md"]
-    S --> I["Target-calibrated<br/>simulated review"]
-    S -->|structural weakness| C
-    I --> J["Revision tree"]
-    J --> K{"Human decision"}
-    K -->|preserve or revise| H
-    K -->|simplify or pivot| C
-    K -->|submit or retarget| L["Final readiness"]
-```
+![Econ Theorist AI core workflow map](assets/core-workflow-map.svg)
+
+## Model Craft Funnel
+
+![Example-to-theory model craft funnel](assets/model-craft-funnel.svg)
 
 ## Control Layer
 
-```mermaid
-flowchart TD
-    AC["active_context.md<br/>compact dashboard"] --> OR["ECONOMETRICA_ORCHESTRATOR.md<br/>router"]
-    HD["human_decisions.md<br/>append-only gates"] --> OR
-    FP["field_profile.md<br/>confirmed field and referee roles"] --> OR
-    TJ["target_journal_profile.md<br/>target ladder and quality floor"] --> OR
-    LE["literature_evidence_ledger.md<br/>verified paper evidence"] --> OR
-    GL["generality_ledger.md<br/>special-case and assumption drift"] --> OR
-    OR --> WG["Workflow modules"]
-    WG --> HP{"Human gate"}
-    HP --> HD
-```
-
 `active_context.md` is only a dashboard, not a source of truth. Important claims
 must still be checked against the underlying workflow artifacts.
+
+The router uses durable project artifacts such as `human_decisions.md`,
+`field_profile.md`, `target_journal_profile.md`,
+`literature_evidence_ledger.md`, and `generality_ledger.md`. Major research
+decisions stop at explicit human gates and are recorded before the workflow
+treats them as confirmed.
 
 ## What This System Does
 
