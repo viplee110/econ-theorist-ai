@@ -69,6 +69,7 @@ treats them as confirmed.
 - Runs target-calibrated simulated review with dynamic referee roles.
 - Routes local-optimum traps back to discovery before manuscript polishing.
 - Creates provisional Working Preview Notes when the human wants a short readable snapshot before gates are final.
+- Runs an anchor-based Manuscript Architecture Compliance Gate before full manuscript drafting, major restructuring, or full style pass, so every section has a job and the section order matches comparable published papers.
 - Calibrates exposition style through a Deep Style Anchor Pass after the contribution is locked.
 - Uses full-text style anchors when legally available or user-provided, extracting exposition architecture rather than prose.
 - Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
@@ -279,6 +280,7 @@ this workflow repository:
 | `model_base_design.md` | Example-to-theory model base, skeleton funnel, failed simpler alternatives, and human confirmation status. |
 | `micro_example_note.md` | Hand-solved smallest example, intuition, predicted comparative static, failure condition, and literature-gap check. |
 | `heuristic_derivation.md` | Economic derivation path from toy example to formal model before proof machinery begins. |
+| `manuscript_architecture_plan.md` | Anchor-based plan for section count, section order, appendix boundary, and section-by-section function before full manuscript drafting or restructuring. |
 | `style_anchor_notes/` | Per-anchor notes from deep reading of legally available or user-provided style anchors. |
 | `style_anchor_matrix.md` | Cross-anchor matrix of exposition architecture, reader path, theorem setup, and proof roadmap moves. |
 | `style_calibration.md` | Human-confirmed style contract for elegant, field-calibrated exposition without rhetoric. |
@@ -373,6 +375,7 @@ model_tournament.md
 model_base_design.md
 micro_example_note.md
 heuristic_derivation.md
+manuscript_architecture_plan.md
 absorption_tests.md
 generality_ledger.md
 risk_register.md

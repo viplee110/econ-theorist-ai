@@ -112,6 +112,7 @@ D0-D3 discovery, literature ledger, field profile, target profile
 D4-D4.5 skeleton search, micro-example, model base, lane/judge pass if useful
 D5-D6 derivation, theorem candidates, absorption tests, invest/pivot choice
 pre-paper model note and contribution lock
+manuscript architecture audit
 manuscript draft
 Deep Style Anchor Pass and style revision
 target-calibrated simulated review
@@ -348,6 +349,7 @@ Before routing, inspect whichever of these files exist:
 - `idea_dossier.md`
 - `contribution_lock.md`
 - `manuscript_map.md`
+- `manuscript_architecture_plan.md`
 - `agent_runs/*/agent_manifest.md`
 - `agent_runs/_lane_registry.md`
 - `cross_agent_model_audit.md`
@@ -371,6 +373,7 @@ Before routing, inspect whichever of these files exist:
 - `risk_register.md`
 - `revision_log.md`
 - `revision_tree.md`
+- `manuscript_architecture_plan.md`
 - `style_anchor_matrix.md`
 - `style_calibration.md`
 - `style_pass_plan.md`
@@ -411,6 +414,7 @@ Safety barriers:
 
 - No strong novelty claim without literature evidence.
 - No full manuscript before theorem sentence and absorption test.
+- No full manuscript draft, major restructuring, or full style pass before an anchor-based manuscript architecture audit.
 - No established theorem if proof status is sketch only.
 - No local polishing if complexity debt is rising.
 - No kill of a possible frontier spike before spike-specific tests.
@@ -911,11 +915,37 @@ Route:
 - If `contribution_lock.md` or a sharp main theorem sentence does not exist, return to Discovery D4.5 or D4-D6 first.
 - If the leading risk is "no central theorem," "too close to old theory," "absorbed by known models," or "unnatural model base," return to Discovery D4.5 or D4-D6 rather than revising prose.
 - If contribution is locked, read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
-- Run Stages 3, 4, and 6 as appropriate.
+- Before a full manuscript draft or major restructuring, require Stage 5.5 and `manuscript_architecture_plan.md`. If it is missing, stale, or contradicted by the current field, target, theorem, contribution lock, or manuscript, run Stage 5.5 and stop at its human gate before full manuscript work.
+- Run Stages 3, 4, 5.5, and 6 as appropriate.
 - Use `ECONOMETRICA_VERIFICATION_WORKFLOW.md` for mathematical claims.
 - Compile when possible.
 - Update `revision_log.md` and `risk_register.md`.
 - Stop if a foundational issue appears.
+
+### Manuscript Architecture Compliance Gate
+
+Triggers:
+
+- "manuscript architecture"
+- "paper structure"
+- "section structure"
+- "section order"
+- "too many sections"
+- "published paper structure"
+- "section norms"
+- "architecture compliance"
+- "structure compliance"
+
+Route:
+
+- Read `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+- Run Stage 5.5.
+- Reuse confirmed `field_profile.md` and `target_journal_profile.md` when current; do not reopen field or target confirmation for architecture calibration alone.
+- Search for or reuse 3-6 target-, field-, and genre-matched published papers as manuscript architecture anchors when web/search tools are available.
+- Prefer user-provided PDFs, legally available full text, tables of contents, or full paper structure visible on publisher, SSRN, NBER, RePEc, journal, or author pages.
+- Record every named architecture anchor in `literature_evidence_ledger.md`; if an anchor lacks a ledger entry, mark the affected architecture judgment provisional.
+- Create or update `manuscript_architecture_plan.md` with recommended section count, section order, essential sections, optional sections, appendix material, current structure diagnosis, sections to keep, merge, delete, move, and section-by-section function.
+- Stop for human confirmation before major restructuring if the architecture changes materially.
 
 ### Working Preview Note
 
@@ -964,6 +994,7 @@ Route:
 - Run Stage 6.5.
 - Reuse confirmed `field_profile.md` when current; do not reopen field confirmation for style calibration alone.
 - Reuse confirmed `target_journal_profile.md` when current; do not reopen target confirmation for style calibration alone.
+- Reuse confirmed `manuscript_architecture_plan.md` when current. If it is missing, stale, or contradicted by the current field, target, theorem, contribution lock, or manuscript, run Stage 5.5 first.
 - If `style_calibration.md` is missing, provisional, stale, or inconsistent with the current theorem, contribution lock, field profile, target journal profile, or target audience, run a Deep Style Anchor Pass first and stop for human confirmation before a full style pass.
 - Prefer user-provided PDFs or a user-provided local literature folder when available.
 - Search for 5-8 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available. If fewer high-quality full-text anchors are legally available, use 3-5 and mark the coverage limitation.
@@ -975,7 +1006,7 @@ Route:
 - Treat style anchors as calibration evidence, not prose templates: extract exposition architecture and exposition moves, not sentences.
 - Do not change the central question, main theorem, model primitives, assumptions, novelty claim, target journal positioning, or unverified literature claims.
 - If the manuscript is mechanical because the theorem is weak, the contribution is unclear, assumptions are patchy, defensive dilution is present, or the model base is unnatural, route to Discovery D4.5, D4-D6, or Stage 8 tree search instead of polishing.
-- After human confirmation of the style contract in `style_calibration.md`, perform a paragraph-level manuscript style pass using `style_pass_plan.md`; improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, paragraph pacing, and flow; then update `revision_log.md` and compile when possible.
+- After human confirmation of the style contract in `style_calibration.md`, perform a paragraph-level manuscript style pass using `style_pass_plan.md` and respecting `manuscript_architecture_plan.md`; improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, paragraph pacing, and flow; then update `revision_log.md` and compile when possible.
 
 ### Simulated Review
 
@@ -1143,7 +1174,7 @@ paper is confirmed or accepted still require explicit human approval.
 
 ## Human Decision Persistence
 
-When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `model_base_design.md`, `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
+When a human gate is reached, the assistant must not rely on chat memory as the only record. After the user chooses, create `human_decisions.md` if it is missing, append the decision, and update the active state file, such as `project_state.md`, `discovery_state.md`, `model_base_design.md`, `field_profile.md`, `target_journal_profile.md`, `manuscript_architecture_plan.md`, `style_calibration.md`, `contribution_lock.md`, `risk_register.md`, or `revision_tree.md`.
 
 If the user reverses an earlier decision, record the reversal as a new entry rather than deleting the old one. The new decision supersedes the old decision for current routing. The reversal entry should identify the previous decision, new decision, reason, affected artifacts, and any stages, panels, proofs, or literature checks that must be rerun.
 

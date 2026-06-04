@@ -48,6 +48,7 @@ The agent should maintain these files whenever possible:
 - `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
 - `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
 - `style_calibration.md`: confirmed or provisional style calibration for elegant, field-sensitive exposition without rhetoric.
+- `manuscript_architecture_plan.md`: confirmed or provisional anchor-based plan for section count, section order, appendix boundary, and section-by-section function before full manuscript drafting, major restructuring, or full style pass.
 - `preview_drafts/`: provisional Working Preview Notes and PDFs for human reading during intermediate stages.
 - `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
 - `target_journal_profile.md`: confirmed or provisional target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
@@ -89,7 +90,7 @@ Every local Human gate in this file inherits the full gate format from `ECONOMET
 For every real human gate:
 
 - Create `human_decisions.md` if it is missing, then append the decision, date, stage, reason, and affected files.
-- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
+- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `target_journal_profile.md`, `manuscript_architecture_plan.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
 - If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
 
 For every AI-delegated provisional gate in guarded full-auto goal mode:
@@ -244,6 +245,7 @@ Before substantial manuscript revision, check whether the project has passed the
 - `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
 - `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md`, or equivalent evidence that the current model base was built from a hand-solved smallest economically interpretable example and passed the Micro-Example Gate and Minimal Model Base Gate
 - a human-approved `contribution_lock.md`
+- before a full manuscript draft, major restructuring, or full style pass, a confirmed or explicitly provisional `manuscript_architecture_plan.md` comparing the section architecture to target-, field-, and genre-matched published papers
 
 If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4.5 or D4-D6 unless the user explicitly asks for mechanical editing only.
 
@@ -558,6 +560,72 @@ Proceed condition:
 
 - The project has a defensible contribution after accounting for the closest substitutes, with key closest-literature evidence recorded in `literature_evidence_ledger.md` or explicitly marked provisional.
 
+## Stage 5.5 - Manuscript Architecture Compliance Gate
+
+Autonomy: Gate
+
+Purpose:
+
+Prevent the manuscript from becoming a workflow-shaped document. Before a full manuscript draft, major restructuring, or full style pass, calibrate the paper's section architecture against published papers that match the confirmed target, field, method, and contribution type.
+
+Hard rule:
+
+```text
+Every section must have a job.
+Every section must be justified by contribution logic and anchor-paper norms.
+No full manuscript draft, major restructuring, or full style pass before an anchor-based manuscript architecture audit.
+```
+
+Prerequisites:
+
+- Reuse confirmed `field_profile.md` and `target_journal_profile.md` when current.
+- Use `literature_evidence_ledger.md` for every named architecture anchor. If an anchor is not recorded there, mark the architecture judgment provisional.
+- Prefer user-provided PDFs or legally available full-text papers when possible. If only abstracts, tables of contents, or partial pages are available, mark the corresponding structure evidence provisional.
+
+AI tasks:
+
+- Search for or reuse 3-6 target-, field-, and genre-matched published papers as manuscript architecture anchors.
+- Create or update `manuscript_architecture_plan.md`.
+- Compare the current or proposed manuscript to anchor-paper norms for section count, section order, section function, appendix boundary, and results/extension placement.
+- Diagnose whether the draft has too many sections, too many local repairs, workflow-shaped structure, a theorem package without narrative order, or sections that exist only because the AI generated an artifact.
+- Recommend which sections to keep, merge, delete, split, reorder, or move to the appendix.
+- Stop for human confirmation before major rewriting if the section architecture materially changes.
+
+Minimum `manuscript_architecture_plan.md` fields:
+
+```text
+Status: Confirmed / Provisional / Stale / Reopen requested
+Target journal and genre:
+Field and contribution type:
+Architecture anchors:
+Ledger status for each anchor:
+Evidence coverage: full-text / partial / provisional
+Typical section architecture:
+Recommended section count:
+Recommended section order:
+Essential sections:
+Optional sections:
+Appendix material:
+Current manuscript structure diagnosis:
+Sections to keep:
+Sections to merge:
+Sections to delete:
+Sections to move to appendix:
+Section-by-section function:
+Architecture risks:
+Human confirmation status:
+```
+
+Human gate:
+
+The human must confirm, edit, or reject the proposed section architecture before the system treats it as a manuscript-level constraint. Record the decision in `human_decisions.md`, update `manuscript_architecture_plan.md`, and mark any required rechecks in `risk_register.md`.
+
+Proceed condition:
+
+- `manuscript_architecture_plan.md` is confirmed or explicitly provisional.
+- Every retained section has a clear function tied to the locked contribution.
+- Deviations from anchor-paper norms are justified by the paper's theorem, mechanism, evidence, or target audience rather than by AI convenience.
+
 ## Stage 6 - Controlled Manuscript Development
 
 Autonomy: Auto, unless contribution changes
@@ -570,6 +638,7 @@ AI tasks:
 
 - Revise section by section.
 - Check `economic_logic_map.md` before rewriting so manuscript edits clarify the economic force rather than only improving prose.
+- Check `manuscript_architecture_plan.md` before drafting or restructuring. If it is missing, provisional without explanation, stale, or contradicted by the current target, field, theorem, or contribution lock, run Stage 5.5 before full manuscript work.
 - For each major section, perform a paragraph-level pass.
 - Improve clarity, notation, transitions, proof roadmaps, motivation, and conclusion.
 - Preserve author voice.
@@ -580,6 +649,8 @@ AI tasks:
 Section-level checklist:
 
 - Does the section serve the locked contribution?
+- Does the section have the function assigned in `manuscript_architecture_plan.md`?
+- Is the section count and order consistent with target-, field-, and genre-matched anchor papers, or is the deviation justified?
 - Is the economic mechanism clear before technical detail?
 - Would a reader understand the economic question being clarified, not only the theorem being solved?
 - Are claims supported?
@@ -619,10 +690,11 @@ Prerequisites:
 - If `field_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but field-sensitive style anchors cannot be treated as final.
 - A confirmed current `target_journal_profile.md` is reused when available. Do not reopen target confirmation for style calibration alone.
 - If `target_journal_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but target-sensitive style anchors cannot be treated as final.
+- A confirmed or explicitly provisional `manuscript_architecture_plan.md` exists before any full style pass. If it is missing, stale, or contradicted by the current manuscript, run Stage 5.5 first.
 
 AI tasks:
 
-- Inspect the current manuscript and core artifacts: `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `risk_register.md`, and latest referee reports if available.
+- Inspect the current manuscript and core artifacts: `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `manuscript_architecture_plan.md`, `risk_register.md`, and latest referee reports if available.
 - Search for 5-8 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, target journal, and target audience. If fewer high-quality full-text anchors are legally available, use 3-5 and mark the coverage limitation.
 - Prefer user-provided PDFs, open-access papers, working papers, author-posted versions, SSRN, NBER, RePEc, journal open pages, or papers the user explicitly authorizes. Do not default to bulk download.
 - If downloaded, store only legally available or authorized files in `literature_cache/style_anchors/` and record source and permission status.
@@ -639,6 +711,7 @@ AI tasks:
   - literature evidence ledger status for anchors
   - full-text / partial / provisional status for each anchor
   - anchor-derived exposition rules
+  - anchor-derived manuscript architecture constraints
   - section-by-section mechanical prose diagnosis
   - theorem setup rules
   - assumption interpretation rules
@@ -650,6 +723,7 @@ AI tasks:
   - 3-5 sample rewrites for human approval
   - sections needing calibration
 - Create or update `style_pass_plan.md` before any full style pass.
+- The style pass plan must respect `manuscript_architecture_plan.md`; do not use style calibration to preserve sections that the architecture audit says should be merged, deleted, reordered, or moved to the appendix.
 - Stop for human confirmation before any full style pass. The user may confirm, edit, or reject the style direction.
 - Record the confirmed or revised style decision in `human_decisions.md` and keep the active constraints in `style_calibration.md`.
 - After confirmation, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, section openings, paragraph pacing, and paragraph flow section by section.
@@ -720,6 +794,7 @@ Guardrails:
 Proceed condition:
 
 - `style_calibration.md` is confirmed or explicitly provisional.
+- `manuscript_architecture_plan.md` is confirmed or explicitly provisional for the current target, field, contribution lock, and theorem package.
 - `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_pass_plan.md` exist or the system has explained why coverage is provisional.
 - The manuscript is more readable and more human without weakening the locked contribution.
 - Any conceptual, theorem, assumption, or novelty issue found during style work is recorded as a risk rather than hidden by elegant prose.
@@ -986,13 +1061,13 @@ Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 2. Create or update contributi
 ### Deep Manuscript Revision
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution gates. Run Stages 3, 4, and 6. Audit the model, model_base_design.md, heuristic_derivation.md, assumptions, proof architecture, and evidence. Then revise the manuscript section by section. Compile after meaningful edits. Log every nontrivial edit in revision_log.md. Stop if you find a foundational problem that threatens the contribution lock or model-base confirmation.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution gates. Run Stages 3, 4, 5.5, and 6. Audit the model, model_base_design.md, heuristic_derivation.md, assumptions, proof architecture, evidence, and manuscript architecture. Create or update manuscript_architecture_plan.md before major restructuring. Then revise the manuscript section by section. Compile after meaningful edits. Log every nontrivial edit in revision_log.md. Stop if you find a foundational problem that threatens the contribution lock, model-base confirmation, or manuscript architecture.
 ```
 
 ### Style Calibration
 
 ```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5 Deep Style Anchor Pass. Reuse confirmed field_profile.md and target_journal_profile.md when current; do not reopen field or target confirmation for style calibration alone. Prefer user-provided PDFs or legally available full-text anchors. Search for 5-8 field-matched and target-matched style anchors when web/search tools are available; if fewer high-quality full-text anchors are available, use 3-5 and mark the coverage limitation. Record named anchors in literature_evidence_ledger.md, create style_anchor_notes/, style_anchor_matrix.md, style_calibration.md, and style_pass_plan.md. If anchors are partial or lack ledger entries, mark the relevant style evidence provisional. Create style_calibration.md as a style contract with target reader, target voice, anchor-derived exposition architecture, section-by-section mechanical prose diagnosis, theorem setup rules, assumption interpretation rules, proof roadmap rules, paragraph-level rewrite rules, forbidden rhetoric, invariants, and 3-5 sample rewrites. Stop for my confirmation before any full style pass.
+Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5 Deep Style Anchor Pass. Reuse confirmed field_profile.md, target_journal_profile.md, and manuscript_architecture_plan.md when current; do not reopen field, target, or manuscript architecture confirmation for style calibration alone. If manuscript_architecture_plan.md is missing, stale, or contradicted by the current manuscript, run Stage 5.5 first. Prefer user-provided PDFs or legally available full-text anchors. Search for 5-8 field-matched and target-matched style anchors when web/search tools are available; if fewer high-quality full-text anchors are available, use 3-5 and mark the coverage limitation. Record named anchors in literature_evidence_ledger.md, create style_anchor_notes/, style_anchor_matrix.md, style_calibration.md, and style_pass_plan.md. If anchors are partial or lack ledger entries, mark the relevant style evidence provisional. Create style_calibration.md as a style contract with target reader, target voice, anchor-derived exposition architecture, anchor-derived manuscript architecture constraints, section-by-section mechanical prose diagnosis, theorem setup rules, assumption interpretation rules, proof roadmap rules, paragraph-level rewrite rules, forbidden rhetoric, invariants, and 3-5 sample rewrites. Stop for my confirmation before any full style pass.
 ```
 
 ### Target-Calibrated Simulated Review

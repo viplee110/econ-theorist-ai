@@ -472,6 +472,27 @@ Rules:
 - If it finds a structural issue, it routes to the Scientific Judge, Discovery D4-D6, or Stage 8 tree search rather than polishing.
 - Its findings should be written into `style_calibration.md` or, if run inside a panel, summarized in the panel output.
 
+### Manuscript Architect / Section Norm Reader
+
+Use before full manuscript drafting, major restructuring, or full style pass when the paper's section architecture may not match target-, field-, and genre-matched published papers.
+
+The Manuscript Architect / Section Norm Reader evaluates whether:
+
+- the paper has the right number of sections for its contribution and target
+- the section order matches the reader path used in comparable published papers
+- every section has a clear job tied to the locked contribution
+- results, extensions, robustness checks, welfare, examples, and proof material are placed in the main text or appendix for a reason
+- the manuscript is not a workflow-shaped artifact with sections created because the AI generated intermediate files
+- excessive subsections, local repairs, or theorem packages should be merged, deleted, reordered, or moved to the appendix
+
+Rules:
+
+- This role cannot approve conceptual changes, theorem changes, or target-journal changes.
+- It reads `manuscript_architecture_plan.md`, `manuscript_map.md`, `contribution_lock.md`, `target_journal_profile.md`, `field_profile.md`, and `literature_evidence_ledger.md` when they exist.
+- It may use published papers only to extract manuscript architecture norms, not prose, wording, paragraph structure, or framing.
+- Every named architecture anchor must have a `literature_evidence_ledger.md` entry, or the structure judgment remains provisional.
+- Its findings should be written into `manuscript_architecture_plan.md` or summarized in the panel output.
+
 ## Generic Panel Phases
 
 ### P0 - Scope and Allowed Materials
@@ -745,13 +766,14 @@ The system must stop for human judgment before:
 - committing to a new project
 - confirming a new or materially changed project-level field profile
 - choosing the model to develop
+- confirming or materially changing the manuscript architecture
 - adding economically meaningful assumptions
 - changing the main theorem
 - changing the contribution lock
 - deciding to submit, pivot, retarget, split, or kill
 - accepting a simulated editorial decision as action-guiding
 
-Every panel-facing human gate must be recorded before the next panel or revision step relies on it. For real human choices, create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `target_journal_profile.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
+Every panel-facing human gate must be recorded before the next panel or revision step relies on it. For real human choices, create `human_decisions.md` if it is missing, append the decision there, and update the panel-specific artifact that the decision controls, such as `field_profile.md`, `target_journal_profile.md`, `manuscript_architecture_plan.md`, `style_calibration.md`, `panel_reports/panel_config.md`, `referee_reports/round_N/panel_config.md`, `contribution_lock.md`, `revision_tree.md`, or `risk_register.md`.
 
 In explicitly requested guarded full-auto goal mode, do not write AI-delegated panel choices as human decisions. Record them as `AI-delegated provisional` entries in `auto_decisions.md`, keep the controlled panel artifact provisional, and add the ratification question to `final_ratification_report.md`.
 
