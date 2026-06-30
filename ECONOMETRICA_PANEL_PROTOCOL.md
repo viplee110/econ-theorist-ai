@@ -382,7 +382,7 @@ Roles:
 
 - Referee 1: re-derivation from primitives.
 - Referee 2: symbolic and numerical counterexample search.
-- Referee 3: proof structure and hidden assumptions.
+- Referee 3: proof structure, hidden assumptions, and result-statement correctness.
 - Referee 4: formalization triage, Lean suitability, and rigor focus selected from the claim's main risk in `panel_config.md`.
 - Associate Editor: classifies each claim as Verified, Partially Verified, Needs Assumption, Counterexample Found, or Fatal Gap.
 - Co-Editor: approves theorem restatement, proof repair path, or claim withdrawal.
@@ -459,6 +459,7 @@ The Exposition Editor / Elegant Reader evaluates whether:
 - the theorem appears as the answer to a real economic question
 - assumptions are interpreted before being used
 - proof roadmaps explain why the proof moves as it does
+- theorem, proposition, lemma, and corollary statements are clean result statements rather than overloaded proof notes
 - prose avoids AI-list style and decorative rhetoric
 - elegance is improving clarity rather than hiding weakness
 
@@ -466,6 +467,7 @@ Rules:
 
 - This role cannot approve conceptual changes.
 - It must not change theorem statements, assumptions, novelty claims, target-journal positioning, or unverified literature claims.
+- It may recommend Result Statement Hygiene edits that move interpretation, proof intuition, caveats, examples, or why-it-matters material out of formal statements and into setup, proof roadmap, remarks, or post-result discussion, while preserving the verified formal content.
 - It reads `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_calibration.md` when they exist.
 - It may use published papers as style anchors only to extract exposition architecture and exposition moves, not sentences, paragraph structures, or framing.
 - It should check whether the anchor evidence is full-text, partial, or provisional, and whether any style claim lacks a `literature_evidence_ledger.md` entry.
@@ -647,7 +649,7 @@ Every Review Panel and high-stakes Revision Panel must include a scientific-tast
 - Does the paper contain a theorem package without one central theorem?
 - Does a non-mainstream direction have deep primitive potential, theorem bite, or a non-absorbed mechanism that warrants further discovery before rejection?
 
-If the contribution sentence requires many clauses such as "under the specific condition that..." or "provided that..." to sound true, label the issue `Defensive Dilution`. If complexity is essential, the judge must say exactly what economic work it performs. If complexity mainly protects a fragile result, the judge should recommend `Pivot`, `Demote to Benchmark`, or `Reject and Resubmit` rather than local repair.
+If the contribution sentence or a formal result statement requires many clauses such as "under the specific condition that..." or "provided that..." to sound true, label the issue `Defensive Dilution` or `defensive statement bloat` as appropriate. If complexity is essential, the judge must say exactly what economic work it performs. If complexity mainly protects a fragile result, the judge should recommend `Pivot`, `Demote to Benchmark`, or `Reject and Resubmit` rather than local repair.
 
 Scientific taste is a filter, not the sole objective. The judge can reject defensive dilution, fake novelty, or a complexity shield, but must separately evaluate deep primitive potential before recommending Kill/Pivot for a non-mainstream exploration.
 

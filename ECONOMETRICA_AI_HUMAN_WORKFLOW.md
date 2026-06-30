@@ -491,6 +491,8 @@ AI tasks:
 - List primitives, agents, timing, information, constraints, equilibrium concept, objects of interest, assumptions, and results.
 - Check whether assumptions are economically interpretable.
 - Check theorem statements against proof structure.
+- Run Result Statement Hygiene: check whether each theorem, proposition, lemma, and corollary statement states only the minimal formal result, whether every condition is truth-critical, and whether interpretation, proof intuition, caveats, examples, or literature positioning should be moved to setup, proof roadmap, remark, or post-result discussion.
+- Flag defensive statement bloat when many clauses are needed for the result to sound true; record suspect conditions in `assumption_ledger.md`, `generality_ledger.md`, or `risk_register.md` rather than burying them inside the statement.
 - Check notation consistency between main text and appendix.
 - Identify missing lemmas or hidden regularity conditions.
 - Identify where the proof relies on unstated monotonicity, continuity, compactness, genericity, equilibrium selection, or identification assumptions.
@@ -641,6 +643,8 @@ AI tasks:
 - Check `manuscript_architecture_plan.md` before drafting or restructuring. If it is missing, provisional without explanation, stale, or contradicted by the current target, field, theorem, or contribution lock, run Stage 5.5 before full manuscript work.
 - For each major section, perform a paragraph-level pass.
 - Improve clarity, notation, transitions, proof roadmaps, motivation, and conclusion.
+- Separate result-statement editing from exposition writing. First preserve or create a clean minimal formal statement; then place economic interpretation, why-it-matters, caveats, examples, and proof strategy in the surrounding paragraphs.
+- A manuscript or style pass may move explanation out of overloaded result statements, but it must not change theorem substance, assumptions, model primitives, or novelty claims without triggering verification and any required human gate.
 - Preserve author voice.
 - Avoid broad rewriting when precise edits suffice.
 - Compile after meaningful edits.
@@ -656,6 +660,7 @@ Section-level checklist:
 - Are claims supported?
 - Is notation introduced before use?
 - Is the reader told why the result matters?
+- Are formal result statements clean, minimal, and free of proof intuition or narrative explanation?
 - Are assumptions interpreted?
 - Are limitations honest but not self-sabotaging?
 
@@ -727,6 +732,7 @@ AI tasks:
 - Stop for human confirmation before any full style pass. The user may confirm, edit, or reject the style direction.
 - Record the confirmed or revised style decision in `human_decisions.md` and keep the active constraints in `style_calibration.md`.
 - After confirmation, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, section openings, paragraph pacing, and paragraph flow section by section.
+- Apply Result Statement Hygiene during style work: move exposition out of bloated theorem/proposition/lemma statements into theorem setup, proof roadmap, remarks, or post-result discussion while preserving the verified formal content.
 - Log nontrivial edits in `revision_log.md` and compile after meaningful manuscript edits when possible.
 
 Minimum `style_anchor_notes/[short_id].md` fields:

@@ -146,9 +146,14 @@ AI tasks:
 - Create `assumption_ledger.md`.
 - For each claim, list:
   - exact statement
+  - minimal formal statement
   - location in manuscript
   - assumptions used
+  - truth-critical assumptions
+  - material to move outside the statement
   - conclusion
+  - proof dependencies
+  - economic interpretation paragraph
   - proof status
   - tool-check status
   - counterexample status
@@ -156,6 +161,7 @@ AI tasks:
 Rule:
 
 No claim should be treated as verified merely because it appears plausible.
+Result statements should state the result, not explain the result. During extraction, separate truth-critical mathematical conditions from proof-roadmap, interpretation, caveat, example, and literature-positioning material. Conditions that are merely explanatory should be moved outside the statement; conditions that are required for truth should be recorded in `assumption_ledger.md`.
 
 ## Stage V2 - Re-Derivation from Primitives
 
@@ -240,6 +246,8 @@ Audit the informal proof after symbolic and numerical checks.
 AI tasks:
 
 - Match every line of proof to a stated assumption or previous result.
+- Check whether each condition in the formal result statement is genuinely needed for truth, merely a proof dependency, or explanatory material that belongs in a proof roadmap, remark, or discussion.
+- If a proof needs an unstated assumption, record it explicitly and require human approval when it changes theorem substance, economic interpretation, novelty, or target positioning.
 - Identify gaps:
   - existence
   - uniqueness
