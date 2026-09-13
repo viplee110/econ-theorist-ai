@@ -1,171 +1,34 @@
-# First-Run Setup
+# First run
 
-This workflow is designed so an economist can start research work before every
-technical tool is configured.
+Modified for the original workflow refresh (2026-09-13).
 
-The core research workflow is always available:
+Install the files described in [INSTALL.md](INSTALL.md), open the paper folder,
+and describe the research task. You can start from a question, a fixed model,
+a theorem, a draft or an existing project.
 
-- idea discovery
-- literature and field profiling
-- target journal profiling
-- model tournaments
-- theorem candidate search
-- simulated review
-- style calibration
-- revision planning
+The agent should identify the immediate uncertainty and perform useful work.
+It creates project state only as needed. There is no requirement to populate
+profiles, scores, approval forms or empty research files before starting.
 
-Python, Lean, Mathematica, LaTeX, and Git strengthen verification and project
-management. They are useful, but they are not required before the first research
-conversation.
-
-## Start In 5 Minutes
-
-1. Download the repository as a ZIP file or clone it with Git.
-2. Copy the workflow files into the root folder of your paper project.
-3. Open that paper project folder in Codex Desktop or another agent IDE.
-4. Ask for a setup check:
-
-```text
-Use the system: first-run setup check
-```
-
-Small Chinese command example:
-
-```text
-按系统处理：初始化检测
-```
-
-5. Then initialize the paper project:
-
-```text
-Use the system: initialize this paper project
-```
-
-## What The Setup Check Does
-
-The setup check detects whether this computer can use:
-
-- Git
-- LaTeX
-- Python and common scientific packages
-- Lean and Lake
-- Mathematica / WolframScript
-
-It does not automatically install large tools. It does not change your Windows
-PATH or system environment variables. It reports what is available and what is
-missing, then explains which workflow abilities are affected.
-
-## Computer Status Versus Paper Status
-
-Toolchain status is computer-level state. By default, `verify_toolchain.ps1
--WriteStatus` writes it to:
-
-```text
-C:\Users\<user>\.econ-theorist-ai\toolchain_status.md
-```
-
-Paper status is project-level state. Each paper project can have its own:
-
-```text
-project_state.md
-active_context.md
-field_profile.md
-target_journal_profile.md
-human_decisions.md
-```
-
-When you start a second paper, the computer-level toolchain check usually does
-not need to be repeated. The new paper still needs its own project
-initialization.
-
-## Folder Portability
-
-The paper project is folder-portable. Copy or sync the whole paper project
-folder, open it on another computer, run the local toolchain check there, and
-continue from the project artifacts.
-
-Use this command after opening the copied folder:
-
-```text
-Use the system: continue by the system.
-```
-
-Copy the whole folder, not just the manuscript. Workflow artifacts such as
-`project_state.md`, `human_decisions.md`, `field_profile.md`,
-`target_journal_profile.md`, `model_base_design.md`, and
-`literature_evidence_ledger.md` tell the assistant what happened and what is
-confirmed. Computer-level setup still belongs to each computer: agent IDE login,
-Python, LaTeX, Lean, Mathematica, Git, and local tool paths should be checked
-locally.
-
-Git is optional for running the workflow. For serious projects, Git checkpoints
-are recommended because they let you roll back file versions if something goes
-wrong. Folder portability preserves project state; Git checkpoints preserve
-recoverable file versions.
-
-## Custom Tool Locations
-
-The default shared verification tool root on Windows is:
-
-```text
-C:\Tools\CodexVerification
-```
-
-You can use a different location with:
+If you want a Windows tool check, run:
 
 ```powershell
-$env:CODEX_VERIFICATION_HOME = "D:\Tools\CodexVerification"
-.\verify_toolchain.ps1 -WriteStatus
+.\verify_toolchain.ps1
 ```
 
-For a persistent local preference, create:
+It detects available capabilities without installing packages. The printed
+status distinguishes executable availability from a test actually run.
+It does not verify your paper's mathematics. Missing tools limit the affected
+operations; they do not block discussion, model development or writing.
 
-```text
-C:\Users\<user>\.econ-theorist-ai\config.json
+Optional saved status:
+
+```powershell
+.\verify_toolchain.ps1 -WriteStatus -StatusPath '.\toolchain_status.md'
 ```
 
-Example:
-
-```json
-{
-  "toolRoot": "D:\\Tools\\CodexVerification",
-  "pythonPath": "D:\\Tools\\CodexVerification\\Python312\\python.exe",
-  "elanHome": "D:\\Tools\\CodexVerification\\elan",
-  "wolframScriptPath": "C:\\Program Files\\Wolfram Research\\Mathematica\\13.0\\wolframscript.exe"
-}
-```
-
-## If Tools Are Missing
-
-Missing tools do not stop the research workflow.
-
-- Missing Python weakens symbolic checks, numerical examples, and counterexample
-  search.
-- Missing `z3-solver` weakens SMT-style finite checks.
-- Missing Lean affects optional formal verification of compact lemmas.
-- Missing Mathematica affects optional symbolic simplification.
-- Missing LaTeX affects local manuscript compilation.
-- Missing Git affects version-control checkpoints.
-
-The system should explain these limits and continue with the parts of the
-research workflow that are available.
-
-## Language Policy
-
-This is an English research system with multilingual command understanding.
-
-You can talk to the assistant in Chinese or English. The assistant should answer
-chat messages in the user's language when convenient. Research-facing outputs
-remain English by default:
-
-- workflow artifacts
-- field and target journal profiles
-- human decision logs
-- referee reports
-- theorem and proof notes
-- revision logs
-- manuscripts
-
-Chinese is allowed in chat and in a small command trigger list only. Do not write
-Chinese into research artifacts unless the user explicitly asks for a separate
-Chinese explanatory note outside the manuscript workflow.
+Use [toolchain guidance](TOOLCHAIN_README.md) for non-default locations,
+and [migration](docs/MIGRATION.md) when continuing an older paper.
+Chat follows your language; notes and manuscripts are English unless requested
+otherwise. Existing commands such as "initialize this paper project" and
+"continue by the system" remain supported as ordinary task requests.

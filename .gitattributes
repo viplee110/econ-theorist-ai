@@ -1,5 +1,9 @@
-*.md text working-tree-encoding=UTF-8
-*.ps1 text working-tree-encoding=UTF-8
-*.py text working-tree-encoding=UTF-8
-*.lean text working-tree-encoding=UTF-8
-
+# Modified for the original workflow refresh (2026-09-13).
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.md text eol=lf working-tree-encoding=UTF-8
+*.ps1 text eol=lf working-tree-encoding=UTF-8
+*.py text eol=lf working-tree-encoding=UTF-8
+*.lean text eol=lf working-tree-encoding=UTF-8
+*.cff text eol=lf working-tree-encoding=UTF-8
+*.svg text eol=lf working-tree-encoding=UTF-8

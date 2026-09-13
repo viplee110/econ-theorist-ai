@@ -1,936 +1,151 @@
-# Human-AI Discovery Workflow for Econometrica-Level Theory Projects
+# Discovery for Economic Theory Research
 
-Version: 2026-05-08
+Workflow revision: 2026-09
 
-This file is a pre-manuscript discovery protocol. Use it before `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` when the project is still at the topic, idea, model, or early theorem stage.
+Modified: 2026-09-13.
 
-The goal is to help the human and AI search broadly without fooling themselves. The agent should generate many candidates, impose tractability and novelty constraints, attempt simple derivations, run hostile kill tests, and stop at human decision gates.
+Use this protocol to develop economic questions, competing explanations, and models. The filename is retained for existing installations; the approach covers microeconomic theory, IO theory, and other theory fields.
 
-This workflow supports three starting modes:
+[AGENTS.md](AGENTS.md) defines instruction priority, authorization, and scientific integrity. Discovery, verification, and writing are activities that can be revisited in any order, not a one-way sequence of approval gates. Use [the verification protocol](ECONOMETRICA_VERIFICATION_WORKFLOW.md) for mathematical claims, [the writing protocol](ECONOMETRICA_AI_HUMAN_WORKFLOW.md) for reader-facing work, and [the panel protocol](ECONOMETRICA_PANEL_PROTOCOL.md) when independent judgment would resolve a material uncertainty.
 
-- `Field mode`: the human knows the broad field but not the exact question.
-- `Idea mode`: the human has a rough idea or mechanism.
-- `Open mode`: the human wants AI to explore candidate topics from scratch.
+## Start from the actual task
 
-For high-stakes screening, model selection, and investment decisions, also read `ECONOMETRICA_PANEL_PROTOCOL.md`. Use independent panels rather than a single-agent judgment when deciding whether to invest in an idea or model.
+Read `project_state.md` if it exists, then only the research material needed for the request. Establish the question, intended audience, available evidence, authorized scope, and the most consequential unknown. Do not infer that a detailed user-supplied model is a proven or valuable research contribution.
 
-## Core Principle
+- For a broad field, look for unsettled questions, institutional changes, conflicting explanations, or theoretical limits.
+- For a rough idea, articulate its economic tension and plausible competing mechanisms before selecting a model.
+- For an existing model, investigate what it teaches and which assumptions carry that lesson.
+- For an explicit derivation or editing request, do that work directly; do not force a new discovery process.
 
-AI can expand the search frontier, but it cannot certify that a topic is unstudied, important, or Econometrica-level. Treat all generated topics as hypotheses. A candidate survives only if it passes novelty, tractability, economic importance, and execution tests.
+Within authorized exploration, vary assumptions and compare branches without treating each experiment as an author-selected change of direction. Changes to the selected research line follow the authorization recorded under AGENTS.md. Research decisions must not be inferred from an old lock file or the presence of a polished draft.
 
-Nonconvex discovery expands candidate generation; it does not certify quality. Tree search remains the search structure. Nonconvex discovery is an internal branch-generation and false-kill prevention discipline inside D1, D4, Primitive Hunter, and D6.
+## Keep a small research record
 
-Specificity is not stage advancement. Stage is determined by artifacts and human gates, not by how formal the user's language sounds. User-supplied agents, timing, information, payoffs, equilibrium concepts, or assumptions are provisional modeling constraints until the model base is confirmed.
+Use the shared [record definitions](ECONOMETRICA_ORCHESTRATOR.md#current-state-and-evidence). Keep the question and competing mechanisms in `idea_dossier.md`, and the model and claims in `model_note.md`. Create only records with useful content.
 
-Model discovery should move from examples to theory. Exhaust broadly at the model-skeleton level; derive narrowly at the formal level. A model is not ready because it is formal; it is ready when its smallest version explains the economic force. No general model may precede a hand-solved micro-example unless the user explicitly asks only to solve a given model mechanically.
+Long derivations and executable checks may live in `verification/`, linked from the relevant claim. Earlier files such as `model_base_design.md`, `theorem_candidates.md`, and `contribution_lock.md` are compatibility sources: inspect their evidence and decisions before reusing them. Their names or old status labels do not establish current validity.
 
-Main-theorem-first rule: do not move into a full manuscript until the project has a candidate main theorem that can be stated in one sharp sentence:
+Reuse earlier project experience only when relevant and authorized. Treat remembered successes or rejections as hypotheses to reconsider against current evidence, not permanent filters. Do not automatically load unrelated project archives or restrict search to previously successful methods.
 
-```text
-This paper proves X, and existing theory cannot obtain X because Y.
-```
+## Frame a question worth understanding
 
-The default discovery output is a 5-8 page model note, not a polished paper. The note should contain only the question, closest substitutes, one model, one main theorem candidate, proof status, and killer intuition. Manuscript development begins only after the theorem survives absorption and model-competition gates.
+An initial idea needs an intelligible question and a reason to investigate, not an introduction-ready theorem. Write a short account of:
 
-## Required Artifacts
+- the economic phenomenon or theoretical difficulty;
+- what a knowledgeable reader currently expects and why;
+- the conflicting incentives, constraints, explanations, or analytical limits;
+- what learning the answer would change;
+- what is currently conjectured, known, or unknown.
 
-Maintain these files during discovery:
+For IO, make the relevant choices and institutional setting concrete: who chooses what, what information or commitment they have, how rivals or consumers respond, and whose outcome is at issue. Do not invent a policy claim to make a model seem important.
 
-- `discovery_state.md`: current mode, constraints, active candidates, last human decision.
-- `topic_longlist.md`: broad list of candidate topics and mechanisms.
-- `topic_shortlist.md`: surviving candidates after screening.
-- `model_candidates.md`: structured model sketches for each surviving candidate.
-- `primitive_hunter_report.md`: deepest primitive, reduced-form object audit, and non-neighborhood model directions.
-- `generality_ledger.md`: running record of generality losses, special-case restrictions, and whether each restriction makes the nugget sharper.
-- `model_tournament.md`: side-by-side comparison of model variants and why weaker variants were killed or demoted.
-- `model_base_design.md`: example-to-theory model base design, skeleton funnel, failed simpler alternatives, recommended baseline, and human confirmation status.
-- `micro_example_note.md`: hand-solved smallest example, intuition, predicted comparative static, failure condition, and literature-gap check before general modeling.
-- `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
-- `agent_runs/`: optional separated output lanes for different IDEs, models, or sessions during high-variance model-base search.
-- `cross_agent_model_audit.md`: judge-pass comparison of multiple model lanes before canonical model-base confirmation.
-- `theorem_candidates.md`: candidate main theorems, theorem sentences, proof status, and failure modes.
-- `absorption_tests.md`: tests for whether the idea is absorbed by existing theoretical families.
-- `derivation_notes.md`: first-pass derivations, algebra, proof attempts, and failure points.
-- `literature_probe.md`: closest literatures, nearest substitutes, novelty risks, and citation TODOs.
-- `literature_evidence_ledger.md`: verified source records for closest papers, anchor papers, absorption threats, and style anchors.
-- `economic_logic_map.md`: concise user-readable map of the phenomenon, economic tension, smallest example, predicted conclusion, sharpness, absorption threat, blocker, and next economic question. It is not a source of truth.
-- `field_profile.md`: project-level field configuration confirmed by the human when possible.
-- `target_journal_profile.md`: target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
-- `idea_kill_tests.md`: hostile referee/editor tests for each candidate.
-- `pre_paper_model_note.md`: 5-8 page note created only after a candidate passes the main-theorem gate.
-- `spike_dossier.md`: optional dossier created only when a possible frontier spike survives D6 and needs focused development.
-- `human_decisions.md`: human choices, taste judgments, pivots, and reasons.
+For a methods, representation, existence, or impossibility project, explain the analytical obstacle and which economic questions or classes of models the result would illuminate. A novel tool can contribute without a directional comparative static or a topical real-world story.
 
-## Economic Logic Map Discipline
+Possible contributions include a mechanism, a meaningful boundary or reversal, an impossibility, a unifying explanation, a characterization, or a useful analytical method. These are possibilities, not boxes every project must fill. Several results may jointly establish one contribution.
 
-After D1/D2, D4.5, D5/D6, and any major pivot, create or update
-`economic_logic_map.md` with:
+## Explore different explanations
+
+Start branches from different substantive perspectives when useful: institutional observations, rival explanations, counterexamples to conventional reasoning, overlooked decision makers, or limitations of a method. Independent contributors should formulate their reasoning before seeing the current preferred answer when anchoring is a concern.
+
+Record only what distinguishes a live branch:
 
 ```text
-Phenomenon:
-Core economic tension:
-Smallest example:
-Predicted conclusion:
-Why the conclusion is sharp / not sharp yet:
-Closest absorption threat:
-What old theory cannot explain:
-Current economic blocker:
-Next economic question:
+Question or tension:
+Candidate explanation and behavioral logic:
+What would differ from the leading alternative:
+Evidence status and main unknown:
+Next informative test, its cost, and possible implications:
 ```
 
-Keep it to roughly 1-2 pages. It should help the user see how economic
-understanding changed, not merely summarize files or workflow stages.
+Changing a parameter, industry name, or timing detail does not by itself create a distinct explanation. Such variations can still be useful tests of one mechanism. Non-mainstream ideas deserve evaluation on their content; labels such as “frontier spike” or “hidden gem” are not evidence of quality.
 
-## Exploration Quota
+Choose search breadth from the task and available resources. Generate another batch only when it is likely to expose a missing explanation or useful test. Stop expanding when variants repeat known mechanisms or a concrete investigation is more informative. Record actual work; never manufacture candidates or rejection reasons to satisfy a count.
 
-D1, D4, and any Primitive Hunter / Theorem Generator Panel must preserve at least 1-2 non-mainstream but internally coherent directions until they have been tested for deep primitive potential, theorem bite, and absorption risk.
+Compare potential value, evidence, unresolved uncertainty, and the information a feasible next test would provide. Do not turn an uncalibrated numerical score, early proof difficulty, or initial lack of positioning into an automatic rejection. A difficult but informative test may justify a small investment; an easy proof may have little research value.
 
-For every exploration direction, record:
+## Use examples to expose the mechanism
 
-- deep primitive
-- possible theorem sentence
-- absorption risk
-- why this is not just a local variant of the current model or a nearby paper
-
-Do not kill an exploration-quota variant merely because it does not look like mainstream taste. It can be killed only after the workflow explains why the primitive is shallow, the theorem has low bite, the direction is absorbed by closest literature, or the assumptions become artificial.
+For applied theory, start with the smallest setting that reveals the relevant incentives. A hand-solvable numerical or symbolic example is often best. State the initial intuition before calculation, then record whether the result supports it, contradicts it, or remains ambiguous.
 
-## Nonconvex Branch Generation
+Explain who changes behavior, why that response matters, and where the explanation may fail. A useful example may reproduce an established benchmark to isolate what a later change adds. The example itself need not be a new theorem.
 
-D1, D4, and Primitive Hunter should classify serious candidates by candidate geometry:
+When a finite hand-solved example cannot carry the contribution, use a minimal application, a representative failure or boundary case, or an explanation of why finite simplification loses the object of study. Methodological and general theory work should make its analytical and economic use intelligible without fabricating a vignette.
 
-```text
-local extension
-recombination
-possible frontier spike
-absorbed benchmark
-clever but shallow
-hidden gem
-```
+Difficulty explaining the model is diagnostic: distinguish missing economic content, a poorly chosen model, and poor exposition. Do not add assumptions merely to produce a clean illustration. Move between an example and the general model as needed; formal language alone does not establish progress.
 
-Possible frontier spike protection is not acceptance. A possible frontier spike cannot be killed merely for weirdness, non-mainstream taste, or weak initial positioning. It can be killed after tests show shallow primitive, weak theorem bite, absorption by existing theory, artificial assumptions, infeasible proof, or unacceptable legibility cost.
+## Build only what the question requires
 
-Use these mutation operators when the search is trapped in local repair or when discovery breadth matters:
+In `model_note.md`, identify the model version, agents, timing, information, actions, payoffs or objectives, constraints, solution concept, and assumptions relevant to the claim. Mark exploration branches as provisional and retain their relation to the selected model.
 
-```text
-primitive mutation
-endogenization mutation
-timing mutation
-information mutation
-objective mutation
-equilibrium-concept mutation
-boundary mutation
-duality mutation
-field-transfer mutation
-```
+For each important assumption, ask what economic force it represents, whether it builds in the conclusion, and what changing it would teach. Distinguish economic content, domain restrictions, and mathematical convenience.
 
-Reuse existing artifacts:
+A reduced-form object is not automatically defective. Endogenize it when holding it fixed distorts the central question, assumes the purported mechanism, or prevents a useful comparison of explanations. Otherwise explain its interpretation and scope. Consider alternatives or sensitivity analysis before adding another layer of choice. Stop adding layers when they do not improve the answer or its applicability.
 
-- Put the frontier map in `literature_probe.md` and `literature_evidence_ledger.md`.
-- Put the mutation queue in `primitive_hunter_report.md`.
-- Create `spike_dossier.md` only if a possible frontier spike survives D6.
-- Put convexification plans in `model_tournament.md` or `contribution_lock.md`.
-- Put negative results in `idea_kill_tests.md`.
+Prefer a simpler model when it preserves the relevant insight. Complexity is justified when it reveals a distinct force, determines a meaningful boundary, or enables an important analysis. Do not judge a model by the number of primitives, conditions, or lines in its theorem.
 
-If a candidate becomes a real paper project, create or update:
+Record candidate results with the claim discipline in the verification protocol. First-pass derivations may redirect the question. A failed prediction is research evidence, not a reason to hide the attempt.
 
-- `idea_dossier.md`
-- `contribution_lock.md`
-- `project_state.md`
+## Compare the actual literature contribution
 
-Then continue with `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`.
+Identify the closest papers through inspected sources. In `literature_evidence_ledger.md`, separate source-supported statements, inferences, and unresolved search questions. An unavailable source or incomplete search permits a provisional comparison, not a definitive novelty or duplication claim.
 
-## Human-AI Division of Labor
+Use legitimate available sources, such as publisher access, author manuscripts or repositories. Record access limits and respect permissions when downloading or sharing texts; do not bypass access controls.
 
-AI should own:
+For a serious comparison, record:
 
-- broad candidate generation
-- combinatorial mechanism exploration
-- structured model sketching
-- first-pass derivation attempts
-- closest-literature search plans
-- hostile novelty objections
-- tractability diagnosis
-- artifact maintenance
+| Dimension | Candidate versus closest inspected result |
+|---|---|
+| Question and setting | Economic object, agents, institution, information, and choices. |
+| Assumptions and scope | Domains, restrictions, solution concept, and relevant quantifiers. |
+| Result | What is actually established, with a precise source location. |
+| Interpretation | What a reader learns and whether that lesson is already present. |
+| Relationship | Shared tool, benchmark application, substantive equivalence, extension, or distinct contribution; explain the mapping. |
 
-The human should own:
+Using a named framework or an established proof method does not establish duplication. Conversely, new terminology or a new setting does not establish a new theoretical insight. To conclude substantive equivalence, show that the prior result covers the relevant assumptions, conclusions, scope, and economic lesson; identify any remaining difference and assess its value separately.
 
-- taste and importance
-- whether a question is worth caring about
-- whether assumptions are economically acceptable
-- whether a mechanism feels deep or merely clever
-- whether to pivot, abandon, or invest
-- final novelty interpretation after real literature checks
-- confirmation of the project-level field profile before high-stakes panels rely on it
+An extension can matter if it changes an important prediction, explains a previously unresolved boundary, unifies cases, or enables a useful analysis. A difficult mathematical extension can still be economically uninformative. Do not require the claim that “existing theory cannot obtain this result”: distinguish what was established before from what follows using available tools.
 
-## Human Gate Persistence
-
-Human gate outcomes are persistent project state, not chat memory. Before proceeding past a real human gate, create `human_decisions.md` if it is missing, write the outcome there, and update the active artifact affected by the gate, such as `discovery_state.md`, `topic_shortlist.md`, `field_profile.md`, `target_journal_profile.md`, `model_tournament.md`, `absorption_tests.md`, `pre_paper_model_note.md`, or `project_state.md`. In guarded full-auto goal mode, an AI-delegated provisional choice is recorded in `auto_decisions.md` instead and does not count as human confirmation.
-
-Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
-
-Use this entry format in `human_decisions.md` when useful:
-
-```text
-Decision record
-Date:
-Stage or gate:
-Decision:
-Reason:
-Affected artifacts:
-Supersedes:
-Next checks:
-```
-
-Human decisions are append-only by default. If the user reverses or overrides a prior choice, do not delete the old decision. Add a reversal entry and update the current-state files so later workflow stages know which decision controls.
-
-```text
-Decision reversal / Override
-Date:
-Previous decision:
-New decision:
-Reason:
-Affected artifacts:
-Required updates or rechecks:
-```
-
-## Stage D0 - Intake and Mode Selection
-
-Autonomy: Gate
-
-Purpose:
-
-Determine what kind of discovery problem this is.
-
-The human should provide as much as available:
-
-- broad field
-- known literatures
-- rough mechanism
-- target journal
-- mathematical comfort zone
-- preferred model style
-- forbidden directions
-- empirical, theoretical, or mixed orientation
-- whether the project should be single-author tractable
-- time budget
-
-AI tasks:
-
-- Create `discovery_state.md`.
-- Identify the mode: `Field`, `Idea`, or `Open`.
-- If the user supplies agents, timing, information, payoffs, equilibrium concepts, or assumptions, record them as `provisional modeling constraints`, not confirmed primitives.
-- Ask only essential clarifying questions.
-- If enough information exists, proceed with stated assumptions.
-
-Human gate:
-
-Approve the mode and constraints.
-
-## Stage D1 - Search Space Expansion
-
-Autonomy: Auto
-
-Purpose:
-
-Generate a wide but structured set of possible research directions.
-
-AI tasks:
-
-- Create `topic_longlist.md`.
-- Create or update `economic_logic_map.md` with the current phenomenon, candidate economic tensions, and the main uncertainty about what the project is trying to explain.
-- Generate 30-80 candidate topic-mechanism combinations, depending on scope.
-- Use multiple axes:
-  - field
-  - friction
-  - agents
-  - information structure
-  - strategic variable
-  - market design or institutional environment
-  - welfare object
-  - identification object if relevant
-  - closest literature family
-  - possible surprising result
-
-Candidate template:
-
-```text
-Candidate ID:
-Working title:
-Field:
-Core economic question:
-Agents:
-Friction:
-Mechanism:
-Strategic choice:
-Information/timing:
-Potential main result:
-Deep primitive:
-Possible theorem sentence:
-Absorption risk:
-Why not local variant:
-Why it might matter:
-Closest literature families:
-Candidate geometry:
-Evidence status: verified / inferred / speculative
-Main uncertainty:
-Most informative next test:
-Kill condition:
-Spike protection status:
-Tractability guess:
-Novelty risk:
-Execution risk:
-Exploration quota status:
-One-sentence pitch:
-```
-
-Rules:
-
-- Do not repeat minor variants as separate candidates.
-- Prefer mechanisms that could change a specialist's belief.
-- Include some high-risk/high-upside candidates.
-- Include some clean and tractable candidates.
-- Include at least 1-2 non-mainstream but internally coherent exploration-quota candidates when the search space permits.
-- Flag candidates that sound clever but not important.
-- Classify each serious candidate by candidate geometry: local extension, recombination, possible frontier spike, absorbed benchmark, clever but shallow, or hidden gem.
-- Use candidate geometry to diversify branch generation and prevent false kills; it is not evidence that a candidate is high quality.
-
-## Stage D2 - Coarse Screening
-
-Autonomy: Auto, then Gate
-
-Purpose:
-
-Reduce the longlist to a serious shortlist.
-
-AI tasks:
-
-- Update `economic_logic_map.md` to explain which economic question survived screening, what intuition is emerging, and why weaker directions were not sharp enough.
-- Score every candidate 1-5 on:
-  - economic importance
-  - novelty potential
-  - non-substitutability
-  - tractability
-  - likelihood of a sharp theorem
-  - literature risk
-  - assumption plausibility
-  - fit for Econometrica
-- Penalize candidates that rely on vague "AI/platform/algorithm" language without a real mechanism.
-- Penalize candidates where the result seems obvious before modeling.
-- Penalize candidates where all novelty comes from adding one extra feature to a known model.
-- Create `topic_shortlist.md` with 5-10 surviving directions for broad Field/Open discovery. For a specific fuzzy idea, create 12-24 mechanism routes and screen them to 4-6 promising directions before model-base construction.
-
-Human gate:
-
-The human selects 1-3 candidates for model sketching.
-
-Panel option:
-
-- If the user asks whether a topic is worth pursuing, run an Idea Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` after D2.
-- Use Blind Mode when judging the idea itself.
-- Use Literature Mode when the main uncertainty is whether the idea is already known.
-
-## Stage D3 - Literature Probe
-
-Autonomy: Checkpoint
-
-Purpose:
-
-Avoid rediscovering known papers.
-
-AI tasks:
-
-- Create `literature_probe.md`.
-- Create or update `literature_evidence_ledger.md`.
-- Create or update `field_profile.md`.
-- Create or update `target_journal_profile.md` when enough evidence exists to recommend a target ladder.
-- For each shortlisted candidate:
-  - identify provisional closest literature families from the idea and model primitives
-  - list likely nearest substitute papers
-  - generate search queries for Google Scholar, Semantic Scholar, RePEc, NBER, CEPR, SSRN, arXiv, and author pages
-  - when web/search tools are available, run the searches and record the papers actually found
-  - update the closest literature families using the search results rather than relying only on memory
-  - describe what would kill the novelty claim
-  - describe what would preserve the contribution
-- In `field_profile.md`, state:
-  - primary field and subfield
-  - adjacent fields and closest literature themes
-  - absorption-risk theory families derived from the papers actually found
-  - method, mechanism, application, or institutional lens
-  - main technical risk
-  - proposed Referee 1-3 field-sensitive roles
-  - which role assignments are field-sensitive and which are functional
-  - confidence, uncertainty, and evidence that would reopen the classification
-- Separate verified facts from AI inferences.
-- Mark all unverified references as TODO.
-- Every closest-paper, anchor-paper, absorption-threat, or style-anchor claim must have a `literature_evidence_ledger.md` entry before downstream artifacts treat it as confirmed.
-- Use this minimum ledger entry:
-
-```text
-Paper title:
-Authors:
-Year:
-Publication / working paper status:
-Source opened:
-DOI / journal / NBER / SSRN / RePEc / publisher link:
-Verified claim from source:
-AI inference:
-Relation to current project:
-  nearest substitute / ancestor / method anchor / style anchor / absorption threat / adjacent literature
-Novelty threat:
-Confidence:
-Unverified TODO:
-```
-
-- If a relevant paper has not been recorded in the ledger, mark the corresponding `field_profile.md`, `target_journal_profile.md`, `absorption_tests.md`, `panel_config.md`, and `style_calibration.md` judgment provisional.
-- Default to search/open/verify/record evidence, not bulk-downloading PDFs.
-- Download only open-access papers, user-provided PDFs, or papers explicitly authorized by the user. If downloaded, store them in `literature_cache/` and record source and permission status in the ledger.
-- Extract model, proof, and exposition moves from papers; do not copy copyrighted prose or treat an anchor as a prose template.
-- Recommend a provisional target ladder using the idea, field profile, closest-literature themes, contribution type, theorem evidence if available, and absorption risk:
-  - Econometrica, Theoretical Economics, or JET when the primitive is deep, the theorem is general, theorem bite is high, and absorption risk is low.
-  - RAND when the economic mechanism has IO, platform, market design, regulatory, institutional, or applied-theory relevance with clear comparative statics and an applied-theory reader path.
-  - GEB when strategic interaction or a game-theoretic mechanism is central.
-  - ReStud, AER, or QJE theory-style when the question is broad, the mechanism is clean, and the result travels beyond a narrow field.
-  - Field journal or working-paper route when the idea is valuable but theorem bite, novelty, or generality is not yet top-field-ready.
-- Treat target-level judgments as provisional until the package contains enough evidence: an idea dossier, a model base or model-base audit, a theorem sentence or theorem candidate, and closest-literature evidence. Do not infer target-journal potential from the idea alone.
-- State explicitly that target journal changes calibration, not quality; no target may bypass model tournament, absorption testing, generality ledger, main-theorem gate, or proof verification.
-
-Human gate:
-
-The human should inspect the top substitute papers or ask the AI to help locate them. The human should confirm or correct `field_profile.md` once before high-stakes panels rely on it, and the agent should record that confirmation in both `field_profile.md` and `human_decisions.md`. If `target_journal_profile.md` is created or materially changed, the human should also confirm or correct the target ladder, and the agent should record that confirmation in both `target_journal_profile.md` and `human_decisions.md`. Do not trust novelty until this gate is passed. If web/search tools are unavailable, label the literature probe, field profile, target profile, panel role configuration, and all downstream absorption tests `provisional`.
-
-Once confirmed, later Idea, Model, Verification, Review, Style Calibration, and Revision Panels should inherit `field_profile.md` and `target_journal_profile.md` rather than asking for confirmation again. Reopen the field or target gate only if a closer substitute paper appears, the primitive or theorem direction changes materially, the target audience changes, the user disputes the classification, or a panelist explains why the current profile makes the absorption or fit test unreliable.
-
-## Stage D4 - Primitive Hunting and Model Candidate Generation
-
-Autonomy: Auto
-
-Purpose:
-
-Find the deepest primitive, then generate broad model skeletons before any paper draft or formal derivation exists.
-
-AI tasks:
-
-- Create or update `primitive_hunter_report.md`.
-- Create or update `generality_ledger.md`.
-- Create `model_candidates.md`.
-- Create or update `model_tournament.md`.
-- Update `economic_logic_map.md` with the deepest primitive, visible economic force, why the leading skeletons are sharper or still weak, and the next economic question.
-- If running as an independent model lane, write `agent_manifest.md`, `model_skeleton_ledger.md`, `model_base_recommendation.md`, `self_critique.md`, and `run_log.md` under `agent_runs/[run_id]/` rather than overwriting canonical artifacts.
-- If `agent_runs/` already contains two or more completed model lanes and `cross_agent_model_audit.md` is missing or stale, stop ordinary generation and recommend a Judge Pass before the Minimal Model Base Gate.
-- Before generating local variants, identify:
-  - the deepest primitive
-  - the object currently treated as reduced-form
-  - the primitive that must be endogenized for the theorem to be non-substitutable
-  - whether to change theorem, change model, or keep the question but change primitive
-- For each selected direction, generate a wide set of cheap model skeletons before formal derivation:
-  - 20-40 model skeletons total, or 10-20 per selected direction when there are multiple directions
-  - local extension, recombination, possible frontier spike, hidden-gem, and absorbed-benchmark candidates where appropriate
-  - alternative agents, timing, information, choice objects, state variables, market objects, frictions, equilibrium concepts, and welfare/comparative-static objects
-  - primitive, endogenization, timing, information, objective, equilibrium-concept, boundary, duality, and field-transfer mutations when local repair is a risk
-- Screen the skeletons with an economic filter before any formal proof attempt:
-  - keep 6-10 semi-formal baselines
-  - keep 3-5 example-to-theory candidates
-  - select only 1-3 formal derivation candidates for D5
-- Preserve 1-2 non-mainstream but internally coherent directions from the exploration quota unless D1 or the Primitive Hunter already killed them for documented primitive, theorem, or absorption reasons.
-- For each exploration-quota direction, state the deep primitive, possible theorem sentence, absorption risk, and why it is not a local variant.
-- When local repair is a risk, use the mutation operators from the Nonconvex Branch Generation section before adding auxiliary features to the current model.
-- For each possible frontier spike, identify the primitive-theorem pair, closest absorption threat, proof bottleneck, and legibility cost before any kill decision.
-
-Model template:
-
-```text
-Model ID:
-Candidate topic:
-Core question:
-Real-world scene:
-Economic tension:
-Economic lesson / model moral:
-Applicability scope:
-Provisional modeling constraints:
-Agents:
-Primitives:
-Timing:
-Information:
-Actions:
-Payoffs/objectives:
-Equilibrium concept:
-Key assumptions:
-Main endogenous objects:
-Predicted main proposition:
-Possible theorem sentence:
-Candidate geometry:
-Belief state:
-  evidence status: verified / inferred / speculative
-  main uncertainty:
-  most informative next test:
-  kill condition:
-  spike protection status:
-Comparative statics:
-Welfare or policy object:
-Smallest example that makes the force visible:
-Why simpler models fail:
-Why generalization is necessary rather than ornamental:
-Why tractable:
-Likely proof technique:
-What could go wrong:
-Closest existing model:
-Generality loss:
-Why not local variant:
-```
-
-Tournament rule:
-
-- Treat every model variant as competing to produce the main theorem.
-- Rank candidates first on economic force visibility, smallest-example clarity, economic lesson, applicability scope, and whether generalization is necessary. Then rank theorem promise, absorption escape, tractability, assumption debt, proof path, and target-reader legibility.
-- Formal completeness is not a tournament win if the model's smallest example has no clear economic lesson.
-- Do not repair a weak variant by adding features until at least one alternative model space has been tried.
-- If two variants produce the same theorem, keep the simpler one and demote the other.
-- If a variant only creates a theorem package of local sufficient conditions, label it `Local repair trap`.
-- If the result follows from a named existing framework, label it `Absorbed benchmark` rather than a main model.
-- Update `generality_ledger.md` whenever a variant becomes a special case, adds a distribution assumption, imposes a special graph structure, adds an agent or state, adds a regularity condition, or makes the theorem sentence longer.
-- If the current winner is mechanically formal, assumption-heavy, lacks a clear toy example, has an unsharp theorem sentence, or relies on fixed point machinery before economic necessity is explained, expand the skeleton search rather than entering D5.
-- Do not claim that 20-40 model skeletons were compared unless `model_candidates.md`, `model_tournament.md`, or a lane-level `model_skeleton_ledger.md` records the candidates, filters, and kill reasons.
-
-Absorption pre-test:
-
-For each model variant, infer the closest classical theory families from the
-topic, primitive friction, agents, information structure, market design, timing,
-and predicted theorem. Ask whether the predicted result is essentially a
-renaming or modest extension of one of those nearest theory families.
-
-This inference must be checked against the live literature search in
-`literature_probe.md` and `literature_evidence_ledger.md` when web/search tools
-are available. If no search was run, or if the closest substitute is not recorded
-in the ledger, record the theory-family classification as provisional and do not
-use it as a final kill or invest decision.
-
-If yes, the model can still be useful, but it cannot be the main theorem unless the note explains the non-absorbed element.
-
-Tractability constraints:
-
-- Prefer two or three agent types before many-type models.
-- Prefer one central friction before multiple interacting frictions.
-- Prefer closed-form or monotone comparative statics where possible.
-- Avoid unnecessary dynamic state variables.
-- Avoid assumptions that exist only to force the desired result.
-- Make every assumption economically interpretable.
-- Do not introduce fixed point, contraction, IFT, or existence-theorem language before explaining the economic object that requires consistency and why the simplest example points to that object.
-
-Panel option:
-
-- If the current primitive is unclear or appears reduced-form, run a Primitive Hunter / Theorem Generator Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` before the Model Panel.
-- If multiple model-base candidates survive, run a Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` and include the Model Base Architect / Economic Naturalness Reader function.
-- Require the math-rigor panelist to check fixed point, IFT, contraction, boundary behavior, equilibrium selection, and assumption packaging risks before a model is selected for the D7 pre-paper package.
-
-Multi-agent lane option:
-
-- The user should not need to remember special lane commands. When D4/D4.5 is high variance, when model generalization becomes inelegant, when top candidates are close, when the ledger looks thin, or when different IDE/model outputs disagree, proactively recommend independent lanes or a Judge Pass.
-- Use a general user-facing prompt: "If you have access to another AI or IDE, I can prepare a copy-paste prompt for an independent lane or judge pass."
-- If multiple lanes exist, do not require pairwise critique by default. Recommend one user-selected judge model to compare all lanes and write `cross_agent_model_audit.md`.
-- If the user wants to use another IDE/model as judge, create `agent_runs/_judge_prompt.md` with a self-checking prompt that tells the external system to inspect the shared project state, identify completed lanes, run Judge Pass, and avoid overwriting canonical artifacts.
-
-## Stage D4.5 - Example-to-Theory Model Base Construction
-
-Autonomy: Checkpoint
-
-Purpose:
-
-Turn the surviving skeletons into a minimal, economically natural model base before formal derivation. This stage is the bridge between primitive hunting and first-pass derivation.
-
-Hard rule:
-
-```text
-No general model before a hand-solved micro-example.
-```
-
-D4.5 has two gates:
-
-- D4.5a Micro-Example Gate
-- D4.5b Minimal Model Base Gate
-
-Inputs:
-
-- `topic_shortlist.md`
-- `primitive_hunter_report.md`
-- `model_candidates.md`
-- `model_tournament.md`
-- `agent_runs/` and `cross_agent_model_audit.md` when multiple model lanes were used
-- `literature_evidence_ledger.md`
-- user-supplied provisional modeling constraints
-
-AI tasks:
-
-- Create or update `micro_example_note.md`.
-- Create or update `model_base_design.md`.
-- Create or update `heuristic_derivation.md`.
-- Update `economic_logic_map.md` with the hand-solved micro-example, predicted conclusion, failure condition, and what remains unclear before generalization.
-- For each of the 3-5 leading example-to-theory candidates, write:
-  - real-world micro scene
-  - core economic tension
-  - economic lesson or model moral
-  - applicability boundary
-  - minimal agents, timing, information, choice object, state variable, friction, and object of interest
-  - which user-supplied constraints are retained, relaxed, or rejected as premature
-  - the smallest toy example that makes the mechanism visible
-  - why simpler models fail
-  - what general primitive the toy example suggests
-  - likely theorem path and likely failure point
-  - where formal machinery may enter, if it is economically necessary
-- Recommend one baseline, one backup baseline, and one parked alternative when evidence supports them.
-- If multiple completed lanes exist, use `cross_agent_model_audit.md` before recommending the model base. If the audit is missing, stale, or produced by an unlabeled judge with low provenance confidence, mark the recommendation provisional and ask whether to run or rerun Judge Pass.
-
-Required `micro_example_note.md` sections:
-
-```text
-Micro-example status: provisional / human-confirmed / stale / rejected
-Real-world vignette:
-Smallest numerical or symbolic example:
-Hand-solved special case:
-Economic force in one paragraph:
-Economic lesson / model moral:
-Predicted comparative static before derivation:
-Failure condition:
-Applicability boundary:
-Closest-literature gap for this mechanism:
-Why generalization is needed:
-What fixed point/existence machinery would add, if anything:
-Human confirmation:
-```
-
-Micro-example discipline:
-
-- Use concrete numbers, a small symbolic case, a diagram description, or a hand-solved two/three-object example before any general model.
-- Predict the economic conclusion before deriving it.
-- State what observation would make the intuition false.
-- If the micro-example cannot be explained in plain economic language, do not proceed to the Minimal Model Base Gate.
-- If the micro-example only restates a known model family, mark it as an absorbed benchmark and return to D4.
-
-Required `model_base_design.md` sections:
-
-```text
-Model base status: provisional / human-confirmed / stale / reopen requested
-Provisional modeling constraints:
-Skeleton funnel:
-  initial skeleton count:
-  semi-formal baselines kept:
-  toy examples kept:
-Recommended minimal baseline:
-Backup baseline:
-Parked alternative:
-Real-world scene:
-Economic tension:
-Economic lesson / model moral:
-Applicability boundary:
-Minimal primitives:
-Failed simpler alternatives:
-Top toy examples:
-Why this baseline is elegant:
-Why generalization is necessary rather than ornamental:
-Likely theorem path:
-Likely failure point:
-Human confirmation:
-```
-
-Required `heuristic_derivation.md` sections:
-
-```text
-Toy example:
-Agent tradeoff:
-Aggregate consistency or market pressure:
-Equilibrium pressure:
-Comparative-static intuition:
-Where formal machinery enters:
-What the heuristic does not prove:
-```
-
-Human gate:
-
-First gate: Micro-Example Gate.
-
-The system must present the real-world vignette, hand-solved micro-example,
-predicted mechanism, failure condition, and provisional literature-gap check.
-The human must confirm, edit, or reject the micro-example before the system turns
-it into a canonical model base.
-
-Second gate: Minimal Model Base Gate.
-
-The system must present the minimal real-world scene, economic tension, economic lesson, applicability boundary, which user constraints are retained or relaxed, the top 3-5 toy examples, the recommended model base, why simpler models fail, why generalization is necessary rather than ornamental, and the next theorem path. The human must confirm, edit, or reject the model base before D5 treats primitives, assumptions, or equilibrium concepts as durable state. Record the decision in `human_decisions.md` and update `model_base_design.md`.
-
-In guarded full-auto goal mode, the system may cross the Micro-Example Gate and
-Minimal Model Base Gate only by recording `AI-delegated provisional` choices in
-`auto_decisions.md` and marking `micro_example_note.md` and
-`model_base_design.md` as requiring human ratification. It must still stop if
-the micro-example is not hand-solved, has no predicted comparative static, lacks
-a failure condition, or lacks a provisional literature-gap check.
-
-## Stage D5 - First-Pass Derivation
-
-Autonomy: Auto, but must be rigorous
-
-Purpose:
-
-Test whether any model has a real main theorem.
-
-AI tasks:
-
-- Read `micro_example_note.md` first, unless the user explicitly asked only to solve a given model mechanically.
-- Read `model_base_design.md` and `heuristic_derivation.md` first, unless the user explicitly asked only to solve a given model mechanically.
-- Read and update `economic_logic_map.md` so the derivation clarifies the economic intuition, not only the algebra.
-- Do not begin from the general model. Begin by replaying the confirmed or explicitly provisional micro-example.
-- Do not treat primitives, assumptions, or equilibrium concepts as confirmed unless the Minimal Model Base Gate is passed or the file clearly marks them as provisional.
-- Create or update `derivation_notes.md`.
-- Create or update `theorem_candidates.md`.
-- For each model variant, attempt a first-pass derivation.
-- Write:
-  - agent problem
-  - objective functions
-  - constraints
-  - equilibrium conditions
-  - candidate solution
-  - main comparative static
-  - proof sketch
-  - candidate main theorem sentence
-  - exact algebra where possible
-  - conditions required
-  - counterexample attempt
-  - failure points
-
-Required derivation discipline:
-
-- Begin from the heuristic path: agent tradeoff, aggregate consistency or market pressure, equilibrium pressure, and comparative-static intuition.
-- Use fixed point, contraction, IFT, or existence-theorem machinery only after stating why the economic object requires that tool.
-- Every proposition must state its assumptions.
-- Every comparative static must identify the derivative, monotone order, or argument used.
-- Every proof sketch must state where each assumption enters.
-- If a result follows almost immediately from an assumption, flag it as low contribution.
-- If the result needs an unstated regularity condition, add it explicitly to `derivation_notes.md` and mark it as a risk.
-- If the derivation adds a distribution assumption, special graph structure, extra agent, extra state, regularity condition, or longer theorem sentence, update `generality_ledger.md`.
-- If algebra becomes messy, try a simpler model before adding assumptions.
-- Try to construct at least one counterexample to the predicted proposition.
-- If the proposition fails, record the failure rather than repairing silently.
-- If the result is true but unsurprising under a known framework, demote it to a benchmark.
-- If the model requires a reduced-form primitive to carry the whole contribution, record what primitive must be endogenized before manuscript development.
-
-Output categories:
-
-- `Main-theorem candidate`: clean result, plausible assumptions, nontrivial insight, and not absorbed by a known framework.
-- `Promising but needs endogenization`: result is interesting, but a key primitive is still reduced-form.
-- `Technically possible but weak`: solvable but low economic bite.
-- `Absorbed benchmark`: result is useful but naturally reproduced by existing theory.
-- `Too tailored`: result depends on artificial assumptions.
-- `Too messy`: solution exists but not paper-tractable.
-- `Fails`: proposition false or no clear result.
-
-## Stage D6 - Absorption, Main Theorem, and Kill Test
-
-Autonomy: Gate
-
-Purpose:
-
-Decide whether the candidate deserves manuscript investment or must return to model search.
-
-AI tasks:
-
-- Create `idea_kill_tests.md`.
-- Create or update `absorption_tests.md`.
-- Create or update `model_tournament.md`.
-- Update `economic_logic_map.md` with the theorem sentence, why it is sharp or not sharp yet, the closest absorption threat, and the next economic blocker.
-- Use `model_base_design.md` and `heuristic_derivation.md` to check whether the model base is economically natural before treating derivations as investable.
-- Create or update `generality_ledger.md`.
-- Use the latest `literature_evidence_ledger.md` before treating closest-paper, anchor-paper, or absorption-threat claims as confirmed.
-- If a closest substitute or absorption threat is not recorded in `literature_evidence_ledger.md`, mark the corresponding absorption judgment provisional.
-- Check whether `field_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If it is missing, provisional, stale, or reopened, update it from the latest `literature_probe.md` and stop for field confirmation before treating absorption as final.
-- Check whether `target_journal_profile.md` is confirmed, provisional, stale, or marked `Reopen requested`. If theorem quality, absorption risk, target audience, or field evidence materially changes the target ladder, update it and stop for target confirmation before treating journal fit as final.
-- Do not skip absorption tests, model tournament, generality ledger, or main theorem gate because the target is RAND, GEB, a field journal, or any non-Econometrica outlet.
-- If the decision is high-stakes, run an Idea Panel or Model Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` rather than a single-agent kill test.
-- If the candidate's deepest primitive or theorem direction is still unclear, run a Primitive Hunter / Theorem Generator Panel before recommending `Invest`, `Refine`, or `Pivot`.
-- For each promising model, simulate:
-  - absorption referee who tries to reduce the result to known theory
-  - hostile closest-literature referee
-  - theory referee
-  - economic relevance referee
-  - editor deciding whether to desk reject
-- Ask:
-  - Is the insight new or just a relabeling?
-  - Is the mechanism economically important?
-  - Does the model reveal something not visible without formal analysis?
-  - Are assumptions credible?
-  - Is the result surprising after reading the closest literature?
-  - Would a top-field seminar audience care?
-  - What is the cleanest theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y"?
-  - Which primitive must be endogenized for the theorem to be more than reduced-form relabeling?
-  - What is the strongest reason to kill this idea today?
-
-Absorption test:
-
-- Before judging absorption, confirm the nearest theory families and substitute papers through the latest `literature_probe.md`.
-- Confirm that the nearest substitute papers and absorption threats appear in `literature_evidence_ledger.md`.
-- If the theorem is equivalent to a nearest classical theory family after renaming variables, it fails as a main theorem.
-- If web/search tools were unavailable, the closest literature was not checked, or the relevant papers are missing from the ledger, label the absorption result `provisional` rather than final.
-- If only a narrow part is absorbed, demote that part to a benchmark and search for the non-absorbed theorem.
-- If the model's key object is assumed rather than generated, require an endogenization plan before `Invest`.
-- Do not kill an exploration-quota variant because it lacks mainstream taste; judge it separately on deep primitive potential, theorem bite, absorption risk, and assumption artificiality.
-- Do not kill a possible frontier spike merely because it looks weird or initially hard to position. Kill or park it only after spike-specific tests show weak primitive depth, weak theorem bite, absorption escape failure, artificial assumptions, infeasible proof, or unacceptable legibility cost.
-
-Main theorem gate:
-
-The candidate cannot receive `Invest` unless all are true:
-
-- The theorem sentence is sharp enough to be put in the introduction unchanged.
-- The theorem changes a specialist's belief after conditioning on closest substitutes.
-- The result is not merely a package of local sufficient conditions.
-- The model primitive that carries the contribution is economically interpretable or explicitly endogenized.
-- The model base has passed the Minimal Model Base Gate or is explicitly marked provisional with a clear reason.
-- The micro-example has passed the Micro-Example Gate or is explicitly marked provisional with a clear reason.
-- At least one alternative model variant has been killed for a documented reason.
-- Any closest-literature or absorption-threat evidence used for the theorem gate is recorded in `literature_evidence_ledger.md`, or the gate is explicitly provisional.
-
-Hostile kill conditions:
-
-Triggering any one condition should lead to `Kill`, `Park`, or `Demote to benchmark` unless the human explicitly overrides with a documented reason.
-
-- `Conclusion-first triviality`: after removing the mathematical shell, the result is just a trivial statement that a specialist would already believe.
-- `Name-swap absorption`: replacing topical nouns such as data, algorithms, platforms, AI, benchmarks, certification, or diagnostics with generic terms such as information, technology, intermediary, signal, or machine makes the result equivalent to an old model.
-- `Assumption manipulation`: removing a minor-looking regularity condition, distributional restriction, or boundary assumption changes the sign or existence of the core result.
-- `Defensive dilution`: the contribution sentence becomes longer, more conditional, or more legalistic after revision.
-- `Complexity shield`: heterogeneity, dynamics, extra states, or special distributions mainly protect the theorem rather than reveal the mechanism.
-
-Decision labels:
-
-- `Invest`: proceed to D7 pre-paper package; begin full manuscript development only after human approval of the model note and theorem sentence.
-- `Refine`: keep the idea but modify the model.
-- `Pivot`: change the mechanism/question.
-- `Demote to benchmark`: keep as background, but do not build the paper around it.
-- `Park`: save for later but do not invest now.
-- `Kill`: abandon for current purposes.
-
-Human gate:
-
-The human must choose a decision label. AI may recommend, but not decide.
-
-## Stage D7 - Pre-Paper Package
-
-Autonomy: Auto
-
-Purpose:
-
-Convert a surviving theorem into a paper-ready model note.
-
-AI tasks:
-
-- Create `idea_dossier.md`.
-- Create or update a draft `contribution_lock.md`.
-- Create `project_state.md`.
-- Create `pre_paper_model_note.md`.
-- Carry forward the confirmed `field_profile.md` if it exists; otherwise mark field-sensitive panel assignments as provisional.
-- Carry forward the confirmed `target_journal_profile.md` if it exists; otherwise mark target-sensitive review and style calibration as provisional.
-- Carry forward `model_base_design.md` and `heuristic_derivation.md`; if the Minimal Model Base Gate was not passed, mark the model note as provisional and do not treat it as ready for full manuscript development.
-- Write a 5-8 page model note:
-  - question
-  - mechanism
-  - smallest example and model-base rationale
-  - model
-  - main theorem candidate
-  - theorem sentence
-  - proof status
-  - absorption-test result
-  - killed model variants
-  - closest literature
-  - contribution claim
-  - biggest risks
-  - next work plan
-
-Proceed condition:
-
-- The human approves the model note and theorem sentence.
-- Then continue with `ECONOMETRICA_AI_HUMAN_WORKFLOW.md`, starting at Stage 1 or Stage 2 depending on maturity.
-
-## Common Failure Modes
-
-Stop or pivot if:
-
-- The generated topic is just a fashionable noun plus a standard model.
-- The model's result is obvious without the model.
-- The model becomes complex before producing a clean insight.
-- The assumptions are doing all the work.
-- The nearest substitute paper already has the same mechanism.
-- The AI cannot explain why the question matters to economists.
-- The result only says "more friction leads to worse outcomes" without a sharp twist.
-- The contribution is a parameter extension, not a conceptual insight.
-- The human cannot pitch the idea in one minute with conviction.
-- The project starts accumulating fixes before it has a central theorem.
-- Two independent panels say the same thing: no central theorem, too close to old theory, or absorbed by a known framework.
-- The manuscript becomes more complete while the theorem sentence becomes less sharp.
-- The model's important object remains a reduced-form primitive after several repair attempts.
-
-## Prompt Templates
-
-### Start Discovery in Field Mode
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Field mode. My broad field is: [FIELD]. Generate a structured longlist of candidate frontier-level theory topics. Do not write a manuscript. Create discovery_state.md, topic_longlist.md, and economic_logic_map.md, then stop with an Economic Progress Summary.
-```
-
-### Start Discovery in Idea Mode
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 through D2 in Idea mode. My rough idea is: [IDEA]. Expand nearby mechanisms and model variants, then screen them. Create discovery_state.md, topic_longlist.md, topic_shortlist.md, and economic_logic_map.md. Stop at the human gate with an Economic Progress Summary.
-```
-
-### Start Discovery in Open Mode
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D0 and D1 in Open mode. Generate a broad but disciplined set of candidate theory topics that could plausibly lead to frontier-level contributions. Favor tractable models, sharp mechanisms, and non-obvious comparative statics. Create discovery_state.md, topic_longlist.md, and economic_logic_map.md, then stop with an Economic Progress Summary.
-```
-
-### Run Literature Probe And Field Profile
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D3 for the shortlisted candidate. Search for closest substitute papers when web/search tools are available, record verified and inferred literature claims separately, create literature_probe.md, and create or update literature_evidence_ledger.md with entries for every closest paper, anchor paper, absorption threat, and style anchor used downstream. Create or update field_profile.md with the primary field, adjacent fields, absorption-risk theory families, and field-sensitive Referee 1-3 roles. If evidence is sufficient, create or update target_journal_profile.md with a primary/stretch/fallback target ladder and quality floor. If any closest-literature or absorption claim lacks a ledger entry, mark the affected judgment provisional. Stop for my confirmation of the field profile and target profile before any high-stakes panel relies on them.
-```
-
-### Generate Models for Shortlisted Ideas
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Use topic_shortlist.md and run Stage D4. First identify the deepest primitive, the reduced-form object that may need endogenization, and whether we should change theorem, change model, or keep the question but change primitive. Treat any user-supplied agents, timing, information, payoffs, or equilibrium language as provisional modeling constraints until the model-base gate confirms them. Generate broad cheap model skeletons before formal derivation: 20-40 total, or 10-20 per selected direction. Screen them to 6-10 semi-formal baselines, then to 3-5 example-to-theory candidates, and choose only 1-3 formal derivation candidates. For each serious direction, record real-world scene, economic tension, economic lesson, applicability scope, candidate geometry, belief state, deep primitive, possible theorem sentence, absorption risk, most informative next test, kill condition, spike protection status, smallest example, why simpler models fail, why generalization is necessary rather than ornamental, and why it is not a local variant. Create primitive_hunter_report.md, generality_ledger.md, model_candidates.md, model_tournament.md, and update economic_logic_map.md with the economic force, sharpness, blocker, and next economic question. Do not write the paper yet.
-```
-
-### Run an Independent Model Lane
-
-```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, and ECONOMETRICA_DISCOVERY_WORKFLOW.md. You are running an independent model-base lane in the same paper project folder. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, and existing agent_runs/. If you are continuing the same declared IDE/model/session, continue the active lane. If this is a different declared IDE/model or a fresh blind lane, create agent_runs/[run_id]/ and write agent_manifest.md, model_skeleton_ledger.md, model_base_recommendation.md, self_critique.md, and run_log.md there. Do not overwrite model_tournament.md, model_base_design.md, heuristic_derivation.md, or human_decisions.md. Treat canonical model choices as provisional unless human_decisions.md confirms them.
-```
-
-### Run Judge Pass
-
-```text
-Read AGENTS.md, ECONOMETRICA_ORCHESTRATOR.md, ECONOMETRICA_DISCOVERY_WORKFLOW.md, and ECONOMETRICA_PANEL_PROTOCOL.md. You are running a Judge Pass over completed model lanes in agent_runs/. First inspect active_context.md only as a dashboard, then project_state.md, human_decisions.md, field_profile.md, target_journal_profile.md, literature_evidence_ledger.md, agent_runs/*/agent_manifest.md, agent_runs/*/model_skeleton_ledger.md, and agent_runs/*/model_base_recommendation.md. Do not generate a new model unless all lanes fail; compare the lanes on smallest hand-solved micro-example, economic lesson, applicability boundary, economic naturalness, necessity of generalization, theorem sentence sharpness, assumption debt, absorption risk, proof tractability, and target-reader legibility. Write agent_runs/[judge_run_id]/agent_manifest.md, judge_report.md, model_base_ranking.md, decisive_objections.md, and create or update cross_agent_model_audit.md. Do not confirm micro_example_note.md or model_base_design.md; stop at the Micro-Example Gate or Minimal Model Base Gate as appropriate.
-```
-
-### Construct Minimal Model Base
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D4.5 Example-to-Theory Model Base Construction before D5. Use topic_shortlist.md, primitive_hunter_report.md, model_candidates.md, model_tournament.md, literature_evidence_ledger.md, and the user's provisional modeling constraints. Create micro_example_note.md, model_base_design.md, heuristic_derivation.md, and update economic_logic_map.md. Start from real-world micro scenes, economic tensions, a hand-solved smallest numerical or symbolic example, economic lesson, applicability boundary, predicted comparative statics, failure conditions, failed simpler alternatives, why generalization is necessary rather than ornamental, and only then identify the minimal formal baseline. Do not introduce fixed point, contraction, IFT, or existence machinery before explaining why the economic object requires consistency. Stop first at the Micro-Example Gate, then at the Minimal Model Base Gate after the micro-example is confirmed.
-```
-
-### Attempt First-Pass Derivations
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D5 for the model candidates selected after the Micro-Example Gate and Minimal Model Base Gate. Read micro_example_note.md, model_base_design.md, heuristic_derivation.md, and economic_logic_map.md first. Replay the hand-solved micro-example before writing the general model. Attempt clean first-pass derivations from the heuristic path, state assumptions, show algebra where possible, identify failure points, attempt counterexamples, and write candidate theorem sentences in the form: "This paper proves X, and existing theory cannot obtain X because Y." Create derivation_notes.md and theorem_candidates.md, and update economic_logic_map.md with what became sharper and what remains weak. Do not hide failed models.
-```
-
-### Run Discovery Kill Test
-
-```text
-Read ECONOMETRICA_DISCOVERY_WORKFLOW.md. Run Stage D6. Use model_candidates.md, model_tournament.md, micro_example_note.md, model_base_design.md, heuristic_derivation.md, theorem_candidates.md, derivation_notes.md, literature_probe.md, literature_evidence_ledger.md, economic_logic_map.md, generality_ledger.md, field_profile.md, and target_journal_profile.md if available. Derive the absorption families from the closest-literature search and papers actually found; if a closest substitute or absorption threat lacks a ledger entry, mark the absorption judgment provisional. If field_profile.md is missing, provisional, stale, or marked `Reopen requested`, update it and stop for field confirmation before making a final absorption judgment. If theorem quality, absorption risk, field evidence, or target audience changes the target ladder, update target_journal_profile.md and stop for target confirmation before treating journal fit as final. Simulate hostile referees and an editor. Create absorption_tests.md, generality_ledger.md, and idea_kill_tests.md, then update economic_logic_map.md with the theorem sentence, absorption threat, sharpness, blocker, and next economic question. Recommend Invest, Refine, Pivot, Demote to benchmark, Park, or Kill for each candidate. Do not kill exploration-quota or possible frontier-spike variants merely because they are non-mainstream or hard to position; use spike-specific tests for primitive depth, theorem bite, absorption escape, assumptions, proof feasibility, legibility, micro-example force, and model-base naturalness. Do not skip absorption or theorem gates because the target is not Econometrica. Stop for my decision.
-```
-
-## How This Connects to the Main Workflow
-
-Use this discovery workflow before writing a full paper. Once a candidate receives `Invest`, create the pre-paper package in Stage D7 and then continue with:
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1 or Stage 2 using the idea_dossier.md and contribution_lock.md created during discovery.
-```
-
-If a later manuscript review says "no central theorem," "too close to existing theory," "absorbed by known models," or "unnatural model base" in two independent rounds, return here to D4.5 or D4-D6 instead of continuing manuscript polishing.
+## Learn from boundaries and failures
+
+When a condition changes the sign, existence, or scope of a result, use the verification protocol to determine what failed. Then examine what the failure teaches:
+
+- A calculation or logical error defeats that derivation; correct it and reassess the claim. Mark the claim `refuted` only when a valid disproof is available.
+- An economically interpretable boundary may reveal competing forces and become the contribution.
+- A technical restriction may limit the current proof without describing the true boundary.
+- A tailored patch may preserve a desired conclusion while removing its relevance.
+
+A longer or more conditional contribution sentence is not itself evidence of dilution. Evaluate the information gained and the naturalness of the conditions. State genuine limits clearly; do not omit necessary assumptions for rhetorical sharpness.
+
+For a failed approach, record the original prediction, the evidence, what remains plausible, and what would justify revisiting it. Separate rejection of a proposition from rejection of the question. A valid counterexample can be the start of a better explanation.
+
+## Test whether a reader learns something
+
+Use a short economic explanation early, before committing to a full manuscript. Keep it proportional to the idea; around two pages is often sufficient. Explain the question, the tension, the emerging result or uncertainty, the mechanism, the closest comparison, and the boundary that matters.
+
+Ask an independent reader to reconstruct the question, behavioral logic or analytical gain, result, importance, and limitation from that explanation. This can be an AI check clearly labeled as such; it does not substitute for actual economist feedback. Failed reconstruction should identify whether the problem is research content or writing.
+
+Do not optimize for surprise alone. A result may be valuable because it explains, characterizes, unifies, or enables something important. Interesting prose must remain faithful to the model and evidence.
+
+## Choose the next action from the evidence
+
+Decide among further exploration, targeted verification, reader explanation, fuller development, parking, or abandoning a line. These are revisable research choices, not mandatory stage gates.
+
+Before substantial manuscript investment, the record should support a coherent economic or analytical contribution, an appropriate set of formal claims with transparent proof status, a credible comparison to inspected literature, and a reader explanation. A rough draft can itself be an exploratory test and should be labeled accordingly.
+
+Use independent review for consequential uncertainty rather than running a full panel on every branch. A final recommendation should explain:
+
+- what has been learned and why it could matter;
+- which evidence supports the current contribution;
+- the strongest unresolved objection;
+- the next useful action and what its possible outcomes would change;
+- whether any decision exceeds the current authorization.
+
+Mathematical correctness is necessary for a claimed result but does not establish research value. A supported finding of duplication or an uninformative conclusion can justify changing course; unfamiliarity, a low self-assigned score, or repetition of the same AI opinion cannot establish that finding.
+
+## Compact task prompts
+
+**Explore:** Read AGENTS.md and this protocol. Use the stated question and available evidence to develop distinct explanations, compare their unknowns, and perform the most useful feasible test. Update only the records the work needs. Explain what changed in our economic understanding.
+
+**Investigate a model:** Read the current model and relevant claims. Identify what the model teaches, use an appropriate minimal example or application, compare the closest inspected results, and test the most consequential assumption or prediction. Apply the verification protocol to mathematical claims and preserve failed attempts.
+
+**Reconsider a direction:** Read the evidence behind the selected line and its main objection. Determine whether the issue is validity, contribution, model choice, or exposition. Investigate authorized alternatives, explain the tradeoff, and use AGENTS.md for any decision outside the existing authorization.

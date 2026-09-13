@@ -1,530 +1,70 @@
 # Econ Theorist AI
 
-An AI system for economic theorists, from idea discovery to theory paper
-development.
+**Turn an economic question into a clear, well-supported theory paper.**
 
-This is an English-first research workflow system with multilingual command
-understanding. You can talk to the assistant in Chinese or English, but research
-artifacts, referee reports, theorem notes, and manuscripts are English by
-default.
+An AI-assisted research workflow for microeconomic theory and IO. Bring an idea,
+a model, a theorem, or a draft; develop the economics, check the reasoning, and
+explain what the reader learns.
 
-Originally developed with Econometrica-level theory standards in mind, this
-unofficial local workflow system helps researchers move from rough ideas to
-primitive hunting, example-to-theory model-base construction, model tournaments,
-theorem candidates, absorption tests, target journal calibration, human gates,
-simulated review, and controlled revision paths.
+![Explore mechanisms, test models and evidence, and explain the economic lesson. Move between these activities as the research develops.](assets/core-workflow-map.svg)
 
-This project is not affiliated with Econometrica. The phrase
-`Econometrica-level` is used only as shorthand for high standards of theoretical
-clarity, novelty, and rigor.
+## Start in three steps
 
-The workflow is target-calibrated rather than Econometrica-only. A confirmed
-`target_journal_profile.md` can calibrate the reader path, referee mix,
-exposition style, and fit standard for RAND, JET, Theoretical Economics, GEB,
-ReStud, AER, or another venue. Target journal changes calibration, not quality.
-
-If this workflow helps your research, please consider giving the repository a
-star so more researchers can find and improve their own research process.
-
-## Workflow Map
-
-![Econ Theorist AI core workflow map](assets/core-workflow-map.svg)
-
-## Model Craft Funnel
-
-![Example-to-theory model craft funnel](assets/model-craft-funnel.svg)
-
-## Control Layer
-
-`active_context.md` is only a dashboard, not a source of truth. Important claims
-must still be checked against the underlying workflow artifacts.
-
-The router uses durable project artifacts such as `human_decisions.md`,
-`field_profile.md`, `target_journal_profile.md`,
-`literature_evidence_ledger.md`, and `generality_ledger.md`. Major research
-decisions stop at explicit human gates and are recorded before the workflow
-treats them as confirmed.
-
-## What This System Does
-
-- Treats ordinary explanatory, translation, GitHub, software, or conceptual questions as ordinary Q&A.
-- Runs research execution seriously by default once the user asks the system to act on an idea, model, theorem, literature, manuscript, review, revision, or project state.
-- Uses simple user commands while keeping explicit human gates for major decisions.
-- Searches for research directions without immediately forcing mainstream taste.
-- Preserves 1-2 non-mainstream but internally coherent directions during discovery.
-- Records closest-paper, anchor-paper, absorption-threat, and style-anchor evidence in `literature_evidence_ledger.md`.
-- Runs Primitive Hunter / Theorem Generator panels when the primitive is unclear.
-- Treats user-supplied model details as provisional modeling constraints until a model-base gate confirms them.
-- Searches broadly over cheap model skeletons, then derives narrowly from the few model bases that survive.
-- Requires a hand-solved micro-example before any general model, fixed point, or existence machinery enters.
-- Builds models from small examples and economic tensions before formal theorem production.
-- Shows economic progress, not only workflow progress, through `economic_logic_map.md` and chat summaries that explain what economic question became clearer.
-- Compares model variants before manuscript writing and uses nonconvex branch generation inside the existing tree search.
-- Requires absorption tests against closest literature and known theory families.
-- Uses `field_profile.md` to assign field-sensitive simulated referees.
-- Uses `target_journal_profile.md` to recommend and confirm a primary, stretch, and fallback target without lowering the quality floor.
-- Records human gate decisions in `human_decisions.md` instead of relying on chat memory.
-- Tracks assumption and generality drift in `generality_ledger.md`.
-- Uses Scientific Judge / Nugget Test safeguards against defensive complexity.
-- Runs target-calibrated simulated review with dynamic referee roles.
-- Routes local-optimum traps back to discovery before manuscript polishing.
-- Creates provisional Working Preview Notes when the human wants a short readable snapshot before gates are final.
-- Runs an anchor-based Manuscript Architecture Compliance Gate before full manuscript drafting, major restructuring, or full style pass, so every section has a job and the section order matches comparable published papers.
-- Calibrates exposition style through a Deep Style Anchor Pass after the contribution is locked.
-- Uses full-text style anchors when legally available or user-provided, extracting exposition architecture rather than prose.
-- Supports Python, Mathematica, Lean, LaTeX, and git-based verification workflows.
-
-## Start In 5 Minutes
-
-Only remember these commands:
+1. Download this repository or clone it.
+2. [Copy the workflow into your paper folder](INSTALL.md).
+3. Open that folder in your AI coding assistant and describe the task:
 
 ```text
 Use the system: initialize this paper project.
 Use the system: continue by the system.
 Use the system: quickly screen this idea.
 Use the system: run a full literature audit.
-Use the system: what should I do today?
+按系统继续：先解释这个机制为什么值得研究。
 ```
 
-The system will ask explicit human-gate questions when important decisions are
-needed; you do not need to know the internal stage names.
+You can speak Chinese or English. Research notes and manuscripts are English
+by default, unless you request another language. Your agent environment provides
+the model and tools; configure software only when a particular check needs it.
 
-For a fully automatic long run, use the guarded form:
+## What the research should produce
 
-```text
-Use the system: run guarded full-auto goal mode from idea discovery to a polished target-journal draft.
-```
+A worthwhile question, a mechanism you can explain, claims with evidence,
+and a paper an economist can follow. An unexpected result can reveal a useful
+boundary and a better question.
 
-In this mode the system can keep working through the pipeline, but major
-decisions are saved as `AI-delegated provisional` rather than human-confirmed.
-The run ends with `final_ratification_report.md`, where you approve, edit, or
-reject the provisional choices before treating the paper as confirmed.
+![A Cournot example turns a false claim about profitable entry into an economic explanation: an entrant earns 1/36 while total welfare falls by 1/72.](assets/model-craft-funnel.svg)
 
-1. Download the repository as a ZIP file or clone it.
-2. Copy these files into the root directory of your paper project:
+The [worked example](examples/cournot_entry.md) shows the model, hand proof,
+economic explanation, and source. It reconstructs a classic result for teaching.
+Methodological theory is welcome too: explain what the new method lets us understand.
 
-```text
-AGENTS.md
-ECONOMETRICA_ORCHESTRATOR.md
-ECONOMETRICA_PANEL_PROTOCOL.md
-ECONOMETRICA_DISCOVERY_WORKFLOW.md
-ECONOMETRICA_VERIFICATION_WORKFLOW.md
-ECONOMETRICA_AI_HUMAN_WORKFLOW.md
-ECONOMETRICA_VERSION_CONTROL.md
-FIRST_RUN.md
-TOOLCHAIN_README.md
-verify_toolchain.ps1
-verification_templates/
-```
+## Familiar commands, a simpler workflow
 
-3. Open the paper folder in Codex Desktop or another agent IDE. `AGENTS.md`
-should be read automatically, and `ECONOMETRICA_ORCHESTRATOR.md` acts as the
-router.
+The usual commands and seven protocol filenames are retained. The AI reads the
+relevant material, records what changed, and continues within your instructions.
+You choose or delegate the research direction.
 
-4. Run a first-run setup check:
+This update removes fixed candidate quotas, repeated approval stops, and rigid
+stage sequences. Old internal stage commands, generated filenames, and some
+tool-check behavior have changed. For an existing project, follow the
+[upgrade and rollback guide](docs/MIGRATION.md) once; keep your papers and evidence.
 
-```text
-Use the system: first-run setup check
-```
+<details>
+<summary>Methods, tools, and verification</summary>
 
-Small Chinese command example:
+- Methods: [Discovery](ECONOMETRICA_DISCOVERY_WORKFLOW.md),
+  [Verification](ECONOMETRICA_VERIFICATION_WORKFLOW.md),
+  [Writing](ECONOMETRICA_AI_HUMAN_WORKFLOW.md),
+  [Independent review](ECONOMETRICA_PANEL_PROTOCOL.md).
+- Getting started: [First run](FIRST_RUN.md) and [optional tools](TOOLCHAIN_README.md).
+- Maintaining the workflow: [Design and sources](docs/DESIGN_NOTES.md),
+  [evaluation cases](evals/behavior_cases.md), and [contributing](CONTRIBUTING.md).
 
-```text
-按系统处理：初始化检测
-```
+Proofs, citations, and computation must support the claims made. Shorter prompts
+and simulated reviews do not establish top-journal quality; research quality
+still needs substantive evaluation.
 
-5. Initialize the paper project:
+</details>
 
-```text
-Use the system: initialize this paper project
-```
-
-## Examples
-
-New users should skim the examples before running a real project:
-
-```text
-examples/full_walkthrough_toy_project/
-examples/model_base_mini_example/
-examples/kill_or_pivot_mini_example/
-```
-
-The examples are toy walkthroughs, not publishable papers and not literature
-claims. They show how the workflow moves from a vague idea to artifacts, human
-gates, model-base choice, preview drafts, review, and kill-or-pivot decisions.
-
-## Common Commands
-
-```text
-Use the system: first-run setup check.
-```
-
-```text
-Use the system: initialize this paper project.
-```
-
-```text
-Use the system: continue by the system.
-```
-
-```text
-Use the system: quickly screen this idea.
-```
-
-```text
-Use the system: run a full literature audit.
-```
-
-```text
-Use the system: I want to explore a new research topic.
-```
-
-```text
-Use the system: run a model tournament and absorption test before writing.
-```
-
-```text
-Use the system: find the minimal model base before formal derivation.
-```
-
-During D4/D4.5 model-base work, the system will automatically detect existing
-`agent_runs/`. If multiple model lanes exist, it should recommend a Judge Pass
-before the Minimal Model Base Gate. You can use the current model as judge, or
-ask the system to create `agent_runs/_judge_prompt.md` for another AI model or
-IDE opened in the same project folder.
-
-```text
-Use the system: run Primitive Hunter and identify the deepest primitive.
-```
-
-```text
-Use the system: rigorously verify Proposition 1 with Python, Mathematica, or Lean if useful.
-```
-
-```text
-Use the system: recommend a target journal ladder for this project.
-```
-
-```text
-Use the system: run a full target-calibrated simulated review.
-```
-
-```text
-Use the system: what should I do today?
-```
-
-```text
-Use the system: where is this project stuck?
-```
-
-```text
-Use the system: if I only have two hours, what is the highest-value next action?
-```
-
-```text
-Use the system: revise with agentic tree search instead of a defensive patch.
-```
-
-```text
-Use the system: export a short working preview draft.
-```
-
-Small Chinese command examples:
-
-```text
-按系统继续
-```
-
-```text
-快速看看这个想法
-```
-
-```text
-完整审查一遍
-```
-
-```text
-今天我该做什么
-```
-
-## Files
-
-| File | Purpose |
-| --- | --- |
-| `AGENTS.md` | Project-level instructions for Codex and compatible agents. |
-| `ECONOMETRICA_ORCHESTRATOR.md` | Natural-language router for workflow modules and stages. |
-| `ECONOMETRICA_DISCOVERY_WORKFLOW.md` | Topic discovery, primitive hunting, model tournaments, and theorem gates. |
-| `ECONOMETRICA_PANEL_PROTOCOL.md` | Independent panels, dynamic referee assignment, AE synthesis, and Co-Editor decisions. |
-| `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` | Manuscript development, simulated review, revision trees, and human gates. |
-| `ECONOMETRICA_VERIFICATION_WORKFLOW.md` | Mathematical derivation, counterexample search, symbolic checks, and formal verification. |
-| `FIRST_RUN.md` | First-run setup guide for non-technical users. |
-| `ECONOMETRICA_VERSION_CONTROL.md` | Git checkpoints, branches, diffs, rollback safety, and version logs. |
-| `TOOLCHAIN_README.md` | Local Python, Lean, Mathematica, and verification setup. |
-| `verify_toolchain.ps1` | Quick local toolchain self-test and status writer. |
-| `verification_templates/` | Starter templates for counterexample search and Lean lemmas. |
-
-## Runtime Artifacts
-
-These files are created inside paper projects, not maintained as fixed files in
-this workflow repository:
-
-| Artifact | Purpose |
-| --- | --- |
-| `active_context.md` | 80-120 line continuation dashboard. |
-| `human_decisions.md` | Append-only human gate decisions, reversals, and reasons. |
-| `field_profile.md` | Confirmed or provisional field profile for literature and referee routing. |
-| `target_journal_profile.md` | Confirmed or provisional target ladder, fit standard, quality floor, and reader calibration. |
-| `literature_evidence_ledger.md` | Verified source records for closest papers, anchors, absorption threats, and style anchors. |
-| `economic_logic_map.md` | User-readable map of the phenomenon, core tension, smallest example, sharpness, absorption threat, blocker, and next economic question. |
-| `generality_ledger.md` | Record of special-case moves, assumptions, and theorem-sentence drift. |
-| `model_base_design.md` | Example-to-theory model base, skeleton funnel, failed simpler alternatives, and human confirmation status. |
-| `micro_example_note.md` | Hand-solved smallest example, intuition, predicted comparative static, failure condition, and literature-gap check. |
-| `heuristic_derivation.md` | Economic derivation path from toy example to formal model before proof machinery begins. |
-| `manuscript_architecture_plan.md` | Anchor-based plan for section count, section order, appendix boundary, and section-by-section function before full manuscript drafting or restructuring. |
-| `style_anchor_notes/` | Per-anchor notes from deep reading of legally available or user-provided style anchors. |
-| `style_anchor_matrix.md` | Cross-anchor matrix of exposition architecture, reader path, theorem setup, and proof roadmap moves. |
-| `style_calibration.md` | Human-confirmed style contract for elegant, field-calibrated exposition without rhetoric. |
-| `style_pass_plan.md` | Section-by-section plan for paragraph-level style correction after style confirmation. |
-| `preview_drafts/` | Optional provisional Working Preview Notes and PDFs for human reading during intermediate stages. |
-| `spike_dossier.md` | Optional focused dossier for a possible frontier spike that survives D6. |
-| `literature_cache/` | Optional local cache for user-authorized or open-access papers; bulk download is not the default. |
-| `literature_cache/style_anchors/` | Optional cache for legally available or user-authorized style anchor PDFs. |
-| `toolchain_status.md` | Computer-level diagnostic status, usually stored globally outside the paper project. |
-| `model_tournament.md` | Comparison of model variants and documented winners/losers. |
-| `agent_runs/` | Optional separated lanes for different AI models, IDEs, or sessions during high-variance model-base search. |
-| `cross_agent_model_audit.md` | Judge Pass comparison of multiple model lanes before canonical model-base confirmation. |
-| `absorption_tests.md` | Tests for whether the result is absorbed by existing theory. |
-| `referee_reports/round_N/` | Simulated referee, AE, Co-Editor, and summary reports. |
-| `run_summary.md` | Compact summary after long automatic runs. |
-| `auto_decisions.md` | AI-delegated provisional gate choices during guarded full-auto goal mode. |
-| `goal_run_plan.md` | Run plan for a guarded full-auto goal-mode session. |
-| `final_ratification_report.md` | End-of-run list of provisional choices requiring human approval. |
-| `scratch_runs/` | Scratch archive for exploratory outputs that should not clutter the project root. |
-
-## Path Display And PDF Outputs
-
-Windows paths can be mangled by Markdown if backslashes are written as raw text.
-The workflow therefore treats path display as an output-safety rule:
-
-- local paths and compiled PDF paths should be shown in backticks or fenced code
-  blocks, not raw prose;
-- file cards and Markdown file links should use the filename only as the visible
-  title; the full absolute path belongs on a separate `Full path:` line;
-- generated PDFs should be reported only after the exact path is verified with
-  `Test-Path -LiteralPath` or `Resolve-Path -LiteralPath`;
-- commands should quote paths with spaces, and path construction should use
-  `Join-Path`, `Resolve-Path -LiteralPath`, `pathlib`, or an equivalent path API.
-
-Example:
-
-```text
-File card:
-[main.pdf](<C:/Dropbox/Shufe/Research/Project/My Paper/output/main.pdf>)
-
-Full path:
-`C:/Dropbox/Shufe/Research/Project/My Paper/output/main.pdf`
-
-Open command:
-`Start-Process -FilePath "C:\Dropbox\Shufe\Research\Project\My Paper\output\main.pdf"`
-```
-
-## Folder Portability
-
-The paper project is folder-portable. Copy or sync the whole paper project
-folder, open it on another computer, run the local toolchain check, and continue
-from the project artifacts.
-
-Use this command after opening the copied folder:
-
-```text
-Use the system: continue by the system.
-```
-
-Folder portability lets you continue elsewhere. Workflow artifacts tell the
-assistant what happened and what is confirmed. Computer-level setup still belongs
-to each computer: agent IDE login, Python, LaTeX, Lean, Mathematica, Git, and
-local tool paths should be checked locally.
-
-## If You Use Git
-
-Generated research files are saved locally in each paper project folder. They are
-not automatically uploaded to GitHub. The workflow works locally even if you
-never use Git.
-
-Git is optional for running the workflow. For serious projects, Git checkpoints
-are recommended because they let you roll back file versions if an AI edit,
-manual edit, LaTeX rewrite, or model rewrite damages the project. Folder
-portability preserves project state; Git checkpoints preserve recoverable file
-versions.
-
-Git commits are stored in the project folder's hidden `.git/` directory. They
-stay local unless you choose to push them to GitHub or another remote.
-
-If you use GitHub as a backup for a paper project, you may choose which generated
-research files to track. Durable research records that are often worth tracking
-include:
-
-```text
-human_decisions.md
-project_state.md
-contribution_lock.md
-field_profile.md
-target_journal_profile.md
-literature_evidence_ledger.md
-model_tournament.md
-model_base_design.md
-micro_example_note.md
-heuristic_derivation.md
-manuscript_architecture_plan.md
-absorption_tests.md
-generality_ledger.md
-risk_register.md
-revision_tree.md
-revision_log.md
-version_log.md
-```
-
-Files that usually do not need to be tracked include:
-
-```text
-active_context.md
-economic_logic_map.md
-toolchain_status.md
-preview_drafts/
-run_summary.md
-auto_decisions.md
-goal_run_plan.md
-final_ratification_report.md
-scratch_runs/
-referee_reports/
-verification/
-formal/
-lean/
-large local caches
-```
-
-These runtime files are ignored in this workflow template so paper-specific
-process files do not accidentally enter the public workflow repository. In your
-own paper project, you may choose to track selected durable records if you want
-GitHub or another remote to back up the research process.
-
-## Toolchain
-
-Keep Python, Lean/elan, Mathlib, and large package caches outside paper folders.
-On Windows the recommended shared tool root is:
-
-```text
-C:\Tools\CodexVerification
-```
-
-You can choose another location by setting `CODEX_VERIFICATION_HOME` or by
-passing `-ToolRoot` to `verify_toolchain.ps1`.
-
-Minimum setup check:
-
-```powershell
-.\verify_toolchain.ps1 -WriteStatus
-```
-
-If the script cannot find Python, Lean, or Mathematica, the workflow still works
-as prompts and checklists, but mathematical verification is weaker until the tool
-root is configured. See `TOOLCHAIN_README.md` for details.
-
-## If You Do Not Have Python, Lean, Or Mathematica
-
-You can still use the research workflow. Missing tools only weaken mathematical
-verification, local compilation, or formal proof support. They do not block idea
-discovery, field profiling, target journal profiling, model tournaments,
-simulated review, style calibration, or revision planning.
-
-## Language Policy
-
-The workflow files, project artifacts, referee reports, theorem notes, revision
-logs, and manuscripts are English by default.
-
-Chinese commands are supported for convenience, but generated research files
-remain English unless the user explicitly requests a separate Chinese
-explanatory note outside the manuscript workflow.
-
-## Optional Researcher Memory
-
-Project artifacts are the source of truth. Cross-project memory, if used, is only
-an optional prior stored outside paper projects, typically under:
-
-```text
-C:\Users\<user>\.econ-theorist-ai\
-```
-
-Possible files include `researcher_profile.md`, `method_library.md`,
-`negative_knowledge.md`, `proof_technique_memory.md`, `project_postmortems/`,
-and `field_maps/`. Literature evidence, proof verification, and current human
-gate decisions override researcher memory.
-
-## Design Principles
-
-- Scientific taste is a filter, not the sole objective.
-- Simple commands must not weaken human gates.
-- Research execution is serious by default, while ordinary Q&A remains ordinary Q&A.
-- Specificity is not stage advancement: formal model language from the user is provisional until artifacts and human gates confirm it.
-- Exhaust broadly at the model-skeleton level; derive narrowly at the formal level.
-- No general model before a hand-solved micro-example.
-- Show economic progress, not only workflow progress.
-- A model should have a visible economic lesson and scope before it becomes a formal baseline.
-- Early review should develop the strongest simple version before it tries to kill an idea.
-- A model is not ready because it is formal; it is ready when its smallest version explains the economic force.
-- Nonconvex discovery expands branch generation inside tree search; it does not certify quality.
-- Target journal changes calibration, not quality.
-- Strong novelty, absorption, anchor, and style claims require evidence recorded in `literature_evidence_ledger.md` or must be marked provisional.
-- Deep style calibration means deep style reading, not prose imitation.
-- Style anchors are used to extract exposition architecture, not sentences, paragraph structures, or framing.
-- Token economy must never override research quality.
-- Main theorem discovery, proof verification, closest-literature checks, and simulated review require enough context and tools.
-- Human gate decisions must be written to persistent artifacts.
-- Simulated acceptance is a diagnostic benchmark, not a publication guarantee.
-- If the paper is stuck in local polishing, return to primitive hunting and model discovery.
-- The preferred path is theorem note first, manuscript second.
-
-## Planned Public-Use Improvements
-
-- Toy worked examples.
-- Benchmark cases.
-- Richer verification templates.
-- Optional cross-platform toolchain notes.
-
-## Feedback and Issues
-
-This project currently uses an issue-only feedback model.
-
-Please open a GitHub Issue if you find:
-
-- unclear workflow routing
-- internal contradictions
-- missing safeguards
-- confusing documentation
-- toolchain setup problems
-- examples where the system behaves poorly
-- suggestions that may help researchers use the system better
-
-Pull requests are not the preferred contribution path at this stage. The
-maintainer reviews issues, decides which suggestions to adopt, and integrates
-accepted changes directly to preserve consistency across the workflow system.
-
-See `CONTRIBUTING.md` for the current contribution policy.
-
-## Citation And Credit
-
-If this system helps your research, please cite the repository and consider
-starring it on GitHub so other researchers can find it.
-
-GitHub should display a "Cite this repository" option from `CITATION.cff`.
-
-Suggested plain-text citation:
-
-```text
-viplee110. econ-theorist-ai: An AI workflow system for economic theory research.
-GitHub repository, 2026. https://github.com/viplee110/econ-theorist-ai
-```
-
-## License
-
-Licensed under the Apache License 2.0. See `LICENSE`.
+Modified for the original workflow refresh, 2026-09-14. Not affiliated with Econometrica.
+Licensed under [Apache 2.0](LICENSE). If useful, [cite the project](CITATION.cff).

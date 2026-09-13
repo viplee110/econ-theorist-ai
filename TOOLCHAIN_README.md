@@ -1,142 +1,69 @@
-# Local Verification Toolchain
+# Optional verification tools
 
-This workflow expects verification tools to live outside paper project folders.
-The default shared tool root on Windows is:
+Modified for the original workflow refresh (2026-09-13).
 
-```text
-C:\Tools\CodexVerification
-```
+Tool choice follows the claim. Python, symbolic algebra, finite-game searches,
+Lean and Mathematica can support different checks; none is required for every
+research activity. LaTeX compiles manuscripts and Git preserves versions.
 
-You can override this location by setting `CODEX_VERIFICATION_HOME` or by
-passing `-ToolRoot` to `verify_toolchain.ps1`.
-
-The toolchain check is diagnostic. It does not install large tools, modify PATH,
-or change system environment variables.
-
-## Shared Tool Layout
-
-- Python 3.12.10: `C:\Tools\CodexVerification\Python312\python.exe`
-- Python packages:
-  - `sympy` for symbolic algebra
-  - `numpy` and `scipy` for numerical computation and counterexample search
-  - `matplotlib` for plots
-  - `pandas` for tables/logs
-  - `z3-solver` for SMT-style checks
-- Lean 4 via elan:
-  - `lean`: `C:\Tools\CodexVerification\elan\bin\lean.exe`
-  - `lake`: `C:\Tools\CodexVerification\elan\bin\lake.exe`
-- Optional shared Lake packages:
-  - `C:\Tools\CodexVerification\lean_packages\lean-vX.Y.Z\`
-
-For Lean projects with Mathlib, keep the project files in the paper folder:
-
-```text
-lakefile.toml
-lake-manifest.json
-lean-toolchain
-YourLeanLibrary/
-```
-
-Keep large package caches in the shared tool root when possible, especially when
-working inside cloud-synced folders such as Dropbox.
-
-## Mathematica
-
-Mathematica 13.0 is installed locally, and `wolframscript` exists at:
-
-```text
-C:\Program Files\Wolfram Research\Mathematica\13.0\wolframscript.exe
-```
-
-Codex can run `wolframscript` successfully when the command is allowed to run outside the default sandbox. In the default sandbox, WolframScript may fail because it cannot read the user configuration directory:
-
-```text
-C:\Users\viplee110\AppData\Roaming\Wolfram\WolframScript
-```
-
-When using Mathematica from Codex, approve the `wolframscript` command if prompted. Mathematica is useful for:
-
-- `FullSimplify`
-- `Reduce`
-- `Resolve`
-- symbolic derivatives
-- inequality checks under assumptions
-- exact parameter-region analysis
-
-## Quick Self-Test
-
-Run:
+## Windows capability check
 
 ```powershell
-.\verify_toolchain.ps1 -WriteStatus
+.\verify_toolchain.ps1
+.\verify_toolchain.ps1 -ToolRoot 'D:\Tools\CodexVerification'
+.\verify_toolchain.ps1 -ConfigPath '.\local-tool-config.json'
+.\verify_toolchain.ps1 -WriteStatus -StatusPath '.\toolchain_status.md'
 ```
 
-This writes a reusable computer-level status file to:
-
-```text
-C:\Users\<user>\.econ-theorist-ai\toolchain_status.md
-```
-
-Use a non-default tool root:
-
-```powershell
-$env:CODEX_VERIFICATION_HOME = "D:\Tools\CodexVerification"
-.\verify_toolchain.ps1 -WriteStatus
-```
-
-or:
-
-```powershell
-.\verify_toolchain.ps1 -ToolRoot "D:\Tools\CodexVerification" -WriteStatus
-```
-
-Use a persistent local config:
-
-```powershell
-.\verify_toolchain.ps1 -ConfigPath "$HOME\.econ-theorist-ai\config.json" -WriteStatus
-```
-
-Example `config.json`:
+Default shared root: `C:\Tools\CodexVerification`, overridden by `-ToolRoot`,
+`CODEX_VERIFICATION_HOME`, or a config `toolRoot`. Explicit/configured paths are
+preferred to PATH lookup. A config may contain:
 
 ```json
 {
   "toolRoot": "D:\\Tools\\CodexVerification",
-  "pythonPath": "D:\\Tools\\CodexVerification\\Python312\\python.exe",
-  "elanHome": "D:\\Tools\\CodexVerification\\elan",
-  "wolframScriptPath": "C:\\Program Files\\Wolfram Research\\Mathematica\\13.0\\wolframscript.exe"
+  "pythonPath": "D:\\Python\\python.exe",
+  "leanPath": "D:\\Tools\\elan\\bin\\lean.exe",
+  "lakePath": "D:\\Tools\\elan\\bin\\lake.exe",
+  "elanHome": "D:\\Tools\\elan",
+  "wolframScriptPath": "D:\\Wolfram\\wolframscript.exe"
 }
 ```
 
-Direct Mathematica test:
+Without `-ConfigPath`, the script reads an existing
+`$HOME/.econ-theorist-ai/config.json` if available; it does not create it.
+`-WriteStatus` defaults to `toolchain_status.md` beside the script, and
+`-StatusPath` overrides that destination. Status writing creates no global
+configuration. Review an existing status file before replacing it.
 
-```powershell
-& "C:\Program Files\Wolfram Research\Mathematica\13.0\wolframscript.exe" -code "Print[2+2]"
-& "C:\Program Files\Wolfram Research\Mathematica\13.0\wolframscript.exe" -code "Print[FullSimplify[D[x^3,x]]]"
-```
+The script installs nothing and does not persist PATH or environment changes.
+It reports protocol presence/revision, executable/version checks, discoverable
+Python packages and the result of an explicitly requested smoke test. An executable found on PATH
+has not necessarily run successfully. A version/import/arithmetic check has not
+validated a research claim. Package discovery does not establish that importing
+a package or using it will succeed. Lean, Lake and LaTeX are located without
+launching them; a Lean launcher can otherwise trigger toolchain setup.
 
-## Python Command
+Use `-RunSmokeTests` to request the optional Wolfram `Print[2+2]` check. It may
+launch a licensed kernel. Its result concerns that arithmetic operation only;
+the script does not compile the Lean example or validate a paper.
 
-Use:
+## Use capabilities selectively
 
-```powershell
-& "C:\Tools\CodexVerification\Python312\python.exe"
-```
+- If the optional templates/examples were copied, use Python 3.8 or later;
+  the scripts and maintainer checks need only the standard library.
+  Optional `sympy`, `numpy`, `scipy`, `pandas`,
+  `matplotlib` and `z3-solver` support project-specific checks.
+- For symbolic algebra, record assumptions and inspect exceptional cases.
+  Numeric searches should include relevant boundaries and failure cases; a
+  search that finds no counterexample does not prove a theorem.
+- The optional Lean template is a compiler smoke test. Substantial Lean work may
+  need a separate Mathlib project and suitable versions; configure those only
+  when the claim warrants formalization. Record the exact theorem checked.
+- Mathematica is optional and machine-specific. Use a configured executable
+  and an available license; do not assume the maintainer's installation exists.
+- Keep large toolchains and caches outside paper folders when practical. Keep
+  source, proofs, environments needed for reproduction and exact outputs with
+  the paper or in a documented reproducible location.
 
-Example:
-
-```powershell
-& "C:\Tools\CodexVerification\Python312\python.exe" -c "import sympy as sp; x=sp.symbols('x'); print(sp.diff(x**3, x))"
-```
-
-## Lean Command
-
-Use:
-
-```powershell
-$env:ELAN_HOME = "C:\Tools\CodexVerification\elan"
-& "C:\Tools\CodexVerification\elan\bin\lean.exe" --version
-& "C:\Tools\CodexVerification\elan\bin\lake.exe" --version
-```
-
-Mathlib should be installed only when needed, because it is a large dependency.
-Prefer shared package storage under `C:\Tools\CodexVerification\lean_packages`.
+See [Verification](ECONOMETRICA_VERIFICATION_WORKFLOW.md) for evidence standards.

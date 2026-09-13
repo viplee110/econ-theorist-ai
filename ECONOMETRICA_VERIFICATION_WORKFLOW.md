@@ -1,396 +1,126 @@
-# Computational and Formal Verification Workflow for Economic Theory Papers
+# Verification for Economic Theory Research
 
-Version: 2026-05-01
+Workflow revision: 2026-09
 
-Use this file whenever Codex derives, checks, repairs, or criticizes mathematical claims in an economics paper. This workflow is designed to reduce language-model hallucination by forcing derivations to interact with external tools, explicit assumptions, symbolic algebra, numerical checks, counterexample search, and, where feasible, formal proof assistants such as Lean 4.
+Modified: 2026-09-13.
 
-For central theorems, disputed claims, or model-selection decisions, also read `ECONOMETRICA_PANEL_PROTOCOL.md` and run a Verification Panel. The panel should produce independent re-derivation, symbolic/numerical counterexample search, proof audit, and formalization triage before AE and Co-Editor synthesis.
+Use this protocol to derive, check, or repair mathematical claims. [AGENTS.md](AGENTS.md) defines global priority, authorization, and scientific integrity. Verification can occur during [discovery](ECONOMETRICA_DISCOVERY_WORKFLOW.md) or [writing](ECONOMETRICA_AI_HUMAN_WORKFLOW.md); it does not require passing a separate model-approval sequence.
 
-This file complements:
+Use independent checking when a central result or a disputed proof warrants it, following [the panel protocol](ECONOMETRICA_PANEL_PROTOCOL.md). The purpose is to test the mathematics, not to turn agreement among agents into proof or to infer economic importance from correctness.
 
-- `ECONOMETRICA_DISCOVERY_WORKFLOW.md` for early topic and model discovery.
-- `ECONOMETRICA_AI_HUMAN_WORKFLOW.md` for manuscript development and simulated review.
-- `AGENTS.md` for project-level standing rules.
+## Bind claims to their evidence
 
-## Core Principle
+Keep the current claim records in `model_note.md`. Link long proofs, scripts, and outputs under `verification/` only when needed. Record material checks and changes in `research_log.md`; do not create a separate ledger for every checking technique.
 
-The language model may propose a theorem, proof, or derivation, but it does not certify it. A mathematical claim becomes more credible only after it passes a layered verification process:
-
-1. assumption extraction
-2. hand derivation
-3. symbolic or algebraic check
-4. numerical sanity check
-5. counterexample search
-6. proof audit
-7. optional formalization
-
-Failure in any layer should be recorded, not hidden.
-
-Verification should not replace model construction. For a research-development task, read `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md` before central D5/V2 derivations when they exist or should exist. Fixed point, contraction, IFT, and existence arguments are mathematical tools; they should enter only after the hand-solved micro-example has made the economic object requiring consistency visible. If the user explicitly asks only to solve a given model mechanically, verify the model as given but do not infer research quality, novelty, or target-journal potential from the solution.
-
-## Verification Artifacts
-
-Maintain these files when doing mathematical work:
-
-- `math_claims.md`: list of propositions, lemmas, comparative statics, and proof-dependent claims.
-- `assumption_ledger.md`: assumptions, where they are used, and whether they are economic, technical, or suspiciously tailored.
-- `derivation_notes.md`: hand derivations, algebra, FOCs, equilibrium conditions, and proof sketches.
-- `verification_log.md`: tool runs, commands, outputs, failures, and interpretation.
-- `counterexamples.md`: failed claims, numerical counterexamples, boundary cases, and parameter regions where results break.
-- `formalization_notes.md`: Lean 4 or other proof-assistant attempts, formalizable lemmas, blockers, and informal-to-formal gaps.
-
-## Tool Ladder
-
-Use the strongest available tool that fits the claim.
-
-### Layer 1 - Exact Algebra
-
-Preferred tools:
-
-- Python `sympy`
-- Matlab Symbolic Math Toolbox
-- Mathematica, if available
-- manual algebra checked line by line
-
-Use for:
-
-- FOCs
-- derivatives
-- comparative statics
-- algebraic simplification
-- determinant/sign checks
-- fixed point equations
-- boundary cases
-
-### Layer 2 - Numerical Sanity Checks
-
-Preferred tools:
-
-- Python `numpy`, `scipy`
-- Matlab
-- Julia
-- grid search or random search scripts
-
-Use for:
-
-- equilibrium computation
-- parameter sweeps
-- sign checks
-- monotonicity checks
-- visualizing comparative statics
-- searching for counterexamples
-- finding suspicious boundary behavior
-
-### Layer 3 - Optimization and Equilibrium Checks
-
-Preferred tools:
-
-- Python `scipy.optimize`
-- Matlab optimization routines
-- CVX/CVXPY for convex programs when appropriate
-- custom best-response iteration for simple games
-
-Use for:
-
-- verifying equilibrium candidates
-- checking uniqueness or multiplicity numerically
-- testing deviations
-- checking global versus local optima
-
-### Layer 4 - Formal Verification
-
-Preferred tools:
-
-- Lean 4 with Mathlib
-- Isabelle/HOL or Coq if already available
-
-Use for:
-
-- small clean lemmas
-- order, monotonicity, continuity, convexity, fixed-point, or algebraic claims
-- checking whether assumptions are sufficient
-
-Do not expect Lean 4 to formalize an entire economics paper quickly. Use it to verify compact lemmas and expose missing assumptions.
-
-## Stage V0 - Tool Inventory
-
-Autonomy: Auto
-
-Purpose:
-
-Determine what verification tools are available in the local environment.
-
-AI tasks:
-
-- Check whether Python, Matlab, Octave, Julia, Lean 4, Lake, and relevant packages are available.
-- Record results in `verification_log.md`.
-- If a tool is unavailable, do not pretend it was used.
-- If a tool requires setup, record exact setup instructions or blockers.
-
-Output:
-
-- `verification_log.md`
-
-## Stage V1 - Claim and Assumption Extraction
-
-Autonomy: Auto
-
-Purpose:
-
-Create a complete inventory of mathematical claims before checking them.
-
-AI tasks:
-
-- Create `math_claims.md`.
-- Extract every theorem, proposition, lemma, corollary, comparative static, equilibrium claim, identification claim, welfare claim, and nontrivial proof-dependent statement.
-- Create `assumption_ledger.md`.
-- For each claim, list:
-  - exact statement
-  - minimal formal statement
-  - location in manuscript
-  - assumptions used
-  - truth-critical assumptions
-  - material to move outside the statement
-  - conclusion
-  - proof dependencies
-  - economic interpretation paragraph
-  - proof status
-  - tool-check status
-  - counterexample status
-
-Rule:
-
-No claim should be treated as verified merely because it appears plausible.
-Result statements should state the result, not explain the result. During extraction, separate truth-critical mathematical conditions from proof-roadmap, interpretation, caveat, example, and literature-positioning material. Conditions that are merely explanatory should be moved outside the statement; conditions that are required for truth should be recorded in `assumption_ledger.md`.
-
-## Stage V2 - Re-Derivation from Primitives
-
-Autonomy: Auto, with Gate if foundational issues appear
-
-Purpose:
-
-Rebuild the result from the model primitives.
-
-AI tasks:
-
-- Restate primitives, timing, information, actions, payoffs, constraints, and equilibrium concept.
-- If the task is not explicitly mechanical model solving, check whether `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md` exist and whether the Micro-Example Gate and Minimal Model Base Gate have passed. If not, mark primitives and assumptions provisional and route foundational concerns back to Discovery D4.5.
-- Re-derive from the heuristic path first: toy example, agent tradeoff, aggregate consistency or market pressure, equilibrium pressure, and comparative-static intuition.
-- Derive agent problems from primitives.
-- Derive FOCs or best responses.
-- Identify whether FOCs are sufficient or only necessary.
-- Identify boundary cases.
-- Identify global versus local optimum issues.
-- State every assumption used in each step.
-
-Stop if:
-
-- The claim does not follow from the stated primitives.
-- A hidden assumption is required.
-- A boundary case reverses the result.
-- The result is simply assumed.
-
-## Stage V3 - Symbolic Verification
-
-Autonomy: Auto
-
-Purpose:
-
-Use symbolic tools to check algebraic steps where possible.
-
-AI tasks:
-
-- Write minimal scripts or commands for symbolic checks.
-- Check derivatives, simplifications, signs, discriminants, and closed-form solutions.
-- Store scripts in a `verification/` folder when useful.
-- Paste or summarize results in `verification_log.md`.
-
-Rules:
-
-- Keep symbolic checks minimal and focused.
-- Do not overinterpret symbolic output.
-- If a sign cannot be determined without assumptions, record the missing conditions.
-- If symbolic simplification fails, try a simpler subproblem before adding assumptions.
-
-## Stage V4 - Numerical Counterexample Search
-
-Autonomy: Auto
-
-Purpose:
-
-Actively try to falsify the result.
-
-AI tasks:
-
-- Define admissible parameter ranges.
-- Run grid search and random search over parameters.
-- Check whether the predicted sign, monotonicity, equilibrium property, or welfare ranking holds.
-- Test boundary cases and limiting cases.
-- Save failures in `counterexamples.md`.
-
-Rules:
-
-- Counterexample search should be adversarial.
-- A numerical pass does not prove the theorem.
-- A single valid counterexample kills or narrows the theorem.
-- If counterexamples occur only outside economically relevant regions, record the needed domain restrictions.
-
-## Stage V5 - Proof Audit
-
-Autonomy: Checkpoint
-
-Purpose:
-
-Audit the informal proof after symbolic and numerical checks.
-
-AI tasks:
-
-- Match every line of proof to a stated assumption or previous result.
-- Check whether each condition in the formal result statement is genuinely needed for truth, merely a proof dependency, or explanatory material that belongs in a proof roadmap, remark, or discussion.
-- If a proof needs an unstated assumption, record it explicitly and require human approval when it changes theorem substance, economic interpretation, novelty, or target positioning.
-- Identify gaps:
-  - existence
-  - uniqueness
-  - continuity
-  - compactness
-  - convexity or concavity
-  - monotonicity
-  - equilibrium selection
-  - differentiability
-  - interchange of limits, derivatives, or expectations
-  - boundary behavior
-- Classify each gap as:
-  - fixable by exposition
-  - fixable by adding a mild assumption
-  - serious but maybe repairable
-  - fatal to current result
-
-Human gate:
-
-The human must approve any new assumption that affects economics, novelty, or interpretation.
-
-Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
-
-Panel option:
-
-- For a central theorem, run a Verification Panel from `ECONOMETRICA_PANEL_PROTOCOL.md` before approving proof repairs.
-- The AE should classify each claim as Verified, Partially Verified, Needs Assumption, Counterexample Found, or Fatal Gap.
-- The Co-Editor should decide whether the theorem can remain, must be narrowed, requires new assumptions, or should be withdrawn.
-
-## Stage V6 - Formalization Triage
-
-Autonomy: Checkpoint
-
-Purpose:
-
-Decide whether any part should be formalized in Lean 4 or another proof assistant.
-
-AI tasks:
-
-- Identify compact lemmas suitable for formalization.
-- Rewrite them in formal-friendly language.
-- Separate mathematical content from economic interpretation.
-- Record candidate lemmas in `formalization_notes.md`.
-
-Good Lean candidates:
-
-- algebraic identities
-- monotonicity of simple functions
-- convexity or concavity of simple functions
-- order arguments
-- fixed assumptions over real numbers
-- finite-game or finite-action lemmas if small
-
-Poor Lean candidates:
-
-- long prose proofs
-- large equilibrium existence arguments with many economic definitions
-- claims depending on undefined economic intuition
-- results requiring extensive custom theory before the main lemma
-
-## Stage V7 - Formal Verification Attempt
-
-Autonomy: Auto if Lean is installed, otherwise record setup blocker
-
-Purpose:
-
-Try to formalize selected compact lemmas.
-
-AI tasks:
-
-- Create a `formal/` or `lean/` folder only if appropriate.
-- Create minimal Lean files for selected lemmas.
-- Prefer small lemmas over ambitious full-theorem formalization.
-- Record what Lean verifies and where it fails.
-- Do not claim formal verification unless the proof assistant accepts the file.
-
-Rule:
-
-Partial formalization is useful even when it fails, because failure often exposes hidden assumptions or imprecise statements.
-
-## Stage V8 - Verification Report
-
-Autonomy: Auto
-
-Purpose:
-
-Summarize what is known after checks.
-
-AI tasks:
-
-- Update `verification_log.md`.
-- Update `counterexamples.md`.
-- Update `assumption_ledger.md`.
-- Write a final section with:
-  - verified claims
-  - partially verified claims
-  - claims with counterexamples
-  - claims needing human proof work
-  - assumptions requiring human approval
-  - recommended theorem revisions
-
-## Decision Rules
-
-- If symbolic algebra contradicts the proof, revise the proof or theorem.
-- If numerical search finds a valid counterexample, narrow or kill the theorem.
-- If a theorem requires a new assumption, the human must decide whether the assumption is economically acceptable.
-- If the proof uses a hidden selection, regularity, or boundary condition, state it explicitly.
-- If formalization fails because definitions are imprecise, improve the informal theorem statement.
-
-## Prompt Templates
-
-### Start Tool Inventory
+For each consequential claim, record:
 
 ```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Run Stage V0. Check what verification tools are available locally: Python, sympy, numpy, scipy, Matlab, Octave, Julia, Lean 4, and Lake. Create verification_log.md and report exact blockers. Do not modify the manuscript.
+Claim ID and model version:
+Exact statement, including domain and quantifiers:
+Assumptions, definitions, and equilibrium/selection concept:
+Dependencies on other claims or external results:
+Proof status: conjecture / proof sketch / proved / refuted / unresolved
+Proof or disproof location and scope:
+Independent check: not run / pass / gap, with checker and evidence location
+Computational or formal evidence: type, scope, result, and location
+Economic interpretation and its limits:
 ```
 
-### Extract Claims
+`Proved` means a complete proof is available for the stated claim; it is not shorthand for plausibility, a successful simulation, or reviewer consensus. A proof sketch or a partially formalized lemma must not acquire the status of the full theorem. Record limitations of an independent check explicitly.
 
-```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Run Stage V1. Extract all mathematical claims from the manuscript into math_claims.md and create assumption_ledger.md. Do not attempt to prove or edit yet.
-```
+Keep truth-critical conditions in the statement or an explicitly referenced assumption block. Explanation and intuition can follow it. A shorter statement is not an improvement if it changes the theorem's meaning.
 
-### Verify One Proposition
+When primitives, assumptions, definitions, quantifiers, or dependent claims change, mark affected checks as needing revalidation and retain the prior version. A proof may remain valid for its old statement; do not silently transfer its status to a new one. Imported records labeled “verified” need their exact statement and supporting evidence checked before reuse.
 
-```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Verify Proposition [X]. Run Stages V2 through V5 for this proposition only. If this is part of research development rather than mechanical model solving, read micro_example_note.md, model_base_design.md, and heuristic_derivation.md first and mark unconfirmed primitives or assumptions provisional. Re-derive from the hand-solved micro-example, from primitives, and from the heuristic path; check algebra symbolically if possible, run numerical counterexample search if applicable, audit the proof, and update verification_log.md, derivation_notes.md, counterexamples.md, and assumption_ledger.md. Stop before changing theorem assumptions.
-```
+A prior independent `pass` belongs to its original claim and model version. For a changed statement, keep that result as history and record the current check as `not run` until checked again, or `gap` if a defect is known. Its proof status is `unresolved` until the evidence has been assessed for that statement. Unchanged claims and their evidence keep their status.
 
-### Search for Counterexamples
+## Select checks that address the actual risk
 
-```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Run Stage V4 for Claim [X]. Treat the claim adversarially. Define admissible parameter ranges, run grid/random search using available tools, test boundary cases, and write all failures or near-failures to counterexamples.md. A numerical pass is not a proof.
-```
+Inspect the relevant model, claims, and existing evidence first. For research development, understand the mechanism or analytical purpose and an appropriate minimal example, application, or boundary case. For an explicitly mechanical request, verify the given model directly without manufacturing a research-value assessment.
 
-### Lean Triage
+Choose checks based on the claim and failure modes. This is not a mandatory ladder through every tool. Check the availability of tools needed for the selected task; do not inventory or install an entire stack on each run. Use project-configured runtimes when available and record a missing tool as a limitation.
 
-```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. Run Stage V6 for the current theorem list. Identify which lemmas are realistic candidates for Lean 4 formalization, rewrite them in formal-friendly language, and create formalization_notes.md. Do not claim formal verification.
-```
+| Check | Suitable use | What it does not establish |
+|---|---|---|
+| Re-derivation | Rebuild reasoning from primitives and expose missing assumptions. | An unchecked derivation is not independent verification. |
+| Symbolic algebra | Derivatives, identities, simplifications, closed-form candidates. | Simplification alone does not prove domain, sign, or equilibrium claims. |
+| Numerical or optimization checks | Feasibility, deviations, parameter regions, suspicious boundaries. | Search success or failure does not prove a universal statement. |
+| Proof audit | Sufficiency, quantifiers, dependence, limits, selection, and global arguments. | Reviewer agreement does not fill an unresolved gap. |
+| Formal proof assistant | Precisely encoded claims within a checked formal environment. | A checked lemma does not establish the full economic theorem or interpretation. |
 
-### Lean Attempt
+Use tools already available, such as SymPy for exact algebra, NumPy/SciPy or equivalent numerical tools, an appropriate optimizer, or Lean/another proof assistant for suitable claims. Manual checking remains useful when a tool adds little. Record what was actually run.
 
-```text
-Read ECONOMETRICA_VERIFICATION_WORKFLOW.md. If Lean 4 and Lake are installed, run Stage V7 on the selected compact lemmas. Create minimal Lean files, run the checker, and record accepted lemmas and blockers in formalization_notes.md. If Lean is not installed, record the setup blocker and do not simulate proof-assistant output.
-```
+## Re-derive and audit the logic
+
+Restate the primitives and solution concept relevant to the claim. Derive behavior from objectives and constraints, rather than assuming a candidate solution is an equilibrium. Check, as applicable:
+
+- whether first-order conditions are necessary, sufficient, or neither at boundaries;
+- feasibility, global versus local optimality, and profitable deviations;
+- existence versus uniqueness, multiplicity, and equilibrium selection;
+- continuity, compactness, convexity, differentiability, and integrability where invoked;
+- interchange of limits, derivatives, maximization, and expectations;
+- the domain and quantifiers of comparative statics or welfare comparisons;
+- the applicability of imported theorems and each proof dependency.
+
+State where assumptions enter. Distinguish a condition used by the current proof from a condition known to be necessary for the claim. A proof gap does not itself refute a theorem; a valid counterexample does. If a purported complete proof has an unresolved gap, remove its `proved` status while preserving the statement as unresolved.
+
+An independent checker should reconstruct the decisive argument from the statement and primitives before relying on the original proof when feasible. If the same derivation or model context was shared, describe that limit to independence. Audit results are evidence about the proof, not a vote on truth.
+
+## Use computation reproducibly
+
+For a material computational check, preserve the minimal script or command, relevant tool/version information, input domain, tolerances, seed when random, output or failure, and interpretation. Link it to the claim ID and model version. Avoid rerunning unchanged checks unless a new concern justifies it.
+
+For symbolic work, supply domain assumptions, track excluded denominators and branches, and check signs or roots under the actual restrictions. A symbolic expression with unspecified assumptions cannot resolve an economic sign claim.
+
+For numerical work, justify the tested parameter region, inspect boundaries and limiting cases where relevant, and report coverage. Check feasibility, solver convergence, residuals, and sensitivity to tolerances or starting values before interpreting a result. Local solver convergence is not evidence of uniqueness or global optimality.
+
+Search for counterexamples deliberately when feasible. A candidate numerical violation should be checked for admissibility and numerical error, preferably by exact calculation or a reliable independent argument. If that validation is incomplete, label it a suspected counterexample and downgrade confidence without asserting a disproof.
+
+No counterexample found means no counterexample was found in the stated search. It does not justify narrowing the domain silently or upgrading a conjecture to a theorem.
+
+## Respond to errors and counterexamples
+
+A valid counterexample refutes the stated claim. Immediately mark it `refuted`, flag dependent claims and affected draft assertions, and notify the user of the mathematical correction and its scope. Do not wait for approval to acknowledge a false claim, and do not silently replace it with a narrower statement.
+
+Classify the next problem precisely:
+
+| Finding | Response |
+|---|---|
+| Algebra or logical error | Correct the step and recheck its dependencies. |
+| Missing proof step | Mark the gap; investigate whether it is repairable without changing the claim. |
+| Hidden assumption or selection | State it explicitly; determine whether it changes the model, claim, or interpretation. |
+| Valid boundary reversal | Withdraw the universal claim; investigate a conditional result and the mechanism behind the boundary. |
+| Conclusion embedded in an assumption | Separate mathematical validity from limited research content and return that issue to discovery. |
+| Solver or tool failure | Record the failure and use another justified check; do not infer mathematical falsity. |
+
+Within authorized exploration, investigate alternative assumptions or formulations as provisional branches, preserving the failed version. Changes to an author-selected main line follow AGENTS.md and the recorded authorization. Evidence that a result is false remains visible regardless of the decision about its replacement.
+
+Do not add assumptions merely to restore a desired sign. A restriction can be justified by economic scope, a precise mathematical domain, or a meaningful boundary; explain which. The discovery protocol handles whether the revised result teaches enough to pursue.
+
+## Formalize when the benefit warrants it
+
+Select compact or consequential claims for which formalization is useful and feasible. Specify the mathematical statement, definitions, dependencies, and the correspondence to the informal claim before interpreting an accepted file.
+
+Preserve the proof source, checker command, environment/dependencies, and accepted output. Inspect unresolved placeholders and admitted results; an admission of the target or its dependencies does not establish it. Disclose nonstandard added axioms and distinguish conditional verification from a proof under the stated model assumptions. State exactly which encoded claim was accepted and which parts of the economics remain informal.
+
+A failed formalization attempt can expose ambiguity or missing assumptions, but it may also reflect library or engineering limitations. Record the blocker without calling it a counterexample. Do not make whole-paper formalization a routine prerequisite.
+
+## Report the result and update dependents
+
+Update the affected claim records and link the checks, rather than producing a generic “verified” verdict. Briefly report:
+
+- the exact claims checked, their versions, and the resulting proof and check statuses;
+- decisive evidence, unresolved gaps, counterexamples, and coverage limits;
+- changed assumptions or interpretations under consideration;
+- affected dependent claims or draft passages and what needs revalidation;
+- the next justified action within the current authorization.
+
+Review manuscript claims, including prose comparative statics and welfare statements, against these records before they are presented as established. A numerical illustration, plausible intuition, or accepted sublemma must remain labeled at its actual evidentiary level.
+
+## Compact task prompts
+
+**Verify a claim:** Read AGENTS.md, this protocol, and the relevant model version. Extract the exact claim and dependencies, re-derive the decisive argument, select appropriate checks, and update its evidence and status. Report errors immediately and investigate replacements within the existing authorization.
+
+**Search for counterexamples:** For the stated claim and admissible domain, design a targeted search that addresses its likely failure modes. Preserve reproducible evidence, validate suspected violations, and explain the coverage and limitations of a negative search result.
+
+**Assess formalization:** Identify a useful claim, state its relation to the economic result, and assess the required definitions and tools. If an attempt is warranted, run the actual checker and report only what the accepted artifact establishes.

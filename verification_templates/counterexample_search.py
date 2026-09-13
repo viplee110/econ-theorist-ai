@@ -1,18 +1,19 @@
-"""Template for adversarial numerical checks of theory claims.
+"""A small, dependency-free counterexample-search template.
 
-Copy this file into a paper-specific `verification/` folder and replace
-`claim_holds` with the proposition or comparative static being tested.
-Numerical success is not a proof; one valid failure is evidence that the
-claim needs narrower assumptions or a corrected statement.
+Modified for the original workflow refresh (2026-09-13).
+
+Replace the domain, claim and cases for your paper. The example claim is
+alpha * beta <= alpha for alpha >= 0 and 0 <= beta <= 1. Tested cases include
+both domain boundaries and a reproducible interior sample. No failures found
+does not establish a proof; a floating-point failure still needs validation.
 """
 
 from __future__ import annotations
 
 import random
 from dataclasses import dataclass
-
-import numpy as np
-import sympy as sp
+from itertools import chain
+from typing import Callable, Iterable
 
 
 @dataclass(frozen=True)
@@ -22,55 +23,46 @@ class Params:
 
 
 def claim_holds(p: Params) -> bool:
-    """Replace with the target claim.
-
-    Example placeholder claim: alpha * beta <= alpha when beta <= 1.
-    """
-    lhs = p.alpha * p.beta
-    rhs = p.alpha
-    return lhs <= rhs + 1e-10
+    return p.alpha * p.beta <= p.alpha + 1e-10
 
 
-def sample_params(n: int, seed: int = 0) -> list[Params]:
+def boundary_cases() -> Iterable[Params]:
+    # The finite search window is alpha in [0, 10], not the full theorem domain.
+    for alpha in (0.0, 1e-9, 1.0, 10.0):
+        for beta in (0.0, 1e-9, 0.5, 1.0 - 1e-9, 1.0):
+            yield Params(alpha, beta)
+
+
+def sample_params(n: int, seed: int = 0) -> Iterable[Params]:
     rng = random.Random(seed)
-    draws: list[Params] = []
     for _ in range(n):
-        draws.append(
-            Params(
-                alpha=rng.uniform(0.0, 10.0),
-                beta=rng.uniform(0.0, 1.0),
-            )
-        )
-    return draws
+        yield Params(rng.uniform(0.0, 10.0), rng.uniform(0.0, 1.0))
 
 
-def symbolic_sanity_check() -> None:
-    alpha, beta = sp.symbols("alpha beta", nonnegative=True)
-    expr = sp.diff(alpha * beta, beta)
-    print("symbolic derivative d(alpha*beta)/d beta =", expr)
+def find_counterexamples(
+    claim: Callable[[Params], bool], cases: Iterable[Params], limit: int = 10
+) -> list[Params]:
+    if limit < 1:
+        raise ValueError("limit must be positive")
+    failures = []
+    for case in cases:
+        if not claim(case):
+            failures.append(case)
+            if len(failures) >= limit:
+                break
+    return failures
 
 
 def main() -> None:
-    symbolic_sanity_check()
-
-    failures: list[Params] = []
-    for p in sample_params(10_000):
-        if not claim_holds(p):
-            failures.append(p)
-            if len(failures) >= 10:
-                break
-
+    failures = find_counterexamples(claim_holds, chain(boundary_cases(), sample_params(10_000)))
     if failures:
-        print("COUNTEREXAMPLES FOUND")
+        print('Candidate counterexamples (validate arithmetic and assumptions):')
         for failure in failures:
             print(failure)
     else:
-        print("No counterexample found in this numerical search.")
-
-    grid = np.linspace(0.0, 1.0, 11)
-    print("boundary grid for beta:", grid)
+        print('No counterexample in the boundary cases and 10,000 seeded interior draws.')
+        print('This is a finite search, not a proof.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-

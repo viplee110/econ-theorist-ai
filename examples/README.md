@@ -1,26 +1,31 @@
-# Examples
+# Worked examples
 
-These examples are lightweight walkthroughs of the workflow. They are not real
-research projects, not publishable papers, and not literature claims.
+Modified for the original workflow refresh (2026-09-13).
 
-The toy topic used here is deliberately generic and unrelated to any private
-research project:
+Read an example when it helps with the current problem. These are teaching
+reconstructions, not original research or evidence of publication readiness.
 
-```text
-Public recognition and task allocation in team production.
-```
+- [Cournot entry](cournot_entry.md): a false initial conjecture becomes a precise
+  boundary result, with an economic explanation, hand proof, and verified source.
+- [Relabeling check](relabeling_check.md): an exact mapping establishes one
+  duplication claim; a changed mechanism creates a question that still needs
+  literature work.
+- [Executable calculation](boundary_example.py): exact rational arithmetic for
+  the Cournot example. Run `python examples/boundary_example.py` from the repository
+  root with Python 3.8 or later.
 
-Use the examples to learn the shape of a project:
+The examples move between exploration, checking, and writing. No candidate quota,
+journal score, or approval of each reversible calculation is required. A live
+project should keep only the records it needs: `project_state.md`,
+`idea_dossier.md`, `model_note.md`, `literature_evidence_ledger.md`,
+`research_log.md`, and `human_decisions.md`. They need not all exist at startup;
+the examples keep the relevant information together for easy reading.
 
-- `full_walkthrough_toy_project/`: a compact end-to-end run from vague idea to
-  revision decision.
-- `model_base_mini_example/`: a focused D4/D4.5 example showing broad
-  model-skeleton generation before formal derivation.
-- `kill_or_pivot_mini_example/`: a focused example showing how literature
-  absorption and weak theorem bite stop manuscript writing.
+Claim status uses `conjecture`, `proof sketch`, `proved`, `refuted`, or
+`unresolved`. Separately record what checking actually occurred. A hand proof,
+finite computation, opened source, and independent review provide different
+evidence. Never turn one into another by changing a label.
 
-The examples intentionally use prefixed filenames such as
-`01_literature_evidence_ledger.md` so they can be committed to this template
-repository even though real paper-project runtime files are ignored by
-`.gitignore`.
-
+[Behavior cases](../evals/behavior_cases.md) test the intended research behavior.
+The accompanying calculation tests check the toy model only; they do not measure
+an AI's research ability.

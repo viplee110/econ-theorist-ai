@@ -1,5 +1,7 @@
 # Contributing
 
+Modified for the original workflow refresh (2026-09-13).
+
 Thank you for your interest in improving this research workflow system.
 
 At this stage, the project uses an issue-only feedback model.
@@ -17,7 +19,7 @@ Good issues include:
 
 - unclear routing
 - internal contradictions between workflow files
-- missing human gates or safeguards
+- scientific evidence errors or incorrect handling of user authorization
 - confusing documentation
 - toolchain setup problems
 - examples where the system produces a weak or inconsistent research process
@@ -26,7 +28,7 @@ Good issues include:
 Pull requests are not the preferred contribution path right now. The maintainer
 reviews issues, decides which suggestions are useful, and integrates accepted
 changes directly. This helps preserve consistency across the workflow system,
-where a small wording change can affect routing, human gates, simulated review,
+where a small wording change can affect routing, authorization, simulated review,
 and revision behavior.
 
 If this system helps your research, please consider giving the repository a star

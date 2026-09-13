@@ -1,3 +1,4 @@
+# Modified for the original workflow refresh (2026-09-13).
 cff-version: 1.2.0
 message: "If econ-theorist-ai helps your research, please cite the repository."
 title: "econ-theorist-ai"
@@ -7,7 +8,7 @@ repository-code: "https://github.com/viplee110/econ-theorist-ai"
 url: "https://github.com/viplee110/econ-theorist-ai"
 license: "Apache-2.0"
 date-released: "2026-05-13"
-abstract: "An English-first AI workflow system for economic theory research, from idea discovery and literature evidence to theorem development, style calibration, simulated review, and revision planning."
+abstract: "An English-first AI workflow system for economic theory research, from economic discovery and literature evidence to theorem development, clear writing, independent checks, and revision."
 keywords:
   - "economic theory"
   - "AI research workflow"

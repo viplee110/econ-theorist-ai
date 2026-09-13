@@ -1,1157 +1,149 @@
-# Human-AI Workflow for Target-Calibrated Theory Paper Development
-
-Version: 2026-05-08
-
-This file is a working protocol for developing and revising an economics paper with Codex or another AI research assistant. Put this file in the paper's root directory and ask the agent to read it before making research or manuscript changes.
-
-The default ambition remains frontier-level economic theory, originally calibrated against Econometrica-level standards. A project may target RAND, JET, Theoretical Economics, GEB, ReStud, AER, or another venue through `target_journal_profile.md`. Target journal changes calibration, not quality: it changes reader path, referee mix, exposition style, and fit standard, but must not lower rigor, theorem discipline, novelty scrutiny, absorption testing, or proof verification.
-
-The goal is not to assume that repeated AI revision will converge to Econometrica acceptance. The goal is to create a disciplined human-AI process that quickly distinguishes four cases:
-
-1. The core idea is strong and the paper needs writing, proof, positioning, and referee-readiness work.
-2. The idea is promising but must be pivoted before heavy writing.
-3. The manuscript is locally improvable but unlikely to reach the target journal without a new insight.
-4. The project should be redirected to a different journal or split into a different paper.
-
-For high-stakes idea, model, theorem, review, or revision decisions, also read `ECONOMETRICA_PANEL_PROTOCOL.md`. Use independent specialist reports, AE synthesis, Co-Editor decision, and parent-agent summaries to avoid single-agent self-confirmation.
-
-## Operating Principles
-
-- Human judgment is the final authority on contribution, economic importance, identification, taste, and submission decisions.
-- AI is strongest as a tireless analyst, critic, editor, proof checker, map maker, and simulated referee.
-- AI should not be treated as an oracle for novelty or acceptance probability.
-- Never confuse "simulated readiness" with real acceptance.
-- Do not let repeated revision erase the paper's sharp central idea.
-- Stop polishing when the main objection is contribution, identification, or economic relevance.
-- Treat simulated review as local search, not invention. If review reveals no central theorem, old-theory absorption, or weak contribution, return to discovery instead of repairing locally.
-- Do not use a full manuscript as a rescue device for an idea that has not passed the main-theorem gate.
-- The preferred path is theorem note first, manuscript second.
-- Use artifacts, gates, and logs. Do not rely on chat memory alone.
-
-## Core Artifacts
-
-The agent should maintain these files whenever possible:
-
-- `project_state.md`: current stage, last human decision, active thesis, active target, current blocker.
-- `active_context.md`: 80-120 line compact dashboard for continuation; not a source of truth.
-- `human_decisions.md`: append-only record of human gate decisions, reversals, overrides, and reasons.
-- `idea_dossier.md`: one-sentence idea, mechanism, closest papers, novelty claims, feasibility risks.
-- `contribution_lock.md`: the locked core question, non-substitutable insight, and reader belief update.
-- `pre_paper_model_note.md`: 5-8 page note containing the model, main theorem candidate, proof status, and absorption-test result.
-- `model_base_design.md`: confirmed or provisional example-to-theory model base, skeleton funnel, failed simpler alternatives, and recommended baseline.
-- `micro_example_note.md`: hand-solved smallest example, economic intuition, predicted comparative static, failure condition, and literature-gap check before general modeling.
-- `economic_logic_map.md`: concise user-readable map of the phenomenon, core tension, smallest example, predicted conclusion, sharpness, absorption threat, blocker, and next economic question; not a source of truth.
-- `heuristic_derivation.md`: economic derivation path from toy examples to formal objects before proof machinery begins.
-- `agent_runs/`: separated model-search or judge-pass lanes produced by different IDEs, models, or sessions before canonical merge.
-- `cross_agent_model_audit.md`: Judge Pass comparison of multiple lanes before the Minimal Model Base Gate.
-- `theorem_candidates.md`: candidate theorem sentences and proof status inherited from discovery.
-- `absorption_tests.md`: checks for whether the idea is absorbed by known theoretical families.
-- `generality_ledger.md`: running record of special-case moves, added assumptions, longer theorem sentences, and whether the nugget became sharper.
-- `style_calibration.md`: confirmed or provisional style calibration for elegant, field-sensitive exposition without rhetoric.
-- `manuscript_architecture_plan.md`: confirmed or provisional anchor-based plan for section count, section order, appendix boundary, and section-by-section function before full manuscript drafting, major restructuring, or full style pass.
-- `preview_drafts/`: provisional Working Preview Notes and PDFs for human reading during intermediate stages.
-- `field_profile.md`: confirmed or provisional project-level field, adjacent literature, absorption-family, and field-sensitive referee configuration.
-- `target_journal_profile.md`: confirmed or provisional target-journal calibration, including primary target, stretch target, fallback target, target audience, fit standard, and quality floor.
-- `literature_evidence_ledger.md`: verified source records for closest papers, anchor papers, absorption threats, and style anchors.
-- `manuscript_map.md`: section map, theorem/proposition list, assumptions, figures, tables, appendix map.
-- `literature_positioning.md`: nearest substitutes, contribution relative to each, citation risks, missing references.
-- `proof_and_model_audit.md`: assumptions, theorem logic, proof gaps, notation risks, model fragility.
-- `referee_reports/round_N/`: simulated referee, AE, Co-Editor, summary, and panel-configuration reports by round.
-- `revision_tree.md`: Stage 8 branch plans for Defensive Patch, Mechanism Simplification, and Pivot/Reframe.
-- `revision_log.md`: every nontrivial edit with file, location, reason, and expected benefit.
-- `risk_register.md`: unresolved risks, author-only TODOs, pivot warnings, and rejection reasons.
-- `run_summary.md`: compact summary after long automatic runs, including what was tried, what survived, open gates, important files, and next action.
-- `goal_run_plan.md`: plan for an explicitly requested guarded full-auto goal-mode run.
-- `auto_decisions.md`: AI-delegated provisional gate choices used only during guarded full-auto goal mode.
-- `final_ratification_report.md`: end-of-run list of provisional choices, evidence, risks, and human ratification questions.
-- `scratch_runs/`: archived scratch for exploratory outputs that should not clutter the project root.
-- `final_report.md`: final summary after any long work session.
-
-## Human Intervention Modes
-
-Use different autonomy levels at different stages.
-
-- `Auto`: AI may inspect, edit, compile, log, and continue without stopping.
-- `Checkpoint`: AI may do analysis and propose edits, but must stop for human approval before changing the paper's core direction.
-- `Gate`: AI must stop and ask the human to choose proceed, pivot, narrow, split, or abandon.
-- `Human-only`: AI may provide analysis, but the human must make the decision.
-
-Default rule:
-
-- Stages 0, 3, 6, a confirmed Stage 6.5 style pass, and mechanical parts of 8 can be `Auto`.
-- Stages 1, 1.5, 2, 5, the first Stage 6.5 style calibration, 7, 9, and 10 require `Gate` or `Human-only`.
-
-## Human Decision Persistence
-
-Human gate outcomes must be written to persistent artifacts before the workflow treats them as durable state. Do not rely on chat history alone. In guarded full-auto goal mode, AI-delegated provisional choices go to `auto_decisions.md`; they are durable run state, but not confirmed human decisions.
-
-Every local Human gate in this file inherits the full gate format from `ECONOMETRICA_ORCHESTRATOR.md`.
-
-For every real human gate:
-
-- Create `human_decisions.md` if it is missing, then append the decision, date, stage, reason, and affected files.
-- Update the current-state file, usually `project_state.md`, and any domain artifact directly controlled by the decision, such as `field_profile.md`, `target_journal_profile.md`, `manuscript_architecture_plan.md`, `style_calibration.md`, `contribution_lock.md`, `literature_positioning.md`, `risk_register.md`, `revision_tree.md`, or `final_report.md`.
-- If the decision changes what prior panels, proofs, citations, or manuscript sections mean, mark the required rechecks explicitly.
-
-For every AI-delegated provisional gate in guarded full-auto goal mode:
-
-- Create `auto_decisions.md` if it is missing, then append the gate name, provisional decision, evidence, risks, rejected alternatives, affected files, and ratification question.
-- Keep the controlled artifact status provisional or `AI-delegated provisional`.
-- Add the decision to `final_ratification_report.md` before the run is complete.
-
-Major gates must use this explicit structure. Simple user commands do not simplify the gate:
-
-```text
-Gate name:
-Why the system is stopping:
-Evidence summary:
-Decision needed:
-Recommended option:
-Alternatives:
-Consequences:
-Files to update:
-Next stage after decision:
-```
-
-Do not ask vague questions such as "continue?" or "what do you think?" at major gates. The user should not need to know the internal stage names, but the gate prompt must teach what decision is needed and what happens next.
-
-Human decisions are append-only by default. A later reversal supersedes the previous decision for current work but does not erase it. Record reversals in this form when useful:
-
-```text
-Decision reversal / Override
-Date:
-Previous decision:
-New decision:
-Reason:
-Affected artifacts:
-Required updates or rechecks:
-```
-
-## Token and Decision Discipline
-
-Token economy must never override research quality. Use `active_context.md` as an 80-120 line compact dashboard to reduce redundant reconstruction during long projects, but verify substantive claims against source artifacts such as `project_state.md`, `human_decisions.md`, `field_profile.md`, `target_journal_profile.md`, `literature_evidence_ledger.md`, `contribution_lock.md`, `risk_register.md`, `revision_tree.md`, and panel reports.
-
-The dashboard should include:
-
-```text
-Current stage:
-Current blocker:
-Economic logic map status:
-Confirmed source-of-truth artifacts:
-Open human gates:
-Micro-example status:
-Model base status:
-Model lane status:
-Pending Judge Pass:
-Provisional modeling constraints:
-Next model-base test:
-2-4 step horizon:
-Execute next:
-Why this next action has highest information value:
-Safety barriers active:
-If only 2 hours are available:
-```
-
-Low-token discipline means shorter boilerplate, fewer repeated summaries, and cleaner state handoffs. It does not mean shallow main-theorem discovery, abbreviated proof verification, skipped closest-literature checks, compressed simulated review, or lightweight handling of high-stakes revision.
-
-Decision Batch Mode:
-
-- Accumulate non-core small decisions into batches of 3-5 before asking the human.
-- Ask immediately when the decision concerns the central question, main theorem, model primitives, assumption set, novelty claim, target journal, or the choice to submit, pivot, split, retarget, or abandon.
-- Write every real human gate outcome to `human_decisions.md` and the artifact controlled by that decision before treating it as confirmed state. In guarded full-auto goal mode, write AI-delegated provisional choices to `auto_decisions.md` and keep the controlled artifact unconfirmed until later human ratification.
-
-Generality Ledger Mode:
-
-- Maintain `generality_ledger.md` when revisions add distribution assumptions, special graph structures, extra agents, extra states, regularity conditions, or longer theorem sentences.
-- If generality loss is rising but the nugget is not sharper, stop local polishing and return to Discovery D4.5, D4-D6, or Stage 8 tree search.
-
-Closed-loop safety barriers:
-
-- No strong novelty claim without literature evidence.
-- No full manuscript before theorem sentence and absorption test.
-- No established theorem if proof status is sketch only.
-- No local polishing if complexity debt is rising.
-- No kill of a possible frontier spike before spike-specific tests.
-- No target-journal downgrade as a substitute for theorem quality.
-- No general model before a hand-solved `micro_example_note.md`, unless the task is explicitly mechanical model solving.
-- No confirmed model primitives, assumptions, or equilibrium concepts before the Minimal Model Base Gate, unless the task is explicitly mechanical model solving.
-- No fixed point, contraction, IFT, or existence-theorem machinery before the economic object requiring consistency has been explained.
-- No autonomous approval of the Micro-Example Gate, Minimal Model Base Gate, main theorem gate, novelty claim, contribution lock, or invest/pivot/kill decision in ordinary mode.
-- In explicitly requested guarded full-auto goal mode, these decisions may be crossed only as `AI-delegated provisional` entries in `auto_decisions.md`; they remain unconfirmed until human ratification.
-
-Fault alarms:
-
-- contribution sentence lengthening
-- assumption count rising
-- proof confidence stagnant
-- absorption risk unresolved
-- same panel criticism recurring
-- model note not compressing to 5-8 pages
-- `risk_register.md` growing without resolution
-- model base feels mechanically formal, assumption-heavy, or lacks a small example
-- missing or merely verbal micro-example before formal derivation
-- formal proof machinery appears before economic necessity is established
-- top-level generated files grow without a sharper mechanism, gate decision, or consolidated state
-
-When a fault alarm fires, stop local polishing and return to Discovery D4.5, D4-D6, Stage 8 tree search, or an explicit human gate.
-
-## Guarded Full-Auto Goal Mode
-
-This mode is available only when the user explicitly asks for end-to-end
-automatic development, full-auto goal mode, or equivalent language. It is meant
-to produce a complete polished provisional draft, not to certify that the paper
-is correct, novel, or submission-ready.
-
-Behavior:
-
-- Start by writing `goal_run_plan.md` with objective, target assumptions, phase
-  sequence, artifact budget, stopping conditions, and expected final outputs.
-- At each major human gate, preserve the normal gate evidence but record the
-  choice as `AI-delegated provisional` in `auto_decisions.md`.
-- Continue through discovery, model-base construction, theorem search,
-  manuscript drafting, style calibration, simulated review, and one revision
-  path only while safety barriers remain satisfied.
-- Keep all controlled artifacts provisional unless the user later confirms them
-  in `human_decisions.md`.
-- Stop rather than loop when the same blocker recurs three times, when a proof
-  or literature claim cannot be made honestly, or when the artifact budget is
-  exhausted.
-- End with `final_ratification_report.md`, summarizing every provisional gate,
-  manuscript status, unresolved proof/literature/style risks, and the exact
-  human decisions needed before submission.
+# Developing and Writing Economic Theory
 
-Guarded full-auto may polish prose, but it must not convert weak model logic,
-unverified novelty, or sketch-only proofs into confident claims.
+Workflow revision: 2026-09
 
-## Artifact Budget For Long Runs
-
-Long automatic runs must produce research progress, not file sprawl.
-
-- Keep canonical source-of-truth artifacts in the project root.
-- Put exploratory scratch under `scratch_runs/YYYYMMDD_HHMM/` or lane-specific output under `agent_runs/[run_id]/`.
-- If a run would create more than roughly 25 top-level generated runtime files, stop and consolidate before continuing.
-- End every long automatic run with `run_summary.md` and an updated `active_context.md`.
-- `run_summary.md` should list what was tried, what survived, what failed, open gates, files that matter, and the next highest-value action.
-
-## Manuscript-Mode Firewall
-
-Before substantial manuscript revision, check whether the project has passed the discovery gates in `ECONOMETRICA_DISCOVERY_WORKFLOW.md`:
-
-- a 5-8 page `pre_paper_model_note.md` or equivalent theorem note
-- a sharp theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y"
-- `absorption_tests.md` showing why the result is not just a known theory family, identified through the closest-literature search, under new names
-- a confirmed or explicitly provisional `field_profile.md` recording the primary field, adjacent fields, absorption-risk families, and field-sensitive referee roles
-- a confirmed or explicitly provisional `target_journal_profile.md` recording primary target, stretch target, fallback target, target audience, fit standard, and quality floor
-- `model_tournament.md` or equivalent evidence that multiple model spaces were considered before the current model was selected
-- `micro_example_note.md`, `model_base_design.md`, and `heuristic_derivation.md`, or equivalent evidence that the current model base was built from a hand-solved smallest economically interpretable example and passed the Micro-Example Gate and Minimal Model Base Gate
-- a human-approved `contribution_lock.md`
-- before a full manuscript draft, major restructuring, or full style pass, a confirmed or explicitly provisional `manuscript_architecture_plan.md` comparing the section architecture to target-, field-, and genre-matched published papers
-
-If these artifacts are missing, Stage 0 may still map an existing manuscript, but Stages 3, 6, and 8 should not try to rescue it through local repairs. Route back to Discovery D4.5 or D4-D6 unless the user explicitly asks for mechanical editing only.
-
-## Working Preview Notes
-
-Working Preview Notes are provisional reading snapshots, not workflow stages and not source-of-truth artifacts.
-
-Use `preview_drafts/preview_note_YYYYMMDD_HHMM.md` when the human asks for a short draft, short PDF, or intermediate manuscript snapshot before the model, theorem, or manuscript is fully confirmed.
-
-Each preview must state:
-
-```text
-Status: Provisional preview
-Not source of truth
-Model base status:
-Theorem status:
-Literature evidence status:
-Pending human gates:
-Next safe workflow step:
-```
+Modified: 2026-09-13.
 
-Rules:
-
-- A preview may summarize a candidate question, model base, theorem sketch, literature status, and current risks for human reading.
-- A preview must not confirm model primitives, assumptions, equilibrium concepts, theorem status, novelty, target fit, or style direction.
-- If the Minimal Model Base Gate has not passed, say the model base is unconfirmed.
-- If proof status is sketch only, say the theorem is a sketch or candidate, not established.
-- If closest-literature evidence lacks `literature_evidence_ledger.md` entries, mark novelty and absorption statements provisional.
-- If generating a PDF, verify the exact output path and report the file using the filename-only card plus full path in code formatting.
-
-## Stage 0 - Project Intake and State Reconstruction
+Use this module when developing an economic explanation, drafting a paper, or revising an existing manuscript. Read `AGENTS.md` for the shared rules on evidence, authorization, and preservation of author work; this module does not add another approval system. Use `ECONOMETRICA_ORCHESTRATOR.md` to resume work and load only the relevant methods.
 
-Autonomy: Auto
+The research objective is a useful, defensible change in economic understanding. A frontier paper may contribute a mechanism, an important boundary, an impossibility result, a unifying explanation, or a method that enables previously inaccessible economic analysis. Technical difficulty, generality, a dramatic result, and simulated acceptance are not substitutes for that contribution.
 
-Purpose:
+## Work from the Actual Research Problem
 
-Build a shared state before judging or editing.
+Exploration, checking, and writing are activities that can alternate or run alongside one another. They are not a sequence of stages that every paper must complete. Writing a short explanation can expose a missing mechanism; a counterexample can open a new question; a clear result can justify deeper verification.
 
-AI tasks:
+At the start of a development task:
 
-- Identify the main manuscript, appendices, bibliography, figures, tables, code, data, and build command.
-- Create or update `project_state.md`.
-- Create or update `manuscript_map.md`.
-- Compile the paper if possible.
-- Record build blockers.
-- Summarize the current paper in one page.
+- Identify the author's current question, intended reader, selected direction, and requested scope from the available materials.
+- Separate constraints the author actually imposed from assumptions introduced by the AI.
+- Read the current economic explanation and relevant model, claims, and literature evidence. Do not require a project to reconstruct a discovery tournament before working on an existing paper.
+- Choose a concrete output that will advance understanding: a mechanism explanation, a discriminating example, a revised result, a section draft, or a targeted check.
 
-Human gate:
+Within the scope defined in `AGENTS.md`, investigate alternatives and make reversible improvements. Preserve an author-selected main line when exploring a different one; show a candidate branch and its consequences rather than silently replacing the author's choice. Existing authorization remains effective across related work.
 
-- Confirm that the AI identified the correct main manuscript and target.
+## Small Set of Working Records
 
-Output:
+Use the [shared record definitions](ECONOMETRICA_ORCHESTRATOR.md#current-state-and-evidence). Develop the economic explanation in `idea_dossier.md`, read the relevant claims from `model_note.md`, and record material revisions in `research_log.md`. Do not create an empty set of files.
 
-- `project_state.md`
-- `manuscript_map.md`
-- Initial build status in `revision_log.md`
-
-Proceed condition:
-
-- The agent knows what files matter and can build or inspect the manuscript.
+Keep manuscript sources in the project's existing location. Preserve proof and computational evidence under `verification/` or link to existing evidence in place. Keep longer calculations and parallel exploratory drafts outside the compact current-state notes.
 
-## Stage 1 - Idea Kill Test
-
-Autonomy: Gate
-
-Purpose:
-
-Test whether the idea is worth writing to a frontier-level target before heavy manuscript polishing.
-
-AI tasks:
-
-- Write `idea_dossier.md`.
-- If the go/no-go decision is high-stakes, run an Idea Panel from `ECONOMETRICA_PANEL_PROTOCOL.md`.
-- State the one-sentence contribution.
-- State the candidate main theorem sentence: "This paper proves X, and existing theory cannot obtain X because Y."
-- Identify the closest existing papers and the strongest substitute argument.
-- Create or update `literature_evidence_ledger.md` for any closest-paper or absorption-threat claim used in the score.
-- Create or update `field_profile.md` if the project does not already have a confirmed current profile.
-- Run or update `absorption_tests.md` if the idea might be a relabeling of a known framework.
-- State what belief a specialist should change after reading the paper.
-- Identify why the current or likely target journal might desk reject the paper.
-- Identify what would have to be true for the paper to deserve a frontier-level theory outlet.
-
-Required questions:
-
-- What is the central economic question?
-- What is the non-substitutable insight?
-- What is surprising after conditioning on the existing literature?
-- Does the model reveal a mechanism, or only repackage a known mechanism?
-- Can the theorem be absorbed by the closest theory families found in the literature search?
-- Are the assumptions doing essential economic work or merely engineering the result?
-- If the main theorem is true, what important belief changes?
-- If the paper disappeared, what would the literature still fail to understand?
-
-Scoring:
-
-Use 1 to 5 for each dimension:
-
-- Novelty
-- Economic importance
-- Non-substitutability
-- Feasibility
-- Theoretical bite
-- Identification or modeling credibility
-- Robustness to closest substitute papers
-
-Human gate:
-
-The human must choose one:
-
-- `Proceed`: idea is strong enough for full development.
-- `Pivot`: change the core question, mechanism, setting, or theorem target.
-- `Narrow`: reduce ambition and aim for a more precise contribution.
-- `Split`: separate multiple ideas into different papers.
-- `Abandon or retarget`: do not aim this version at the current target.
-
-If `field_profile.md` was created or materially changed during this stage, the human must also confirm or correct it before `Proceed`; record the confirmation in `field_profile.md` and `project_state.md`.
-
-Proceed condition:
-
-- No score below 3.
-- Novelty, importance, and non-substitutability are at least 4.
-- The main theorem sentence is sharp and not absorbed by the nearest substitute theory.
-- Closest-paper and absorption-threat claims are backed by `literature_evidence_ledger.md`, or the novelty and absorption conclusions are explicitly provisional.
-- The project-level field profile is confirmed, or explicitly marked provisional because search tools are unavailable.
-- The human can defend the one-sentence contribution without relying on wording tricks.
-
-## Stage 1.5 - Target Journal Profile Gate
+## Write the Economic Explanation Early
 
-Autonomy: Gate
+As soon as a mechanism has enough shape to discuss, prepare a short explanation in `idea_dossier.md`. A two-page note or five-minute seminar explanation is a useful format, not a mandatory length or an entry ticket to further research.
 
-Purpose:
+The explanation should let the intended reader answer:
 
-Recommend and confirm the target-journal calibration without lowering the paper's quality floor.
+1. What is the economic question or theoretical difficulty?
+2. What does a natural existing explanation lead one to expect?
+3. Who changes behavior, in response to what incentive or information, and with what consequences for others?
+4. What does the analysis teach that the reader did not already know?
+5. Which condition or institutional feature changes the answer, and why?
 
-Guiding principle:
+For a methodological contribution, explain the economic question that becomes tractable and demonstrate a minimal application. Do not invent a policy story, empirical claim, or behavioral narrative for a result whose contribution is methodological.
 
-```text
-Target journal changes calibration, not quality.
-A different target changes reader path, referee mix, exposition style, and fit standard;
-it must not lower rigor, theorem discipline, novelty scrutiny, or absorption testing.
-```
+Use the smallest example that reveals the force when useful. A finite example is not compulsory if it removes the mechanism; a restricted subproblem, limiting case, diagram, or minimal application may explain it better. Formal analysis may help discover the intuition rather than waiting for a complete intuition in advance.
 
-AI tasks:
+When alternatives remain plausible, state their different predictions and the next observation, calculation, or literature comparison that could distinguish them. Do not fill explanatory gaps with additional terminology.
 
-- Inspect available evidence: `idea_dossier.md`, `field_profile.md`, `literature_probe.md`, `literature_evidence_ledger.md`, `primitive_hunter_report.md`, `theorem_candidates.md`, `absorption_tests.md`, `generality_ledger.md`, `risk_register.md`, `manuscript_map.md`, and latest panel reports if available.
-- Create or update `target_journal_profile.md`.
-- Recommend a target ladder:
-  - Primary target
-  - Stretch target
-  - Fallback target
-- Explain whether the recommendation reflects fit, reader path, field audience, theorem strength, absorption risk, exposition needs, or a genuine quality limitation.
-- Preserve upward ambition. If primary target is RAND, still check whether Econometrica, TE, or JET stretch potential exists.
-- If retargeting from Econometrica to RAND or another outlet, state whether this is a fit change, reader change, or quality limitation. Do not hide quality concerns by calling them mere fit.
-- If the target recommendation depends on closest literature or journal/style anchors that are not recorded in `literature_evidence_ledger.md`, mark the affected target-profile claims provisional.
-- If `model_base_design.md`, `theorem_candidates.md`, or closest-literature evidence is missing, mark target-level potential provisional. A target ladder may guide the next search, but target-journal readiness cannot be confirmed from the idea alone.
+## Reader Checks Before Expensive Polish
 
-Minimum `target_journal_profile.md` schema:
+Use `ECONOMETRICA_PANEL_PROTOCOL.md` for a fresh reader check when the explanation needs an outside test. Give the reader the note and its intended audience, without the author's self-assessment or earlier review verdicts. Ask the reader to restate the question, behavioral mechanism, result, significance, and boundary.
 
-```text
-Project or candidate:
-Status: Confirmed / Provisional / Stale / Reopen requested
-Human confirmation:
-Primary target:
-Stretch target:
-Fallback target:
-Target audience:
-Fit standard:
-Quality floor:
-Theorem rigor expectation:
-Reader path:
-Referee mix implications:
-Style calibration implications:
-What must improve to move upward:
-What would trigger retargeting:
-Evidence used:
-Literature evidence ledger status:
-Missing evidence:
-Reopen triggers:
-```
+A failure to restate the argument can indicate different problems:
 
-Default recommendation logic:
+- The economic discovery is present but obscured by exposition: rewrite the reader path.
+- The result is clear but the claimed contribution is unsupported: examine the literature comparison or significance.
+- The mechanism is missing or inconsistent: return to the relevant modeling question.
+- The result is conditional in an economically meaningful way: make the boundary part of the explanation.
 
-- Econometrica, Theoretical Economics, or JET: deep primitive, general theorem, high theorem bite, low absorption risk, and broad theoretical interest.
-- RAND: strong economic mechanism with IO, platform, market design, regulatory, institutional, or applied-theory relevance; clear comparative statics; strong reader path for applied theory.
-- GEB: strategic interaction or game-theoretic mechanism is central.
-- ReStud, AER, or QJE theory-style paper: large economic question, broad reader interest, clean mechanism, strong narrative, and theorem package that travels beyond a narrow field.
-- Field journal or working-paper route: idea is valuable but theorem bite, novelty, or generality is not yet top-field-ready.
+An AI reader supplies a diagnostic, not evidence that economists will value the paper. Prepare materials for real expert or seminar feedback when useful, and incorporate feedback the user provides. Follow `AGENTS.md` for any external contact; never invent a human reaction.
 
-Human gate:
+## Maintain a Revisable Contribution
 
-The human must confirm, edit, or reject the target ladder. Record the decision in `human_decisions.md` and update `project_state.md`. If the profile remains provisional because evidence is missing, mark exactly which evidence is missing.
+Record the current contribution together with its supporting claims and uncertainty. Useful elements are the economic question, the best current answer, the closest published comparison, the reader's resulting understanding, and what could change that answer.
 
-Proceed condition:
+Do not freeze a desired theorem or contribution sentence as a scientific constraint. A prior author choice records research intent, not mathematical truth. Evidence may require withdrawing a claim immediately while the author considers a different direction.
 
-- `target_journal_profile.md` is confirmed or explicitly provisional.
-- The target profile states a quality floor and does not weaken theorem, novelty, absorption, or verification requirements.
-- The profile can be reused by Stage 6.5 style calibration, Stage 7 target-calibrated review, and Stage 8 revision triage.
+When a result changes, record in `research_log.md`:
 
-## Stage 2 - Contribution Lock
+- The old and new claim, including changed assumptions or quantifiers.
+- The evidence that required or motivated the change.
+- Whether the change corrects an error, identifies an economic boundary, or introduces a modeling cost needing justification.
+- The implications for the current economic explanation and affected manuscript passages.
 
-Autonomy: Gate
+A longer or more conditional sentence is not grounds for rejection. A meaningful boundary can strengthen a paper. A shorter sentence obtained by omitting a truth-critical condition is unacceptable. Judge complexity by the economic work it performs, not by counting assumptions or clauses.
 
-Purpose:
+Do not dismiss a contribution merely because it uses a known mathematical framework. Use the literature comparison method in `ECONOMETRICA_DISCOVERY_WORKFLOW.md` to establish whether the economic result is already present, or whether familiar tools reveal something new.
 
-Prevent later rounds from diluting the core idea.
+## Carry Claim Status into Every Draft
 
-AI tasks:
+`ECONOMETRICA_VERIFICATION_WORKFLOW.md` owns the verification procedure. Writing must preserve its distinctions:
 
-- Create or update `contribution_lock.md`.
-- Create or update `economic_logic_map.md` so the locked contribution is connected to the phenomenon, core tension, theorem sentence, absorption threat, and next economic question.
-- Draft four locked statements:
-  - `Central question`
-  - `Main theorem sentence`
-  - `Non-substitutable insight`
-  - `Reader belief update`
-- Draft a short "do not dilute" list.
-- Draft a "claims we must not overstate" list.
+- Claim status: `conjecture`, `proof sketch`, `proved`, `refuted`, or `unresolved`.
+- Independent check: `not run`, `pass`, or `gap`, with the scope of the check.
+- Computational and formal evidence: record what was actually checked, under which model version and assumptions.
 
-Human gate:
+Each substantive formal claim must link to its claim ID, model version, assumptions, quantifiers, dependencies, and evidence in `model_note.md` or the existing claim records. `proved` requires a complete proof of the stated claim; numerical success or failure to find a counterexample does not supply one. Independent review is recorded separately from the proof's existence.
 
-The human must approve or rewrite the four locked statements.
+If a premise changes, identify the claims and passages depending on it and mark their relevant checks and wording for re-examination. Do not invalidate unrelated work or restart the whole project. A prose-only edit does not require repeating a mathematical audit unless its meaning changes.
 
-Rule:
+Provisional drafts may contain conjectures and proof sketches if they are clearly identified where relevant. A reading draft need not wait for every uncertainty to disappear. It must not present a conjecture as a theorem or an incomplete search as established novelty.
 
-No later revision may weaken these statements without explicit human approval.
+## Build the Manuscript around the Argument
 
-Proceed condition:
+Choose section order from the reader's needs and the contribution. A usual progression introduces the question and tension, explains the model, develops the principal findings, and discusses their implications and boundaries. Change that progression when the paper's argument warrants it.
 
-- The introduction, theorem targets, and conclusion can all be organized around the locked theorem and contribution.
+Before a large draft or restructuring, sketch what each section teaches and which claims it uses. Put this outline in the current working note or manuscript plan; it does not require an additional architecture artifact or approval gate.
 
-## Stage 3 - Model, Assumption, and Proof Architecture Audit
+Ask of each section:
 
-Autonomy: Mostly Auto, with Gate if a foundational issue appears
+- What understanding does the reader gain here?
+- Why is that understanding needed at this point?
+- Which assumptions and results carry it?
+- What belongs in the main argument, and what can move to a proof appendix or be removed?
 
-Purpose:
+Use published papers as exposition references when a specific difficulty warrants it. Select relevant examples and record the source and limits of the comparison in the literature ledger. There is no required number of anchors and no requirement to match another paper's section count. Full-text evidence is needed for claims about its detailed exposition; an abstract supports only limited conclusions.
 
-Determine whether the model and proofs can carry the contribution.
+Extract useful explanatory choices, not prose to imitate. Reuse prior reading when it is relevant. Ordinary editing does not wait for a style contract, a journal profile, or a separate architecture confirmation.
 
-AI tasks:
+## Draft Clear, Precise Prose
 
-- Create `proof_and_model_audit.md`.
-- List primitives, agents, timing, information, constraints, equilibrium concept, objects of interest, assumptions, and results.
-- Check whether assumptions are economically interpretable.
-- Check theorem statements against proof structure.
-- Run Result Statement Hygiene: check whether each theorem, proposition, lemma, and corollary statement states only the minimal formal result, whether every condition is truth-critical, and whether interpretation, proof intuition, caveats, examples, or literature positioning should be moved to setup, proof roadmap, remark, or post-result discussion.
-- Flag defensive statement bloat when many clauses are needed for the result to sound true; record suspect conditions in `assumption_ledger.md`, `generality_ledger.md`, or `risk_register.md` rather than burying them inside the statement.
-- Check notation consistency between main text and appendix.
-- Identify missing lemmas or hidden regularity conditions.
-- Identify where the proof relies on unstated monotonicity, continuity, compactness, genericity, equilibrium selection, or identification assumptions.
+Lead substantive sections with their economic purpose. Introduce notation when it becomes useful. Explain assumptions through the behavior or institutional feature they represent, including where they limit applicability.
 
-Human gate:
+Formal theorem and proposition statements must retain every truth-critical assumption, domain, quantifier, and equilibrium qualification, either stated directly or through an unambiguous reference to maintained assumptions. Keep interpretation and proof intuition in surrounding prose when that improves clarity. Concision must not change a mathematical assertion.
 
-Stop if any issue threatens the main result, main mechanism, or contribution lock.
+After an important result, explain its causal or strategic logic, its relationship to the relevant benchmark, and its economic boundary. An abstract or introduction should communicate the question and contribution in language the intended reader can follow without reconstructing the proof.
 
-Proceed condition:
+Avoid decorative motivation, inflated importance claims, needless terminology, and repeated defensive caveats. State limitations where they bear on an argument. Do not suppress economically central limitations for a stronger narrative, and do not repeat the entire risk register throughout the paper.
 
-- The core result is either sound or has a clearly identified repair path.
+Preserve the author's voice. A targeted edit is enough when it solves the problem; a broader rewrite is appropriate when the reader path requires it and the task authorizes it. User-requested writing improvements do not need repeated style approvals.
 
-## Stage 4 - Execution and Feasibility Audit
+## Revise According to Evidence
 
-Autonomy: Auto
+Treat comments as hypotheses to investigate. Identify the exact affected claim or passage, the evidence offered, and whether the comment concerns correctness, contribution, economic interpretation, exposition, or presentation. A reviewer's confidence or repeated objection is not itself proof.
 
-Purpose:
+Correct demonstrably false statements promptly. For unresolved substantive objections, compare the plausible responses: a corrected claim, a meaningful boundary, a simpler explanation, a different model, or a change in research question. Do not require a fixed three-branch ritual for every revision.
 
-Close the ideation-execution gap.
+When the choice is genuinely open, produce enough of the leading alternatives to make the tradeoff reviewable. Reversible branch prototypes may be developed within the authorized scope. Preserve the author's selected manuscript while an alternative direction remains only a proposal.
 
-AI tasks:
+Judge a proposed assumption by whether it has an economic interpretation, how it affects the result, and what it costs in applicability. Endogenize an object when holding it fixed distorts the question or when its determination is itself the question. More primitive depth is not an automatic improvement.
 
-- Identify every claim that requires a proof, computation, calibration, robustness check, data result, or external citation.
-- Mark each claim as verified, partially verified, unverified, or author-only.
-- Run available code or compile tables if safe and possible.
-- When compiling LaTeX or reporting generated PDFs, verify the exact output path with `Test-Path -LiteralPath` or `Resolve-Path -LiteralPath` before reporting it. If creating a PDF file card or Markdown file link, use the filename only as the visible title and put the full resolved path on a separate `Full path:` line in backticks or a fenced code block so Markdown cannot drop `\` or `/` separators.
-- Build output paths with `Join-Path`, `Resolve-Path -LiteralPath`, `pathlib`, or equivalent path APIs. Do not manually concatenate path fragments in user-facing output.
-- Check whether figures and tables support the claims made in the text.
-- Add unverifiable claims to `risk_register.md`.
+Repeated criticism calls for diagnosis: is there new evidence, a valid unresolved objection, shared reviewer framing, or a misunderstanding of the paper? Use a targeted check to resolve it. Do not automatically kill, pivot, or retarget after a fixed count of negative reviews.
 
-Human gate:
+Record meaningful changes and their reasons in `research_log.md`, preserve recoverable versions following `ECONOMETRICA_VERSION_CONTROL.md`, and compile after meaningful LaTeX edits when the toolchain is available. Report verification limits accurately when a tool is unavailable.
 
-- Required only if the paper depends on an unverified result.
+## Assess the Result, Not Workflow Completion
 
-Proceed condition:
+Before describing a draft as ready for outside evaluation, inspect the actual manuscript and its supporting evidence:
 
-- The paper does not rely on invented, assumed, or unverified evidence.
+- The question, mechanism or methodological contribution, and economic importance are understandable.
+- Central results have the status and evidence claimed for them.
+- Literature comparisons are accurate and appropriately qualified.
+- Assumptions and applicability boundaries are visible to the reader.
+- Unresolved concerns and author choices are clearly identified.
 
-## Stage 5 - Literature Positioning and Novelty Audit
+Target-journal discussion should draw on relevant published work and the intended audience. No self-score, panel majority, number of revisions, or completion of these methods establishes top-journal quality or a probability of acceptance. Real submission and external commitments follow the authorization rules in `AGENTS.md`.
 
-Autonomy: Gate
+## Existing Projects
 
-Purpose:
-
-Stress test novelty against the real literature.
-
-AI tasks:
-
-- Create or update `literature_positioning.md`.
-- Create or update `field_profile.md` if it is missing, provisional, or contradicted by new literature.
-- Identify nearest substitute papers.
-- Create or update `literature_evidence_ledger.md` for every nearest substitute, absorption threat, method anchor, and style anchor used in the audit.
-- For each substitute, write:
-  - what it already does
-  - what this paper adds
-  - what it makes less novel
-  - what citation or framing change is needed
-- Flag missing citations rather than inventing them.
-- Separate "known to be true from documents" from "AI inference."
-- If a nearest substitute is not recorded in `literature_evidence_ledger.md`, mark the corresponding novelty or absorption conclusion provisional.
-
-Human gate:
-
-The human must verify the key nearest substitute papers, confirm or correct the project-level field profile if it is new or materially changed, record the confirmation in `field_profile.md` and `project_state.md`, and decide whether the novelty claim survives.
-
-Proceed condition:
-
-- The project has a defensible contribution after accounting for the closest substitutes, with key closest-literature evidence recorded in `literature_evidence_ledger.md` or explicitly marked provisional.
-
-## Stage 5.5 - Manuscript Architecture Compliance Gate
-
-Autonomy: Gate
-
-Purpose:
-
-Prevent the manuscript from becoming a workflow-shaped document. Before a full manuscript draft, major restructuring, or full style pass, calibrate the paper's section architecture against published papers that match the confirmed target, field, method, and contribution type.
-
-Hard rule:
-
-```text
-Every section must have a job.
-Every section must be justified by contribution logic and anchor-paper norms.
-No full manuscript draft, major restructuring, or full style pass before an anchor-based manuscript architecture audit.
-```
-
-Prerequisites:
-
-- Reuse confirmed `field_profile.md` and `target_journal_profile.md` when current.
-- Use `literature_evidence_ledger.md` for every named architecture anchor. If an anchor is not recorded there, mark the architecture judgment provisional.
-- Prefer user-provided PDFs or legally available full-text papers when possible. If only abstracts, tables of contents, or partial pages are available, mark the corresponding structure evidence provisional.
-
-AI tasks:
-
-- Search for or reuse 3-6 target-, field-, and genre-matched published papers as manuscript architecture anchors.
-- Create or update `manuscript_architecture_plan.md`.
-- Compare the current or proposed manuscript to anchor-paper norms for section count, section order, section function, appendix boundary, and results/extension placement.
-- Diagnose whether the draft has too many sections, too many local repairs, workflow-shaped structure, a theorem package without narrative order, or sections that exist only because the AI generated an artifact.
-- Recommend which sections to keep, merge, delete, split, reorder, or move to the appendix.
-- Stop for human confirmation before major rewriting if the section architecture materially changes.
-
-Minimum `manuscript_architecture_plan.md` fields:
-
-```text
-Status: Confirmed / Provisional / Stale / Reopen requested
-Target journal and genre:
-Field and contribution type:
-Architecture anchors:
-Ledger status for each anchor:
-Evidence coverage: full-text / partial / provisional
-Typical section architecture:
-Recommended section count:
-Recommended section order:
-Essential sections:
-Optional sections:
-Appendix material:
-Current manuscript structure diagnosis:
-Sections to keep:
-Sections to merge:
-Sections to delete:
-Sections to move to appendix:
-Section-by-section function:
-Architecture risks:
-Human confirmation status:
-```
-
-Human gate:
-
-The human must confirm, edit, or reject the proposed section architecture before the system treats it as a manuscript-level constraint. Record the decision in `human_decisions.md`, update `manuscript_architecture_plan.md`, and mark any required rechecks in `risk_register.md`.
-
-Proceed condition:
-
-- `manuscript_architecture_plan.md` is confirmed or explicitly provisional.
-- Every retained section has a clear function tied to the locked contribution.
-- Deviations from anchor-paper norms are justified by the paper's theorem, mechanism, evidence, or target audience rather than by AI convenience.
-
-## Stage 6 - Controlled Manuscript Development
-
-Autonomy: Auto, unless contribution changes
-
-Purpose:
-
-Write and revise without losing the core idea.
-
-AI tasks:
-
-- Revise section by section.
-- Check `economic_logic_map.md` before rewriting so manuscript edits clarify the economic force rather than only improving prose.
-- Check `manuscript_architecture_plan.md` before drafting or restructuring. If it is missing, provisional without explanation, stale, or contradicted by the current target, field, theorem, or contribution lock, run Stage 5.5 before full manuscript work.
-- For each major section, perform a paragraph-level pass.
-- Improve clarity, notation, transitions, proof roadmaps, motivation, and conclusion.
-- Separate result-statement editing from exposition writing. First preserve or create a clean minimal formal statement; then place economic interpretation, why-it-matters, caveats, examples, and proof strategy in the surrounding paragraphs.
-- A manuscript or style pass may move explanation out of overloaded result statements, but it must not change theorem substance, assumptions, model primitives, or novelty claims without triggering verification and any required human gate.
-- Preserve author voice.
-- Avoid broad rewriting when precise edits suffice.
-- Compile after meaningful edits.
-- Log every nontrivial edit in `revision_log.md`.
-
-Section-level checklist:
-
-- Does the section serve the locked contribution?
-- Does the section have the function assigned in `manuscript_architecture_plan.md`?
-- Is the section count and order consistent with target-, field-, and genre-matched anchor papers, or is the deviation justified?
-- Is the economic mechanism clear before technical detail?
-- Would a reader understand the economic question being clarified, not only the theorem being solved?
-- Are claims supported?
-- Is notation introduced before use?
-- Is the reader told why the result matters?
-- Are formal result statements clean, minimal, and free of proof intuition or narrative explanation?
-- Are assumptions interpreted?
-- Are limitations honest but not self-sabotaging?
-
-Proceed condition:
-
-- The manuscript expresses the locked contribution clearly and does not contain obvious correctness or exposition blockers.
-
-## Stage 6.5 - Deep Style Anchor Pass and Exposition Elegance
-
-Autonomy: Checkpoint for calibration, Auto after human confirmation
-
-Purpose:
-
-Make the manuscript read like a thoughtful economic theorist wrote it, not like a mechanical solution note, while preserving rigor, contribution height, theorem precision, and the confirmed target's quality floor. This stage performs deep style reading when full-text anchors are legally available or user-provided; it does not imitate prose and must not substitute for a missing model-base construction step.
-
-Guiding principles:
-
-```text
-Deep style reading, not prose imitation.
-Use full-text anchors when legally available or user-provided.
-Extract exposition architecture, not sentences.
-Style calibration improves reader path; it must not hide weak theory.
-Elegance without rhetoric.
-Use published papers as calibration anchors, not prose templates.
-Extract exposition moves, not sentences.
-```
-
-Prerequisites:
-
-- The project has passed the contribution lock and main-theorem gate, or the user explicitly asks for exposition diagnosis only.
-- A confirmed current `field_profile.md` is reused when available. Do not reopen field confirmation for style calibration alone.
-- If `field_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but field-sensitive style anchors cannot be treated as final.
-- A confirmed current `target_journal_profile.md` is reused when available. Do not reopen target confirmation for style calibration alone.
-- If `target_journal_profile.md` is missing, provisional, stale, or marked `Reopen requested`, style calibration may be provisional, but target-sensitive style anchors cannot be treated as final.
-- A confirmed or explicitly provisional `manuscript_architecture_plan.md` exists before any full style pass. If it is missing, stale, or contradicted by the current manuscript, run Stage 5.5 first.
-
-AI tasks:
-
-- Inspect the current manuscript and core artifacts: `field_profile.md`, `target_journal_profile.md`, `contribution_lock.md`, `theorem_candidates.md`, `manuscript_map.md`, `manuscript_architecture_plan.md`, `risk_register.md`, and latest referee reports if available.
-- Search for 5-8 field-matched, target-matched, same-genre, high-level published papers as style anchors when web/search tools are available, using the confirmed primary field, adjacent fields, closest literature themes, method, contribution type, target journal, and target audience. If fewer high-quality full-text anchors are legally available, use 3-5 and mark the coverage limitation.
-- Prefer user-provided PDFs, open-access papers, working papers, author-posted versions, SSRN, NBER, RePEc, journal open pages, or papers the user explicitly authorizes. Do not default to bulk download.
-- If downloaded, store only legally available or authorized files in `literature_cache/style_anchors/` and record source and permission status.
-- Record named style anchors in `literature_evidence_ledger.md`. If an anchor is not recorded there, keep the corresponding style claim provisional.
-- If only abstracts, web pages, or fragments are available, mark that anchor's style evidence `provisional` and label it as provisional style evidence.
-- Create or update `style_anchor_notes/`, with one note per serious anchor.
-- Create or update `style_anchor_matrix.md`.
-- Create or update `style_calibration.md` with:
-  - field profile source and status
-  - target journal profile source and status
-  - target reader
-  - target voice
-  - style anchor list with citations or links
-  - literature evidence ledger status for anchors
-  - full-text / partial / provisional status for each anchor
-  - anchor-derived exposition rules
-  - anchor-derived manuscript architecture constraints
-  - section-by-section mechanical prose diagnosis
-  - theorem setup rules
-  - assumption interpretation rules
-  - proof roadmap rules
-  - paragraph-level rewrite rules
-  - current mechanical prose diagnosis
-  - forbidden rhetoric and overclaiming rules
-  - invariants that must not change
-  - 3-5 sample rewrites for human approval
-  - sections needing calibration
-- Create or update `style_pass_plan.md` before any full style pass.
-- The style pass plan must respect `manuscript_architecture_plan.md`; do not use style calibration to preserve sections that the architecture audit says should be merged, deleted, reordered, or moved to the appendix.
-- Stop for human confirmation before any full style pass. The user may confirm, edit, or reject the style direction.
-- Record the confirmed or revised style decision in `human_decisions.md` and keep the active constraints in `style_calibration.md`.
-- After confirmation, improve reader path, transitions, motivation, theorem setup, assumption interpretation, proof roadmap, section openings, paragraph pacing, and paragraph flow section by section.
-- Apply Result Statement Hygiene during style work: move exposition out of bloated theorem/proposition/lemma statements into theorem setup, proof roadmap, remarks, or post-result discussion while preserving the verified formal content.
-- Log nontrivial edits in `revision_log.md` and compile after meaningful manuscript edits when possible.
-
-Minimum `style_anchor_notes/[short_id].md` fields:
-
-```text
-Anchor:
-Why chosen:
-Source / access status / ledger link:
-Full-text status: full-text / partial / provisional
-Reader path:
-Introduction opening move:
-Puzzle-to-primitive move:
-Assumption exposition move:
-Theorem setup move:
-Proof roadmap move:
-Literature positioning move:
-Transition and paragraph pacing:
-What not to imitate:
-Applicable sections in our manuscript:
-```
-
-Minimum `style_anchor_matrix.md` fields:
-
-```text
-Anchor set and coverage limitation:
-Common exposition moves:
-Target-specific moves:
-Field-specific moves:
-Theorem-presentation patterns:
-Proof-roadmap patterns:
-Literature-positioning patterns:
-Moves unsuitable for our paper:
-Confidence by anchor: full-text / partial / provisional
-```
-
-Minimum `style_pass_plan.md` fields:
-
-```text
-Sections needing calibration:
-Per-section rewrite objective:
-Risk of changing meaning:
-Style-anchor moves to apply:
-Locked theorem / assumption / novelty text:
-Compile or check requirement after meaningful edits:
-```
-
-House style:
-
-- Mechanism before notation.
-- Reader path before theorem.
-- Precision before flourish.
-- Understatement before promotion.
-- Economic intuition before technical detail, but never instead of technical detail.
-- Avoid AI-list prose, decorative motivation, slogan-like contribution claims, and legalistic overqualification.
-
-Guardrails:
-
-- Do not change the central question, main theorem, model primitives, assumption set, novelty claim, target journal positioning, or unverified citations/literature claims.
-- Do not copy sentences, paragraph structures, or framing from style anchors.
-- Summarize anchor-paper exposition strategies only; do not quote long passages.
-- Extract exposition architecture, not sentences. Anchor papers are calibration evidence, not prose templates.
-- If mechanical prose reflects a weak theorem, unclear contribution, patchy assumptions, defensive dilution, or an unnatural model base, update `economic_logic_map.md` with the missing economic force and route back to Discovery D4.5, D4-D6, or Stage 8 tree search instead of polishing.
-- If confirmed `style_calibration.md` exists and the field profile, target journal profile, main theorem, contribution lock, and target audience remain current, reuse it rather than asking again.
-
-Proceed condition:
-
-- `style_calibration.md` is confirmed or explicitly provisional.
-- `manuscript_architecture_plan.md` is confirmed or explicitly provisional for the current target, field, contribution lock, and theorem package.
-- `style_anchor_notes/`, `style_anchor_matrix.md`, and `style_pass_plan.md` exist or the system has explained why coverage is provisional.
-- The manuscript is more readable and more human without weakening the locked contribution.
-- Any conceptual, theorem, assumption, or novelty issue found during style work is recorded as a risk rather than hidden by elegant prose.
-
-## Stage 7 - Target-Calibrated Simulated Review Board
-
-Autonomy: Gate
-
-Purpose:
-
-Generate structured, adversarial, and diverse feedback calibrated to the confirmed target journal without overtrusting the simulation.
-
-Before assigning referee roles:
-
-- Use the confirmed `field_profile.md` when it exists and is still current; otherwise infer a provisional profile from the manuscript and closest-literature evidence.
-- Use the confirmed `target_journal_profile.md` when it exists and is still current; otherwise create a provisional target profile from the manuscript, field profile, theorem package, closest-literature evidence, and explicit user preferences.
-- Use `literature_evidence_ledger.md` for nearest substitute papers, target-calibrated anchors, style anchors, and absorption threats. If a named paper is not in the ledger, mark that part of the panel configuration provisional.
-- Create `referee_reports/round_N/panel_config.md` from the current field profile, target journal profile, and manuscript evidence.
-- Read `economic_logic_map.md` if present and test whether the review objections are about the idea, model base, theorem, exposition, or literature positioning.
-- Infer the manuscript's narrowest defensible field, closest literature themes, target audience, main method, contribution type, and main technical risk.
-- Select referees dynamically from those features rather than using a fixed field template.
-- Do not default to IO, search, networks, theory, econometrics, or any named field unless the current manuscript actually belongs there.
-- Ask for field confirmation before running the review only if the profile is missing, provisional, stale, marked `Reopen requested`, or contradicted by new evidence.
-- Ask for target confirmation before running the review if `target_journal_profile.md` is missing, provisional, stale, marked `Reopen requested`, contradicted by new evidence, or materially changed by the theorem package or target audience.
-- Treat older paper-specific methodology files as historical records rather than referee-role templates.
-- Write the final role list into `panel_config.md` before creating any individual referee prompt.
-- Include candidate geometry when reviewing a pre-manuscript idea, model, or possible frontier spike.
-
-AI roles:
-
-- Referee 1: primary-field specialist selected from the manuscript's narrowest defensible field.
-- Referee 2: closest-literature or adjacent-field specialist selected from the nearest substitute literature.
-- Referee 3: method, mechanism, application, or institutional specialist selected from the paper's actual contribution.
-- Referee 4: rigor specialist selected from the main risk type: mathematical proof, econometric identification, computational reproducibility, empirical design, experimental design, or institutional interpretation.
-- Referee 5: Scientific Judge / Idea Critic who runs the Nugget Test, Occam Test, and Defensive Dilution check.
-- Referee 6: Advocate / Best-Case Reader who argues for acceptance if acceptance were required, and states the strongest defensible "why should we care?" case in the paper's own terms.
-- Associate Editor: independent read first, then synthesis of referee reports.
-- Co-Editor: independent read first, then final decision letter and internal notes.
-
-Required outputs:
-
-- `referee_reports/round_N/panel_config.md`
-- `referee_reports/round_N/dilution_check.md`
-- `referee_reports/round_N/referee_1.md`
-- `referee_reports/round_N/referee_2.md`
-- `referee_reports/round_N/referee_3.md`
-- `referee_reports/round_N/referee_4_rigor.md`
-- `referee_reports/round_N/referee_5_scientific_judge.md`
-- `referee_reports/round_N/referee_6_advocate.md`
-- `referee_reports/round_N/associate_editor_report.md`
-- `referee_reports/round_N/co_editor_decision.md`
-- `referee_reports/round_N/00_summary.md`
-- Updated `risk_register.md`
-- A ranked list of objections by fatality, not by ease of fixing.
-- A developmental summary with `Best-case version`, `Developmental repair`, `Fatal risk`, and `What would change the decision`.
-
-Information isolation:
-
-- Default to Blind Mode from `ECONOMETRICA_PANEL_PROTOCOL.md`.
-- If the runtime supports real agent delegation, run referee reports as parallel isolated workers by default.
-- If the runtime does not support real agents, simulate independence serially by running each referee in a separate prompt block without exposing earlier referee reports.
-- Each referee prompt must quote or summarize only that referee's role from `panel_config.md`, not the full role list plus prior reports.
-- Referees should read only the current manuscript and explicitly allowed appendices.
-- Referees should not read old reports, revision logs, risk registers, workflow files, or each other's reports.
-- The parent agent must generate `dilution_check.md` using only the current manuscript and `contribution_lock.md`. Referees do not read it.
-- AE may read referee reports only after producing an independent judgment.
-- Co-Editor may read AE/referee reports only after producing an independent judgment.
-
-Location and confidence requirements:
-
-- Every major concern must cite a line, section, theorem, proposition, lemma, equation, assumption, figure, table, or closest-literature comparison.
-- Any concern based on a named closest paper, anchor paper, or absorption threat must cite the corresponding `literature_evidence_ledger.md` entry or be labeled provisional.
-- Every referee, AE, and Co-Editor report must include Recommendation and Confidence.
-
-Scoring:
-
-Use 1 to 5:
-
-- Contribution
-- Correctness
-- Identification and assumptions
-- Proof clarity
-- Empirical or computational credibility
-- Literature positioning
-- Exposition
-- Robustness to likely objections
-- Fit for confirmed target journal
-- Frontier-level quality floor
-
-Interpretation:
-
-- Scores are diagnostic only.
-- A score cannot certify acceptance.
-- If two independent review rounds say "no central theorem," "too close to existing theory," "absorbed by known models," or "unnatural model base," stop polishing and return to Discovery D4.5 or D4-D6.
-
-Human gate:
-
-The human must choose:
-
-- `Revise`: objections are fixable inside the current paper.
-- `Pivot`: contribution or model needs redesign.
-- `External feedback`: ask a human expert before further AI revision.
-- `Retarget`: the paper may be good but not for the confirmed primary target.
-
-## Stage 8 - Revision Loop
-
-Autonomy: Mixed
-
-Purpose:
-
-Convert referee objections into a controlled search over revision strategies, not a linear sequence of additive patches.
-
-Triage order:
-
-1. Fatal correctness or proof gaps.
-2. Contribution and novelty objections.
-3. Identification, assumptions, and mechanism objections.
-4. Literature positioning.
-5. Exposition and structure.
-6. Style, grammar, and formatting.
-
-AI tasks:
-
-- Create `revision_tree.md` before editing.
-- If the leading objection is missing central theorem, old-theory absorption, weak contribution, defensive dilution, or unnatural model base, do not revise locally. Route back to Discovery D4.5 or D4-D6.
-- If `generality_ledger.md` shows rising generality loss without a sharper nugget, stop local polishing and return to Discovery D4.5, D4-D6, or Stage 8 tree search before manuscript edits.
-- For major theoretical or mechanism objections, generate three parallel revision branches as plans before touching the manuscript:
-  - Branch A, `Defensive Patch`: minimal repair that preserves the current model, adding the fewest assumptions or clarifications possible.
-  - Branch B, `Mechanism Simplification`: remove complexity and seek a cleaner primitive, theorem, or benchmark that explains the mechanism with fewer moving parts.
-  - Branch C, `Pivot and Reframe`: abandon or demote the attacked theorem and rebuild around the strongest surviving mechanism.
-- For each branch, write no more than 500 words covering the revised nugget, mathematical cost, assumptions added or removed, likely referee reaction, and kill risk.
-- Run the Scientific Judge on the three branch plans before manuscript edits.
-- Prune any branch whose contribution sentence becomes longer, more conditional, or less economically intuitive.
-- Use Git branches or worktrees for actual manuscript edits only after the human chooses a branch.
-- Tie each eventual edit to a specific objection and chosen branch.
-- Avoid adding defensive clutter.
-- Remove or demote claims that cannot be supported.
-- Compile and fix build issues after edits.
-- Update `revision_log.md`, `risk_register.md`, and `revision_tree.md`.
-
-Human gate:
-
-Stop before any edit that changes:
-
-- central question
-- main theorem
-- model primitives
-- assumption set
-- claimed novelty
-- empirical interpretation
-- target journal positioning
-
-For major objections, the human must choose `Branch A`, `Branch B`, `Branch C`, `Return to Discovery`, or `Stop` before direct manuscript edits.
-
-Proceed condition:
-
-- Each major objection has been fixed, reframed, or explicitly recorded as remaining risk.
-
-## Stage 9 - External Human Reality Check
-
-Autonomy: Human-only, AI assists
-
-Purpose:
-
-Break the correlated-error loop among AI author, AI reviewer, and AI editor.
-
-AI tasks:
-
-- Prepare a 2-page memo for a human reader.
-- Prepare a seminar-style 5-minute explanation.
-- Prepare a list of questions for a senior economist or coauthor.
-- Summarize external feedback after the human provides it.
-
-Human tasks:
-
-- Ask at least one real field expert, coauthor, advisor, or seminar participant for feedback.
-- Pay attention to first-reaction objections.
-- Decide whether the external feedback confirms or contradicts the AI review loop.
-
-Proceed condition:
-
-- A real human expert does not immediately reject the core contribution, or the project has been pivoted accordingly.
-
-## Stage 10 - Submission Readiness Decision
-
-Autonomy: Gate
-
-Purpose:
-
-Decide whether to submit, revise further, pivot, or retarget.
-
-AI tasks:
-
-- Write `final_report.md`.
-- Summarize remaining risks.
-- Check abstract, introduction, main results, proofs, appendix, bibliography, figures, and tables for consistency.
-- Produce a final simulated editor recommendation.
-- Produce a pre-submission checklist.
-
-Human decision:
-
-- Submit to the confirmed primary target.
-- Do one more targeted revision.
-- Send for external feedback.
-- Retarget journal.
-- Pivot the project.
-
-Submission readiness threshold:
-
-- No known fatal correctness gap.
-- No unverified central result.
-- Contribution lock remains sharp.
-- Closest-literature positioning is defensible.
-- Introduction makes the economic question and insight clear.
-- Main assumptions are interpretable.
-- Proofs and appendix are navigable.
-- Remaining risks are known, not hidden.
-
-## Non-Convergence Diagnostics
-
-Stop the current revision loop if any of these patterns appears:
-
-- Two independent reviews identify the same structural objection: no central theorem, old-theory absorption, or weak contribution.
-- The same "incremental contribution" objection survives three rounds.
-- The paper becomes longer but the one-sentence contribution becomes weaker.
-- Assumptions become more tailored after every revision.
-- The model needs increasingly artificial features to generate the result.
-- The work turns into a theorem package of local sufficient conditions rather than one clean result.
-- Referee objections cause the AI to add sections rather than reconsider the model space.
-- A key object remains reduced-form even though it carries the whole contribution.
-- The editor simulation improves mainly because prose improves, not because the core objection changes.
-- AI repeatedly proposes literature claims that the human cannot verify.
-- The paper is technically correct but the "why should we care?" answer stays vague.
-- The introduction has to use elaborate wording to make the contribution sound important.
-
-When this happens, return to Discovery D4.5 or D4-D6 for model-base construction, model tournament, absorption testing, and main-theorem search. Do not continue cosmetic revision.
-
-## Recommended Codex Prompts
-
-### Start a New Project
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md and follow it as the project protocol. Begin with Stage 0 only. Inspect the local paper folder, identify the main manuscript and build process, create project_state.md and manuscript_map.md, and stop for my confirmation before judging or editing the paper.
-```
-
-### Run Idea Kill Test
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1, the Idea Kill Test. Do not edit the manuscript. Create idea_dossier.md, identify the closest substitute arguments, score the idea, and stop at the human gate with a recommendation: proceed, pivot, narrow, split, abandon, or retarget.
-```
-
-### Confirm Target Journal Profile
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 1.5. Use idea_dossier.md, field_profile.md, literature_probe.md, literature_evidence_ledger.md, primitive_hunter_report.md, theorem_candidates.md, absorption_tests.md, generality_ledger.md, risk_register.md, and manuscript_map.md when available. Create or update target_journal_profile.md with primary target, stretch target, fallback target, target audience, fit standard, quality floor, theorem rigor expectation, reader path, referee mix, style implications, upward-improvement requirements, retargeting triggers, and literature evidence ledger status. Recommend a target ladder without lowering the quality floor. Stop for my confirmation.
-```
-
-### Lock the Contribution
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 2. Create or update contribution_lock.md with the central question, non-substitutable insight, reader belief update, do-not-dilute list, and overclaim risks. Stop for my approval before any manuscript revision.
-```
-
-### Deep Manuscript Revision
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. We have passed the idea and contribution gates. Run Stages 3, 4, 5.5, and 6. Audit the model, model_base_design.md, heuristic_derivation.md, assumptions, proof architecture, evidence, and manuscript architecture. Create or update manuscript_architecture_plan.md before major restructuring. Then revise the manuscript section by section. Compile after meaningful edits. Log every nontrivial edit in revision_log.md. Stop if you find a foundational problem that threatens the contribution lock, model-base confirmation, or manuscript architecture.
-```
-
-### Style Calibration
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 6.5 Deep Style Anchor Pass. Reuse confirmed field_profile.md, target_journal_profile.md, and manuscript_architecture_plan.md when current; do not reopen field, target, or manuscript architecture confirmation for style calibration alone. If manuscript_architecture_plan.md is missing, stale, or contradicted by the current manuscript, run Stage 5.5 first. Prefer user-provided PDFs or legally available full-text anchors. Search for 5-8 field-matched and target-matched style anchors when web/search tools are available; if fewer high-quality full-text anchors are available, use 3-5 and mark the coverage limitation. Record named anchors in literature_evidence_ledger.md, create style_anchor_notes/, style_anchor_matrix.md, style_calibration.md, and style_pass_plan.md. If anchors are partial or lack ledger entries, mark the relevant style evidence provisional. Create style_calibration.md as a style contract with target reader, target voice, anchor-derived exposition architecture, anchor-derived manuscript architecture constraints, section-by-section mechanical prose diagnosis, theorem setup rules, assumption interpretation rules, proof roadmap rules, paragraph-level rewrite rules, forbidden rhetoric, invariants, and 3-5 sample rewrites. Stop for my confirmation before any full style pass.
-```
-
-### Target-Calibrated Simulated Review
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 7. Reuse confirmed field_profile.md and target_journal_profile.md when current; if either is missing, provisional, stale, or marked `Reopen requested`, create or update it from the closest-literature, theorem, target-audience, and manuscript evidence and stop for confirmation before running referee prompts. Use literature_evidence_ledger.md for closest substitutes, absorption threats, and target-calibrated anchors; if a named paper lacks a ledger entry, mark that part of the review provisional. Then create referee_reports/round_N/panel_config.md by detecting the paper's narrowest field, confirmed target, target audience, closest literature themes, main method, contribution type, main risk, target-calibrated anchors, and control-paper calibration plan if available. Simulate the target-calibrated review board with dynamically assigned Referees 1-4, Referee 5 Scientific Judge, Referee 6 Advocate, Associate Editor, and Co-Editor. Also create dilution_check.md from only the current manuscript and contribution_lock.md. Use parallel isolated agents if available; otherwise use serial isolated referee prompts. Write referee_reports/round_N/ files and update risk_register.md. Rank objections by fatality. Do not edit the manuscript in this pass. Stop for my decision.
-```
-
-### Referee-Guided Revision
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 8 using the latest referee report in Agentic Tree Search Mode. If the leading objection is missing central theorem, old-theory absorption, weak contribution, defensive dilution, unnatural model base, or rising generality loss without a sharper nugget, do not edit locally; route back to Discovery D4.5 or D4-D6. Otherwise create revision_tree.md with Branch A Defensive Patch, Branch B Mechanism Simplification, and Branch C Pivot and Reframe, checking generality_ledger.md before choosing local repairs. Run the Scientific Judge on the branch plans and stop for my branch choice before editing the manuscript.
-```
-
-### Final Submission Readiness
-
-```text
-Read ECONOMETRICA_AI_HUMAN_WORKFLOW.md. Run Stage 10. Do not make major conceptual edits. Check final consistency, unresolved TODOs, bibliography, figures, theorem statements, assumptions, proofs, and appendix links. Write final_report.md with a simulated editor recommendation and a human pre-submission checklist.
-```
-
-## Practical Time Budgets
-
-For a 5-hour Codex Desktop session:
-
-- 30 minutes: intake and discovery-state reconstruction.
-- 60 minutes: absorption and closest-literature probe.
-- 90 minutes: broad skeleton search and model-base tournament.
-- 45 minutes: D4.5 example-to-theory model-base gate when the baseline is not already confirmed.
-- 90 minutes: first-pass derivations and theorem-candidate search.
-- 45 minutes: kill test or Model Panel.
-- 30 minutes: pre-paper model note and human gate.
-
-Important:
-
-- Spend roughly 70% of early project time on discovery, model competition, and theorem search before prose.
-- Do not spend the full 5 hours on prose if the main theorem gate is weak.
-- Do not let the AI continue beyond a human gate by pretending uncertainty has been resolved.
-
-## What the Human Should Do Better Than AI
-
-The human should own:
-
-- The taste judgment of whether the idea matters.
-- The decision to pivot or abandon.
-- The final interpretation of assumptions.
-- The final novelty claim.
-- The choice of target journal.
-- The decision to trust or reject a proof repair.
-- The decision to add, remove, or soften a central claim.
-- The decision to send the paper to real humans.
-
-The AI should own:
-
-- Exhaustive checklist execution.
-- Drafting alternative framings.
-- Finding internal inconsistencies.
-- Mapping claims to evidence.
-- Generating adversarial objections.
-- Maintaining logs and risk registers.
-- Mechanical LaTeX and reference checks.
-- Producing structured reports for human decisions.
-
-## Research Basis
-
-This protocol is informed by current agentic research-writing and AI-review systems:
-
-- Stanford Agentic Reviewer uses document extraction, related-work retrieval, relevance filtering, and structured review generation, and explicitly warns that AI reviews may contain errors and require human judgment: https://paperreview.ai/tech-overview
-- AutoResearchClaw moved from pure autonomy toward human-in-the-loop modes, checkpoints, SmartPause, claim verification, budget guardrails, and pivot/refine decisions: https://github.com/aiming-lab/AutoResearchClaw
-- PaperOrchestra decomposes paper writing into outline, plotting, literature review, section writing, and content refinement agents, with strict halt rules and verification helpers: https://github.com/Ar9av/PaperOrchestra
-- ResearchClaw emphasizes persistent research state so long-horizon work does not disappear into one-off chat threads: https://github.com/ymx10086/ResearchClaw
-- AI Scientist-v2 uses agentic tree search for open-ended research, while its own README cautions that broader exploration can have lower success rates than template-based workflows: https://github.com/SakanaAI/AI-Scientist-v2
-- Sakana AI reports that the broader AI Scientist line was published in Nature and that AI Scientist-v2 uses agentic tree search for open-ended exploration: https://sakana.ai/ai-scientist-nature/
-- AI Can Learn Scientific Taste proposes reinforcement learning from community feedback as one way to train or scaffold scientific taste; use this as motivation for taste checks, not as proof that AI taste is reliable: https://arxiv.org/abs/2603.14473
-- Nicholas Carlini's research essay emphasizes scientific taste, single-idea focus, early problem selection, and killing projects that are not working: https://nicholas.carlini.com/writing/2026/how-to-win-a-best-paper-award.html
-- Agent Laboratory frames agents as assistants to a human-produced research idea and says the human is the pilot: https://agentlaboratory.github.io/
-- AI co-scientist work emphasizes generate, debate, rank, evolve, and meta-review cycles with scientist-provided objectives and guidance: https://huggingface.co/papers/2502.18864
-- MARG shows that specialized multi-agent review can reduce generic comments and improve useful feedback relative to simpler baselines: https://www.catalyzex.com/paper/marg-multi-agent-review-generation-for
-- AgentReview shows that simulated peer review can expose review dynamics and bias, which is useful but also a reason not to treat any simulated decision as definitive: https://aclanthology.org/2024.emnlp-main.70/
-- ReviewerToo reports that AI reviewers can help with consistency and coverage but remain weaker on methodological novelty and theoretical contribution, where human expertise remains essential: https://huggingface.co/papers/2510.08867
-- Large-scale feedback studies find LLM feedback can overlap substantially with human reviewer comments and be helpful, but should augment rather than replace expert review: https://par.nsf.gov/biblio/10617069
-- Research on LLM ideation finds AI ideas can look novel at the idea stage but lose more value after execution, which motivates early feasibility and execution gates: https://huggingface.co/papers/2506.20803
+Read old `contribution_lock.md`, field/target profiles, style plans, stage records, and referee reports as historical evidence when relevant. Do not enforce their retired gates or create them for compatibility. A recorded approval is not proof validity, and an old AI recommendation is not a human decision. Use the repository's migration guidance when consolidating old state; preserve the original records and their provenance.
